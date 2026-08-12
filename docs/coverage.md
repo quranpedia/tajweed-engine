@@ -17,7 +17,7 @@ For a tool that teaches recitation, that is the more damaging kind of error.
 | الميم الساكنة | 3 | إدغام، إخفاء، إظهار شفوي |
 | المشددتان | 2 | النون والميم المشددتان |
 | المد | 13 | طبيعي، عوض، صلة صغرى، لين، بدل، واجب متصل، جائز منفصل، **لازم** |
-| القلقلة | 2 | صغرى في وسط الكلمة، ومتطرفة على حرف ساكن في آخرها |
+| القلقلة | 3 | صغرى في وسط الكلمة، متطرفة على حرف ساكن في آخرها، وكبرى على رأس الآية |
 
 القلقلة and المد اللازم were authored for this corpus rather than inherited from
 the source; both were absent, and المد اللازم's absence was why every ayah of الحروف
@@ -35,12 +35,17 @@ One of them is deliberately coarser than the classical division:
 
 These are absent from the corpus entirely — not disabled, not partial, absent.
 
-- **القلقلة عند الوقف على حرف متحرك.** A qalqalah letter carrying a vowel at the
-  end of a word — the ط of صِرَٰطَ, the ب of ٱلۡمَغۡضُوبِ, the د of أَحَدٌ — is not
-  qalqalah while the reciter continues. It becomes qalqalah only if they stop on
-  it, and where a reciter stops is their choice, not something the text records.
-  Marking every such letter would colour thousands of positions that are usually
-  read straight through, so only letters written sakin are annotated.
+- **القلقلة عند الوقف في وسط الآية.** A qalqalah letter carrying a vowel at the
+  end of a word — the ط of صِرَٰطَ, the ب of ٱلۡمَغۡضُوبِ — is not qalqalah while the
+  reciter continues, and whether they stop mid-ayah is their choice rather than
+  something the text records. Marking every such letter would colour 4,470
+  positions that are usually read straight through.
+
+  Ayah endings are the exception, and they *are* annotated: stopping at رأس الآية
+  is sunnah and usual, so the ruling is realised there. That is
+  `qalqalah-kubra`, 422 ayahs — أَحَدٌ، ٱلصَّمَدُ، وَتَبَّ. A reciter who joins one ayah
+  to the next would not pronounce it on a vowelled letter, which is why the rule
+  is scoped to ayah ends rather than applied to every stop a reciter might make.
 - **مد الفرق** — ءَآللَّهُ، ءَآلذَّكَرَيۡنِ. Six places, and structurally close enough to
   المد اللازم الكلمي that a pattern written loosely will swallow them; the rule
   for المخفف is deliberately written as a literal to avoid exactly that.

@@ -1,5 +1,5 @@
 {
- "corpusVersion": "0.3.0",
+ "corpusVersion": "0.4.0",
  "edition": {
   "id": "uthmani-hafs",
   "sha256": "b5d29736bb3ef49d9d331c4e60a59d83fe899b921e9e8dc35911bd4a18ce55f3",
@@ -7124,6 +7124,11 @@
    "ayahs": 478,
    "occurrences": 512,
    "digest": "3ca3a7a2e6621dab"
+  },
+  "qalqalah-kubra.1": {
+   "ayahs": 422,
+   "occurrences": 422,
+   "digest": "022bbae1600800ca"
   },
   "madd-lazim-kalimi-muthaqqal.1": {
    "ayahs": 92,

@@ -66,6 +66,13 @@ const EXPECTATIONS: readonly Expectation[] = [
     why: 'فواتح السور التي هجاء حروفها ثلاثة أحرف أوسطها مد',
   },
   {
+    rule: 'qalqalah-kubra.1',
+    matches: ['112:1', '112:2', '112:3', '112:4', '111:1'],
+    // Neither ends in a qalqalah letter.
+    avoids: ['1:1', '1:7'],
+    why: 'أَحَدٌ، ٱلصَّمَدُ، يُولَدْ، وَتَبَّ — حرف قلقلة في آخر الآية، والوقف على رؤوس الآي سنة',
+  },
+  {
     rule: 'qalqalah-sughra.1',
     matches: ['96:1', '2:27'],
     avoids: ['1:1'],

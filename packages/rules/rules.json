@@ -1,6 +1,6 @@
 {
   "$schema": "./schema/rules.schema.json",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "riwayah": "hafs-an-asim",
   "provenance": {
     "source": "tajweed.quranpedia.net",
@@ -652,6 +652,13 @@
       "category": "qalqalah-ranks",
       "label": {
         "ar": "القلقلة المتطرفة"
+      }
+    },
+    {
+      "id": "qalqalah-kubra",
+      "category": "qalqalah-ranks",
+      "label": {
+        "ar": "القلقلة الكبرى"
       }
     },
     {
@@ -2615,6 +2622,21 @@
           "reason": "The rule matched every qalqalah letter at the end of a word, whatever its vowel — so صِرَٰطَ and ٱلۡمَغۡضُوبِ in al-Fatiha were marked as qalqalah although neither is قلقلة when the reciter continues. Qalqalah needs the letter to be sakin; a vowelled final letter becomes sakin only if the reciter stops on it, which is a choice rather than a property of the text. Restricted to letters written sakin: 4,470 occurrences across 2,851 ayahs became 512 across 478."
         }
       ]
+    },
+    {
+      "id": "qalqalah-kubra.1",
+      "hukum": "qalqalah-kubra",
+      "case": "[ق ط ب ج د] + نهاية الآية",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا جاء أحد حروف القلقلة (ق ط ب ج د) في آخر الآية"
+      },
+      "notes": {
+        "ar": "القلقلة الكبرى تكون بالوقف على الحرف المتطرف، والوقف على رؤوس الآي سنة، فالحكم واقع في الغالب. ومن وصل الآية بما بعدها فلا قلقلة فيه إن كان الحرف متحركا. وقد اقتُصر على رؤوس الآي دون سائر الكلمات لأن الوقف في غيرها اختيار من القارئ لا يدل عليه الرسم."
+      }
     },
     {
       "id": "madd-lazim-kalimi-muthaqqal.1",

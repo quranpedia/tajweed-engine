@@ -70,6 +70,10 @@ const NAMED_MARKS: ReadonlyArray<readonly [string, string]> = [
 const ANCHORS: Readonly<Record<string, string>> = {
   'نهاية الكلمة': '(?=\\s|$)',
   'بداية الكلمة': '(?<=^|\\s)',
+  // End of the passage being analysed. Given one ayah at a time — which is how
+  // the engine is used — this is رأس الآية, where stopping is the norm and a
+  // ruling that depends on stopping is therefore realised.
+  'نهاية الآية': `(?=[\\s${ALLOWED_MARKS.map(escapeCodePoint).join('')}]*$)`,
 }
 
 /**
