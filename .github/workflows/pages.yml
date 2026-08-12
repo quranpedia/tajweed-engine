@@ -1,0 +1,67 @@
+name: Playground
+
+# Publishes the playground to GitHub Pages.
+#
+# The page is one self-contained HTML file with the engine and the corpus inlined,
+# so "deploying" is copying a single file — no bundler on the server, no runtime,
+# nothing to configure. It is rebuilt here rather than served from the committed
+# copy so that the demo cannot drift from the corpus it claims to demonstrate.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; queued rather than cancelled, so a push that lands
+# mid-deploy still ends up published.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build the playground
+        run: pnpm playground:build
+
+      - name: Fail if the page is not self-contained
+        # A strict reading of the same rule the build script enforces: the page
+        # must work offline and must not reach for anything it does not carry.
+        run: |
+          if grep -qE '(src|href)="https?://' playground/index.html; then
+            echo "The playground references something external:"
+            grep -nE '(src|href)="https?://' playground/index.html
+            exit 1
+          fi
+          echo "self-contained, $(du -h playground/index.html | cut -f1)"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: playground
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

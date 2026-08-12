@@ -39,8 +39,9 @@ indistinguishable from "no rule applies here" unless you say so in your UI.
 | [`@tajweed/cli`](./packages/cli) | Query the corpus, annotate text, verify an edition. MIT. |
 | [`tajweed`](./python) | Python reader for the dataset. Stdlib only. MIT. |
 
-There is also a [playground](./playground/index.html) — one self-contained HTML
-file, no build step and no network, for looking at what a rule actually matches.
+There is also a **[playground](https://quranpedia.github.io/tajweed-engine/)** for
+looking at what a rule actually matches — one self-contained HTML file, no build
+step and no network, so it works offline and from disk too.
 
 ## Design
 
