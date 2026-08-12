@@ -24,6 +24,9 @@ const result = await build({
   format: 'esm',
   target: 'es2022',
   minify: true,
+  // Keep Arabic as UTF-8 rather than \u-escaping every character, which roughly
+  // triples the size of a page that is mostly Arabic text.
+  charset: 'utf8',
   write: false,
   loader: { '.json': 'json' },
   logLevel: 'warning',

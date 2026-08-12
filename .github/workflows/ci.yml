@@ -31,10 +31,12 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Verify rules against the mushaf
+        # Pins each authored rule to passages whose ruling is not in dispute, and
+        # to an exact total wherever the total is known.
+        run: pnpm rules:verify
+
       - name: Test
-        # The conformance suite skips without a reference snapshot, which cannot
-        # be generated here — it needs the legacy application and its database.
-        # The unit tests always run.
         run: pnpm test
 
       - name: Build

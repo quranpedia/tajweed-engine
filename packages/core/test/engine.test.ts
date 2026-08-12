@@ -1,9 +1,8 @@
 /**
- * Tests for the public API, driven by the real corpus.
+ * Tests for the public API, driven by the real corpus and real ayahs.
  *
- * The text used here is constructed from named code points, so these tests
- * exercise the API without a Quranic text dependency. Behaviour over the mushaf
- * is what conformance/ is for.
+ * Whether each rule is correct is what conformance/ and scripts/verify-rules.ts
+ * are for; these check the shape of what `analyze` returns.
  */
 
 import { describe, expect, it } from 'vitest'
@@ -11,9 +10,11 @@ import { describe, expect, it } from 'vitest'
 import corpus from '../../rules/rules.json' with { type: 'json' }
 import { Tajweed, resolveOverlaps, sliceSpan } from '../src/engine.js'
 import type { Corpus, Span } from '../src/types.js'
-import { BA_TEST_TEXT } from './fixtures.js'
+import { RICH_AYAH, ayah } from './fixtures.js'
 
 const typed = corpus as unknown as Corpus
+
+const text = ayah(RICH_AYAH)
 
 describe('Tajweed', () => {
   it('uses only stable rules by default', () => {
@@ -72,19 +73,19 @@ describe('Tajweed', () => {
   describe('analyze', () => {
     it('returns spans that index the text that was passed in', () => {
       const engine = new Tajweed(typed)
-      const spans = engine.analyze(BA_TEST_TEXT)
+      const spans = engine.analyze(text)
 
       for (const span of spans) {
         expect(span.start).toBeGreaterThanOrEqual(0)
-        expect(span.end).toBeLessThanOrEqual(Array.from(BA_TEST_TEXT).length)
+        expect(span.end).toBeLessThanOrEqual(Array.from(text).length)
         expect(span.end).toBeGreaterThan(span.start)
-        expect(sliceSpan(BA_TEST_TEXT, span)).not.toBe('')
+        expect(sliceSpan(text, span)).not.toBe('')
       }
     })
 
     it('carries the whole lineage on every span', () => {
       const engine = new Tajweed(typed)
-      const [span] = engine.analyze(BA_TEST_TEXT)
+      const [span] = engine.analyze(text)
 
       expect(span).toBeDefined()
       expect(span!.ruleId).toBeTruthy()
@@ -94,7 +95,7 @@ describe('Tajweed', () => {
     })
 
     it('returns spans in document order', () => {
-      const spans = new Tajweed(typed).analyze(BA_TEST_TEXT)
+      const spans = new Tajweed(typed).analyze(text)
       for (let i = 1; i < spans.length; i++) {
         expect(spans[i]!.start).toBeGreaterThanOrEqual(spans[i - 1]!.start)
       }
@@ -104,7 +105,7 @@ describe('Tajweed', () => {
       // Compiled patterns are reused between calls, so a leaked lastIndex would
       // make the second call return less than the first.
       const engine = new Tajweed(typed)
-      expect(engine.analyze(BA_TEST_TEXT)).toEqual(engine.analyze(BA_TEST_TEXT))
+      expect(engine.analyze(text)).toEqual(engine.analyze(text))
     })
 
     it('returns nothing for text with no Arabic in it', () => {

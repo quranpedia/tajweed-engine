@@ -43,12 +43,15 @@ These are not style preferences.
 - **Never type Quranic text by hand**, in code, tests, or fixtures. Copy it from
   a verified edition. A single transposed diacritic is a corruption of the text
   that will not look wrong to most reviewers.
-- **Never commit Quranic text to this repository.** Reference ayahs as
-  `surah:ayah` against a hash-identified edition.
+- **Never add another copy of the Quranic text.** One edition lives in
+  `editions/`, identified by digest. Reference ayahs as `surah:ayah` against it;
+  do not paste passages into code, tests, issues or commit messages.
+- **Never invent Arabic to stand in for Quranic text.** In a tajweed tool a
+  composed phrase reads as Quran to whoever sees it. Use a real ayah by
+  reference, or build the input from named code points, which is unambiguous
+  about what is being tested.
 - **Never log Quranic text.** Error messages, debug output and test failure
   messages use the reference (`2:255`), not the text.
-- **Never use Quranic text as sample or placeholder data** for something that is
-  not about the Quran.
 - **Never apply Unicode normalisation** to the source text anywhere in the
   pipeline. NFC will silently rewrite Uthmani codepoints. The engine's own
   normalisation produces a separate string and never mutates the input.

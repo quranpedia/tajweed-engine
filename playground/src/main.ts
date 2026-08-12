@@ -1,41 +1,84 @@
 /**
  * The playground's behaviour.
  *
- * Everything runs in the browser: the corpus is bundled in, and the text never
- * leaves the page. That is partly a privacy property and partly the point — the
- * page is a way to see what a rule actually matches, and a round trip to a server
- * would make it feel like a search engine rather than a lens.
+ * Everything runs in the browser: the corpus, the engine and the text are all
+ * bundled in, so nothing is sent anywhere and the page works offline. That is
+ * partly a privacy property and partly the point — it is a lens on the corpus,
+ * not a service.
  *
- * No Quranic text is bundled. The sample below is ordinary vocalised Arabic
- * composed for this purpose; paste in whatever you want to look at.
+ * The ayah shown is real, selected from the edition, and rendered read-only.
+ * Two rules meet here and only one arrangement satisfies both: Quranic text must
+ * not be presented as editable, and text that is not from the mushaf must never
+ * be shown where a reader would take it for Quran. So the mushaf is a pair of
+ * dropdowns over verified text, and anything a user wants to try themselves goes
+ * in a separate box that says what it is.
  */
 
 import corpus from '@tajweed/rules' with { type: 'json' }
+import edition from '../../editions/uthmani-hafs.json' with { type: 'json' }
+import surahNames from './surahs.json' with { type: 'json' }
 import {
   Tajweed,
   TOPIC_COLORS,
+  orderedReferences,
   resolveOverlaps,
   sliceSpan,
   type Corpus,
+  type Edition,
   type Span,
 } from '@tajweed/core'
 
 const typed = corpus as unknown as Corpus
+const mushaf = edition as unknown as Edition
+const names = surahNames as Array<{ number: number; name: string }>
 
-const SAMPLE = 'مَنْ تَكَلَّمَ سُوءًا فَقَدْ أَخْطَأَ وَٱلضَّآلِّينَ'
-
-const input = document.querySelector<HTMLTextAreaElement>('#input')!
+const surahSelect = document.querySelector<HTMLSelectElement>('#surah')!
+const ayahSelect = document.querySelector<HTMLSelectElement>('#ayah')!
+const customInput = document.querySelector<HTMLTextAreaElement>('#custom')!
 const output = document.querySelector<HTMLDivElement>('#output')!
+const reference = document.querySelector<HTMLSpanElement>('#reference')!
 const summary = document.querySelector<HTMLDivElement>('#summary')!
 const topicFilter = document.querySelector<HTMLDivElement>('#topics')!
 const overlapToggle = document.querySelector<HTMLInputElement>('#overlapping')!
 const details = document.querySelector<HTMLDivElement>('#details')!
 
-const enabledTopics = new Set(typed.topics.map((topic) => topic.id))
+/** Ayah numbers per surah, counted from the edition rather than hardcoded. */
+const ayahNumbers = new Map<number, number[]>()
+for (const ref of orderedReferences(mushaf)) {
+  const [surah, ayah] = ref.split(':').map(Number)
+  ayahNumbers.set(surah!, [...(ayahNumbers.get(surah!) ?? []), ayah!])
+}
 
+const enabledTopics = new Set(typed.topics.map((topic) => topic.id))
 const ruleById = new Map(typed.rules.map((rule) => [rule.id, rule]))
 const hukumById = new Map(typed.hukums.map((hukum) => [hukum.id, hukum]))
 const topicById = new Map(typed.topics.map((topic) => [topic.id, topic]))
+
+function buildSurahs(): void {
+  for (const { number, name } of names) {
+    const option = document.createElement('option')
+    option.value = String(number)
+    option.textContent = `${number}. ${name}`
+    option.lang = 'ar'
+    surahSelect.append(option)
+  }
+}
+
+function buildAyahs(): void {
+  const surah = Number(surahSelect.value)
+  const previous = Number(ayahSelect.value)
+  ayahSelect.replaceChildren()
+
+  for (const number of ayahNumbers.get(surah) ?? []) {
+    const option = document.createElement('option')
+    option.value = String(number)
+    option.textContent = String(number)
+    ayahSelect.append(option)
+  }
+
+  const available = ayahNumbers.get(surah) ?? []
+  ayahSelect.value = String(available.includes(previous) ? previous : (available[0] ?? 1))
+}
 
 function buildTopicFilter(): void {
   for (const topic of typed.topics) {
@@ -73,15 +116,27 @@ function describe(span: Span): string {
   return `${hukum} — ${rule}`
 }
 
+/** What is being analysed: the selected ayah, or the reader's own text. */
+function subject(): { text: string; label: string } {
+  const custom = customInput.value.trim()
+  if (custom !== '') {
+    return { text: custom, label: 'your text' }
+  }
+  const ref = `${surahSelect.value}:${ayahSelect.value}`
+  return { text: mushaf.ayahs[ref] ?? '', label: ref }
+}
+
 function render(): void {
-  const text = input.value
+  const { text, label } = subject()
   const engine = new Tajweed(typed, { only: [...enabledTopics] })
-  const found = enabledTopics.size === 0 ? [] : engine.analyze(text)
+  const found = enabledTopics.size === 0 || text === '' ? [] : engine.analyze(text)
   const shown = overlapToggle.checked
     ? [...found].sort((a, b) => a.start - b.start)
     : resolveOverlaps(found)
 
+  reference.textContent = label
   output.replaceChildren()
+
   const characters = Array.from(text)
   let cursor = 0
 
@@ -99,7 +154,14 @@ function render(): void {
     mark.textContent = characters.slice(span.start, span.end).join('')
     mark.title = describe(span)
     mark.setAttribute('aria-label', describe(span))
+    mark.tabIndex = 0
     mark.addEventListener('click', () => showDetails(span, text))
+    mark.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        showDetails(span, text)
+      }
+    })
     output.append(mark)
 
     cursor = span.end
@@ -168,8 +230,19 @@ function showDetails(span: Span, text: string): void {
   details.append(heading, matched, rows)
 }
 
-input.value = SAMPLE
-input.addEventListener('input', render)
+surahSelect.addEventListener('change', () => {
+  buildAyahs()
+  render()
+})
+ayahSelect.addEventListener('change', render)
+customInput.addEventListener('input', render)
 overlapToggle.addEventListener('change', render)
+
+buildSurahs()
+// Al-Fatiha 1:7 to open on: long enough to carry several rulings at once, and it
+// ends with the standard example of المد اللازم الكلمي المثقل.
+surahSelect.value = '1'
+buildAyahs()
+ayahSelect.value = '7'
 buildTopicFilter()
 render()

@@ -9,10 +9,8 @@ shows up as a failing test rather than as a quiet difference in output.
 pnpm test
 ```
 
-The suite needs a local copy of the text edition at `editions/uthmani-hafs.json`,
-which is not committed — it holds the mushaf. Without it these tests **skip**, so
-a checkout without one still has a green suite, and the unit tests in
-`packages/core/test` cover the same mechanisms by example and always run.
+The suite reads the text edition at `editions/uthmani-hafs.json`, which is in the
+repository, so it runs everywhere including CI.
 
 ## What is pinned
 
@@ -56,7 +54,8 @@ being digests rather than text, it can be committed.
 Deliberate differences from the original are recorded in
 [docs/divergences.md](../docs/divergences.md).
 
-## No Quranic text is committed here
+## Digests, not text
 
-Fixtures reference ayahs as `surah:ayah`. Failure messages name references, never
-text.
+`frozen.json` holds no Quranic text — only hashes of what the engine did to it.
+Fixtures reference ayahs as `surah:ayah`, and failure messages name references
+rather than quoting passages.

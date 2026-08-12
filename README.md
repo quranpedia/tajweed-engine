@@ -72,14 +72,25 @@ The annotations describe one edition. If yours differs, the offsets point at
 different letters — `pnpm edition:check <file>` measures that rather than assuming
 it. See [docs/editions.md](./docs/editions.md).
 
-## No Quranic text is distributed here
+## Quranic text in this repository
 
-Not in the packages, not in the fixtures. Conformance tests reference ayahs by
-`surah:ayah` against a text edition identified by hash, and load the text from a
-verified source at test time. This keeps the corpus free of any claim to
-distribute a mushaf, and makes it unambiguous *which* edition an annotation was
-computed against — the same rule can land on different offsets in different
-editions of the Uthmani script.
+**None of the published packages contain any.** `@tajweed/rules` is patterns,
+`@tajweed/annotations` is offsets, `@tajweed/core` is code. That is deliberate:
+it keeps them free of any claim to distribute a mushaf, and it makes the question
+*which edition?* explicit rather than assumed, since the same rule lands on
+different offsets in different editions of the Uthmani script.
+
+The **repository** does contain one edition, at
+[`editions/uthmani-hafs.json`](./editions/uthmani-hafs.json) — the text published
+at [tajweed.quranpedia.net](https://tajweed.quranpedia.net). The playground shows
+real ayahs, and the conformance suite needs real text to check against, so it is
+here rather than fetched.
+
+Wherever text is shown, it is shown read-only and taken from that edition.
+Nothing in this project invents Arabic to stand in for Quranic text: a composed
+phrase in that position reads as Quran to whoever sees it, which is worse than
+the problem it avoids. Tests that need to exercise one mechanism build their
+input from named code points instead, which is not text at all.
 
 ## Where this comes from
 

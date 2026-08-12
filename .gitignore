@@ -4,8 +4,5 @@ dist/
 .DS_Store
 coverage/
 
-# Reference snapshot: embeds mushaf text, never committed.
+# Reference snapshots from the implementation this was ported from.
 conformance/reference.json
-
-# Text editions: hold Quranic text, never committed.
-editions/
