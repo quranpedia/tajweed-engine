@@ -1,5 +1,5 @@
 {
- "corpusVersion": "0.2.0",
+ "corpusVersion": "0.3.0",
  "edition": {
   "id": "uthmani-hafs",
   "sha256": "b5d29736bb3ef49d9d331c4e60a59d83fe899b921e9e8dc35911bd4a18ce55f3",
@@ -7121,14 +7121,9 @@
    "digest": "c3c0800ebaa8e4e3"
   },
   "qalqalah-mutatarrifa.1": {
-   "ayahs": 2851,
-   "occurrences": 4470,
-   "digest": "fd4fc7be31024978"
-  },
-  "qalqalah-mutatarrifa.2": {
-   "ayahs": 530,
-   "occurrences": 582,
-   "digest": "caec7edab5aaa413"
+   "ayahs": 478,
+   "occurrences": 512,
+   "digest": "3ca3a7a2e6621dab"
   },
   "madd-lazim-kalimi-muthaqqal.1": {
    "ayahs": 92,

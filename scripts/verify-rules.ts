@@ -73,15 +73,12 @@ const EXPECTATIONS: readonly Expectation[] = [
   },
   {
     rule: 'qalqalah-mutatarrifa.1',
-    matches: ['111:1', '112:1', '113:1'],
-    avoids: ['1:1'],
-    why: 'وَتَبَّ، أَحَدٌ، ٱلۡفَلَقِ — حرف قلقلة في آخر الكلمة',
-  },
-  {
-    rule: 'qalqalah-mutatarrifa.2',
-    matches: ['111:1'],
-    avoids: ['1:1', '112:1'],
-    why: 'وَتَبَّ — حرف قلقلة مشدد في آخر الكلمة',
+    matches: ['112:3', '2:60', '2:65'],
+    // Vowelled at the end of a word: qalqalah only if the reciter stops, which
+    // is a choice rather than a property of the text. 1:7 ends صِرَٰطَ … ٱلۡمَغۡضُوبِ
+    // and 112:1 ends أَحَدٌ; none of them is qalqalah when continuing.
+    avoids: ['1:7', '112:1', '111:1', '1:1'],
+    why: 'لَمْ يَلِدْ وَلَمْ يُولَدْ — حرف قلقلة ساكن في آخر الكلمة',
   },
 ]
 

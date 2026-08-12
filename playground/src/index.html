@@ -97,6 +97,22 @@
       .controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.9rem; font-size: 0.875rem; color: var(--muted); }
       .controls label { display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; }
       #details:empty { display: none; }
+      #rules { display: flex; flex-direction: column; gap: 0.15rem; }
+      .rule-row {
+        display: grid; grid-template-columns: 0.7rem 1fr auto; align-items: baseline;
+        gap: 0.6rem; padding: 0.35rem 0.5rem; border-radius: 6px;
+        background: none; border: 0; color: inherit; font: inherit; text-align: start;
+        cursor: pointer; width: 100%;
+      }
+      .rule-row:hover { background: color-mix(in srgb, currentColor 7%, transparent); }
+      .rule-row[aria-pressed="true"] { background: color-mix(in srgb, currentColor 12%, transparent); }
+      .rule-row .dot { width: 0.7rem; height: 0.7rem; border-radius: 2px; align-self: center; }
+      .rule-row .who { display: flex; flex-direction: column; gap: 0.1rem; }
+      .rule-row .hukum { font-size: 0.95rem; }
+      .rule-row .desc { font-size: 0.8rem; color: var(--muted); }
+      .rule-row .count { font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+      .rule-row .flag { font-size: 0.7rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0 0.35rem; margin-inline-start: 0.35rem; }
+      #rules:empty::after { content: 'Nothing matched.'; color: var(--muted); font-size: 0.875rem; }
       #details h2 { margin: 0 0 0.5rem; font-size: 1.05rem; }
       .matched { font-family: "Amiri Quran", "Scheherazade New", serif; font-size: 1.8rem; direction: rtl; margin: 0 0 0.75rem; }
       dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.35rem 1rem; margin: 0; font-size: 0.9rem; }
@@ -139,6 +155,11 @@
         <label class="field">Result <span id="reference" class="ref"></span></label>
         <div id="output"></div>
         <div id="summary"></div>
+      </div>
+
+      <div class="panel">
+        <label class="field">Rules that apply here <span id="isolated" class="ref"></span></label>
+        <div id="rules"></div>
       </div>
 
       <details class="panel">

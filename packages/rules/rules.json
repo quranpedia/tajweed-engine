@@ -1,6 +1,6 @@
 {
   "$schema": "./schema/rules.schema.json",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "riwayah": "hafs-an-asim",
   "provenance": {
     "source": "tajweed.quranpedia.net",
@@ -651,7 +651,7 @@
       "id": "qalqalah-mutatarrifa",
       "category": "qalqalah-ranks",
       "label": {
-        "ar": "القلقلة المتطرفة (الوسطى والكبرى عند الوقف)"
+        "ar": "القلقلة المتطرفة"
       }
     },
     {
@@ -2597,32 +2597,24 @@
     {
       "id": "qalqalah-mutatarrifa.1",
       "hukum": "qalqalah-mutatarrifa",
-      "case": "[ق ط ب ج د] + نهاية الكلمة",
+      "case": "[قْ طْ بْ جْ دْ] + نهاية الكلمة",
       "scope": "within-word",
       "status": "stable",
       "needsReview": true,
       "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
       "label": {
-        "ar": "إذا جاء أحد حروف القلقلة (ق ط ب ج د) في آخر الكلمة"
+        "ar": "إذا جاء أحد حروف القلقلة (ق ط ب ج د) ساكنا في آخر الكلمة"
       },
       "notes": {
-        "ar": "تُنطق القلقلة هنا عند الوقف على الكلمة، سواء كان الحرف ساكنا في الرسم أو متحركا يسكَّن بالوقف. ولأن التفريق بين الوسطى والكبرى يقوم على التشديد وعلى اختيار القارئ الوقف، فهما مجموعتان في حكم واحد، وتُفرد الكبرى بقاعدة مستقلة."
-      }
-    },
-    {
-      "id": "qalqalah-mutatarrifa.2",
-      "hukum": "qalqalah-mutatarrifa",
-      "case": "[قّ طّ بّ جّ دّ] + نهاية الكلمة",
-      "scope": "within-word",
-      "status": "stable",
-      "needsReview": true,
-      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
-      "label": {
-        "ar": "إذا جاء أحد حروف القلقلة (ق ط ب ج د) مشددا في آخر الكلمة"
+        "ar": "الحرف ساكن في الرسم، فالقلقلة واقعة وصلا ووقفا: صغرى عند الوصل، كبرى عند الوقف عليه. أما الحرف المتحرك في آخر الكلمة فلا قلقلة فيه إلا إذا وقف القارئ عليه فسكن، وذلك اختيار من القارئ لا وصف للنص، فلا يُعلَّم عليه هنا."
       },
-      "notes": {
-        "ar": "هذه هي القلقلة الكبرى عند من يفرِّق بين المراتب الثلاث. مواضعها داخلة في القاعدة السابقة، فالحكمان يتداخلان عمدا."
-      }
+      "corrections": [
+        {
+          "field": "case",
+          "was": "[ق ط ب ج د] + نهاية الكلمة",
+          "reason": "The rule matched every qalqalah letter at the end of a word, whatever its vowel — so صِرَٰطَ and ٱلۡمَغۡضُوبِ in al-Fatiha were marked as qalqalah although neither is قلقلة when the reciter continues. Qalqalah needs the letter to be sakin; a vowelled final letter becomes sakin only if the reciter stops on it, which is a choice rather than a property of the text. Restricted to letters written sakin: 4,470 occurrences across 2,851 ayahs became 512 across 478."
+        }
+      ]
     },
     {
       "id": "madd-lazim-kalimi-muthaqqal.1",

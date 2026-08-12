@@ -41,6 +41,17 @@ const summary = document.querySelector<HTMLDivElement>('#summary')!
 const topicFilter = document.querySelector<HTMLDivElement>('#topics')!
 const overlapToggle = document.querySelector<HTMLInputElement>('#overlapping')!
 const details = document.querySelector<HTMLDivElement>('#details')!
+const rulesPanel = document.querySelector<HTMLDivElement>('#rules')!
+const isolatedLabel = document.querySelector<HTMLSpanElement>('#isolated')!
+
+/**
+ * A single rule to show on its own, or null for all of them.
+ *
+ * Topics answer "which kinds of ruling are here"; this answers "where exactly
+ * does THIS rule apply", which is the question the corpus is actually organised
+ * around and the one the topic chips are too coarse to reach.
+ */
+let isolatedRule: string | null = null
 
 /** Ayah numbers per surah, counted from the edition rather than hardcoded. */
 const ayahNumbers = new Map<number, number[]>()
@@ -95,6 +106,7 @@ function buildTopicFilter(): void {
       } else {
         enabledTopics.delete(topic.id)
       }
+      isolatedRule = null
       render()
     })
 
@@ -130,9 +142,13 @@ function render(): void {
   const { text, label } = subject()
   const engine = new Tajweed(typed, { only: [...enabledTopics] })
   const found = enabledTopics.size === 0 || text === '' ? [] : engine.analyze(text)
+
+  // The rule list always reflects everything that applies; isolating one changes
+  // what is drawn, not what is reported to be there.
+  const drawn = isolatedRule ? found.filter((span) => span.ruleId === isolatedRule) : found
   const shown = overlapToggle.checked
-    ? [...found].sort((a, b) => a.start - b.start)
-    : resolveOverlaps(found)
+    ? [...drawn].sort((a, b) => a.start - b.start)
+    : resolveOverlaps(drawn)
 
   reference.textContent = label
   output.replaceChildren()
@@ -177,7 +193,78 @@ function render(): void {
       ? 'No rule matched. That means no modelled rule matched — the corpus is silent outside the topics it covers.'
       : `${found.length} occurrences, ${ahkam.size} ahkam, ${new Set(found.map((s) => s.ruleId)).size} rules.`
 
+  renderRules(found, text)
   details.replaceChildren()
+}
+
+/**
+ * Every rule that applies to what is being shown, in the order it first appears,
+ * with how many times. Selecting one draws only that rule.
+ */
+function renderRules(spans: readonly Span[], text: string): void {
+  rulesPanel.replaceChildren()
+  isolatedLabel.textContent = isolatedRule ? 'showing one rule — click it again for all' : ''
+
+  const counts = new Map<string, { count: number; first: Span }>()
+  for (const span of spans) {
+    const seen = counts.get(span.ruleId)
+    if (seen) {
+      seen.count += 1
+    } else {
+      counts.set(span.ruleId, { count: 1, first: span })
+    }
+  }
+
+  for (const [ruleId, { count, first }] of counts) {
+    const rule = ruleById.get(ruleId)
+    const hukum = hukumById.get(first.hukumId)
+
+    const row = document.createElement('button')
+    row.type = 'button'
+    row.className = 'rule-row'
+    row.setAttribute('aria-pressed', String(isolatedRule === ruleId))
+
+    const dot = document.createElement('span')
+    dot.className = 'dot'
+    dot.style.background = TOPIC_COLORS[first.topicId] ?? 'currentColor'
+
+    const who = document.createElement('span')
+    who.className = 'who'
+
+    const name = document.createElement('span')
+    name.className = 'hukum'
+    name.lang = 'ar'
+    name.textContent = hukum?.label.ar ?? first.hukumId
+    if (rule?.needsReview) {
+      const flag = document.createElement('span')
+      flag.className = 'flag'
+      flag.textContent = 'awaiting review'
+      flag.title = 'Verified against the text, but not signed off by a qualified reviewer.'
+      name.append(flag)
+    }
+
+    const desc = document.createElement('span')
+    desc.className = 'desc'
+    desc.lang = 'ar'
+    desc.textContent = rule?.label.ar ?? ruleId
+
+    who.append(name, desc)
+
+    const howMany = document.createElement('span')
+    howMany.className = 'count'
+    howMany.textContent = count === 1 ? '1×' : `${count}×`
+
+    row.append(dot, who, howMany)
+    row.addEventListener('click', () => {
+      isolatedRule = isolatedRule === ruleId ? null : ruleId
+      render()
+      if (isolatedRule) {
+        showDetails(first, text)
+      }
+    })
+
+    rulesPanel.append(row)
+  }
 }
 
 function showDetails(span: Span, text: string): void {
@@ -230,12 +317,17 @@ function showDetails(span: Span, text: string): void {
   details.append(heading, matched, rows)
 }
 
+function reset(): void {
+  isolatedRule = null
+  render()
+}
+
 surahSelect.addEventListener('change', () => {
   buildAyahs()
-  render()
+  reset()
 })
-ayahSelect.addEventListener('change', render)
-customInput.addEventListener('input', render)
+ayahSelect.addEventListener('change', reset)
+customInput.addEventListener('input', reset)
 overlapToggle.addEventListener('change', render)
 
 buildSurahs()
