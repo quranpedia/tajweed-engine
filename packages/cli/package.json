@@ -1,0 +1,20 @@
+{
+  "name": "@tajweed/cli",
+  "version": "0.1.0",
+  "description": "Command line for the tajweed rule corpus and engine.",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "tajweed": "./dist/index.js" },
+  "files": ["dist/", "README.md"],
+  "scripts": { "build": "tsc -p tsconfig.json" },
+  "dependencies": {
+    "@tajweed/core": "workspace:*",
+    "@tajweed/rules": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quranpedia/tajweed-engine.git",
+    "directory": "packages/cli"
+  },
+  "keywords": ["quran", "tajweed", "cli"]
+}

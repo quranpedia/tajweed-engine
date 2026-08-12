@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The version comes from `packageManager` in package.json; naming it here
+      # too makes the action fail on a mismatch.
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Validate the rule corpus
+        run: pnpm rules:validate
+
+      - name: Audit rule descriptions against their patterns
+        run: pnpm rules:audit
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        # The conformance suite skips without a reference snapshot, which cannot
+        # be generated here — it needs the legacy application and its database.
+        # The unit tests always run.
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Test the Python reader
+        working-directory: python
+        run: python -m unittest discover -s tests
+        env:
+          PYTHONPATH: .

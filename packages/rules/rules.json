@@ -1,0 +1,2696 @@
+{
+  "$schema": "./schema/rules.schema.json",
+  "version": "0.2.0",
+  "riwayah": "hafs-an-asim",
+  "provenance": {
+    "source": "tajweed.quranpedia.net",
+    "url": "https://tajweed.quranpedia.net"
+  },
+  "topics": [
+    {
+      "id": "tafkheem-tarqeeq",
+      "label": {
+        "ar": "التفخيم والترقيق"
+      }
+    },
+    {
+      "id": "letter-relations",
+      "label": {
+        "ar": "علاقات الحروف"
+      }
+    },
+    {
+      "id": "noon-tanween",
+      "label": {
+        "ar": "النون والتنوين"
+      }
+    },
+    {
+      "id": "meem-sakinah",
+      "label": {
+        "ar": "الميم الساكنة"
+      }
+    },
+    {
+      "id": "mushaddadatan",
+      "label": {
+        "ar": "المشددتان"
+      }
+    },
+    {
+      "id": "madd",
+      "label": {
+        "ar": "المد"
+      }
+    },
+    {
+      "id": "qalqalah",
+      "label": {
+        "ar": "القلقلة"
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "tafkheem-ranks",
+      "topic": "tafkheem-tarqeeq",
+      "label": {
+        "ar": "مراتب التفخيم"
+      }
+    },
+    {
+      "id": "always-tarqeeq-letters",
+      "topic": "tafkheem-tarqeeq",
+      "label": {
+        "ar": "الحروف المرققة"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-quality",
+      "topic": "tafkheem-tarqeeq",
+      "label": {
+        "ar": "ترقيق وتفخيم غنة الإخفاء الحقيقي"
+      }
+    },
+    {
+      "id": "lam-jalalah",
+      "topic": "tafkheem-tarqeeq",
+      "label": {
+        "ar": "ترقيق وتفخيم لام لفظ الجلالة"
+      }
+    },
+    {
+      "id": "raa-rules",
+      "topic": "tafkheem-tarqeeq",
+      "label": {
+        "ar": "أحكام الراء"
+      }
+    },
+    {
+      "id": "alef-quality",
+      "topic": "tafkheem-tarqeeq",
+      "label": {
+        "ar": "ترقيق وتفخيم الألف"
+      }
+    },
+    {
+      "id": "mutamathilain-sagheer",
+      "topic": "letter-relations",
+      "label": {
+        "ar": "المتماثلين الصغير"
+      }
+    },
+    {
+      "id": "letter-relations-misc",
+      "topic": "letter-relations",
+      "label": {
+        "ar": "علاقات الحروف"
+      },
+      "empty": true
+    },
+    {
+      "id": "mutajanisain-sagheer",
+      "topic": "letter-relations",
+      "label": {
+        "ar": "المتجانسين الصغير"
+      }
+    },
+    {
+      "id": "izhar-halqi",
+      "topic": "noon-tanween",
+      "label": {
+        "ar": "الإظهار الحلقي"
+      }
+    },
+    {
+      "id": "idgham-bi-ghunnah",
+      "topic": "noon-tanween",
+      "label": {
+        "ar": "الإدغام بغنة"
+      }
+    },
+    {
+      "id": "idgham-bila-ghunnah",
+      "topic": "noon-tanween",
+      "label": {
+        "ar": "الإدغام بغير غنة"
+      }
+    },
+    {
+      "id": "idgham-kamil",
+      "topic": "noon-tanween",
+      "label": {
+        "ar": "الإدغام الكامل"
+      }
+    },
+    {
+      "id": "idgham-naqis",
+      "topic": "noon-tanween",
+      "label": {
+        "ar": "الإدغام الناقص"
+      }
+    },
+    {
+      "id": "iqlab",
+      "topic": "noon-tanween",
+      "label": {
+        "ar": "الإقلاب أو القلب"
+      }
+    },
+    {
+      "id": "ikhfa-haqiqi",
+      "topic": "noon-tanween",
+      "label": {
+        "ar": "الإخفاء الحقيقي"
+      }
+    },
+    {
+      "id": "izhar-mutlaq",
+      "topic": "noon-tanween",
+      "label": {
+        "ar": "الإظهار المطلق"
+      }
+    },
+    {
+      "id": "izhar-mutlaq-annexed",
+      "topic": "noon-tanween",
+      "label": {
+        "ar": "محلق بالإظهار المطلق"
+      },
+      "empty": true
+    },
+    {
+      "id": "idgham-shafawi",
+      "topic": "meem-sakinah",
+      "label": {
+        "ar": "الإدغام الشفوي"
+      }
+    },
+    {
+      "id": "ikhfa-shafawi",
+      "topic": "meem-sakinah",
+      "label": {
+        "ar": "الإخفاء الشفوي"
+      }
+    },
+    {
+      "id": "izhar-shafawi",
+      "topic": "meem-sakinah",
+      "label": {
+        "ar": "الإظهار الشفوي"
+      }
+    },
+    {
+      "id": "mushaddadatan",
+      "topic": "mushaddadatan",
+      "label": {
+        "ar": "المشددتان"
+      }
+    },
+    {
+      "id": "madd-tabee",
+      "topic": "madd",
+      "label": {
+        "ar": "المدالطبيعي"
+      }
+    },
+    {
+      "id": "leen-letters",
+      "topic": "madd",
+      "label": {
+        "ar": "حروف اللين"
+      }
+    },
+    {
+      "id": "madd-far-hamz",
+      "topic": "madd",
+      "label": {
+        "ar": "المد الفرعي بسبب الهمز"
+      }
+    },
+    {
+      "id": "qalqalah-ranks",
+      "topic": "qalqalah",
+      "label": {
+        "ar": "مراتب القلقلة"
+      }
+    },
+    {
+      "id": "madd-lazim",
+      "topic": "madd",
+      "label": {
+        "ar": "المد اللازم"
+      }
+    }
+  ],
+  "hukums": [
+    {
+      "id": "tafkheem-rank-1-jazari",
+      "category": "tafkheem-ranks",
+      "label": {
+        "ar": "مرتبة التفخيم الأولى (ابن الجزري)"
+      },
+      "school": {
+        "id": "ibn-al-jazari",
+        "scholar": "ابن الجزري"
+      }
+    },
+    {
+      "id": "tafkheem-rank-2-jazari",
+      "category": "tafkheem-ranks",
+      "label": {
+        "ar": "مرتبة التفخيم الثانية (ابن الجزري)"
+      },
+      "school": {
+        "id": "ibn-al-jazari",
+        "scholar": "ابن الجزري"
+      }
+    },
+    {
+      "id": "tafkheem-rank-3-jazari",
+      "category": "tafkheem-ranks",
+      "label": {
+        "ar": "مرتبة التفخيم الثالثة (ابن الجزري)"
+      },
+      "school": {
+        "id": "ibn-al-jazari",
+        "scholar": "ابن الجزري"
+      }
+    },
+    {
+      "id": "tafkheem-rank-4-jazari",
+      "category": "tafkheem-ranks",
+      "label": {
+        "ar": "مرتبة التفخيم الرابعة (ابن الجزري)"
+      },
+      "school": {
+        "id": "ibn-al-jazari",
+        "scholar": "ابن الجزري"
+      }
+    },
+    {
+      "id": "tafkheem-rank-5-relative-jazari",
+      "category": "tafkheem-ranks",
+      "label": {
+        "ar": "مرتبة التفخيم الخامسة - التفخيم النسبي (ابن الجزري)"
+      },
+      "school": {
+        "id": "ibn-al-jazari",
+        "scholar": "ابن الجزري"
+      }
+    },
+    {
+      "id": "tafkheem-rank-1-tahhan",
+      "category": "tafkheem-ranks",
+      "label": {
+        "ar": "مرتبة التفخيم الأولى (ابن الطحان الأندلسي)"
+      },
+      "school": {
+        "id": "ibn-al-tahhan",
+        "scholar": "ابن الطحان الأندلسي"
+      }
+    },
+    {
+      "id": "tafkheem-rank-2-tahhan",
+      "category": "tafkheem-ranks",
+      "label": {
+        "ar": "مرتبة التفخيم الثانية (ابن الطحان الأندلسي)"
+      },
+      "school": {
+        "id": "ibn-al-tahhan",
+        "scholar": "ابن الطحان الأندلسي"
+      }
+    },
+    {
+      "id": "tafkheem-rank-3-relative-tahhan",
+      "category": "tafkheem-ranks",
+      "label": {
+        "ar": "مرتبة التفخيم الثالثة -التفخيم النسبي (ابن الطحان الأندلسي)"
+      },
+      "school": {
+        "id": "ibn-al-tahhan",
+        "scholar": "ابن الطحان الأندلسي"
+      }
+    },
+    {
+      "id": "always-tarqeeq",
+      "category": "always-tarqeeq-letters",
+      "label": {
+        "ar": "الحروف المرققة دائما"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-tarqeeq",
+      "category": "ikhfa-ghunnah-quality",
+      "label": {
+        "ar": "غنة الإخفاء الحقيقي المرققة"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-tafkheem",
+      "category": "ikhfa-ghunnah-quality",
+      "label": {
+        "ar": "غنة الإخفاء الحقيقي المفخمة"
+      }
+    },
+    {
+      "id": "lam-jalalah-tafkheem",
+      "category": "lam-jalalah",
+      "label": {
+        "ar": "لام لفظ الجلالة المفخمة"
+      }
+    },
+    {
+      "id": "lam-jalalah-tarqeeq",
+      "category": "lam-jalalah",
+      "label": {
+        "ar": "لام لفظ الجلالة المرققة"
+      }
+    },
+    {
+      "id": "raa-tafkheem",
+      "category": "raa-rules",
+      "label": {
+        "ar": "تفخيم الراء"
+      }
+    },
+    {
+      "id": "raa-tarqeeq",
+      "category": "raa-rules",
+      "label": {
+        "ar": "ترقيق الراء"
+      }
+    },
+    {
+      "id": "raa-either-permissible",
+      "category": "raa-rules",
+      "label": {
+        "ar": "جواز ترقيق وتفخيم الراء"
+      }
+    },
+    {
+      "id": "alef-tafkheem",
+      "category": "alef-quality",
+      "label": {
+        "ar": "الألف المفخمة"
+      }
+    },
+    {
+      "id": "alef-tarqeeq",
+      "category": "alef-quality",
+      "label": {
+        "ar": "الألف المرققة"
+      }
+    },
+    {
+      "id": "mutamathilain-idgham-kamil",
+      "category": "mutamathilain-sagheer",
+      "label": {
+        "ar": "الإدغام الكامل"
+      }
+    },
+    {
+      "id": "mutamathilain-izhar",
+      "category": "mutamathilain-sagheer",
+      "label": {
+        "ar": "الإظهار"
+      }
+    },
+    {
+      "id": "mutajanisain-idgham-naqis",
+      "category": "mutajanisain-sagheer",
+      "label": {
+        "ar": "الإدغام الناقص"
+      }
+    },
+    {
+      "id": "mutajanisain-ikhfa-shafawi",
+      "category": "mutajanisain-sagheer",
+      "label": {
+        "ar": "الاخفاء الشفوي"
+      }
+    },
+    {
+      "id": "izhar-halqi-noon",
+      "category": "izhar-halqi",
+      "label": {
+        "ar": "إظهار النون"
+      }
+    },
+    {
+      "id": "izhar-halqi-tanween",
+      "category": "izhar-halqi",
+      "label": {
+        "ar": "إظهار التنوين"
+      }
+    },
+    {
+      "id": "idgham-bi-ghunnah-noon",
+      "category": "idgham-bi-ghunnah",
+      "label": {
+        "ar": "إدغام النون بغنة"
+      }
+    },
+    {
+      "id": "idgham-bi-ghunnah-tanween",
+      "category": "idgham-bi-ghunnah",
+      "label": {
+        "ar": "إدغام التنوين بغنة"
+      }
+    },
+    {
+      "id": "idgham-bila-ghunnah-noon",
+      "category": "idgham-bila-ghunnah",
+      "label": {
+        "ar": "إدغام النون بغير غنة"
+      }
+    },
+    {
+      "id": "idgham-bila-ghunnah-tanween",
+      "category": "idgham-bila-ghunnah",
+      "label": {
+        "ar": "إدغام التنوين بغير غنة"
+      }
+    },
+    {
+      "id": "idgham-kamil-noon",
+      "category": "idgham-kamil",
+      "label": {
+        "ar": "إدغام النون الكامل"
+      }
+    },
+    {
+      "id": "idgham-kamil-tanween",
+      "category": "idgham-kamil",
+      "label": {
+        "ar": "إدغام التنوين الكامل"
+      }
+    },
+    {
+      "id": "idgham-naqis-noon",
+      "category": "idgham-naqis",
+      "label": {
+        "ar": "إدغام النون الناقص"
+      }
+    },
+    {
+      "id": "idgham-naqis-tanween",
+      "category": "idgham-naqis",
+      "label": {
+        "ar": "إدغام التنوين الناقص"
+      }
+    },
+    {
+      "id": "iqlab-noon",
+      "category": "iqlab",
+      "label": {
+        "ar": "قلب النون الساكنة"
+      }
+    },
+    {
+      "id": "iqlab-tanween",
+      "category": "iqlab",
+      "label": {
+        "ar": "قلب التنوين"
+      }
+    },
+    {
+      "id": "ikhfa-haqiqi-noon",
+      "category": "ikhfa-haqiqi",
+      "label": {
+        "ar": "الإخفاء الحقيقي للنون"
+      }
+    },
+    {
+      "id": "ikhfa-haqiqi-tanween",
+      "category": "ikhfa-haqiqi",
+      "label": {
+        "ar": "الإخفاء الحقيقي للتنوين"
+      }
+    },
+    {
+      "id": "izhar-mutlaq",
+      "category": "izhar-mutlaq",
+      "label": {
+        "ar": "الإظهار المطلق"
+      }
+    },
+    {
+      "id": "idgham-shafawi-meem",
+      "category": "idgham-shafawi",
+      "label": {
+        "ar": "إدغام الميم الساكنة"
+      }
+    },
+    {
+      "id": "noon-mushaddadah",
+      "category": "mushaddadatan",
+      "label": {
+        "ar": "النون المشددة"
+      }
+    },
+    {
+      "id": "meem-mushaddadah",
+      "category": "mushaddadatan",
+      "label": {
+        "ar": "الميم المشددة"
+      }
+    },
+    {
+      "id": "madd-tabee-kalimi",
+      "category": "madd-tabee",
+      "label": {
+        "ar": "المد الطبيعي الكلمي"
+      }
+    },
+    {
+      "id": "leen-waw",
+      "category": "leen-letters",
+      "label": {
+        "ar": "الواو اللينة"
+      }
+    },
+    {
+      "id": "leen-yaa",
+      "category": "leen-letters",
+      "label": {
+        "ar": "الياء اللينة"
+      }
+    },
+    {
+      "id": "madd-iwad",
+      "category": "madd-tabee",
+      "label": {
+        "ar": "مد العوض"
+      }
+    },
+    {
+      "id": "madd-silah-sughra",
+      "category": "madd-tabee",
+      "label": {
+        "ar": "مد الصلة الصغرى"
+      }
+    },
+    {
+      "id": "seven-alefs",
+      "category": "madd-tabee",
+      "label": {
+        "ar": "الألفات السبع"
+      }
+    },
+    {
+      "id": "seven-alefs-khulf",
+      "category": "madd-tabee",
+      "label": {
+        "ar": "الألفات السبع بخلف"
+      }
+    },
+    {
+      "id": "madd-badal",
+      "category": "madd-far-hamz",
+      "label": {
+        "ar": "مد البدل وشبيهه"
+      }
+    },
+    {
+      "id": "madd-muttasil",
+      "category": "madd-far-hamz",
+      "label": {
+        "ar": "المد الواجب المتصل"
+      }
+    },
+    {
+      "id": "madd-munfasil",
+      "category": "madd-far-hamz",
+      "label": {
+        "ar": "المد الجائز المنفصل"
+      }
+    },
+    {
+      "id": "ikhfa-shafawi-meem",
+      "category": "ikhfa-shafawi",
+      "label": {
+        "ar": "إخفاء الميم الساكنة"
+      }
+    },
+    {
+      "id": "izhar-shafawi-meem",
+      "category": "izhar-shafawi",
+      "label": {
+        "ar": "إظهار الميم الساكنة"
+      }
+    },
+    {
+      "id": "qalqalah-sughra",
+      "category": "qalqalah-ranks",
+      "label": {
+        "ar": "القلقلة الصغرى"
+      }
+    },
+    {
+      "id": "qalqalah-mutatarrifa",
+      "category": "qalqalah-ranks",
+      "label": {
+        "ar": "القلقلة المتطرفة (الوسطى والكبرى عند الوقف)"
+      }
+    },
+    {
+      "id": "madd-lazim-kalimi-muthaqqal",
+      "category": "madd-lazim",
+      "label": {
+        "ar": "المد اللازم الكلمي المثقل"
+      }
+    },
+    {
+      "id": "madd-lazim-kalimi-mukhaffaf",
+      "category": "madd-lazim",
+      "label": {
+        "ar": "المد اللازم الكلمي المخفف"
+      }
+    },
+    {
+      "id": "madd-lazim-harfi",
+      "category": "madd-lazim",
+      "label": {
+        "ar": "المد اللازم الحرفي"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "tafkheem-rank-1-jazari.1",
+      "hukum": "tafkheem-rank-1-jazari",
+      "case": "[ خَ صَ ضَ غَ طَ قَ ظَ] + ا",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مفتوحا وبعده حرف ألف"
+      }
+    },
+    {
+      "id": "tafkheem-rank-1-jazari.2",
+      "hukum": "tafkheem-rank-1-jazari",
+      "case": "[ خَّ صَّ ضَّ غَّ طَّ قَّ ظَّ] + ا",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مفتوحا ومشددا وبعده حرف ألف"
+      }
+    },
+    {
+      "id": "tafkheem-rank-1-jazari.3",
+      "hukum": "tafkheem-rank-1-jazari",
+      "case": "[ خ ص ض غ ط ق ظ] + ًا",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "عند الوقف على الكلمة المنتهية بحرف استعلاء (خ ص ض غ ط ق ظ) وتنوين فتح"
+      }
+    },
+    {
+      "id": "tafkheem-rank-2-jazari.1",
+      "hukum": "tafkheem-rank-2-jazari",
+      "case": "[ خَ صَ ضَ غَ طَ قَ ظَ]",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "unsupported-negation",
+      "statusReason": "The rule is defined by what does NOT follow (\"وليس بعده ألف\"). The notation has no negation, so as written it also matches the cases it is meant to exclude.",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مفتوحا وليس بعده ألف"
+      }
+    },
+    {
+      "id": "tafkheem-rank-2-jazari.2",
+      "hukum": "tafkheem-rank-2-jazari",
+      "case": "[ خَّ صَّ ضَّ غَّ طَّ قَّ ظَّ]",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "unsupported-negation",
+      "statusReason": "The rule is defined by what does NOT follow (\"وليس بعده ألف\"). The notation has no negation, so as written it also matches the cases it is meant to exclude.",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مفتوحا ومشددا وليس بعده ألف"
+      }
+    },
+    {
+      "id": "tafkheem-rank-3-jazari.1",
+      "hukum": "tafkheem-rank-3-jazari",
+      "case": "[ خُ صُ ضُ غُ طُ قُ ظُ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مضموما"
+      }
+    },
+    {
+      "id": "tafkheem-rank-3-jazari.2",
+      "hukum": "tafkheem-rank-3-jazari",
+      "case": "[ خُّ صُّ ضُّ غُّ طُّ قُّ ظُّ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مضموما ومشددا"
+      }
+    },
+    {
+      "id": "tafkheem-rank-4-jazari.1",
+      "hukum": "tafkheem-rank-4-jazari",
+      "case": "[ خْ صْ ضْ غْ طْ قْ ظْ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) ساكنا"
+      }
+    },
+    {
+      "id": "tafkheem-rank-5-relative-jazari.1",
+      "hukum": "tafkheem-rank-5-relative-jazari",
+      "case": "[ خِ صِ ضِ غِ طِ قِ ظِ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مكسورا"
+      }
+    },
+    {
+      "id": "tafkheem-rank-5-relative-jazari.2",
+      "hukum": "tafkheem-rank-5-relative-jazari",
+      "case": "[ خِّ صِّ ضِّ غِّ طِّ قِّ ظِّ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مكسورا ومشددا"
+      }
+    },
+    {
+      "id": "tafkheem-rank-1-tahhan.1",
+      "hukum": "tafkheem-rank-1-tahhan",
+      "case": "[ خَ صَ ضَ غَ طَ قَ ظَ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مفتوحا"
+      }
+    },
+    {
+      "id": "tafkheem-rank-1-tahhan.2",
+      "hukum": "tafkheem-rank-1-tahhan",
+      "case": "[ خَّ صَّ ضَّ غَّ طَّ قَّ ظَّ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مفتوحا ومشددا"
+      }
+    },
+    {
+      "id": "tafkheem-rank-1-tahhan.3",
+      "hukum": "tafkheem-rank-1-tahhan",
+      "case": "[ءَ أَ ؤَ ئَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ] + [ همزة وصل أو بدون] + [خْ صْ ضْ غْ طْ قْ ظْ]",
+      "scope": "either",
+      "status": "disabled",
+      "gap": "unsupported-optional-group",
+      "statusReason": "The rule permits an optional hamzat wasl between two groups ([همزة وصل أو بدون]). The notation has no optional-group syntax.",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) ساكنا بعد مفتوح"
+      }
+    },
+    {
+      "id": "tafkheem-rank-2-tahhan.1",
+      "hukum": "tafkheem-rank-2-tahhan",
+      "case": "[ خُ صُ ضُ غُ طُ قُ ظُ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مضموماً"
+      }
+    },
+    {
+      "id": "tafkheem-rank-2-tahhan.2",
+      "hukum": "tafkheem-rank-2-tahhan",
+      "case": "[ خُّ صُّ ضُّ غُّ طُّ قُّ ظُّ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مضموماً ومشددا"
+      }
+    },
+    {
+      "id": "tafkheem-rank-2-tahhan.3",
+      "hukum": "tafkheem-rank-2-tahhan",
+      "case": "[ءُ أُ ؤُ ئُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ] + [ همزة وصل أو بدون] + [خْ صْ ضْ غْ طْ قْ ظْ]",
+      "scope": "either",
+      "status": "disabled",
+      "gap": "unsupported-optional-group",
+      "statusReason": "The rule permits an optional hamzat wasl between two groups ([همزة وصل أو بدون]). The notation has no optional-group syntax.",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) ساكناً بعد ضم"
+      }
+    },
+    {
+      "id": "tafkheem-rank-3-relative-tahhan.1",
+      "hukum": "tafkheem-rank-3-relative-tahhan",
+      "case": "[ خِ صِ ضِ غِ طِ قِ ظِ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مكسورا"
+      }
+    },
+    {
+      "id": "tafkheem-rank-3-relative-tahhan.2",
+      "hukum": "tafkheem-rank-3-relative-tahhan",
+      "case": "[ خِّ صِّ ضِّ غِّ طِّ قِّ ظِّ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) مكسورا ومشددا"
+      }
+    },
+    {
+      "id": "tafkheem-rank-3-relative-tahhan.3",
+      "hukum": "tafkheem-rank-3-relative-tahhan",
+      "case": "[ءِ أِ ؤِ ئِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ إِ] + [ همزة وصل أو بدون] [خْ صْ ضْ غْ طْ قْ ظْ]",
+      "scope": "either",
+      "status": "disabled",
+      "gap": "unsupported-optional-group",
+      "statusReason": "The rule permits an optional hamzat wasl between two groups ([همزة وصل أو بدون]). The notation has no optional-group syntax.",
+      "label": {
+        "ar": "إذا جاء حرف الاستعلاء (خ ص ض غ ط ق ظ) ساكنا بعد كسر"
+      }
+    },
+    {
+      "id": "always-tarqeeq.1",
+      "hukum": "always-tarqeeq",
+      "case": "[ء أ ؤ ئ ب ت ث ج ح د ذ ر ز س ش ع ف ك ل م ن ه و ي ة]",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "unsupported-exception",
+      "statusReason": "The rule carries a stated exception (\"عدا لام لفظ الجلالة\", \"باستثناء كلمة فرق\"). The notation cannot subtract a case from a group.",
+      "label": {
+        "ar": "حروف الاستفال عدا الألف والراء ولام لفظ الجلالة"
+      },
+      "notes": {
+        "ar": "باستثناء لام لفظ الجلالة فلها أحكام خاصة بها"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-tarqeeq.1",
+      "hukum": "ikhfa-ghunnah-tarqeeq",
+      "case": "نْ + [ ذ ث ك ج ش س د ز ف ت ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد النون الساكنة أحد أحرف الإخفاء الحقيقي المستفلة (ذ ث ك ج ش س د ز ف ت )"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-tarqeeq.2",
+      "hukum": "ikhfa-ghunnah-tarqeeq",
+      "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً] + [ ذ ث ك ج ش س د ز ف ت ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء بعد تنوين الفتح أحد أحرف الإخفاء الحقيقي المستفلة (ذ ث ك ج ش س د ز ف ت )"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-tarqeeq.3",
+      "hukum": "ikhfa-ghunnah-tarqeeq",
+      "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ذ ث ك ج ش س د ز ف ت ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء بعد تنوين الضم أحد أحرف الإخفاء الحقيقي المستفلة (ذ ث ك ج ش س د ز ف ت )"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-tarqeeq.4",
+      "hukum": "ikhfa-ghunnah-tarqeeq",
+      "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ ًى] + [ ذ ث ك ج ش س د ز ف ت ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثالثة: إذا جاء بعد تنوين الكسر أحد أحرف الإخفاء الحقيقي المستفلة (ذ ث ك ج ش س د ز ف ت )"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-tafkheem.1",
+      "hukum": "ikhfa-ghunnah-tafkheem",
+      "case": "نْ + [ ص ق ط ض ظ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد النون الساكنة أحد أحرف الإخفاء الحقيقي المستعلية (ص ق ط ض ظ )"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-tafkheem.2",
+      "hukum": "ikhfa-ghunnah-tafkheem",
+      "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ص ق ط ض ظ ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء بعد تنوين الفتح أحد أحرف الإخفاء الحقيقي المستعلية (ص ق ط ض ظ )"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-tafkheem.3",
+      "hukum": "ikhfa-ghunnah-tafkheem",
+      "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ص ق ط ض ظ ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء بعد تنوين الضم أحد أحرف الإخفاء الحقيقي المستعلية (ص ق ط ض ظ )"
+      }
+    },
+    {
+      "id": "ikhfa-ghunnah-tafkheem.4",
+      "hukum": "ikhfa-ghunnah-tafkheem",
+      "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ص ق ط ض ظ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثالثة: إذا جاء بعد تنوين الكسر أحد أحرف الإخفاء الحقيقي المستعلية (ص ق ط ض ظ )"
+      }
+    },
+    {
+      "id": "lam-jalalah-tafkheem.1",
+      "hukum": "lam-jalalah-tafkheem",
+      "case": "[ــــــــَ ـــــــــُـــــــ ـــــَّـــــ ـــــــــُّــــــــــــ] + [الله اللهم]",
+      "scope": "across-words",
+      "status": "disabled",
+      "gap": "ambiguous-wildcard",
+      "statusReason": "The group mixes the ــ wildcard with a multi-part sequence. Because space is the alternation separator, the sequence is compiled as alternatives instead, and the wildcard matches diacritics and spaces as readily as letters.",
+      "label": {
+        "ar": "إذا جاء قبل لفظ الجلالة (الله أو اللهم) فتحة أو ضمة"
+      }
+    },
+    {
+      "id": "lam-jalalah-tarqeeq.1",
+      "hukum": "lam-jalalah-tarqeeq",
+      "case": "[ ــــــــِـــــــ ــــِّـــــــ ـــــــــٌ ــــــــً ـــــــٍ ًا ةً ًى] + [الله اللهم]",
+      "scope": "across-words",
+      "status": "disabled",
+      "gap": "ambiguous-wildcard",
+      "statusReason": "The group mixes the ــ wildcard with a multi-part sequence. Because space is the alternation separator, the sequence is compiled as alternatives instead, and the wildcard matches diacritics and spaces as readily as letters.",
+      "label": {
+        "ar": "إذا جاء قبل لفظ الجلالة (الله أو اللهم) كسرة أو تنوين"
+      }
+    },
+    {
+      "id": "raa-tafkheem.1",
+      "hukum": "raa-tafkheem",
+      "case": "[رَ رُ رَّ رُّ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا كانت الراء مفتوحة أو مضمومة"
+      }
+    },
+    {
+      "id": "raa-tafkheem.2",
+      "hukum": "raa-tafkheem",
+      "case": "[ــــــــَ ـــــــــُـــــــ ـــــَّـــــ ـــــــــُّــــــــــــ] + رْ",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا كانت الراء ساكنة وقبلها مفتوح أو مضموم"
+      }
+    },
+    {
+      "id": "raa-tafkheem.3",
+      "hukum": "raa-tafkheem",
+      "case": "[ــــــــَ ـــــــــُـــــــ ـــــَّـــــ ـــــــــُّــــــــــــ] + [ءْ أْ ؤْ ئْ بْ تْ ثْ جْ حْ خْ دْ ذْ رْ زْ سْ شْ صْ ضْ طْ ظْ عْ غْ فْ قْ كْ لْ مْ نْ هْ وْ ] + رْ",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا كانت الراء ساكنة وقبلها ساكن غير الياء وقبله مفتوح أو مضموم"
+      }
+    },
+    {
+      "id": "raa-tafkheem.4",
+      "hukum": "raa-tafkheem",
+      "case": "همزة وصل + رْ",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "unsupported-token",
+      "statusReason": "The rule refers to hamzat wasl by name as a group of its own. The notation has named tokens only for الألف الخنجرية, واو صغيرة and ياء صغيرة.",
+      "label": {
+        "ar": "إذا كانت الراء ساكنة وقبلها همزة وصل"
+      },
+      "notes": {
+        "ar": "بمعنى أن الراء الساكنة في أول الكلمة"
+      }
+    },
+    {
+      "id": "raa-tafkheem.5",
+      "hukum": "raa-tafkheem",
+      "case": "[ــــــــِــــ] + رْ + [خ ص ض غ ط ق ظ]",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "unsupported-exception",
+      "statusReason": "The rule carries a stated exception (\"عدا لام لفظ الجلالة\", \"باستثناء كلمة فرق\"). The notation cannot subtract a case from a group.",
+      "label": {
+        "ar": "إذا كانت الراء ساكنة وقبلها كسرة وبعدها حرف استعلاء"
+      },
+      "notes": {
+        "ar": "باستثناء كلمة فرق - الشعراء 63"
+      }
+    },
+    {
+      "id": "raa-tarqeeq.1",
+      "hukum": "raa-tarqeeq",
+      "case": "[ رِ رِّ ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا كانت الراء مكسورة"
+      }
+    },
+    {
+      "id": "raa-tarqeeq.2",
+      "hukum": "raa-tarqeeq",
+      "case": "[ـــــــِــــ ــــــــِّـــــــ ] + رْ + [ء ؤ ئ أ ي ت ث ج ح د ذ ر ز س ش ع ف ك ل م ن ه و ي ة]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا كانت الراء ساكنة وقبلها كسرة وليس بعدها حرف استعلاء"
+      }
+    },
+    {
+      "id": "raa-tarqeeq.3",
+      "hukum": "raa-tarqeeq",
+      "case": "يْ + رْ",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا كانت الراء ساكنة وقبلها ياء ساكنة"
+      }
+    },
+    {
+      "id": "raa-tarqeeq.4",
+      "hukum": "raa-tarqeeq",
+      "case": "[ـــــــِــــ ــــــــِّـــــــ ] + [ءْ أْ ؤْ ئْ بْ تْ ثْ جْ حْ دْ ذْ رْ زْ سْ شْ عْ فْ كْ لْ مْ نْ هْ وْ يْ] + رْ",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا كانت الراء ساكنة وقبلها ساكن غير الياء وحروف الاستعلاء وقبله مكسور"
+      }
+    },
+    {
+      "id": "raa-either-permissible.1",
+      "hukum": "raa-either-permissible",
+      "case": "كلمة فرق - الشعراء 63",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "not-a-pattern",
+      "statusReason": "The case field holds prose rather than a pattern. Expressing it needs support for literal words anchored to a specific location in the mushaf.",
+      "label": {
+        "ar": "إذا كانت الراء ساكنة وقبلها كسرة وبعدها حرف استعلاء ضعيف"
+      },
+      "notes": {
+        "ar": "حالة وحيدة"
+      }
+    },
+    {
+      "id": "raa-either-permissible.2",
+      "hukum": "raa-either-permissible",
+      "case": "فِرْقٍ",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا كانت الراء ساكنة وقبلها كسرة وبعدها حرف استعلاء مكسور (كلمة فرق)"
+      }
+    },
+    {
+      "id": "alef-tafkheem.1",
+      "hukum": "alef-tafkheem",
+      "case": "[أي حرف حكمه التفخيم] + ا",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "needs-rule-composition",
+      "statusReason": "The rule is defined in terms of the OUTCOME of other rules (\"any letter ruled tafkheem\"), which a standalone regular expression cannot see. Needs the engine to match in passes.",
+      "label": {
+        "ar": "إذا جاءت الألف بعد أي حرف حكمه التفخيم حسب جميع القواعد السابقة"
+      }
+    },
+    {
+      "id": "alef-tarqeeq.1",
+      "hukum": "alef-tarqeeq",
+      "case": "[أي حرف حكمه الترقيق] + ا",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "needs-rule-composition",
+      "statusReason": "The rule is defined in terms of the OUTCOME of other rules (\"any letter ruled tafkheem\"), which a standalone regular expression cannot see. Needs the engine to match in passes.",
+      "label": {
+        "ar": "إذا جاءت الألف بعد أي حرف حكمه الترقيق حسب جميع القواعد السابقة"
+      }
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.1",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "[ ءْ أْ ؤْ ئْ] + [ ء أ ؤ ئ إ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت همزة ساكنة وبعدها همزة"
+      }
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.2",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "بْ + ب",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت باء ساكنة وبعدها باء"
+      },
+      "startFrom": "بْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.3",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "تْ + [ت ة]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت تاء ساكنة وبعدها تاء"
+      },
+      "startFrom": "تْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.4",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "ثْ + ث",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت ثاء ساكنة وبعدها ثاء"
+      },
+      "startFrom": "ثْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.5",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "جْ + ج",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت جيم ساكنة وبعدها جيم"
+      },
+      "startFrom": "جْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.6",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "حْ + ح",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت حاء ساكنة وبعدها حاء"
+      },
+      "startFrom": "حْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.7",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "خْ + خ",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت خاء ساكنة وبعدها خاء"
+      },
+      "startFrom": "خْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.8",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "دْ + د",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت دال ساكنة وبعدها دال"
+      },
+      "startFrom": "دْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.9",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "ذْ + ذ",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت ذال ساكنة وبعدها ذال"
+      },
+      "startFrom": "ذْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.10",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "رْ + ر",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت راء ساكنة وبعدها راء"
+      },
+      "startFrom": "رْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.11",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "زْ + ز",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت زاي ساكنة وبعدها زاي"
+      },
+      "startFrom": "زْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.12",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "سْ + س",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت سين ساكنة وبعدها سين"
+      },
+      "startFrom": "سْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.13",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "شْ + ش",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت شين ساكنة وبعدها شين"
+      },
+      "startFrom": "شْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.14",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "صْ + ص",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت صاد ساكنة وبعدها صاد"
+      },
+      "startFrom": "صْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.15",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "ضْ + ض",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت ضاد ساكنة وبعدها ضاد"
+      },
+      "startFrom": "ضْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.16",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "طْ + ط",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت طاء ساكنة وبعدها طاء"
+      },
+      "startFrom": "طْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.17",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "ظْ + ظ",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت ظاء ساكنة وبعدها ظاء"
+      },
+      "startFrom": "ظْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.18",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "عْ + ع",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت عين ساكنة وبعدها عين"
+      },
+      "startFrom": "عْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.19",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "غْ + غ",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت غين ساكنة وبعدها غين"
+      },
+      "startFrom": "غْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.20",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "فْ + ف",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت فاء ساكنة وبعدها فاء"
+      },
+      "startFrom": "فْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.21",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "قْ + ق",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت قاف ساكنة وبعدها قاف"
+      },
+      "startFrom": "قْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.22",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "كْ + ك",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت كاف ساكنة وبعدها كاف"
+      },
+      "startFrom": "كْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.23",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "لْ + ل",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت لام ساكنة وبعدها لام"
+      },
+      "startFrom": "لْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.24",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "مْ + م",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت ميم ساكنة وبعدها ميم"
+      },
+      "startFrom": "مْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.25",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "نْ + ن",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت نون ساكنة وبعدها نون"
+      },
+      "startFrom": "نْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.26",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ن ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء تنوين فتح بعده نون"
+      }
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.27",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ن ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء تنوين ضم بعده نون"
+      }
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.28",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ن ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء تنوين كسر بعده نون"
+      }
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.29",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "هْ + ه",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت هاء ساكنة وبعدها هاء"
+      },
+      "startFrom": "هْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.30",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "ــــــــــــــــــَ وْ + و",
+      "scope": "either",
+      "status": "disabled",
+      "gap": "ambiguous-wildcard",
+      "statusReason": "The group mixes the ــ wildcard with a multi-part sequence. Because space is the alternation separator, the sequence is compiled as alternatives instead, and the wildcard matches diacritics and spaces as readily as letters.",
+      "label": {
+        "ar": "اذا جاءت واو ساكنة وقبلها فتحة وبعدها واو"
+      },
+      "startFrom": "ــــــــــــــــــَ وْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.31",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "ــــــــــــــــــَ يْ + ي",
+      "scope": "either",
+      "status": "disabled",
+      "gap": "ambiguous-wildcard",
+      "statusReason": "The group mixes the ــ wildcard with a multi-part sequence. Because space is the alternation separator, the sequence is compiled as alternatives instead, and the wildcard matches diacritics and spaces as readily as letters.",
+      "label": {
+        "ar": "اذا جاءت ياء ساكنة وقبلها فتحة وبعدها ياء"
+      },
+      "startFrom": "ــــــــــــــــــَ يْ"
+    },
+    {
+      "id": "mutamathilain-izhar.1",
+      "hukum": "mutamathilain-izhar",
+      "case": "ــــــــــــــــــُ وْ + و",
+      "scope": "either",
+      "status": "disabled",
+      "gap": "ambiguous-wildcard",
+      "statusReason": "The group mixes the ــ wildcard with a multi-part sequence. Because space is the alternation separator, the sequence is compiled as alternatives instead, and the wildcard matches diacritics and spaces as readily as letters.",
+      "label": {
+        "ar": "اذا جاءت واو ساكنة وقبلها ضمة وبعدها واو"
+      },
+      "startFrom": "ــــــــــــــــــُ وْ"
+    },
+    {
+      "id": "mutamathilain-izhar.2",
+      "hukum": "mutamathilain-izhar",
+      "case": "ــــــــــــــــــِ يْ + ي",
+      "scope": "either",
+      "status": "disabled",
+      "gap": "ambiguous-wildcard",
+      "statusReason": "The group mixes the ــ wildcard with a multi-part sequence. Because space is the alternation separator, the sequence is compiled as alternatives instead, and the wildcard matches diacritics and spaces as readily as letters.",
+      "label": {
+        "ar": "اذا جاءت ياء ساكنة وقبلها كسرة وبعدها ياء"
+      },
+      "startFrom": "ــــــــــــــــــِ يْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.32",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "دْ + ت",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت دال ساكنة بعدها تاء"
+      },
+      "startFrom": "دْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.33",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "ذْ + ظ",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت ذال ساكنة بعدها ظاء"
+      },
+      "startFrom": "ذْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.34",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "تْ + ط",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت تاء ساكنة بعدها طاء"
+      },
+      "startFrom": "تْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.35",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "تْ + د",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت تاء ساكنة بعدها دال"
+      },
+      "startFrom": "تْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.36",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "بْ + م",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت باء ساكنة بعدها ميم"
+      },
+      "startFrom": "بْ"
+    },
+    {
+      "id": "mutamathilain-idgham-kamil.37",
+      "hukum": "mutamathilain-idgham-kamil",
+      "case": "ثْ + ذ",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت ثاء ساكنة بعدها ذال"
+      },
+      "startFrom": "ثْ"
+    },
+    {
+      "id": "mutajanisain-idgham-naqis.1",
+      "hukum": "mutajanisain-idgham-naqis",
+      "case": "طْ + ت",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت طاء ساكنة بعدها تاء"
+      },
+      "startFrom": "طْ"
+    },
+    {
+      "id": "mutajanisain-ikhfa-shafawi.1",
+      "hukum": "mutajanisain-ikhfa-shafawi",
+      "case": "مْ + ب",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت ميم ساكنة بعدها باء"
+      },
+      "startFrom": "مْ"
+    },
+    {
+      "id": "mutamathilain-izhar.3",
+      "hukum": "mutamathilain-izhar",
+      "case": "[ ءْ أْ ؤْ ئْ] + ه",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت همزة ساكنة بعدها هاء"
+      },
+      "startFrom": "[ ءْ أْ ؤْ ئْ]"
+    },
+    {
+      "id": "mutamathilain-izhar.4",
+      "hukum": "mutamathilain-izhar",
+      "case": "هْ + [ ء أ ؤ ئ إ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت هاء ساكنة بعدها همزة"
+      },
+      "startFrom": "هْ"
+    },
+    {
+      "id": "mutamathilain-izhar.5",
+      "hukum": "mutamathilain-izhar",
+      "case": "حْ + ع",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت حاء ساكنة بعدها عين"
+      },
+      "startFrom": "حْ"
+    },
+    {
+      "id": "mutamathilain-izhar.6",
+      "hukum": "mutamathilain-izhar",
+      "case": "عْ + ح",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت عين ساكنة بعدها حاء"
+      },
+      "startFrom": "عْ"
+    },
+    {
+      "id": "mutamathilain-izhar.7",
+      "hukum": "mutamathilain-izhar",
+      "case": "غْ + خ",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت غين ساكنة بعدها خاء"
+      },
+      "startFrom": "غْ"
+    },
+    {
+      "id": "mutamathilain-izhar.8",
+      "hukum": "mutamathilain-izhar",
+      "case": "خْ + غ",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت خاء ساكنة بعدها غين"
+      },
+      "startFrom": "خْ"
+    },
+    {
+      "id": "mutamathilain-izhar.9",
+      "hukum": "mutamathilain-izhar",
+      "case": "جْ + ش",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت جيم ساكنة بعدها شين"
+      },
+      "startFrom": "جْ"
+    },
+    {
+      "id": "mutamathilain-izhar.10",
+      "hukum": "mutamathilain-izhar",
+      "case": "جْ + ي",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت جيم ساكنة بعدها ياء"
+      },
+      "startFrom": "جْ"
+    },
+    {
+      "id": "mutamathilain-izhar.11",
+      "hukum": "mutamathilain-izhar",
+      "case": "يْ + ش",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت ياء ساكنة بعدها شين"
+      },
+      "startFrom": "يْ"
+    },
+    {
+      "id": "mutamathilain-izhar.12",
+      "hukum": "mutamathilain-izhar",
+      "case": "يْ + ج",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت ياء ساكنة بعدها جيم"
+      },
+      "startFrom": "يْ"
+    },
+    {
+      "id": "mutamathilain-izhar.13",
+      "hukum": "mutamathilain-izhar",
+      "case": "شْ + ي",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت شين ساكنة بعدها ياء"
+      },
+      "startFrom": "شْ"
+    },
+    {
+      "id": "mutamathilain-izhar.14",
+      "hukum": "mutamathilain-izhar",
+      "case": "شْ + ج",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت شين ساكنة بعدها جيم"
+      },
+      "startFrom": "شْ"
+    },
+    {
+      "id": "mutamathilain-izhar.15",
+      "hukum": "mutamathilain-izhar",
+      "case": "دْ + ط",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت دال ساكنة بعدها طاء"
+      },
+      "startFrom": "دْ"
+    },
+    {
+      "id": "mutamathilain-izhar.16",
+      "hukum": "mutamathilain-izhar",
+      "case": "طْ + د",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت طاء ساكنة بعدها دال"
+      },
+      "startFrom": "طْ"
+    },
+    {
+      "id": "mutamathilain-izhar.17",
+      "hukum": "mutamathilain-izhar",
+      "case": "سْ + ز",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت سين ساكنة بعدها زاي"
+      },
+      "startFrom": "سْ"
+    },
+    {
+      "id": "mutamathilain-izhar.18",
+      "hukum": "mutamathilain-izhar",
+      "case": "سْ + ص",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت سين ساكنة بعدها صاد"
+      },
+      "startFrom": "سْ"
+    },
+    {
+      "id": "mutamathilain-izhar.19",
+      "hukum": "mutamathilain-izhar",
+      "case": "زْ + س",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت زاي ساكنة بعدها سين"
+      },
+      "startFrom": "زْ"
+    },
+    {
+      "id": "mutamathilain-izhar.20",
+      "hukum": "mutamathilain-izhar",
+      "case": "زْ + ص",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت زاي ساكنة بعدها صاد"
+      },
+      "startFrom": "زْ"
+    },
+    {
+      "id": "mutamathilain-izhar.21",
+      "hukum": "mutamathilain-izhar",
+      "case": "صْ + ز",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت صاد ساكنة بعدها زاي"
+      },
+      "startFrom": "صْ"
+    },
+    {
+      "id": "mutamathilain-izhar.22",
+      "hukum": "mutamathilain-izhar",
+      "case": "صْ + س",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت صاد ساكنة بعدها سين"
+      },
+      "startFrom": "صْ"
+    },
+    {
+      "id": "mutamathilain-izhar.23",
+      "hukum": "mutamathilain-izhar",
+      "case": "ذْ + ث",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت ذال ساكنة بعدها ثاء"
+      },
+      "startFrom": "ذْ"
+    },
+    {
+      "id": "mutamathilain-izhar.24",
+      "hukum": "mutamathilain-izhar",
+      "case": "ثْ + ظ",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت ثاء ساكنة بعدها ظاء"
+      },
+      "startFrom": "ثْ"
+    },
+    {
+      "id": "mutamathilain-izhar.25",
+      "hukum": "mutamathilain-izhar",
+      "case": "ظْ + ذ",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت ظاء ساكنة بعدها ذال"
+      },
+      "startFrom": "ظْ"
+    },
+    {
+      "id": "mutamathilain-izhar.26",
+      "hukum": "mutamathilain-izhar",
+      "case": "ظْ + ث",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت ظاء ساكنة بعدها ثاء"
+      },
+      "startFrom": "ظْ"
+    },
+    {
+      "id": "mutamathilain-izhar.27",
+      "hukum": "mutamathilain-izhar",
+      "case": "وْ + م",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت واو ساكنة بعدها ميم"
+      },
+      "startFrom": "وْ"
+    },
+    {
+      "id": "mutamathilain-izhar.28",
+      "hukum": "mutamathilain-izhar",
+      "case": "وْ + ب",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت واو ساكنة بعدها باء"
+      },
+      "startFrom": "وْ"
+    },
+    {
+      "id": "mutamathilain-izhar.29",
+      "hukum": "mutamathilain-izhar",
+      "case": "مْ + و",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت ميم ساكنة بعدها واو"
+      },
+      "startFrom": "مْ"
+    },
+    {
+      "id": "mutamathilain-izhar.30",
+      "hukum": "mutamathilain-izhar",
+      "case": "بْ + و",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "اذا جاءت باء ساكنة بعدها واو"
+      },
+      "startFrom": "بْ"
+    },
+    {
+      "id": "izhar-halqi-noon.1",
+      "hukum": "izhar-halqi-noon",
+      "case": "نْ + [ ء أ ؤ ئ ه ع ح غ خ إ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد النون الساكنة أحد أحرف الإظهار الستة (ء هـ ح خ ع غ)"
+      }
+    },
+    {
+      "id": "izhar-halqi-tanween.1",
+      "hukum": "izhar-halqi-tanween",
+      "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ء أ ؤ ئ إ ه ع ح غ خ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء بعد تنوين الفتح أحد أحرف الإظهار الستة (ء هـ ح خ ع غ)"
+      }
+    },
+    {
+      "id": "izhar-halqi-tanween.2",
+      "hukum": "izhar-halqi-tanween",
+      "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ء أ ؤ ئ إ ه ع ح غ خ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء بعد تنوين الضم أحد أحرف الإظهار الستة (ء هـ ح خ ع غ)"
+      }
+    },
+    {
+      "id": "izhar-halqi-tanween.3",
+      "hukum": "izhar-halqi-tanween",
+      "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ء أ ؤ ئ إ ه ع ح غ خ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثالثة: إذا جاء بعد تنوين الكسر أحد أحرف الإظهار الستة (ء هـ ح خ ع غ)"
+      }
+    },
+    {
+      "id": "idgham-bi-ghunnah-noon.1",
+      "hukum": "idgham-bi-ghunnah-noon",
+      "case": "نْ + [ ي ن م و]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد النون الساكنة أحد أحرف الإدغام بغنة (ي ن م و)"
+      }
+    },
+    {
+      "id": "idgham-bi-ghunnah-tanween.1",
+      "hukum": "idgham-bi-ghunnah-tanween",
+      "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ي ن م و]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء بعد تنوين الفتح أحد أحرف الإدغام بغنة (ي ن م و)"
+      }
+    },
+    {
+      "id": "idgham-bi-ghunnah-tanween.2",
+      "hukum": "idgham-bi-ghunnah-tanween",
+      "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ي ن م و]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء بعد تنوين الضم أحد أحرف الإدغام بغنة (ي ن م و )"
+      }
+    },
+    {
+      "id": "idgham-bi-ghunnah-tanween.3",
+      "hukum": "idgham-bi-ghunnah-tanween",
+      "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ي ن م و]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثالثة: إذا جاء بعد تنوين الكسر أحد أحرف الإدغام بغنة (ي ن م و)"
+      }
+    },
+    {
+      "id": "idgham-bila-ghunnah-noon.1",
+      "hukum": "idgham-bila-ghunnah-noon",
+      "case": "نْ + [ ل ر]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد النون الساكنة أحد أحرف الإدغام بغير غنة (ل ر)"
+      }
+    },
+    {
+      "id": "idgham-bila-ghunnah-tanween.1",
+      "hukum": "idgham-bila-ghunnah-tanween",
+      "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ل ر]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء بعد تنوين الفتح أحد أحرف الإدغام بغير غنة (ل ر)"
+      }
+    },
+    {
+      "id": "idgham-bila-ghunnah-tanween.2",
+      "hukum": "idgham-bila-ghunnah-tanween",
+      "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ل ر]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء بعد تنوين الضم أحد أحرف الإدغام بغير غنة (ل ر)"
+      }
+    },
+    {
+      "id": "idgham-bila-ghunnah-tanween.3",
+      "hukum": "idgham-bila-ghunnah-tanween",
+      "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ل ر]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثالثة: إذا جاء بعد تنوين الكسر أحد أحرف الإدغام بغير غنة (ل ر)"
+      }
+    },
+    {
+      "id": "idgham-kamil-noon.1",
+      "hukum": "idgham-kamil-noon",
+      "case": "نْ + [ ن ر م ل]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد النون الساكنة أحد أحرف الإدغام الكامل (ن ر م ل )"
+      }
+    },
+    {
+      "id": "idgham-kamil-tanween.1",
+      "hukum": "idgham-kamil-tanween",
+      "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ن ر م ل]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء بعد تنوين الفتح أحد أحرف الإدغام الكامل (ن ر م ل)"
+      }
+    },
+    {
+      "id": "idgham-kamil-tanween.2",
+      "hukum": "idgham-kamil-tanween",
+      "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ن ر م ل]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء بعد تنوين الضم أحد أحرف الإدغام الكامل (ن ر م ل)"
+      }
+    },
+    {
+      "id": "idgham-kamil-tanween.3",
+      "hukum": "idgham-kamil-tanween",
+      "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ن ر م ل]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثالثة: إذا جاء بعد تنوين الكسر أحد أحرف الإدغام الكامل (ن ر م ل)"
+      }
+    },
+    {
+      "id": "idgham-naqis-noon.1",
+      "hukum": "idgham-naqis-noon",
+      "case": "نْ + [ ي و ]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد النون الساكنة أحد أحرف الإدغام الناقص (ي و ) بين كلمتين فقط (لا يقع في كلمة واحدة)"
+      }
+    },
+    {
+      "id": "idgham-naqis-tanween.1",
+      "hukum": "idgham-naqis-tanween",
+      "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ي و]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء بعد تنوين الفتح أحد أحرف الإدغام الناقص(ي و )"
+      }
+    },
+    {
+      "id": "idgham-naqis-tanween.2",
+      "hukum": "idgham-naqis-tanween",
+      "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ي و ]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء بعد تنوين الضم أحد أحرف الإدغام الناقص(ي و)"
+      }
+    },
+    {
+      "id": "idgham-naqis-tanween.3",
+      "hukum": "idgham-naqis-tanween",
+      "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ي و]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثالثة: إذا جاء بعد تنوين الكسر أحد أحرف الإدغام الناقص(ي و)"
+      }
+    },
+    {
+      "id": "iqlab-noon.1",
+      "hukum": "iqlab-noon",
+      "case": "نْ + ب",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد النون الساكنة حرف الميم"
+      }
+    },
+    {
+      "id": "iqlab-tanween.1",
+      "hukum": "iqlab-tanween",
+      "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + ب",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء بعد تنوين الفتح حرف الباء"
+      }
+    },
+    {
+      "id": "iqlab-tanween.2",
+      "hukum": "iqlab-tanween",
+      "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + ب",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء بعد تنوين الضم حرف الباء"
+      }
+    },
+    {
+      "id": "iqlab-tanween.3",
+      "hukum": "iqlab-tanween",
+      "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + ب",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثالثة: إذا جاء بعد تنوين الكسر حرف الباء"
+      }
+    },
+    {
+      "id": "ikhfa-haqiqi-noon.1",
+      "hukum": "ikhfa-haqiqi-noon",
+      "case": "نْ + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد النون الساكنة أحد أحرف الإخفاء الحقيقي (ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ)"
+      }
+    },
+    {
+      "id": "ikhfa-haqiqi-tanween.1",
+      "hukum": "ikhfa-haqiqi-tanween",
+      "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الأولى: إذا جاء بعد تنوين الفتح أحد أحرف الإخفاء الحقيقي (ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ)"
+      }
+    },
+    {
+      "id": "ikhfa-haqiqi-tanween.2",
+      "hukum": "ikhfa-haqiqi-tanween",
+      "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثانية: إذا جاء بعد تنوين الضم أحد أحرف الإخفاء الحقيقي (ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ)"
+      }
+    },
+    {
+      "id": "ikhfa-haqiqi-tanween.3",
+      "hukum": "ikhfa-haqiqi-tanween",
+      "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "الحالة الثالثة: إذا جاء بعد تنوين الكسر أحد أحرف الإخفاء الحقيقي (ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ)"
+      }
+    },
+    {
+      "id": "izhar-mutlaq.1",
+      "hukum": "izhar-mutlaq",
+      "case": "نْ + [ ي ن م و]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد النون الساكنة أحد أحرف الإدغام بغنة (ي ن م و)"
+      }
+    },
+    {
+      "id": "izhar-mutlaq.2",
+      "hukum": "izhar-mutlaq",
+      "case": "موضعان فقط:\n يس والقرءان الحكيم (سورة يس)\n ن والقلم وما يسطرون (سورة القلم)",
+      "scope": "across-words",
+      "status": "disabled",
+      "gap": "not-a-pattern",
+      "statusReason": "The case field holds prose rather than a pattern. Expressing it needs support for literal words anchored to a specific location in the mushaf.",
+      "label": {
+        "ar": "إذا التقت النون السكنة في آخر الحروف المقطعة بحرف الواو"
+      }
+    },
+    {
+      "id": "idgham-shafawi-meem.1",
+      "hukum": "idgham-shafawi-meem",
+      "case": "مْ + م",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد الميم الساكنة حرف الميم"
+      }
+    },
+    {
+      "id": "ikhfa-shafawi-meem.1",
+      "hukum": "ikhfa-shafawi-meem",
+      "case": "مْ + ب",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد الميم الساكنة حرف الباء"
+      }
+    },
+    {
+      "id": "izhar-shafawi-meem.1",
+      "hukum": "izhar-shafawi-meem",
+      "case": "مْ + [ ء أ ؤ ئ إ ا ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل ن ه و ي]",
+      "scope": "either",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاء بعد الميم الساكنة أي حرف ما عدا الباء والميم"
+      }
+    },
+    {
+      "id": "noon-mushaddadah.1",
+      "hukum": "noon-mushaddadah",
+      "case": "نّ",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت النون مشددة"
+      }
+    },
+    {
+      "id": "meem-mushaddadah.1",
+      "hukum": "meem-mushaddadah",
+      "case": "مّ",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا جاءت الميم مشددة"
+      }
+    },
+    {
+      "id": "madd-tabee-kalimi.1",
+      "hukum": "madd-tabee-kalimi",
+      "case": "[بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ا ى الألف الخنجرية]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الألف الساكنة المسبوقة بحرف مفتوح (باستثناء الهمزة المفتوحة)"
+      }
+    },
+    {
+      "id": "madd-tabee-kalimi.2",
+      "hukum": "madd-tabee-kalimi",
+      "case": "[بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [وْ و]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الواو الساكنة المسبوقة بحرف مضموم (باستثناء الهمزة المضمومة)"
+      }
+    },
+    {
+      "id": "madd-tabee-kalimi.3",
+      "hukum": "madd-tabee-kalimi",
+      "case": "[ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ي يْ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الياء الساكنة المسبوقة بحرف مكسور (باستثناء الهمزة المكسورة)"
+      }
+    },
+    {
+      "id": "leen-waw.1",
+      "hukum": "leen-waw",
+      "case": "[أَ ؤَ ئَ ءَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [و وْ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الواو الساكنة المسبوقة بحرف مفتوح"
+      },
+      "startFrom": "[بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [و وْ]"
+    },
+    {
+      "id": "leen-yaa.1",
+      "hukum": "leen-yaa",
+      "case": "[أَ ؤَ ئَ ءَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ي يْ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الياء الساكنة المسبوقة بحرف مفتوح"
+      },
+      "startFrom": "[بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ي يْ]"
+    },
+    {
+      "id": "madd-iwad.1",
+      "hukum": "madd-iwad",
+      "case": "[ ًا ءً ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "تنوين الفتح عند الوقف عليه باستثناء تنوين الفتح على التاء المربوطة"
+      }
+    },
+    {
+      "id": "madd-silah-sughra.1",
+      "hukum": "madd-silah-sughra",
+      "case": "[ ه ] + [واو صغيرة]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الهاء في آخر الكلمة متبوعة بالواو الصغيرة في حال الوصل فقط"
+      }
+    },
+    {
+      "id": "madd-silah-sughra.2",
+      "hukum": "madd-silah-sughra",
+      "case": "[ ه ] + [ياء صغيرة]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الهاء في آخر الكلمة متبوعة بالياء الصغيرة المعقوصة في حال الوصل فقط"
+      }
+    },
+    {
+      "id": "seven-alefs.1",
+      "hukum": "seven-alefs",
+      "case": "لَّٰكِنَّا۠",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "كلمة \"لكنا\" في الكهف 38"
+      },
+      "startFrom": "لكنا"
+    },
+    {
+      "id": "seven-alefs.2",
+      "hukum": "seven-alefs",
+      "case": "قَوَارِيرَا۠",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "كلمة \"قواريرا\" في الإنسان 15"
+      },
+      "startFrom": "قواريرا"
+    },
+    {
+      "id": "seven-alefs.3",
+      "hukum": "seven-alefs",
+      "case": "ٱلظُّنُونَا۠",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "كلمة \"الظنونا\" في الأحزاب 10"
+      },
+      "startFrom": "الظنونا"
+    },
+    {
+      "id": "seven-alefs.4",
+      "hukum": "seven-alefs",
+      "case": "ٱلرَّسُولَا۠",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "كلمة \"الرسولا\" في الأحزاب 66"
+      },
+      "startFrom": "الرسولا"
+    },
+    {
+      "id": "seven-alefs.5",
+      "hukum": "seven-alefs",
+      "case": "ٱلسَّبِيلَا۠",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "كلمة \"السبيلا\" في الأحزاب 67"
+      },
+      "startFrom": "السبيلا"
+    },
+    {
+      "id": "seven-alefs.6",
+      "hukum": "seven-alefs",
+      "case": "أَنَا۠",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "كلمة \"أنا\" حيثما وردت بشرط أن لا يأتي بعدها همز وصل"
+      },
+      "startFrom": "أنا + [ء أ ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي]"
+    },
+    {
+      "id": "seven-alefs-khulf.1",
+      "hukum": "seven-alefs-khulf",
+      "case": "سَلَاسِلَاْ",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "كلمة \"سلاسلا\" في الإنسان 4"
+      },
+      "startFrom": "سلاسلا"
+    },
+    {
+      "id": "madd-badal.1",
+      "hukum": "madd-badal",
+      "case": "[أَ ؤَ ئَ ءَ] + [ا ى الألف الخنجرية]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الألف الساكنة المسبوقة بهمزة مفتوحة"
+      }
+    },
+    {
+      "id": "madd-badal.2",
+      "hukum": "madd-badal",
+      "case": "[أُ ؤُ ئُ ءُ] + [و وْ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الواو الساكنة المسبوقة بهمزة مضمومة"
+      }
+    },
+    {
+      "id": "madd-badal.3",
+      "hukum": "madd-badal",
+      "case": "[أِ ؤِ ئِ ءِ] + [يْ ي]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الياء الساكنة المسبوقة بهمزة مكسورة"
+      }
+    },
+    {
+      "id": "madd-muttasil.1",
+      "hukum": "madd-muttasil",
+      "case": "[أَ ؤَ ئَ ءَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "الألف الساكنة المسبوقة بحرف مفتوح والمتبوعة بهمزة في نفس الكلمة"
+      }
+    },
+    {
+      "id": "madd-muttasil.2",
+      "hukum": "madd-muttasil",
+      "case": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [و وْ] + [أ ؤ ئ ء]",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "corrections": [
+        {
+          "field": "case",
+          "was": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+          "reason": "The rule describes الواو الساكنة (a sakin waw), but the middle group searched for alef. The uncorrected pattern matched nothing at all, so this obligatory madd was absent from the corpus; the corrected pattern finds 54 occurrences (سُوء at 2:49, رُوء at 2:228, …)."
+        }
+      ],
+      "label": {
+        "ar": "الواو الساكنة المسبوقة بحرف مضموم والمتبوعة بهمزة في نفس الكلمة"
+      }
+    },
+    {
+      "id": "madd-muttasil.3",
+      "hukum": "madd-muttasil",
+      "case": "[أِ ؤِ ئِ ءِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [يْ ي] + [أ ؤ ئ ء]",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "corrections": [
+        {
+          "field": "case",
+          "was": "[أِ ؤِ ئِ ءِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+          "reason": "The rule describes الياء الساكنة (a sakin yaa), but the middle group searched for alef. The uncorrected pattern matched 10 occurrences, all of them wrong (مِائة at 2:259, 2:261, 8:65, 8:66, …), and missed 28 correct ones (خطيئة at 2:81, نِيء at 4:4, …)."
+        }
+      ],
+      "label": {
+        "ar": "الياء الساكنة المسبوقة بحرف مكسور والمتبوعة بهمزة في نفس الكلمة"
+      }
+    },
+    {
+      "id": "madd-munfasil.1",
+      "hukum": "madd-munfasil",
+      "case": "[أَ ؤَ ئَ ءَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "الألف الساكنة المسبوقة بحرف مفتوح في نهاية الكلمة والمتبوعة بهمزة في بداية الكلمة التالية"
+      }
+    },
+    {
+      "id": "madd-munfasil.2",
+      "hukum": "madd-munfasil",
+      "case": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [و وْ ] + [أ ؤ ئ ء]",
+      "scope": "across-words",
+      "status": "stable",
+      "needsReview": true,
+      "corrections": [
+        {
+          "field": "case",
+          "was": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [ا ى ] + [أ ؤ ئ ء]",
+          "reason": "The rule describes الواو الساكنة (a sakin waw), but the middle group searched for alef — copied from the sibling alef rule (legacy #169) without updating the group. Taken from the editorial annotation recorded alongside the rule in the source corpus, which has the waw group. Matches 0 occurrences either way, so no highlighting changes; corrected for consistency with #172."
+        }
+      ],
+      "label": {
+        "ar": "الواو الساكنة المسبوقة بحرف مضموم في نهاية الكلمة والمتبوعة بهمزة في بداية الكلمة التالية"
+      },
+      "startFrom": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [و وْ ] + [أ ؤ ئ ء]"
+    },
+    {
+      "id": "madd-munfasil.3",
+      "hukum": "madd-munfasil",
+      "case": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [وا وْا] + [أ ؤ ئ ء]",
+      "scope": "across-words",
+      "status": "stable",
+      "label": {
+        "ar": "واو الجماعة الساكنة المسبوقة بحرف مضموم والمتبوعة بهمزة في بداية الكلمة التالية (الألف بعد الواو هي ألف التفريق)"
+      }
+    },
+    {
+      "id": "madd-munfasil.4",
+      "hukum": "madd-munfasil",
+      "case": "[أِ ؤِ ئِ ءِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ي يْ] + [أ ؤ ئ ء]",
+      "scope": "across-words",
+      "status": "stable",
+      "needsReview": true,
+      "corrections": [
+        {
+          "field": "case",
+          "was": "[أِ ؤِ ئِ ءِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+          "reason": "The rule describes الياء الساكنة (a sakin yaa), but the middle group searched for alef — copied from the sibling alef rule (legacy #169) without updating the group. Taken from the editorial annotation recorded alongside the rule in the source corpus, which has the yaa group. The uncorrected pattern matched 3 occurrences, all of them wrong (مِائة at 2:261, 8:65, 8:66), and missed 79 correct ones (إِنِّي أَعْلَمُ at 2:30, …)."
+        }
+      ],
+      "label": {
+        "ar": "الياء الساكنة المسبوقة بحرف مكسور في نهاية الكلمة والمتبوعة بهمزة في بداية الكلمة التالية"
+      },
+      "startFrom": "[أِ ؤِ ئِ ءِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ي يْ] + [أ ؤ ئ ء]"
+    },
+    {
+      "id": "raa-either-permissible.3",
+      "hukum": "raa-either-permissible",
+      "case": "[مِصْرَ مِّصْرَ الْقِطْرِ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا كانت الراء ساكنة عند الوقف وقبلها حرف استعلاء ساكن وقبله مكسور"
+      },
+      "notes": {
+        "ar": "حال الوقف فقط"
+      }
+    },
+    {
+      "id": "raa-either-permissible.4",
+      "hukum": "raa-either-permissible",
+      "case": "[نُذُرِ يَسْرِ أَسْرِ]",
+      "scope": "within-word",
+      "status": "stable",
+      "label": {
+        "ar": "إذا كانت الراء مكسورة في آخر الكلمة وحذفت ياؤها عند الوقف"
+      },
+      "notes": {
+        "ar": "حال الوقف فقط"
+      }
+    },
+    {
+      "id": "qalqalah-sughra.1",
+      "hukum": "qalqalah-sughra",
+      "case": "[قْ طْ بْ جْ دْ] + [ء أ ؤ ئ ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي ة ى]",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا جاء أحد حروف القلقلة (ق ط ب ج د) ساكنا في وسط الكلمة"
+      },
+      "notes": {
+        "ar": "القلقلة الصغرى تكون في الحرف الساكن في وسط الكلمة. اشتراط حرف بعده في الكلمة نفسها هو ما يميزها عن القلقلة المتطرفة."
+      }
+    },
+    {
+      "id": "qalqalah-mutatarrifa.1",
+      "hukum": "qalqalah-mutatarrifa",
+      "case": "[ق ط ب ج د] + نهاية الكلمة",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا جاء أحد حروف القلقلة (ق ط ب ج د) في آخر الكلمة"
+      },
+      "notes": {
+        "ar": "تُنطق القلقلة هنا عند الوقف على الكلمة، سواء كان الحرف ساكنا في الرسم أو متحركا يسكَّن بالوقف. ولأن التفريق بين الوسطى والكبرى يقوم على التشديد وعلى اختيار القارئ الوقف، فهما مجموعتان في حكم واحد، وتُفرد الكبرى بقاعدة مستقلة."
+      }
+    },
+    {
+      "id": "qalqalah-mutatarrifa.2",
+      "hukum": "qalqalah-mutatarrifa",
+      "case": "[قّ طّ بّ جّ دّ] + نهاية الكلمة",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا جاء أحد حروف القلقلة (ق ط ب ج د) مشددا في آخر الكلمة"
+      },
+      "notes": {
+        "ar": "هذه هي القلقلة الكبرى عند من يفرِّق بين المراتب الثلاث. مواضعها داخلة في القاعدة السابقة، فالحكمان يتداخلان عمدا."
+      }
+    },
+    {
+      "id": "madd-lazim-kalimi-muthaqqal.1",
+      "hukum": "madd-lazim-kalimi-muthaqqal",
+      "case": "[ا ى الألف الخنجرية] + [بّ تّ ثّ جّ حّ خّ دّ ذّ رّ زّ سّ شّ صّ ضّ طّ ظّ عّ غّ فّ قّ كّ لّ مّ نّ هّ وّ يّ]",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا جاء بعد الألف المدية حرف مشدد في الكلمة نفسها"
+      }
+    },
+    {
+      "id": "madd-lazim-kalimi-muthaqqal.2",
+      "hukum": "madd-lazim-kalimi-muthaqqal",
+      "case": "[و وْ] + [بّ تّ ثّ جّ حّ خّ دّ ذّ رّ زّ سّ شّ صّ ضّ طّ ظّ عّ غّ فّ قّ كّ لّ مّ نّ هّ وّ يّ]",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا جاء بعد الواو المدية حرف مشدد في الكلمة نفسها"
+      }
+    },
+    {
+      "id": "madd-lazim-kalimi-muthaqqal.3",
+      "hukum": "madd-lazim-kalimi-muthaqqal",
+      "case": "[ي يْ] + [بّ تّ ثّ جّ حّ خّ دّ ذّ رّ زّ سّ شّ صّ ضّ طّ ظّ عّ غّ فّ قّ كّ لّ مّ نّ هّ وّ يّ]",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا جاء بعد الياء المدية حرف مشدد في الكلمة نفسها"
+      }
+    },
+    {
+      "id": "madd-lazim-kalimi-mukhaffaf.1",
+      "hukum": "madd-lazim-kalimi-mukhaffaf",
+      "case": "[ءَآلۡـَٰٔنَ]",
+      "scope": "within-word",
+      "matchAgainst": "original",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا جاء بعد الألف المدية حرف ساكن سكونا أصليا غير مشدد في الكلمة نفسها"
+      },
+      "notes": {
+        "ar": "لا يقع هذا في القرآن إلا في كلمة ءَآلۡـَٰٔنَ في موضعين من سورة يونس (٥١ و٩١)، والرسم فيهما متطابق حرفا بحرف. وقد جُعلت القاعدة على اللفظ نفسه لا على وصف بنيته، لأن الوصف البنيوي يشمل معه فواتح السور وكلمات مد الفرق، وهي أحكام أخرى."
+      }
+    },
+    {
+      "id": "madd-lazim-harfi.1",
+      "hukum": "madd-lazim-harfi",
+      "case": "[لٓ مٓ سٓ صٓ عٓ قٓ كٓ نٓ]",
+      "scope": "within-word",
+      "matchAgainst": "original",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا جاء في فواتح السور حرف هجاؤه ثلاثة أحرف أوسطها حرف مد (ل م س ص ع ق ك ن)"
+      },
+      "notes": {
+        "ar": "يُطابَق على الرسم لا على النص المُطبَّع، لأن علامة المد (ٓ) تُحذف في التطبيع. والتفريق بين المثقل والمخفف يقوم على إدغام آخر الحرف فيما بعده، وهو ما لا تستطيع الصيغة التعبير عنه، فجُمعا في حكم واحد."
+      }
+    }
+  ]
+}

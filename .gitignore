@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+coverage/
+
+# Reference snapshot: embeds mushaf text, never committed.
+conformance/reference.json
+
+# Text editions: hold Quranic text, never committed.
+editions/

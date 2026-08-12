@@ -1,0 +1,30 @@
+{
+  "name": "@tajweed/rules",
+  "version": "0.1.0",
+  "description": "A scholar-authored corpus of tajweed rules for the riwayah of Hafs 'an 'Asim, as versioned JSON.",
+  "license": "CC-BY-4.0",
+  "type": "module",
+  "main": "./rules.json",
+  "exports": {
+    ".": "./rules.json",
+    "./schema": "./schema/rules.schema.json"
+  },
+  "files": [
+    "rules.json",
+    "schema/",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quranpedia/tajweed-engine.git",
+    "directory": "packages/rules"
+  },
+  "keywords": [
+    "quran",
+    "tajweed",
+    "arabic",
+    "hafs",
+    "uthmani"
+  ]
+}

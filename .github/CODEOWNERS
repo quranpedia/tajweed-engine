@@ -1,0 +1,16 @@
+# The corpus is reviewed differently from the code.
+#
+# A change to a rule is a claim about how the Quran is recited, and is approved
+# by someone qualified in tajweed rather than by whoever has merge rights. Add
+# those reviewers here; until then this file records the intent and the
+# requirement stated in CONTRIBUTING.md.
+
+/packages/rules/            @quranpedia/tajweed-reviewers
+/packages/annotations/      @quranpedia/tajweed-reviewers
+/scripts/additions.ts       @quranpedia/tajweed-reviewers
+/scripts/slugs.ts           @quranpedia/tajweed-reviewers
+/docs/coverage.md           @quranpedia/tajweed-reviewers
+
+# Normalisation decides what the text is understood to say before any rule sees
+# it, so it is held to the same bar.
+/packages/core/src/normalize.ts   @quranpedia/tajweed-reviewers

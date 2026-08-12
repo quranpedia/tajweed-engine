@@ -1,0 +1,35 @@
+Tajweed Annotations (`@tajweed/annotations`)
+Copyright (c) 2026 Quranpedia
+
+This work is licensed under the Creative Commons Attribution 4.0 International
+License (CC BY 4.0).
+
+You are free to:
+
+  - Share — copy and redistribute the material in any medium or format
+  - Adapt — remix, transform, and build upon the material for any purpose,
+    even commercially
+
+Under the following terms:
+
+  - Attribution — You must give appropriate credit, provide a link to the
+    license, and indicate if changes were made.
+
+Full license text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+---
+
+ATTRIBUTION
+
+When redistributing this corpus or a derivative of it, credit:
+
+  Tajweed Rule Corpus, Quranpedia — https://github.com/quranpedia/tajweed-engine
+
+---
+
+A NOTE ON MODIFICATION
+
+CC BY 4.0 permits modification. Please note that the rules in this corpus
+encode positions attributed to named scholars. If you modify a rule's matching
+behaviour, change its `source` attribution as well, so that a position is not
+misattributed to a scholar who did not hold it.
