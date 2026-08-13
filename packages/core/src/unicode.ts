@@ -44,6 +44,14 @@ export const INVERTED_DAMMA = '\u{0657}' // ٗ
 export const SUBSCRIPT_ALEF = '\u{0656}' // ٖ
 export const FATHATAN_VERTICAL = '\u{065E}' // ٞ
 export const RECTANGULAR_ZERO = '\u{06E0}' // ۠
+/**
+ * Marks that record a performance rather than a letter: the imāla of Hūd 41,
+ * and the tashīl of Fuṣṣilat 44 / the ishmām of Yūsuf 11. A letter carrying one
+ * is being given a vowel by it, which is why normalisation must not then treat
+ * the letter as bare — see insertImpliedSukoon.
+ */
+export const IMALAH_MARK = '\u{06EA}' // ۪
+export const TASHIL_MARK = '\u{06EC}' // ۬
 
 /**
  * Marks that appear in mushaf text but never in a CASE pattern. They are removed
@@ -63,8 +71,8 @@ export const OPTIONAL_MARKS: readonly string[] = [
   '\u{06E7}', // ۧ small high yeh
   '\u{06E8}', // ۨ small high noon
   RECTANGULAR_ZERO,
-  '\u{06EA}', // ۪ empty centre low stop
-  '\u{06EC}', // ۬ rounded high stop with filled centre
+  IMALAH_MARK,
+  TASHIL_MARK,
   HAMZA_ABOVE,
   '\u{0655}', // ٕ hamza below
   TATWEEL,

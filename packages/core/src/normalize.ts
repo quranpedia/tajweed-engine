@@ -30,6 +30,7 @@ import {
   FATHATAN_VERTICAL,
   HAMZA,
   HAMZA_ABOVE,
+  IMALAH_MARK,
   INVERTED_DAMMA,
   KASRA,
   KASRATAN,
@@ -44,6 +45,7 @@ import {
   SUBSCRIPT_ALEF,
   SUKOON,
   SUPERSCRIPT_ALEF,
+  TASHIL_MARK,
   TATWEEL,
   TEH_MARBUTA,
   WAW,
@@ -222,6 +224,18 @@ const insertImpliedSukoon: Pass = (input) => {
     // Already carries a diacritic of its own.
     const next = input[i + 1]
     if (isDiacritic(next) || next === SUPERSCRIPT_ALEF) {
+      continue
+    }
+
+    // Or carries a mark that records how the letter is performed, which means it
+    // is vowelled even though no haraka is written. The reh in Hūd 41 carries the
+    // imāla mark and nothing else: its fatha is inclined towards a kasra, not
+    // absent. Reading it as bare gives it a sukoon and turns a
+    // vowelled letter into a sakin one, which then attracts the rulings of a
+    // sakin reh. In this edition only the imāla mark reaches here — the other two
+    // places write a haraka as well — but both are handled, because what makes
+    // this true is the mark, not the place.
+    if (next === IMALAH_MARK || next === TASHIL_MARK) {
       continue
     }
 
