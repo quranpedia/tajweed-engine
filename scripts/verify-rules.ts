@@ -87,6 +87,37 @@ const EXPECTATIONS: readonly Expectation[] = [
     avoids: ['1:7', '112:1', '111:1', '1:1'],
     why: 'لَمْ يَلِدْ وَلَمْ يُولَدْ — حرف قلقلة ساكن في آخر الكلمة',
   },
+  {
+    rule: 'imalah-kubra.1',
+    matches: ['11:41'],
+    // مرساها carries the same رvowel-ألف shape and is NOT imāla for Ḥafṣ.
+    avoids: ['7:187', '79:42'],
+    exactlyOccurrences: 1,
+    why: 'الموضع الوحيد للإمالة الكبرى عند حفص — هود ٤١',
+  },
+  {
+    rule: 'tashil-hamza.1',
+    matches: ['41:44'],
+    // The same word with a fully realised hamza, and its plural.
+    avoids: ['16:103', '26:198'],
+    exactlyOccurrences: 1,
+    why: 'الموضع الوحيد للتسهيل عند حفص — فصلت ٤٤',
+  },
+  {
+    rule: 'ishmam-tamanna.1',
+    matches: ['12:11'],
+    // Same root, no idghaam and so no ishmām.
+    avoids: ['3:75'],
+    exactlyOccurrences: 1,
+    why: 'الموضع الوحيد للإشمام في الحركة عند حفص — يوسف ١١',
+  },
+  {
+    rule: 'ikhtilas-tamanna.1',
+    matches: ['12:11'],
+    avoids: ['3:75'],
+    exactlyOccurrences: 1,
+    why: 'الوجه الثاني في الموضع نفسه — يوسف ١١',
+  },
 ]
 
 let failures = 0

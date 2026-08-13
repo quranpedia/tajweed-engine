@@ -18,14 +18,23 @@ For a tool that teaches recitation, that is the more damaging kind of error.
 | المشددتان | 2 | النون والميم المشددتان |
 | المد | 13 | طبيعي، عوض، صلة صغرى، لين، بدل، واجب متصل، جائز منفصل، **لازم** |
 | القلقلة | 3 | صغرى في وسط الكلمة، متطرفة على حرف ساكن في آخرها، وكبرى على رأس الآية |
+| أداءات خاصة عند حفص | 4 | الإمالة، التسهيل، والإشمام والاختلاس في تأمنا — ثلاثة مواضع بأعيانها |
 
-القلقلة and المد اللازم were authored for this corpus rather than inherited from
-the source; both were absent, and المد اللازم's absence was why every ayah of الحروف
-المقطعة came back with nothing to say about it. Every rule in those two areas is
-flagged `needsReview` until a qualified reviewer signs it off, and each is pinned
-to passages whose ruling is not in dispute — see `scripts/verify-rules.ts`.
+القلقلة، المد اللازم and أداءات خاصة were authored for this corpus rather than
+inherited from the source. All three were absent, and المد اللازم's absence was why
+every ayah of الحروف المقطعة came back with nothing to say about it. Every rule in
+those three areas is flagged `needsReview` until a qualified reviewer signs it off,
+and each is pinned to passages whose ruling is not in dispute — see
+`scripts/verify-rules.ts`.
 
-One of them is deliberately coarser than the classical division:
+The three أداءات خاصة are rulings of specific words at specific places rather than
+patterns: الإمالة in Hūd 41, التسهيل in Fuṣṣilat 44, and الإشمام in Yūsuf 11, which
+also carries a second accepted wajh, الاختلاس. Each is written as the word itself and
+matched against the text as printed, because the mushaf records all three with a mark
+of its own — U+06EA and U+06EC — that normalisation strips. An edition without those
+marks silently loses the rules; `pnpm edition:check` reports it.
+
+One ruling is deliberately coarser than the classical division:
 
 - **المد اللازم الحرفي** does not distinguish مثقل from مخفف. That turns on
   whether the letter's spelled-out name assimilates into the next, which the CASE
