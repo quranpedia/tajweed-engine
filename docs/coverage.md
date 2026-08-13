@@ -18,12 +18,21 @@ For a tool that teaches recitation, that is the more damaging kind of error.
 | المشددتان | 2 | النون والميم المشددتان |
 | المد | 13 | طبيعي، عوض، صلة صغرى، لين، بدل، واجب متصل، جائز منفصل، **لازم** |
 | القلقلة | 3 | صغرى في وسط الكلمة، متطرفة على حرف ساكن في آخرها، وكبرى على رأس الآية |
+| أحكام الوقف | 3 | الروم على رؤوس الآي: في المضموم والمكسور والمنون بهما، وفي الهاء على مذهب التفصيل |
 
-القلقلة and المد اللازم were authored for this corpus rather than inherited from
-the source; both were absent, and المد اللازم's absence was why every ayah of الحروف
-المقطعة came back with nothing to say about it. Every rule in those two areas is
-flagged `needsReview` until a qualified reviewer signs it off, and each is pinned
-to passages whose ruling is not in dispute — see `scripts/verify-rules.ts`.
+القلقلة، المد اللازم and الروم were authored for this corpus rather than inherited
+from the source; all three were absent, and المد اللازم's absence was why every ayah
+of الحروف المقطعة came back with nothing to say about it. Every rule in those three
+areas is flagged `needsReview` until a qualified reviewer signs it off, and each is
+pinned to passages whose ruling is not in dispute — see `scripts/verify-rules.ts`.
+
+الروم is annotated **only at رؤوس الآي**, on the same reasoning that confined
+القلقلة الكبرى there: stopping at a رأس آية is sunnah and usual, while stopping
+anywhere else is the reciter's choice and not something the text records. Written
+for every word end it would mark 22,197 positions instead of 1,920 — a permission
+the reciter usually does not take, on nearly every word. Two of the four موانع —
+ميم الجمع and الحركة العارضة — cannot arise at a رأس آية at all, since both need a
+following word.
 
 One of them is deliberately coarser than the classical division:
 
@@ -53,8 +62,10 @@ These are absent from the corpus entirely — not disabled, not partial, absent.
 - **السكت.** Normalisation recognises the saktah mark and uses it to stop rules
   matching across it, but there is no rule that reports a saktah as a ruling of
   its own.
-- **الوقف والابتداء.** Waqf marks are preserved and never coloured, but they are
-  not annotated.
+- **الوقف والابتداء**, apart from الروم. Waqf marks are preserved and never
+  coloured, and where a reciter may stop is not annotated. الإشمام عند الوقف is
+  not modelled either, so a رأس آية ending in a damma reports that روم is
+  permitted there and says nothing about إشمام, which is permitted too.
 - **أحكام الاستعاذة والبسملة.**
 - **المتباعدين**, and the **الكبير** forms of المتماثلين والمتجانسين.
 

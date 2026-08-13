@@ -7154,6 +7154,51 @@
    "ayahs": 29,
    "occurrences": 44,
    "digest": "12b369732e323001"
+  },
+  "rawm-damm.1": {
+   "ayahs": 310,
+   "occurrences": 310,
+   "digest": "30ab2d10fd8d3733"
+  },
+  "rawm-damm.2": {
+   "ayahs": 579,
+   "occurrences": 579,
+   "digest": "53f47bb0f51b4aaf"
+  },
+  "rawm-kasr.1": {
+   "ayahs": 564,
+   "occurrences": 564,
+   "digest": "8e9644304f7d0b54"
+  },
+  "rawm-kasr.2": {
+   "ayahs": 444,
+   "occurrences": 444,
+   "digest": "d8badf3e95b4381a"
+  },
+  "rawm-haa-tafsil.1": {
+   "ayahs": 22,
+   "occurrences": 22,
+   "digest": "3596dc1489f60bd5"
+  },
+  "rawm-haa-tafsil.2": {
+   "ayahs": 1,
+   "occurrences": 1,
+   "digest": "a418777728bb7b49"
+  },
+  "mani-rawm-ishmam.1": {
+   "ayahs": 0,
+   "occurrences": 0,
+   "digest": "e3b0c44298fc1c14"
+  },
+  "mani-rawm-ishmam.2": {
+   "ayahs": 0,
+   "occurrences": 0,
+   "digest": "e3b0c44298fc1c14"
+  },
+  "mani-rawm-ishmam.3": {
+   "ayahs": 0,
+   "occurrences": 0,
+   "digest": "e3b0c44298fc1c14"
   }
  }
 }

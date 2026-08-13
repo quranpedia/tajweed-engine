@@ -48,6 +48,12 @@
       "label": {
         "ar": "القلقلة"
       }
+    },
+    {
+      "id": "waqf",
+      "label": {
+        "ar": "أحكام الوقف"
+      }
     }
   ],
   "categories": [
@@ -240,6 +246,20 @@
       "topic": "madd",
       "label": {
         "ar": "المد اللازم"
+      }
+    },
+    {
+      "id": "rawm",
+      "topic": "waqf",
+      "label": {
+        "ar": "الروم"
+      }
+    },
+    {
+      "id": "mawani-rawm-ishmam",
+      "topic": "waqf",
+      "label": {
+        "ar": "موانع الروم والإشمام"
       }
     }
   ],
@@ -680,6 +700,34 @@
       "category": "madd-lazim",
       "label": {
         "ar": "المد اللازم الحرفي"
+      }
+    },
+    {
+      "id": "rawm-damm",
+      "category": "rawm",
+      "label": {
+        "ar": "روم الضمة"
+      }
+    },
+    {
+      "id": "rawm-kasr",
+      "category": "rawm",
+      "label": {
+        "ar": "روم الكسرة"
+      }
+    },
+    {
+      "id": "rawm-haa-tafsil",
+      "category": "rawm",
+      "label": {
+        "ar": "روم الهاء على مذهب التفصيل"
+      }
+    },
+    {
+      "id": "mani-rawm-ishmam",
+      "category": "mawani-rawm-ishmam",
+      "label": {
+        "ar": "ما يمتنع فيه الروم والإشمام"
       }
     }
   ],
@@ -2704,6 +2752,132 @@
       },
       "notes": {
         "ar": "يُطابَق على الرسم لا على النص المُطبَّع، لأن علامة المد (ٓ) تُحذف في التطبيع. والتفريق بين المثقل والمخفف يقوم على إدغام آخر الحرف فيما بعده، وهو ما لا تستطيع الصيغة التعبير عنه، فجُمعا في حكم واحد."
+      }
+    },
+    {
+      "id": "rawm-damm.1",
+      "hukum": "rawm-damm",
+      "case": "[ءُ أُ ؤُ ئُ اُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ وُ يُ ىُ] + نهاية الآية",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا كان آخر الآية حرفا مضموما، جاز الوقف عليه بالروم"
+      },
+      "notes": {
+        "ar": "الروم النطق بجزء يسير من الحركة الأصلية بصوت خفي يسمعه القريب المصغي، وقدّره أهل الأداء بنحو ثلث الحركة. ويقع في الضمة والكسرة دون الفتحة. وأُخرجت التاء المربوطة من الحروف لأن الوقف عليها بهاء ساكنة، وأُخرجت الهاء لأن فيها تفصيلا مستقلا في هذه المجموعة. واقتُصر على رؤوس الآي دون سائر الكلمات، لأن الوقف على رأس الآية سنة فالحكم واقع في الغالب، والوقف في غيرها اختيار من القارئ لا يدل عليه الرسم — وهو التعليل نفسه الذي اقتُصرت به القلقلة الكبرى على رؤوس الآي. والروم جائز لا واجب، فالوقف بالسكون المحض صحيح معه في كل موضع."
+      }
+    },
+    {
+      "id": "rawm-damm.2",
+      "hukum": "rawm-damm",
+      "case": "[ءٌ أٌ ؤٌ ئٌ اٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ وٌ يٌ ىٌ] + نهاية الآية",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا كان آخر الآية حرفا منونا بتنوين الضم، جاز الوقف عليه بروم الضمة"
+      },
+      "notes": {
+        "ar": "الروم النطق بجزء يسير من الحركة الأصلية بصوت خفي يسمعه القريب المصغي، وقدّره أهل الأداء بنحو ثلث الحركة. ويقع في الضمة والكسرة دون الفتحة. ويُحذف التنوين عند الوقف، فيكون الروم للحركة الأصلية التي تحته. وأُخرجت التاء المربوطة من الحروف لأن الوقف عليها بهاء ساكنة، وأُخرجت الهاء لأن فيها تفصيلا مستقلا في هذه المجموعة. واقتُصر على رؤوس الآي دون سائر الكلمات، لأن الوقف على رأس الآية سنة فالحكم واقع في الغالب، والوقف في غيرها اختيار من القارئ لا يدل عليه الرسم — وهو التعليل نفسه الذي اقتُصرت به القلقلة الكبرى على رؤوس الآي. والروم جائز لا واجب، فالوقف بالسكون المحض صحيح معه في كل موضع."
+      }
+    },
+    {
+      "id": "rawm-kasr.1",
+      "hukum": "rawm-kasr",
+      "case": "[ءِ أِ ؤِ ئِ اِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ وِ يِ ىِ] + نهاية الآية",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا كان آخر الآية حرفا مكسورا، جاز الوقف عليه بالروم"
+      },
+      "notes": {
+        "ar": "الروم النطق بجزء يسير من الحركة الأصلية بصوت خفي يسمعه القريب المصغي، وقدّره أهل الأداء بنحو ثلث الحركة. ويقع في الضمة والكسرة دون الفتحة. وأُخرجت التاء المربوطة من الحروف لأن الوقف عليها بهاء ساكنة، وأُخرجت الهاء لأن فيها تفصيلا مستقلا في هذه المجموعة. واقتُصر على رؤوس الآي دون سائر الكلمات، لأن الوقف على رأس الآية سنة فالحكم واقع في الغالب، والوقف في غيرها اختيار من القارئ لا يدل عليه الرسم — وهو التعليل نفسه الذي اقتُصرت به القلقلة الكبرى على رؤوس الآي. والروم جائز لا واجب، فالوقف بالسكون المحض صحيح معه في كل موضع."
+      }
+    },
+    {
+      "id": "rawm-kasr.2",
+      "hukum": "rawm-kasr",
+      "case": "[ءٍ أٍ ؤٍ ئٍ اٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ وٍ يٍ ىٍ] + نهاية الآية",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا كان آخر الآية حرفا منونا بتنوين الكسر، جاز الوقف عليه بروم الكسرة"
+      },
+      "notes": {
+        "ar": "الروم النطق بجزء يسير من الحركة الأصلية بصوت خفي يسمعه القريب المصغي، وقدّره أهل الأداء بنحو ثلث الحركة. ويقع في الضمة والكسرة دون الفتحة. ويُحذف التنوين عند الوقف، فيكون الروم للحركة الأصلية التي تحته. وأُخرجت التاء المربوطة من الحروف لأن الوقف عليها بهاء ساكنة، وأُخرجت الهاء لأن فيها تفصيلا مستقلا في هذه المجموعة. واقتُصر على رؤوس الآي دون سائر الكلمات، لأن الوقف على رأس الآية سنة فالحكم واقع في الغالب، والوقف في غيرها اختيار من القارئ لا يدل عليه الرسم — وهو التعليل نفسه الذي اقتُصرت به القلقلة الكبرى على رؤوس الآي. والروم جائز لا واجب، فالوقف بالسكون المحض صحيح معه في كل موضع."
+      }
+    },
+    {
+      "id": "rawm-haa-tafsil.1",
+      "hukum": "rawm-haa-tafsil",
+      "case": "[ــــَ ا ــــْ] + [هُ] + نهاية الآية",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا كانت الهاء في آخر الآية مضمومة وقبلها فتح أو ألف أو ساكن صحيح، جاز الوقف عليها بالروم"
+      },
+      "notes": {
+        "ar": "في هاء الضمير ثلاثة مذاهب: الجواز مطلقا، والمنع مطلقا، والتفصيل؛ وعدّ ابن الجزري التفصيل أعدل المذاهب وأتمها. وحاصله أن الروم يمتنع إذا سبق الهاء ضم أو واو ساكنة أو كسر أو ياء ساكنة، ويجوز إذا سبقها فتح أو ألف أو ساكن صحيح. وصيغت القاعدة على الجواز لا على المنع، لأن المطابقة تدل على وقوع الحكم لا على انتفائه، وليس في الصيغة استثناء. ولا تميز الصيغة هاء الضمير من هاء أصلية في آخر الكلمة، فقد تدخل معها هاء ليست ضميرا — وحكمها الروم أيضا بالقاعدة العامة، فالحكم صحيح والنسبة إلى الباب فيها تجوز. واقتُصر على رؤوس الآي دون سائر الكلمات، لأن الوقف على رأس الآية سنة فالحكم واقع في الغالب، والوقف في غيرها اختيار من القارئ لا يدل عليه الرسم — وهو التعليل نفسه الذي اقتُصرت به القلقلة الكبرى على رؤوس الآي. والروم جائز لا واجب، فالوقف بالسكون المحض صحيح معه في كل موضع."
+      }
+    },
+    {
+      "id": "rawm-haa-tafsil.2",
+      "hukum": "rawm-haa-tafsil",
+      "case": "[ــــَ ا ــــْ] + [هِ] + نهاية الآية",
+      "scope": "within-word",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا كانت الهاء في آخر الآية مكسورة وقبلها فتح أو ألف أو ساكن صحيح، جاز الوقف عليها بالروم"
+      },
+      "notes": {
+        "ar": "في هاء الضمير ثلاثة مذاهب: الجواز مطلقا، والمنع مطلقا، والتفصيل؛ وعدّ ابن الجزري التفصيل أعدل المذاهب وأتمها. وحاصله أن الروم يمتنع إذا سبق الهاء ضم أو واو ساكنة أو كسر أو ياء ساكنة، ويجوز إذا سبقها فتح أو ألف أو ساكن صحيح. وصيغت القاعدة على الجواز لا على المنع، لأن المطابقة تدل على وقوع الحكم لا على انتفائه، وليس في الصيغة استثناء. ولا تميز الصيغة هاء الضمير من هاء أصلية في آخر الكلمة، فقد تدخل معها هاء ليست ضميرا — وحكمها الروم أيضا بالقاعدة العامة، فالحكم صحيح والنسبة إلى الباب فيها تجوز. واقتُصر على رؤوس الآي دون سائر الكلمات، لأن الوقف على رأس الآية سنة فالحكم واقع في الغالب، والوقف في غيرها اختيار من القارئ لا يدل عليه الرسم — وهو التعليل نفسه الذي اقتُصرت به القلقلة الكبرى على رؤوس الآي. والروم جائز لا واجب، فالوقف بالسكون المحض صحيح معه في كل موضع."
+      }
+    },
+    {
+      "id": "mani-rawm-ishmam.1",
+      "hukum": "mani-rawm-ishmam",
+      "case": "ة + [ــــُ ــــٌ ــــِ ــــٍ] + نهاية الكلمة",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "unsupported-exception",
+      "statusReason": "A منع: it says where روم and إشمام do NOT apply. A span means a ruling applies there, so a منع cannot be published as a match, and the notation has no way to subtract a case from another rule's group. Published disabled so the exclusion is auditable rather than invisible. None of these can arise at a رأس آية, which is the scope the roum and ishmām rules are written at, so nothing is lost by leaving them unexpressed today; they are the specification for extending the topic to every stopping place.",
+      "label": {
+        "ar": "إذا كان آخر الكلمة تاء مربوطة، فلا روم فيها ولا إشمام، لأن الوقف عليها بهاء ساكنة"
+      }
+    },
+    {
+      "id": "mani-rawm-ishmam.2",
+      "hukum": "mani-rawm-ishmam",
+      "case": "ميم الجمع + نهاية الكلمة",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "unsupported-exception",
+      "statusReason": "A منع: it says where روم and إشمام do NOT apply. A span means a ruling applies there, so a منع cannot be published as a match, and the notation has no way to subtract a case from another rule's group. Published disabled so the exclusion is auditable rather than invisible. None of these can arise at a رأس آية, which is the scope the roum and ishmām rules are written at, so nothing is lost by leaving them unexpressed today; they are the specification for extending the topic to every stopping place.",
+      "label": {
+        "ar": "إذا كان آخر الكلمة ميم الجمع، فلا روم فيها ولا إشمام"
+      }
+    },
+    {
+      "id": "mani-rawm-ishmam.3",
+      "hukum": "mani-rawm-ishmam",
+      "case": "ــــ + حركة عارضة + نهاية الكلمة",
+      "scope": "within-word",
+      "status": "disabled",
+      "gap": "unsupported-exception",
+      "statusReason": "A منع: it says where روم and إشمام do NOT apply. A span means a ruling applies there, so a منع cannot be published as a match, and the notation has no way to subtract a case from another rule's group. Published disabled so the exclusion is auditable rather than invisible. None of these can arise at a رأس آية, which is the scope the roum and ishmām rules are written at, so nothing is lost by leaving them unexpressed today; they are the specification for extending the topic to every stopping place.",
+      "label": {
+        "ar": "إذا كانت حركة آخر الكلمة عارضة، ككسرة التخلص من التقاء الساكنين، فلا روم فيها ولا إشمام، وتُحذف الحركة ويوقف بالسكون"
       }
     }
   ]
