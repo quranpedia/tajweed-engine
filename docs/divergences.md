@@ -1,86 +1,89 @@
 # Divergences from the legacy engine
 
-The TypeScript engine is a port, and conformance/ holds it to producing the same
-normalised text and the same rule-to-ayah incidence as the PHP engine it came
-from. Where it deliberately does something different, it is recorded here.
+The TypeScript engine is a port. The conformance suite holds it to producing
+the same normalised text and the same rule-to-ayah matches as the PHP engine it
+came from. Where it deliberately does something different, that difference is
+recorded here.
 
 Nothing on this list changes *which* ayahs a rule matches. Everything on it
-changes the extent of a span, or the corpus, and each was verified against the
-whole mushaf before being accepted.
+changes either how far a span extends, or the corpus itself, and each item was
+checked over the whole mushaf before being accepted.
 
 ---
 
-## Span extents are derived from an offset map, not by searching again
+## Span extents come from an offset map, not from a second search
 
-**Legacy:** match against normalised text, then build a second, looser pattern
-from the matched fragment and search the *original* text for it, to find out
-where to highlight.
+**Legacy:** match against the normalised text, then build a second, looser
+pattern from the matched fragment and search the *original* text for it, to
+find out where to highlight.
 
-**Port:** the normaliser records, for each character it emits, the code-point
-index it came from. A match's extent follows from that map directly.
+**Port:** while normalising, the engine records for each character it produces
+which position in the original text it came from. A match's extent is read
+straight off that map.
 
-**Why:** searching again is ambiguous. When the same normalised fragment occurs
-more than once in an ayah — which is common, since normalisation removes exactly
-the marks that distinguish occurrences — the second search finds all of them and
-cannot tell which one matched. The legacy code works around this with a
-duplicate-suppression list keyed on the matched text, which suppresses genuine
-repeat occurrences along with spurious ones. It also has to walk forward from
-each match to absorb trailing diacritics, because a span that ends between a
-letter and its haraka splits a rendered glyph cluster.
+**Why:** searching again is ambiguous. The same normalised fragment often
+appears more than once in an ayah — normalisation removes exactly the marks
+that told the occurrences apart — so the second search finds all of them and
+cannot tell which one actually matched. The legacy code worked around this with
+a duplicate-suppression list keyed on the matched text, which also suppressed
+genuine repeats. It also had to walk forward from each match to pick up
+trailing diacritics, because a span that ends between a letter and its haraka
+splits a rendered glyph in half.
 
-The offset map removes all three: the extent is exact, repeat occurrences are
-distinct, and marks dropped inside the match sit in the gap between mapped
-indices, so they are inside the span already.
+The offset map removes all three problems: the extent is exact, repeated
+occurrences stay separate, and marks that normalisation dropped inside the
+match sit between mapped positions, so they are inside the span already.
 
 ---
 
-## Trailing waqf marks bind uniformly across a single-group rule's alternatives
+## Trailing waqf marks attach the same way to every alternative
 
-**Legacy:** a single-group rule compiles to `group(?:waqf)*` with `group`
-unbracketed. Alternation binds loosest, so `ا|ب(?:waqf)*` means "an alef, or a
-baa followed by waqf marks" — whether a trailing waqf mark fell inside the match
-depended on which alternative matched.
+**Legacy:** a single-group rule compiled to `group(?:waqf)*` with the group
+unbracketed. Because alternation binds loosest, `ا|ب(?:waqf)*` means "an alef,
+or (a baa followed by waqf marks)" — so whether a trailing waqf mark ended up
+inside the match depended on which alternative matched.
 
-**Port:** the group is bracketed, so the suffix applies to every alternative.
+**Port:** the group is bracketed, so the waqf suffix applies to every
+alternative equally.
 
-**Why:** the legacy behaviour is a precedence slip rather than a decision, and it
-makes a rule's spans inconsistent with themselves. Multi-group rules were already
-bracketed in the legacy engine, so this makes the two paths agree.
+**Why:** the legacy behaviour was an operator-precedence slip, not a decision,
+and it made one rule's spans inconsistent with each other. Multi-group rules
+were already bracketed in the legacy engine; this makes the two paths agree.
 
 ---
 
 ## `across-words` scope does not actually require whitespace
 
 **Legacy and port both:** the separator between groups compiles to
-`(?:\s+|waqf|marks)+`, which is satisfied by a diacritic just as well as by a
-space.
+`(?:\s+|waqf|marks)+`, and a diacritic satisfies it just as well as a space
+does.
 
-**Not changed.** This is recorded as a divergence-in-waiting rather than a
-divergence: the name says one thing and the behaviour does another, but
+**Not changed.** The name says one thing and the behaviour does another, but
 tightening it would change what 22 rules match. That is a corpus change, not a
-port detail, and belongs in a pull request that can be reviewed on its own with
-before-and-after match counts.
+porting detail, and it belongs in its own pull request with before-and-after
+match counts.
 
 ---
 
 ## A normalisation bug was fixed in both engines
 
-`أ` followed by a maddah above is آ — a hamza followed by a long a, which is مد
-بدل. Only `ا` followed by a maddah was being resolved, so on the hamza-carrying
-form the maddah was stripped with the other annotation marks and the bare hamza
-then collected an implied sukoon, turning a madd letter into a sakin consonant.
-It affects 272 ayahs, and recovers 212 ayahs of مد بدل that were invisible.
+`أ` followed by a maddah is آ — a hamza followed by a long *a*, which is مد
+بدل. Only `ا` followed by a maddah was being resolved. On the hamza-carrying
+form, the maddah was stripped along with the other annotation marks, and the
+bare hamza then received an implied sukoon — turning a madd letter into a sakin
+consonant. This affected 272 ayahs, and the fix recovered 212 ayahs of مد بدل
+that had been invisible.
 
-This was fixed **in the PHP engine as well**, so the two still produce identical
-normalised text and the conformance check stays exact rather than acquiring an
-exception list. It is recorded here because it changes published behaviour, not
-because the two engines disagree.
+The fix was applied **in the PHP engine as well**, so the two engines still
+produce identical normalised text and the conformance check stays exact, with
+no exception list. It is recorded here because it changed published behaviour,
+not because the engines disagree.
 
 ## Four rules were corrected
 
-Four rules described one madd letter and searched for another. See
-`packages/rules/rules.json` — each carries a `corrections` entry with the previous
-value, the evidence, and `needsReview: true`.
+Four rules described one madd letter in their text but searched for another.
+See `packages/rules/rules.json` — each carries a `corrections` entry with the
+previous value, the evidence, and `needsReview: true`.
 
 | Rule | Described | Searched for | Effect of the correction |
 |---|---|---|---|
@@ -89,11 +92,12 @@ value, the evidence, and `needsReview: true`.
 | `madd-munfasil.2` | sakin waw | alef | 0 → 0 (corrected for consistency) |
 | `madd-munfasil.4` | sakin yaa | alef | 3 matches, all wrong → 79 correct |
 
-Each is one of a three-rule alef/waw/yaa series where the leading group's harakat
-were updated from the sibling rule and the madd letter itself was not. The
-corrected groups are taken either from the row's own editorial `start_from`
-column or from مد البدل, which is the same series written correctly.
+Each belongs to a three-rule alef/waw/yaa series where the first group's
+harakat were copied and updated from the sibling rule, but the madd letter
+itself was not. The corrected groups come either from the row's own editorial
+`start_from` column or from مد البدل, which is the same series written
+correctly.
 
-`scripts/audit-corpus.ts` checks for this class of defect mechanically, by
-comparing each rule's Arabic description against the letters its pattern actually
-contains.
+`scripts/audit-corpus.ts` checks for this class of mistake mechanically, by
+comparing each rule's Arabic description against the letters its pattern
+actually contains.

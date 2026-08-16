@@ -6,11 +6,11 @@ npx @tajweed/cli explain madd-lazim-harfi.1
 npx @tajweed/cli gaps
 ```
 
-Two kinds of thing live here.
+The CLI does two kinds of thing.
 
-**Asking questions of the corpus** needs no Quranic text and works immediately —
-which rules exist, what one says, and which rules the notation still cannot
-express.
+**Asking questions about the rules** needs no Quranic text and works right
+away — which rules exist, what a rule says, and which rules the notation still
+cannot express.
 
 **Annotating** needs text, which this tool does not ship and will not fetch:
 
@@ -21,17 +21,17 @@ tajweed annotate --edition ./my-edition.json --ref 2:255 --only madd
 ```
 
 `--format` is `ansi` (default), `json`, `html` or `text` (tab-separated
-offsets, for piping into something else).
+positions, for piping into something else).
 
-`tajweed verify --edition <file>` prints an edition's digest, which is what an
-annotation set pins itself to. If it does not match, the offsets in that set
-describe different text.
+`tajweed verify --edition <file>` prints an edition's digest — the value an
+annotation set records to say which text it describes. If the digests do not
+match, the positions in that set describe different text.
 
 ## Why an edition file
 
-A tajweed annotation is a pair of offsets into a specific string, and editions of
-the Uthmani script that read identically are not identical as data. Rather than
-guess which one you have, this takes the one you point it at. The format is
-`{ id, riwayah, script, ayahs: { "1:1": "…" } }`.
+A tajweed annotation is a pair of positions into one specific string, and two
+editions of the Uthmani script can read identically while differing as data.
+Rather than guess which text you have, the tool takes the one you point it at.
+The format is `{ id, riwayah, script, ayahs: { "1:1": "…" } }`.
 
 MIT. The rule corpus it reads is CC BY 4.0.

@@ -1,11 +1,12 @@
-# What the corpus covers, and what it does not
+# What the rules cover, and what they do not
 
-Read this before shipping anything that colours text with these rules.
+Read this before you ship anything that colours text with these rules.
 
-The corpus is deep in the areas it covers and silent outside them. Silence looks
-identical to "this rule does not apply here", so a reader shown only these
-annotations will conclude that rules the corpus never modelled do not exist.
-For a tool that teaches recitation, that is the more damaging kind of error.
+The corpus covers seven topics in depth and says nothing outside them. The
+problem: "nothing" looks exactly like "no rule applies here". A reader who sees
+only these colours will assume that rules the corpus never included simply do
+not exist. For a tool that teaches recitation, that is the more damaging kind
+of mistake.
 
 ## Covered
 
@@ -19,61 +20,67 @@ For a tool that teaches recitation, that is the more damaging kind of error.
 | المد | 13 | طبيعي، عوض، صلة صغرى، لين، بدل، واجب متصل، جائز منفصل، **لازم** |
 | القلقلة | 3 | صغرى في وسط الكلمة، متطرفة على حرف ساكن في آخرها، وكبرى على رأس الآية |
 
-القلقلة and المد اللازم were authored for this corpus rather than inherited from
-the source; both were absent, and المد اللازم's absence was why every ayah of الحروف
-المقطعة came back with nothing to say about it. Every rule in those two areas is
-flagged `needsReview` until a qualified reviewer signs it off, and each is pinned
-to passages whose ruling is not in dispute — see `scripts/verify-rules.ts`.
+القلقلة and المد اللازم were written for this corpus; the source system did not
+have them. Before المد اللازم was added, the engine had nothing to say about
+الحروف المقطعة — the disjoined letters that open some surahs. Every rule in
+these two areas is flagged `needsReview` until
+a qualified reviewer signs it off, and each is tested against passages whose
+ruling is not in dispute — see `scripts/verify-rules.ts`.
 
-One of them is deliberately coarser than the classical division:
+One of them is deliberately less detailed than the classical books:
 
-- **المد اللازم الحرفي** does not distinguish مثقل from مخفف. That turns on
-  whether the letter's spelled-out name assimilates into the next, which the CASE
-  notation cannot see.
+- **المد اللازم الحرفي** does not split into مثقل and مخفف. The split depends on
+  whether the letter's spelled-out name merges into the next letter, and the
+  CASE notation cannot see spelled-out names.
 
 ## Not covered
 
-These are absent from the corpus entirely — not disabled, not partial, absent.
+These are missing from the corpus entirely — not disabled, not partial, missing.
 
-- **القلقلة عند الوقف في وسط الآية.** A qalqalah letter carrying a vowel at the
-  end of a word — the ط of صِرَٰطَ, the ب of ٱلۡمَغۡضُوبِ — is not qalqalah while the
-  reciter continues, and whether they stop mid-ayah is their choice rather than
-  something the text records. Marking every such letter would colour 4,470
+- **القلقلة عند الوقف في وسط الآية.** A qalqalah letter that carries a vowel at
+  the end of a word — the ط of صِرَٰطَ, the ب of ٱلۡمَغۡضُوبِ — only becomes qalqalah
+  if the reciter stops there. Whether they stop mid-ayah is their choice; the
+  text does not record it. Marking every such letter would colour 4,470
   positions that are usually read straight through.
 
-  Ayah endings are the exception, and they *are* annotated: stopping at رأس الآية
-  is sunnah and usual, so the ruling is realised there. That is
-  `qalqalah-kubra`, 422 ayahs — أَحَدٌ، ٱلصَّمَدُ، وَتَبَّ. A reciter who joins one ayah
-  to the next would not pronounce it on a vowelled letter, which is why the rule
-  is scoped to ayah ends rather than applied to every stop a reciter might make.
-- **مد الفرق** — ءَآللَّهُ، ءَآلذَّكَرَيۡنِ. Six places, and structurally close enough to
-  المد اللازم الكلمي that a pattern written loosely will swallow them; the rule
-  for المخفف is deliberately written as a literal to avoid exactly that.
+  Ayah endings are different, and they *are* annotated: stopping at the end of
+  an ayah is sunnah and the normal way to recite, so the ruling actually happens
+  there. That is `qalqalah-kubra`, 422 ayahs — أَحَدٌ، ٱلصَّمَدُ، وَتَبَّ. A reciter
+  who joins one ayah into the next would not pronounce it on a vowelled letter,
+  which is why the rule covers ayah ends only, and not every place a reciter
+  might choose to stop.
+- **مد الفرق** — ءَآللَّهُ، ءَآلذَّكَرَيۡنِ. Six places in the mushaf. Its shape is so
+  close to المد اللازم الكلمي that a loosely written pattern would swallow it by
+  accident; the rule for المخفف is written as an exact word for exactly this
+  reason.
 - **مد الصلة الكبرى.** The صغرى is covered; the كبرى is not.
-- **السكت.** Normalisation recognises the saktah mark and uses it to stop rules
-  matching across it, but there is no rule that reports a saktah as a ruling of
-  its own.
-- **الوقف والابتداء.** Waqf marks are preserved and never coloured, but they are
-  not annotated.
+- **السكت.** The normaliser recognises the saktah mark and uses it to stop rules
+  from matching across it, but no rule reports a saktah as a ruling of its own.
+- **الوقف والابتداء.** Waqf marks are kept in the text and never coloured, but
+  they are not annotated.
 - **أحكام الاستعاذة والبسملة.**
 - **المتباعدين**, and the **الكبير** forms of المتماثلين والمتجانسين.
 
 ## Disabled within covered areas
 
-18 further rules are present but disabled, because the CASE notation cannot
-express them. Two of those are the ones that would identify راء in فِرْق and the
-two مواضع of الإظهار المطلق. See [packages/rules/README.md](../packages/rules/README.md).
+18 more rules exist in the corpus but are disabled, because the CASE notation
+cannot express them yet. Two of those are the rules that would identify the راء
+in فِرْق and the two places of الإظهار المطلق. See
+[packages/rules/README.md](../packages/rules/README.md).
 
-## What this means for a consumer
+## What this means for you
 
 **Do not present this as complete tajweed colouring.** If you build a reader,
 say which rules are shown. A legend listing the covered topics is honest; an
-unlabelled wash of colour implies completeness the data does not have.
+unlabelled wash of colour claims a completeness the data does not have.
 
-**Do not infer absence.** `analyze()` returning nothing for an ayah means no
-*modelled* rule matched, not that the ayah is free of tajweed.
+**Do not treat silence as "no rule applies".** When `analyze()` returns nothing
+for a stretch of text, it means no rule *in the corpus* matched — not that the
+text is free of tajweed. For example, the corpus has no rule for السكت, so the
+saktah in 18:1–2 gets no annotation; that is a gap in the corpus, not a fact
+about the ayah.
 
-**Ayahs with no annotations are omitted** from a generated annotation set rather
-than stored as an empty list, so that "no rules matched" and "not computed" stay
-distinguishable. As of the current corpus every ayah of the mushaf carries at
-least one annotation, so the omitted set is empty.
+**Ayahs with no annotations are left out** of a generated annotation set, not
+stored as an empty list. That keeps "no rules matched" and "not computed"
+distinguishable. As of the current corpus, every ayah of the mushaf has at
+least one annotation, so in practice nothing is left out.

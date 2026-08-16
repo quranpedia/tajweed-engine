@@ -1,7 +1,7 @@
 # @tajweed/core
 
-Compiles the [tajweed rule corpus](../rules) and reports where each rule applies
-in Quranic text.
+Compiles the [tajweed rule corpus](../rules) and reports where each rule
+applies in Quranic text.
 
 ```bash
 npm install @tajweed/core @tajweed/rules
@@ -18,11 +18,11 @@ for (const span of tajweed.analyze(ayahText)) {
 }
 ```
 
-## It returns offsets, not markup
+## It returns positions, not markup
 
 ```ts
 interface Span {
-  start: number      // code-point offset into the text YOU passed in
+  start: number      // code-point position in the text YOU passed in
   end: number        // half-open
   ruleId: string     // 'madd-muttasil.1'
   hukumId: string    // 'madd-muttasil'
@@ -31,20 +31,28 @@ interface Span {
 }
 ```
 
-Colours, HTML, ANSI, SVG overlays and mushaf-page coordinates are all downstream
-of this and all differ per platform. An engine that returns HTML is useful only
-to the last person who needed HTML.
+For example, analysing ayah 112:1 (قُلۡ هُوَ ٱللَّهُ أَحَدٌ) returns four spans, one
+of which is:
+
+```js
+{ start: 22, end: 24, ruleId: 'qalqalah-kubra.1', hukumId: 'qalqalah-kubra', ... }
+// sliceSpan(text, span) === 'دٌ'  — the final د of أَحَدٌ, with its tanween
+```
+
+Colours, HTML, ANSI, SVG overlays and mushaf-page coordinates all build on top
+of this, and each platform needs a different one. Returning positions keeps the
+engine useful for all of them; returning HTML would serve only one.
 
 `start` and `end` count **code points**, not bytes and not UTF-16 units, so the
-same offsets mean the same thing in PHP, Python and Swift. All Arabic and all
-Quranic annotation marks are in the Basic Multilingual Plane, so for Quranic text
-they are also valid JavaScript string indices — `sliceSpan` handles the general
-case.
+same numbers mean the same thing in PHP, Python and Swift. All Arabic and all
+Quranic annotation marks sit in the Basic Multilingual Plane, so for Quranic
+text the positions also work directly as JavaScript string indices —
+`sliceSpan` handles the general case anyway.
 
 ## Spans overlap, on purpose
 
-One letter can demonstrate more than one ruling. `analyze` reports all of them;
-deciding what to draw is a presentation question:
+One letter can demonstrate more than one ruling, and `analyze` reports all of
+them. Choosing what to draw is a display decision, not an engine decision:
 
 ```ts
 import { resolveOverlaps } from '@tajweed/core'
@@ -52,7 +60,8 @@ import { resolveOverlaps } from '@tajweed/core'
 resolveOverlaps(spans) // earliest wins, longest wins on a tie
 ```
 
-Anything teaching tajweed probably wants the overlaps rather than one layer.
+An app that teaches tajweed probably wants to keep the overlaps rather than
+flatten them to one layer.
 
 ## Choosing rules
 
@@ -64,22 +73,22 @@ new Tajweed(corpus, { school: 'ibn-al-jazari' })           // pick a school
 new Tajweed(corpus, { includeDisabled: true })             // for working ON the corpus
 ```
 
-`school` matters where two authorities are modelled side by side — Ibn al-Jazarī
-counts five ranks of tafkheem, Ibn al-Ṭaḥḥān counts three, and the corpus
-represents both. Ahkam with no school attribution are always kept.
+`school` matters where the corpus models two authorities side by side — Ibn
+al-Jazarī counts five ranks of tafkheem, Ibn al-Ṭaḥḥān counts three, and both
+are present. Ahkam with no school attribution are always kept.
 
-## Your text is never modified
+## Your text is never changed
 
-Matching runs against an internal normalised form. Nothing in the pipeline
-applies Unicode normalisation, strips diacritics, or drops waqf marks, and
-`analyze` never returns a modified copy of your string — only offsets into it.
+Matching runs on an internal normalised copy. Nothing in the pipeline applies
+Unicode normalisation, strips diacritics, or drops waqf marks, and `analyze`
+never returns a modified copy of your string — only positions into it.
 
 ## Run it at build time
 
-The Quran is a fixed corpus, so for production the expected shape is to annotate
-every ayah once and ship the offsets, rather than compiling 174 patterns on every
-request. Pin the text edition you computed against: the same rule lands on
-different offsets in different editions of the Uthmani script.
+The Quran is a fixed text, so for production the expected setup is: annotate
+every ayah once and ship the positions, instead of compiling 174 patterns on
+every request. Record which text edition you computed against — the same rule
+lands on different positions in different editions of the Uthmani script.
 
 ## Licence
 
