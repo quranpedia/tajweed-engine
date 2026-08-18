@@ -1,6 +1,6 @@
 {
   "$schema": "./schema/rules.schema.json",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "riwayah": "hafs-an-asim",
   "provenance": {
     "source": "tajweed.quranpedia.net",
@@ -2334,6 +2334,7 @@
       "hukum": "madd-silah-sughra",
       "case": "[ ه ] + [واو صغيرة]",
       "scope": "within-word",
+      "matchAgainst": "original",
       "status": "stable",
       "label": {
         "ar": "الهاء في آخر الكلمة متبوعة بالواو الصغيرة في حال الوصل فقط"
@@ -2344,6 +2345,7 @@
       "hukum": "madd-silah-sughra",
       "case": "[ ه ] + [ياء صغيرة]",
       "scope": "within-word",
+      "matchAgainst": "original",
       "status": "stable",
       "label": {
         "ar": "الهاء في آخر الكلمة متبوعة بالياء الصغيرة المعقوصة في حال الوصل فقط"
@@ -2354,6 +2356,7 @@
       "hukum": "seven-alefs",
       "case": "لَّٰكِنَّا۠",
       "scope": "within-word",
+      "matchAgainst": "original",
       "status": "stable",
       "label": {
         "ar": "كلمة \"لكنا\" في الكهف 38"
@@ -2365,6 +2368,7 @@
       "hukum": "seven-alefs",
       "case": "قَوَارِيرَا۠",
       "scope": "within-word",
+      "matchAgainst": "original",
       "status": "stable",
       "label": {
         "ar": "كلمة \"قواريرا\" في الإنسان 15"
@@ -2376,6 +2380,7 @@
       "hukum": "seven-alefs",
       "case": "ٱلظُّنُونَا۠",
       "scope": "within-word",
+      "matchAgainst": "original",
       "status": "stable",
       "label": {
         "ar": "كلمة \"الظنونا\" في الأحزاب 10"
@@ -2387,6 +2392,7 @@
       "hukum": "seven-alefs",
       "case": "ٱلرَّسُولَا۠",
       "scope": "within-word",
+      "matchAgainst": "original",
       "status": "stable",
       "label": {
         "ar": "كلمة \"الرسولا\" في الأحزاب 66"
@@ -2398,6 +2404,7 @@
       "hukum": "seven-alefs",
       "case": "ٱلسَّبِيلَا۠",
       "scope": "within-word",
+      "matchAgainst": "original",
       "status": "stable",
       "label": {
         "ar": "كلمة \"السبيلا\" في الأحزاب 67"
@@ -2409,6 +2416,7 @@
       "hukum": "seven-alefs",
       "case": "أَنَا۠",
       "scope": "within-word",
+      "matchAgainst": "original",
       "status": "stable",
       "label": {
         "ar": "كلمة \"أنا\" حيثما وردت بشرط أن لا يأتي بعدها همز وصل"

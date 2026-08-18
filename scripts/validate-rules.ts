@@ -15,11 +15,37 @@ import { dirname, join } from 'node:path'
 
 import Ajv2020 from 'ajv/dist/2020.js'
 
+import { OPTIONAL_MARKS, TATWEEL } from '../packages/core/src/unicode.js'
+
 const here = dirname(fileURLToPath(import.meta.url))
 const rulesDir = join(here, '..', 'packages', 'rules')
 
 const schema = JSON.parse(readFileSync(join(rulesDir, 'schema', 'rules.schema.json'), 'utf8'))
 const corpus = JSON.parse(readFileSync(join(rulesDir, 'rules.json'), 'utf8'))
+
+const strippedByNormalisation = new Set(OPTIONAL_MARKS)
+
+/**
+ * The CASE notation spells out marks that are hard to type. Expand them before
+ * asking which characters a pattern actually looks for.
+ *
+ * A run of tatweel is the notation's wildcard letter rather than a literal mark,
+ * so it is exempt above even though normalisation does strip it.
+ */
+const NAMED_MARKS: ReadonlyArray<readonly [string, string]> = [
+  ['الألف الخنجرية', '\u{0670}'],
+  ['واو صغيرة', '\u{06E5}'],
+  ['ياء صغيرة', '\u{06E6}'],
+  ['علامة المد', '\u{0653}'],
+]
+
+function expandNamedMarks(pattern: string): string {
+  return NAMED_MARKS.reduce((text, [name, mark]) => text.split(name).join(mark), pattern)
+}
+
+function describe(character: string): string {
+  return `U+${character.codePointAt(0)!.toString(16).toUpperCase().padStart(4, '0')}`
+}
 
 const problems: string[] = []
 
@@ -97,6 +123,26 @@ for (const rule of corpus.rules) {
   }
   if (rule.status === 'stable' && rule.gap) {
     problems.push(`rule ${rule.id} is stable but records a gap`)
+  }
+
+  // A rule whose pattern contains a mark normalisation removes will run against
+  // text that no longer has it and match nothing — silently, since the rule
+  // compiles and the corpus still calls it stable. That is how مد الصلة الصغرى
+  // came to report zero occurrences while the documentation listed it as
+  // covered. Declaring `original` is the way to say "look at the text as
+  // written"; not declaring it is a mistake, not a choice.
+  if (rule.gap !== 'not-a-pattern' && rule.matchAgainst !== 'original') {
+    const written = expandNamedMarks(rule.case)
+    const stripped = [...new Set([...written])].filter(
+      (character) => strippedByNormalisation.has(character) && character !== TATWEEL,
+    )
+    if (stripped.length > 0) {
+      problems.push(
+        `rule ${rule.id} looks for ${stripped.map(describe).join(', ')}, ` +
+          'which normalisation removes, but does not declare matchAgainst: "original" — ' +
+          'it would match nothing',
+      )
+    }
   }
 }
 

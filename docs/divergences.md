@@ -101,3 +101,31 @@ correctly.
 `scripts/audit-corpus.ts` checks for this class of mistake mechanically, by
 comparing each rule's Arabic description against the letters its pattern
 actually contains.
+
+## Eight rules matched nothing because normalisation removed what they look for
+
+`OPTIONAL_MARKS` removes the marks that never appear in a CASE pattern — which
+is right for almost every rule, and wrong for the few whose pattern *is* one of
+those marks. Eight such rules compiled cleanly, ran against text the mark had
+already been stripped from, and matched nothing at all:
+
+| Rule | Looks for | Was | Now |
+|---|---|---|---|
+| `madd-silah-sughra.1` | ۥ U+06E5 small waw | 0 ayahs | 969 |
+| `madd-silah-sughra.2` | ۦ U+06E6 small yeh | 0 ayahs | 791 |
+| `seven-alefs.1`–`.5` | ۠ U+06E0 rectangular zero | 0 ayahs each | 1 each |
+| `seven-alefs.6` | ۠ U+06E0 rectangular zero | 0 ayahs | 60 |
+
+مد الصلة الصغرى is not a marginal ruling — it is one of the most frequent madd
+in the mushaf, and `docs/coverage.md` listed it as covered throughout. Nothing
+errored, no test failed, and the corpus reported the rule as `stable`: the only
+visible symptom was a colour that never appeared.
+
+The mechanism to express this already existed. Each of the eight now declares
+`matchAgainst: "original"`, the same escape hatch `madd-lazim-harfi.1` uses, and
+each returns exactly the set of ayahs the PHP engine returned — 969, 791, and
+1/1/1/1/1/60 — so this restores parity rather than changing behaviour.
+
+`scripts/validate-rules.ts` now rejects any rule whose pattern contains a mark
+normalisation strips unless it declares `matchAgainst: "original"`, so a rule
+cannot silently match nothing this way again.
