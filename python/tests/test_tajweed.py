@@ -75,9 +75,17 @@ class AnnotationsTest(unittest.TestCase):
         cls.corpus = Corpus.load(RULES)
         cls.annotations = Annotations.load(ANNOTATIONS, cls.corpus)
 
-    def test_covers_the_whole_mushaf(self):
+    def test_covers_the_whole_mushaf_but_for_taha(self):
+        # 20:1 طه is the one ayah with no ruling, and it is honest: it is two
+        # disjoined letters read as their names, ta-ha, whose only tajweed is
+        # al-madd al-tabee'i al-harfi, which the corpus does not cover. Asserted
+        # by name so that a second ayah going quiet fails here rather than
+        # becoming a number someone bumps.
         self.assertEqual(self.annotations.ayah_count, 6236)
-        self.assertEqual(len(list(self.annotations.references())), 6236)
+
+        annotated = set(self.annotations.references())
+        self.assertEqual(len(annotated), 6235)
+        self.assertNotIn("20:1", annotated)
 
     def test_spans_carry_the_whole_lineage(self):
         span = self.annotations.spans("1:7")[0]

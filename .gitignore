@@ -6,3 +6,4 @@ coverage/
 
 # Reference snapshots from the implementation this was ported from.
 conformance/reference.json
+data/
