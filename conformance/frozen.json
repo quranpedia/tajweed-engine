@@ -1,5 +1,5 @@
 {
- "corpusVersion": "0.4.1",
+ "corpusVersion": "0.4.2",
  "edition": {
   "id": "uthmani-hafs",
   "sha256": "b5d29736bb3ef49d9d331c4e60a59d83fe899b921e9e8dc35911bd4a18ce55f3",
@@ -7154,6 +7154,21 @@
    "ayahs": 29,
    "occurrences": 44,
    "digest": "12b369732e323001"
+  },
+  "ishmam-damm.1": {
+   "ayahs": 310,
+   "occurrences": 310,
+   "digest": "30ab2d10fd8d3733"
+  },
+  "ishmam-damm.2": {
+   "ayahs": 579,
+   "occurrences": 579,
+   "digest": "53f47bb0f51b4aaf"
+  },
+  "ishmam-haa-tafsil.1": {
+   "ayahs": 22,
+   "occurrences": 22,
+   "digest": "3596dc1489f60bd5"
   }
  }
 }
