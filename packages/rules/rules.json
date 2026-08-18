@@ -48,6 +48,12 @@
       "label": {
         "ar": "القلقلة"
       }
+    },
+    {
+      "id": "ada-khass",
+      "label": {
+        "ar": "أداءات خاصة عند حفص"
+      }
     }
   ],
   "categories": [
@@ -240,6 +246,27 @@
       "topic": "madd",
       "label": {
         "ar": "المد اللازم"
+      }
+    },
+    {
+      "id": "imalah",
+      "topic": "ada-khass",
+      "label": {
+        "ar": "الإمالة"
+      }
+    },
+    {
+      "id": "tashil",
+      "topic": "ada-khass",
+      "label": {
+        "ar": "التسهيل"
+      }
+    },
+    {
+      "id": "ishmam-harakah",
+      "topic": "ada-khass",
+      "label": {
+        "ar": "الإشمام والاختلاس في الحركة"
       }
     }
   ],
@@ -680,6 +707,34 @@
       "category": "madd-lazim",
       "label": {
         "ar": "المد اللازم الحرفي"
+      }
+    },
+    {
+      "id": "imalah-kubra",
+      "category": "imalah",
+      "label": {
+        "ar": "الإمالة الكبرى"
+      }
+    },
+    {
+      "id": "tashil-hamza",
+      "category": "tashil",
+      "label": {
+        "ar": "تسهيل الهمزة الثانية"
+      }
+    },
+    {
+      "id": "ishmam-tamanna",
+      "category": "ishmam-harakah",
+      "label": {
+        "ar": "الإشمام في تأمنا"
+      }
+    },
+    {
+      "id": "ikhtilas-tamanna",
+      "category": "ishmam-harakah",
+      "label": {
+        "ar": "الاختلاس في تأمنا"
       }
     }
   ],
@@ -2731,6 +2786,70 @@
       },
       "notes": {
         "ar": "يُطابَق على الرسم لا على النص المُطبَّع، لأن علامة المد (ٓ) تُحذف في التطبيع. والتفريق بين المثقل والمخفف يقوم على إدغام آخر الحرف فيما بعده، وهو ما لا تستطيع الصيغة التعبير عنه، فجُمعا في حكم واحد."
+      }
+    },
+    {
+      "id": "imalah-kubra.1",
+      "hukum": "imalah-kubra",
+      "case": "[مَجۡر۪ىٰهَا]",
+      "scope": "within-word",
+      "matchAgainst": "original",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا وقعت الكلمة الممالة في هود ٤١، فتُمال فتحة الراء نحو الكسرة والألف بعدها نحو الياء"
+      },
+      "notes": {
+        "ar": "ليس لحفص إمالة كبرى إلا في هذا الموضع، وهي ثابتة في الوقف والوصل، ولا تُقلب الفتحة كسرة خالصة ولا الألف ياء خالصة. وجُعلت القاعدة على اللفظ في موضعه لا على وزن عام، لأن الراء مع الألف الخنجرية تقع في غير هذا الموضع بلا إمالة — كما في مرساها في الأعراف ١٨٧ والنازعات ٤٢. ويُطابَق على الرسم لا على النص المُطبَّع، لأن علامة الإمالة (U+06EA) تُحذف في التطبيع."
+      }
+    },
+    {
+      "id": "tashil-hamza.1",
+      "hukum": "tashil-hamza",
+      "case": "[ءَا۬عۡجَمِيّٞ]",
+      "scope": "within-word",
+      "matchAgainst": "original",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا وقعت الهمزتان في فصلت ٤٤، فتُحقَّق الأولى وتُسهَّل الثانية بين الهمزة والألف"
+      },
+      "notes": {
+        "ar": "التسهيل هنا بين بين: صوت متوسط بين الهمزة المحققة والألف، لا ألف خالصة ولا هاء، ومن غير إدخال ألف فاصلة بين الهمزتين، وهو وجه واحد لحفص. والتعريف العام للتسهيل أن المفتوحة بين الهمزة والألف، والمكسورة بين الهمزة والياء، والمضمومة بين الهمزة والواو؛ والمطلوب هنا خاص بالهمزة الثانية المفتوحة في هذا الموضع وحده. ويُطابَق على الرسم لأن علامة التسهيل (U+06EC) تُحذف في التطبيع."
+      }
+    },
+    {
+      "id": "ishmam-tamanna.1",
+      "hukum": "ishmam-tamanna",
+      "case": "[تَأۡمَ۬نَّا]",
+      "scope": "within-word",
+      "matchAgainst": "original",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا وقعت الكلمة في يوسف ١١، أُشير بضم الشفتين إلى ضمة النون الأولى عند النطق بالنون المشددة"
+      },
+      "notes": {
+        "ar": "أصلها بنونين: الأولى مضمومة والثانية مفتوحة، فأُدغمت الأولى في الثانية، ويُشار إلى ضمة النون الأولى بضم الشفتين من غير صوت للضمة. وهذا إشمام داخل الكلمة، ليس إشمام وقف، فلا يُقاس عليه ولا يُجمع معه. وللكلمة وجه آخر هو الاختلاس، وهو حكم مستقل في هذه المجموعة."
+      }
+    },
+    {
+      "id": "ikhtilas-tamanna.1",
+      "hukum": "ikhtilas-tamanna",
+      "case": "[تَأۡمَ۬نَّا]",
+      "scope": "within-word",
+      "matchAgainst": "original",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا وقعت الكلمة في يوسف ١١، اختُلست ضمة النون الأولى ثم فُتحت النون الثانية"
+      },
+      "notes": {
+        "ar": "الوجه الثاني في الكلمة: تُنطق ضمة النون الأولى بمقدار نحو ثلثي الحركة، ثم النون الثانية مفتوحة، فلا يكون الإدغام كاملا. وسمّاه بعض المصنفين رومًا، والأدق عند عدد من أهل الأداء تسميته الاختلاس، وليس هو روم الوقف. وهو والإشمام وجهان أدائيان للموضع نفسه، فيقعان على المدى نفسه من النص."
       }
     }
   ]
