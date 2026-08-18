@@ -43,6 +43,13 @@ output:
   name is not in the text. Marking it would mean marking the written mīm, which
   is a different letter.
 
+يوسف ١١ carries two accepted wajh, الإشمام and الاختلاس, and the corpus states
+both. They are alternatives — a reciter performs one or the other — but nothing in
+the model says so, and both are emitted as spans over the identical range. A
+consumer that flattens to a single layer with `resolveOverlaps` therefore shows
+exactly one of them, chosen by rule id, which is not a judgement anyone made. Read
+`analyze` directly if you need to present the choice.
+
 One of them is deliberately less detailed than the classical books:
 
 - **المد اللازم الحرفي** does not split into مثقل and مخفف. The split depends on
