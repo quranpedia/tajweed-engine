@@ -35,6 +35,8 @@ interface Expectation {
   readonly rule: string
   /** Ayahs the rule must match. */
   readonly matches: readonly string[]
+  /** More ayahs the rule must match, kept separate only to be commented on. */
+  readonly matchesAlso?: readonly string[]
   /** Ayahs the rule must not match. */
   readonly avoids?: readonly string[]
   /** Exact number of ayahs the rule may match across the whole mushaf. */
@@ -75,8 +77,12 @@ const EXPECTATIONS: readonly Expectation[] = [
   {
     rule: 'qalqalah-sughra.1',
     matches: ['96:1', '2:27'],
-    avoids: ['1:1'],
-    why: 'ٱقۡرَأۡ، يَقۡطَعُونَ — حرف قلقلة ساكن في وسط الكلمة',
+    // 20:1 طه and 26:1 طسٓمٓ are letter names — ṭā-hā, ṭā-sīn-mīm — with no
+    // sakin ṭāʾ in either. 27:22 أَحَطتُ is إدغام ناقص: the ṭāʾ merges into the
+    // tāʾ and is never released, so there is nothing to qalqalah.
+    avoids: ['1:1', '20:1', '26:1', '27:22'],
+    exactlyOccurrences: 2923,
+    why: 'ٱقۡرَأۡ، يَقۡطَعُونَ — حرف قلقلة ساكن في وسط الكلمة غير مدغم',
   },
   {
     rule: 'qalqalah-mutatarrifa.1',
@@ -84,8 +90,31 @@ const EXPECTATIONS: readonly Expectation[] = [
     // Vowelled at the end of a word: qalqalah only if the reciter stops, which
     // is a choice rather than a property of the text. 1:7 ends صِرَٰطَ … ٱلۡمَغۡضُوبِ
     // and 112:1 ends أَحَدٌ; none of them is qalqalah when continuing.
-    avoids: ['1:7', '112:1', '111:1', '1:1'],
-    why: 'لَمْ يَلِدْ وَلَمْ يُولَدْ — حرف قلقلة ساكن في آخر الكلمة',
+    // 11:42 ٱرۡكَب مَّعَنَا is إدغام متجانسين and 2:256 قَد تَّبَيَّنَ إدغام: the
+    // letter is merged into the next word, not released. 50:1 قٓ and 42:2 عٓسٓقٓ
+    // are read qāf, with a long alef and no sakin qāf anywhere in them.
+    avoids: ['1:7', '112:1', '111:1', '1:1', '11:42', '2:256', '50:1', '42:2'],
+    // Written bare because the ayah ends there, but genuinely sakin — فَٱرۡغَبۡ
+    // is an imperative. Guards the fix above against over-correcting.
+    matchesAlso: ['94:8', '96:19'],
+    exactlyOccurrences: 494,
+    why: 'لَمْ يَلِدْ وَلَمْ يُولَدْ — حرف قلقلة ساكن في آخر الكلمة غير مدغم',
+  },
+  {
+    rule: 'madd-lazim-kalimi-muthaqqal.2',
+    matches: ['6:80', '39:64'],
+    exactlyOccurrences: 2,
+    why: 'أَتُحَٰٓجُّوٓنِّي، تَأۡمُرُوٓنِّيٓ — واو مدية يليها حرف مشدد',
+  },
+  {
+    rule: 'madd-lazim-kalimi-muthaqqal.3',
+    matches: [],
+    // بِأَييِّكُمُ is the only place a yaa precedes a shadda this way, and its
+    // yaa follows a fatha and carries no maddah — a written second yaa, not a
+    // madd letter. This madd does not occur with yaa in the Quran.
+    avoids: ['68:6'],
+    exactlyOccurrences: 0,
+    why: 'ياء مدية يليها حرف مشدد — لا يقع في القرآن',
   },
 ]
 
@@ -146,7 +175,7 @@ for (const expectation of EXPECTATIONS) {
     console.log(`    ${sample}`)
   }
 
-  for (const reference of expectation.matches) {
+  for (const reference of [...expectation.matches, ...(expectation.matchesAlso ?? [])]) {
     if (!matched.has(reference)) {
       fail(`${expectation.rule}: expected a match at ${reference}, found none`)
     }

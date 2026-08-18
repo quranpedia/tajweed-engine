@@ -129,3 +129,50 @@ each returns exactly the set of ayahs the PHP engine returned — 969, 791, and
 `scripts/validate-rules.ts` now rejects any rule whose pattern contains a mark
 normalisation strips unless it declares `matchAgainst: "original"`, so a rule
 cannot silently match nothing this way again.
+
+## قلقلة was being marked on letters that are never released
+
+Three defects with one shape: a letter that is not sakin was being treated as
+sakin, because `insertImpliedSukoon` supplies a sukoon to any bare consonant.
+That pass exists for the إدغام rules, which are written `بْ + ب` and need the
+merged letter to look sakin in order to find it. قلقلة needs the opposite — it
+does not occur on a letter that merges into the next.
+
+| | Was | Now |
+|---|---|---|
+| `qalqalah-sughra.1` | 2,970 | 2,923 |
+| `qalqalah-mutatarrifa.1` | 512 | 494 |
+| `madd-lazim-kalimi-muthaqqal.3` | 1 | 0 |
+
+**Merged letters.** `ٱضۡرِب بِّعَصَاكَ`, `قَد تَّبَيَّنَ`, `ٱرۡكَب مَّعَنَا`,
+`أَرَدتُّمۡ`, `عَٰهَدتُّمۡ` — the mushaf leaves the letter bare precisely because
+it is assimilated. A new anchor, `غير مدغم`, rejects them: a doubled following
+letter for إدغام كامل, and طاء before تاء for إدغام ناقص, which carries no
+shadda and so needs naming separately (`بَسَطتَ`, `أَحَطتُ`, `فَرَّطتُمۡ`).
+
+**Disjoined letters.** `قٓ` and `عٓسٓقٓ` were reported as قلقلة متطرفة, and the
+ṭāʾ of `طه`, `طسٓ` and `طسٓمٓ` as قلقلة صغرى. These are letter names — *qāf*,
+*ṭā-hā* — with no sakin qāf or ṭāʾ anywhere in them. Two passes now decline to
+imply a sukoon: on a consonant carrying a maddah, and on one followed by another
+consonant with no vowel, which no Arabic word can contain.
+
+**A yaa that is not a madd letter.** `madd-lazim-kalimi-muthaqqal.3` matched only
+`بِأَييِّكُمُ` (68:6), where the yaa follows a fatha and carries no maddah. Its
+label says الياء المدية; the pattern now requires the kasra that makes one, and
+the count is zero, which is the correct answer for this madd in Hafs.
+
+### What else moved, and why
+
+The two normalisation passes change 32 ayahs, all of them disjoined-letter
+openings. Four other rules move with them:
+
+- `tafkheem-rank-4-jazari.1` loses 9. It wants a **sakin** حرف استعلاء, and the
+  ṣād of `الٓمٓصٓ` is read *ṣād*, with a fatha. Those nine were wrong.
+- `idgham-bi-ghunnah-noon.1` and `idgham-naqis-noon.1` each lose 68:1,
+  `نٓۚ وَٱلۡقَلَمِ`. The written nūn opens the name *nūn* and is not sakin, and
+  Hafs reads that junction with إظهار rather than إدغام. Also wrong.
+- `izhar-shafawi-meem.1` loses 7:1 and 13:1. This one is a real loss: إظهار
+  شفوي does occur there, but on the final mīm of the spelled name *mīm*, which
+  is not a character in the text. The notation cannot see spelled-out names —
+  the same limit that keeps المد اللازم الحرفي from splitting into مثقل and
+  مخفف. Right ruling, wrong letter; it is no longer claimed.

@@ -27,6 +27,14 @@ these two areas is flagged `needsReview` until
 a qualified reviewer signs it off, and each is tested against passages whose
 ruling is not in dispute — see `scripts/verify-rules.ts`.
 
+Two consequences of the same limit are worth knowing before you rely on the
+output:
+
+- **إظهار شفوي at `الٓمٓصٓ` (7:1) and `الٓمٓرۚ` (13:1) is not marked.** It is
+  real, but it falls on the last mīm of the spelled name *mīm*, and the spelled
+  name is not in the text. Marking it would mean marking the written mīm, which
+  is a different letter.
+
 One of them is deliberately less detailed than the classical books:
 
 - **المد اللازم الحرفي** does not split into مثقل and مخفف. The split depends on
@@ -36,6 +44,12 @@ One of them is deliberately less detailed than the classical books:
 ## Not covered
 
 These are missing from the corpus entirely — not disabled, not partial, missing.
+
+- **المد الطبيعي الحرفي.** The disjoined letters whose names hold a two-count
+  madd — ط، ه، ي، ح، ر — carry one, and no rule describes it. It is why 20:1
+  `طه` is the single ayah in the mushaf with no ruling at all: it is ṭā-hā and
+  nothing else. Until this was corrected the ṭāʾ was marked قلقلة, which made
+  the gap invisible rather than absent.
 
 - **القلقلة عند الوقف في وسط الآية.** A qalqalah letter that carries a vowel at
   the end of a word — the ط of صِرَٰطَ, the ب of ٱلۡمَغۡضُوبِ — only becomes qalqalah

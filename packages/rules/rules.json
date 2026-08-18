@@ -1,6 +1,6 @@
 {
   "$schema": "./schema/rules.schema.json",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "riwayah": "hafs-an-asim",
   "provenance": {
     "source": "tajweed.quranpedia.net",
@@ -2597,7 +2597,7 @@
     {
       "id": "qalqalah-sughra.1",
       "hukum": "qalqalah-sughra",
-      "case": "[قْ طْ بْ جْ دْ] + [ء أ ؤ ئ ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي ة ى]",
+      "case": "[قْ طْ بْ جْ دْ] + غير مدغم + [ء أ ؤ ئ ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي ة ى]",
       "scope": "within-word",
       "status": "stable",
       "needsReview": true,
@@ -2607,12 +2607,19 @@
       },
       "notes": {
         "ar": "القلقلة الصغرى تكون في الحرف الساكن في وسط الكلمة. اشتراط حرف بعده في الكلمة نفسها هو ما يميزها عن القلقلة المتطرفة."
-      }
+      },
+      "corrections": [
+        {
+          "field": "case",
+          "was": "[قْ طْ بْ جْ دْ] + [ء أ ؤ ئ ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي ة ى]",
+          "reason": "قلقلة does not occur on a letter that is merged into the next. The mushaf leaves such a letter bare and insertImpliedSukoon supplies a sukoon so the إدغام rules can match it, which made 47 assimilations across 43 words — أَرَدتُّمۡ، عَٰهَدتُّمۡ، بَسَطتَ — look like قلقلة صغرى. 2,970 occurrences become 2,923."
+        }
+      ]
     },
     {
       "id": "qalqalah-mutatarrifa.1",
       "hukum": "qalqalah-mutatarrifa",
-      "case": "[قْ طْ بْ جْ دْ] + نهاية الكلمة",
+      "case": "[قْ طْ بْ جْ دْ] + غير مدغم + نهاية الكلمة",
       "scope": "within-word",
       "status": "stable",
       "needsReview": true,
@@ -2628,6 +2635,11 @@
           "field": "case",
           "was": "[ق ط ب ج د] + نهاية الكلمة",
           "reason": "The rule matched every qalqalah letter at the end of a word, whatever its vowel — so صِرَٰطَ and ٱلۡمَغۡضُوبِ in al-Fatiha were marked as qalqalah although neither is قلقلة when the reciter continues. Qalqalah needs the letter to be sakin; a vowelled final letter becomes sakin only if the reciter stops on it, which is a choice rather than a property of the text. Restricted to letters written sakin: 4,470 occurrences across 2,851 ayahs became 512 across 478."
+        },
+        {
+          "field": "case",
+          "was": "[قْ طْ بْ جْ دْ] + نهاية الكلمة",
+          "reason": "Same merged-letter problem across a word boundary: ٱضۡرِب بِّعَصَاكَ، قَد تَّبَيَّنَ، ٱرۡكَب مَّعَنَا were marked although the letter is assimilated into the next word and never released. 512 occurrences become 492."
         }
       ]
     },
@@ -2673,14 +2685,21 @@
     {
       "id": "madd-lazim-kalimi-muthaqqal.3",
       "hukum": "madd-lazim-kalimi-muthaqqal",
-      "case": "[ي يْ] + [بّ تّ ثّ جّ حّ خّ دّ ذّ رّ زّ سّ شّ صّ ضّ طّ ظّ عّ غّ فّ قّ كّ لّ مّ نّ هّ وّ يّ]",
+      "case": "[أِ ؤِ ئِ ءِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ي يْ] + [بّ تّ ثّ جّ حّ خّ دّ ذّ رّ زّ سّ شّ صّ ضّ طّ ظّ عّ غّ فّ قّ كّ لّ مّ نّ هّ وّ يّ]",
       "scope": "within-word",
       "status": "stable",
       "needsReview": true,
       "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
       "label": {
         "ar": "إذا جاء بعد الياء المدية حرف مشدد في الكلمة نفسها"
-      }
+      },
+      "corrections": [
+        {
+          "field": "case",
+          "was": "[ي يْ] + [بّ تّ ثّ جّ حّ خّ دّ ذّ رّ زّ سّ شّ صّ ضّ طّ ظّ عّ غّ فّ قّ كّ لّ مّ نّ هّ وّ يّ]",
+          "reason": "The label says الياء المدية, and a madd yaa is preceded by a kasra; the pattern checked only that a yaa preceded a shadda. Its one match in the whole mushaf was بِأَييِّكُمُ (68:6), where the yaa follows a fatha and carries no maddah — an orthographic second yaa, not a madd letter. With the kasra required the count is zero, which is the correct answer: this madd does not occur with yaa in the Quran."
+        }
+      ]
     },
     {
       "id": "madd-lazim-kalimi-mukhaffaf.1",

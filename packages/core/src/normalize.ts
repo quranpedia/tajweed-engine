@@ -225,6 +225,16 @@ const insertImpliedSukoon: Pass = (input) => {
       continue
     }
 
+    // A maddah over a consonant lengthens it; it does not silence it. The
+    // disjoined letters are written this way — قٓ is read qāf, with a long alef
+    // and no sakin qaf anywhere in it. The maddah is stripped further down the
+    // pipeline as decoration, so without this the letter arrives at the
+    // matchers looking like a sakin consonant, and قٓ and عٓسٓقٓ were being
+    // reported as قلقلة متطرفة.
+    if (next === MADDAH_ABOVE) {
+      continue
+    }
+
     // A waw after a damma or a yeh after a kasra is the second half of a long
     // vowel, not a sakin consonant.
     const previous = input[i - 1]
@@ -233,6 +243,22 @@ const insertImpliedSukoon: Pass = (input) => {
     }
     if (char === YEH && previous === KASRA) {
       continue
+    }
+
+    // Two consonants in a row with no vowel between them is not an Arabic
+    // word — a syllable cannot begin with two sakins. It is the disjoined
+    // letters, where each character is read as its own name: طه is ṭā-hā and
+    // طسٓمٓ is ṭā-sīn-mīm, with no sakin ṭāʾ in either. Left alone, the ṭāʾ
+    // collected an implied sukoon and was reported as قلقلة. A maddah does not
+    // count as a vowel here; it is what marks سٓ and مٓ as letter names.
+    const following = input[i + 1]
+    if (isConsonant(following)) {
+      const afterFollowing = input[i + 2]
+      const vowelled =
+        isDiacritic(afterFollowing) || afterFollowing === SUPERSCRIPT_ALEF
+      if (!vowelled) {
+        continue
+      }
     }
 
     out.emit(SUKOON, i + 1)

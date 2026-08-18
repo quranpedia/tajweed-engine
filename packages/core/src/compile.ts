@@ -67,6 +67,9 @@ const NAMED_MARKS: ReadonlyArray<readonly [string, string]> = [
  * These consume no text, so a rule ending in one matches up to the last real
  * character and no further.
  */
+/** Arabic letters that can carry a shadda. */
+const LETTER_CLASS = '[\\u{0621}-\\u{063A}\\u{0641}-\\u{064A}\\u{0629}]'
+
 const ANCHORS: Readonly<Record<string, string>> = {
   'نهاية الكلمة': '(?=\\s|$)',
   'بداية الكلمة': '(?<=^|\\s)',
@@ -74,6 +77,24 @@ const ANCHORS: Readonly<Record<string, string>> = {
   // the engine is used — this is رأس الآية, where stopping is the norm and a
   // ruling that depends on stopping is therefore realised.
   'نهاية الآية': `(?=[\\s${ALLOWED_MARKS.map(escapeCodePoint).join('')}]*$)`,
+  // The letter that follows is not doubled, so this one is released rather than
+  // merged into it.
+  //
+  // The mushaf leaves a letter bare where it is assimilated, and
+  // insertImpliedSukoon gives it a sukoon so that the إدغام rules — written
+  // `بْ + ب` — can find it. That is right for them and wrong for قلقلة, which
+  // does not occur on a merged letter: ٱضۡرِب بِّعَصَاكَ and أَرَدتُّمۡ are read
+  // straight through the ب and the د. Written as a lookahead because the
+  // notation has no negation, and as an anchor because it consumes nothing and
+  // so can sit between two groups.
+  //
+  // Two shapes of merging to reject. A doubled following letter is إدغام كامل
+  // and carries a shadda. طاء before تاء is إدغام ناقص — the tongue merges
+  // while إطباق and استعلاء remain — and is written with no shadda at all,
+  // which is why بَسَطتَ، أَحَطتُ and فَرَّطتُمۡ need naming separately.
+  'غير مدغم':
+    `(?!\\s?${LETTER_CLASS}[\\u{064B}-\\u{0650}]?${escapeCodePoint(SHADDA)})` +
+    `(?!(?<=\\u{0637}\\u{0652})\\u{062A})`,
 }
 
 /**
@@ -108,8 +129,6 @@ function separatorFor(scope: Scope): string {
   }
 }
 
-/** Arabic letters that can carry a shadda. */
-const LETTER_CLASS = '[\\u{0621}-\\u{063A}\\u{0641}-\\u{064A}\\u{0629}]'
 
 /**
  * Parses one group of a CASE pattern into its alternatives.
