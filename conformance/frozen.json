@@ -1,5 +1,5 @@
 {
- "corpusVersion": "0.4.1",
+ "corpusVersion": "0.4.2",
  "edition": {
   "id": "uthmani-hafs",
   "sha256": "b5d29736bb3ef49d9d331c4e60a59d83fe899b921e9e8dc35911bd4a18ce55f3",
@@ -1520,7 +1520,7 @@
   "11:38": "0ff5342ed6ae2edf",
   "11:39": "db4a5051b8a83c12",
   "11:40": "43b4c30731a89fe0",
-  "11:41": "b6f0c3fc6b9d6b14",
+  "11:41": "48a5ad649805e371",
   "11:42": "189d0766d1d99424",
   "11:43": "d3fcc229549378e1",
   "11:44": "cbff8d10e6f93b77",
@@ -6406,9 +6406,9 @@
    "digest": "16895d7139b5a546"
   },
   "raa-tafkheem.3": {
-   "ayahs": 1,
-   "occurrences": 1,
-   "digest": "fb8c8e7c9a4b7636"
+   "ayahs": 0,
+   "occurrences": 0,
+   "digest": "e3b0c44298fc1c14"
   },
   "raa-tafkheem.4": {
    "ayahs": 0,
@@ -6439,6 +6439,11 @@
    "ayahs": 0,
    "occurrences": 0,
    "digest": "e3b0c44298fc1c14"
+  },
+  "raa-tarqeeq.5": {
+   "ayahs": 1,
+   "occurrences": 1,
+   "digest": "fb8c8e7c9a4b7636"
   },
   "raa-either-permissible.1": {
    "ayahs": 0,

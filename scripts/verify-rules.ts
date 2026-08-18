@@ -116,6 +116,25 @@ const EXPECTATIONS: readonly Expectation[] = [
     exactlyOccurrences: 0,
     why: 'ياء مدية يليها حرف مشدد — لا يقع في القرآن',
   },
+  {
+    rule: 'raa-tarqeeq.5',
+    matches: ['11:41'],
+    // Ordinary reh, tafkheem or tarqeeq by its own vowel, never imāla.
+    avoids: ['1:1', '1:7'],
+    exactlyOccurrences: 1,
+    why: 'الراء الممالة مرققة، ولا إمالة لحفص إلا في هود ٤١',
+  },
+  {
+    rule: 'raa-tafkheem.3',
+    matches: [],
+    // Two consecutive sakins do not occur in continuous recitation, so this rule
+    // describes a shape the joined text does not contain. Its one match before
+    // this change was the imāla reh of 11:41, which normalisation was reading as
+    // sakin — see docs/divergences.md.
+    avoids: ['11:41'],
+    exactlyOccurrences: 0,
+    why: 'راء ساكنة قبلها ساكن صحيح — لا تقع في الوصل، وإنما عند الوقف',
+  },
 ]
 
 let failures = 0

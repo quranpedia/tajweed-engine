@@ -27,6 +27,7 @@ import {
   FATHATAN,
   HAMZA,
   HAMZA_ABOVE,
+  IMALAH_MARK,
   KASRA,
   KASRATAN,
   LAM,
@@ -49,6 +50,7 @@ const TA = '\u{062A}'
 const NOON = '\u{0646}'
 const KAF = '\u{0643}'
 const MEEM = '\u{0645}'
+const REH = '\u{0631}'
 
 const normalized = (text: string) => normalize(text).text
 
@@ -135,6 +137,14 @@ describe('normalize', () => {
 
     it('is not written onto an alef, which is never sakin', () => {
       expect(normalized(BA + FATHA + ALEF)).toBe(BA + FATHA + ALEF)
+    })
+
+    it('is not written onto a letter carrying the imāla mark', () => {
+      // The mark is the letter's vowel: an inclined fatha, written as a mark
+      // instead of a haraka. Reading it as bare makes a vowelled reh sakin, and
+      // the rulings of a sakin reh then apply to it.
+      expect(normalized(REH + IMALAH_MARK)).toBe(REH)
+      expect(normalized(REH)).toBe(REH + SUKOON)
     })
   })
 
