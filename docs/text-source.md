@@ -59,9 +59,9 @@ nothing here decides them:
 
 ## What that costs, measured
 
-With all four classes handled, **6,213** of 6,236 ayahs normalise to a
-byte-identical string, against **2,357** before any of them were, and the engine finds **147,237** spans on quran-text's Ḥafṣ
-against **147,255** on the current reference — 18 spans apart, with **14** of 164
+With all four classes handled, **6,219** of 6,236 ayahs normalise to a
+byte-identical string, against **2,357** before any of them were, and the engine finds **147,243** spans on quran-text's Ḥafṣ
+against **147,261** on the current reference — 18 spans apart, with **14** of 164
 rules moving.
 
 Before the normaliser was taught the open tanween, that number was not 22. Every
@@ -74,24 +74,20 @@ quietly stops being reported.
 
 ## What is still open
 
-**23 ayahs do not normalise alike**: the 4 above, and 19 more. All 19 are the
-same unfinished business — a hamza this normaliser cannot see — and it is a gap
-on **both** editions, not something the migration introduced:
+**17 ayahs do not normalise alike**: the 4 above, and 13 more. They are two
+remaining shapes of one thing — a haraka the two editions put on different sides
+of a hamza:
 
-- **9** where the hamza is written *below* the line as U+0655 — تِلۡقَآيِٕ (10:15),
-  وَإِيتَآيِٕ (16:90), ءَانَآيِٕ (20:130). `recoverBorneHamza` and
-  `seatUnborneHamza` both recover only a hamza written above, so on these the
-  consonant is dropped from **both** editions and every ruling that turns on it
-  is missing from the published annotations today. The two editions differ here
-  only in an incidental sukoon that one mark order provokes.
-- **6** where the hamza carries a tanwīn — هَنِيٓـًٔا (52:19, 69:24, 77:43) and
-  their neighbours. The tanwīn survives on one edition and folds to a plain
-  haraka on the other.
-- **4** in the remaining shapes — خَطِيٓـَٔاتِ (7:161, 71:25), ٱمۡرِيٍْ (52:21),
-  and 2:245.
+- **6** where the hamza carries a **tanwin** — خَطَـًٔا (4:92), مَلۡجَـًٔا (9:57),
+  هَنِيٓـًٔا (52:19, 69:24, 77:43). The tanwin is the word's last vowel and so the
+  hamza's, being the last consonant; one edition writes it after the hamza and
+  the other before, and the rule that assigns the hamza its vowel does not yet
+  know that a tanwin is always the hamza's.
+- **7** in the remaining shapes — خَطِيٓـَٔاتِ (7:161, 71:25), ٱمۡرِيٍْ (52:21),
+  2:245 and their neighbours.
 
-Closing the first of those would move published offsets, so it is its own change
-and not part of a text migration.
+Neither is a migration issue; both are the same unfinished business as the hamza
+written below the line, which this repository now reads.
 
 **Five rules match nothing on quran-text's Ḥafṣ** — `seven-alefs.1`, `.3`, `.4`,
 `.5` and `madd-lazim-kalimi-mukhaffaf.1`. All five carry `matchAgainst: "original"`,
