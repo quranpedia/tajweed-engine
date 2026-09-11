@@ -167,8 +167,9 @@ const recoverBorneHamza: Pass = (input) => {
  * the line, so their order says nothing about which of the two they belong to;
  * they are listed in docs/text-source.md and are not guessed at here.
  *
- * `pnpm edition:diff` is what measures it: 6,168 of 6,236 ayahs normalise to
- * byte-identical strings across the two editions, against 5,543 before.
+ * `pnpm edition:diff` is what measures it: with this pass and the three other
+ * encoding gaps closed, 6,168 of 6,236 ayahs normalise to byte-identical strings
+ * across the two editions, against 2,357 before any of them.
  */
 const seatUnborneHamza: Pass = (input) => {
   const out = new MappedBuilder()

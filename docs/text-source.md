@@ -60,7 +60,7 @@ nothing here decides them:
 ## What that costs, measured
 
 With all four classes handled, **6,168** of 6,236 ayahs normalise to a
-byte-identical string, and the engine finds **147,233** spans on quran-text's Ḥafṣ
+byte-identical string, against **2,357** before any of them were, and the engine finds **147,233** spans on quran-text's Ḥafṣ
 against **147,255** on the current reference — 22 spans apart, with **18** of 164
 rules moving.
 
