@@ -161,9 +161,14 @@ const recoverBorneHamza: Pass = (input) => {
  * belong to the letter underneath, unless the hamza is sakin — in which case its
  * sukoon stays on the far side, where it already reads correctly.
  *
- * That is the rule, and it is checked rather than assumed: with it, all 6,232
- * ayahs the two editions agree on normalise to byte-identical strings, and
- * without it 465 of them do not. `pnpm edition:diff` is what measures that.
+ * That is the rule, and it is measured rather than assumed. It reads 449 of the
+ * 455 unborne hamzas in quran-text's Hafs the same way the tatweel form of the
+ * same word is read. The six it cannot are the ones where both marks sit above
+ * the line, so their order says nothing about which of the two they belong to;
+ * they are listed in docs/text-source.md and are not guessed at here.
+ *
+ * `pnpm edition:diff` is what measures it: 6,168 of 6,236 ayahs normalise to
+ * byte-identical strings across the two editions, against 5,543 before.
  */
 const seatUnborneHamza: Pass = (input) => {
   const out = new MappedBuilder()
