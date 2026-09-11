@@ -6,7 +6,7 @@ rewritten.
 
 | Package | Version | Spans | Rules |
 |---|---|---|---|
-| `@tajweed/annotations` — **not yet published to npm** | `0.1.0`, corpus `0.4.2` | 147,255 | 182 authored, 164 currently producing spans |
+| `@tajweed/annotations` — **not yet published to npm** | `0.1.0`, corpus `0.4.2` | 147,255 | 182 authored, 164 compiled, 127 producing spans |
 
 *Tajwīd* is the set of rules that govern how the Qurʾān is pronounced when it is
 recited: where a sound is lengthened, merged into the next, held silent, or read
