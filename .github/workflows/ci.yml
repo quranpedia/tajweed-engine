@@ -52,6 +52,14 @@ jobs:
           pnpm edition:diff editions/uthmani-hafs.json editions/hafs-quran-text.json
           git diff --exit-code reports/
 
+      - name: The published annotations still match the corpus
+        # frozen.json pins the engine, not the dataset. A corpus change that is
+        # correctly re-frozen still leaves packages/annotations/uthmani-hafs.json
+        # describing the old rules, and it is the file consumers actually read.
+        run: |
+          pnpm annotate editions/uthmani-hafs.json packages/annotations/uthmani-hafs.json
+          git diff --exit-code packages/annotations/uthmani-hafs.json
+
       - name: Test
         run: pnpm test
 
