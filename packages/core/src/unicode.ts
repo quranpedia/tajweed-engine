@@ -46,6 +46,19 @@ export const FATHATAN_VERTICAL = '\u{065E}' // ٞ
 export const RECTANGULAR_ZERO = '\u{06E0}' // ۠
 
 /**
+ * The open tanween of the Arabic Extended-A block.
+ *
+ * The two families are the same three marks drawn differently, and an edition
+ * uses one or the other throughout. The KFGQPC digital muṣḥafs — and so
+ * quran-ws/quran-text — write these; the older positional marks above are what
+ * the first edition read here used. Both fold onto the standalone tanween, so a
+ * CASE pattern is written once and matches either.
+ */
+export const OPEN_FATHATAN = '\u{08F0}' // ࣰ
+export const OPEN_DAMMATAN = '\u{08F1}' // ࣱ
+export const OPEN_KASRATAN = '\u{08F2}' // ࣲ
+
+/**
  * Marks that appear in mushaf text but never in a CASE pattern. They are removed
  * during normalisation so a pattern written without them still matches, and the
  * offset map is what puts them back inside the reported span.
@@ -95,6 +108,36 @@ export function isDiacritic(char: string | undefined): boolean {
   }
   const code = char.codePointAt(0)!
   return code >= 0x064b && code <= 0x0652
+}
+
+/**
+ * Marks that are written on a letter rather than between letters: harakat,
+ * tanween, sukoon, and the small signs the Uthmani script stacks above and below.
+ * Waqf signs are deliberately excluded — they sit between words, and a cluster
+ * ends at one.
+ */
+export function isStackedMark(char: string | undefined): boolean {
+  if (char === undefined) {
+    return false
+  }
+  const code = char.codePointAt(0)!
+  return (
+    (code >= 0x064b && code <= 0x0656) ||
+    code === 0x0657 ||
+    code === 0x0658 ||
+    code === 0x065c ||
+    code === 0x065e ||
+    code === 0x0670 ||
+    code === 0x06e1 ||
+    code === 0x06e2 ||
+    code === 0x06e4 ||
+    code === 0x06e5 ||
+    code === 0x06e6 ||
+    code === 0x06e7 ||
+    code === 0x06e8 ||
+    code === 0x06ed ||
+    (code >= 0x08f0 && code <= 0x08f2)
+  )
 }
 
 /** Vowel marks only — excludes shadda and sukoon. U+064B..U+0650. */

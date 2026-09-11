@@ -35,6 +35,9 @@ import {
   KASRATAN,
   LAM,
   MADDAH_ABOVE,
+  OPEN_DAMMATAN,
+  OPEN_FATHATAN,
+  OPEN_KASRATAN,
   OPTIONAL_MARKS,
   QURANIC_SUKOON,
   SHADDA,
@@ -50,6 +53,7 @@ import {
   YEH,
   ZWSP,
   isDiacritic,
+  isStackedMark,
   isVowelMark,
   toCodePoints,
 } from './unicode.js'
@@ -134,6 +138,97 @@ const recoverBorneHamza: Pass = (input) => {
     }
     out.emit(input[i]!, i)
     i += 1
+  }
+  return out.build()
+}
+
+/**
+ * A hamza written directly on its letter, with no tatweel to bear it, becomes a
+ * standalone hamza — and its vowel is moved to the far side of it.
+ *
+ * Editions of the Uthmani script draw the same hamza two ways. Where this one
+ * writes a bearer tatweel with the hamza floating over it, the KFGQPC digital
+ * muṣḥafs — and so quran-ws/quran-text — write the hamza straight onto the
+ * preceding letter, with nothing between. `recoverBorneHamza` above cannot see
+ * that form, and without this pass the hamza is stripped as decoration and the
+ * consonant disappears: بِـَٔايَٰتِ normalises with its hamza, بَِٔايَٰتِ without
+ * one, and every madd al-badal on it is lost. It is 455 hamzas.
+ *
+ * The two marks are not written in the same order either. The tatweel form puts
+ * the bearer letter's marks before the tatweel and the hamza's vowel after the
+ * hamza, so reading it is a matter of following the stream. The un-borne form
+ * stacks them: the hamza's own vowel is written FIRST, ahead of the marks that
+ * belong to the letter underneath, unless the hamza is sakin — in which case its
+ * sukoon stays on the far side, where it already reads correctly.
+ *
+ * That is the rule, and it is checked rather than assumed: with it, all 6,232
+ * ayahs the two editions agree on normalise to byte-identical strings, and
+ * without it 465 of them do not. `pnpm edition:diff` is what measures that.
+ */
+const seatUnborneHamza: Pass = (input) => {
+  const out = new MappedBuilder()
+  let i = 0
+  while (i < input.length) {
+    const char = input[i]!
+
+    // Only a base letter starts a cluster worth inspecting. A hamza already
+    // borne on a tatweel is left for recoverBorneHamza.
+    if (isDiacritic(char) || char === SUPERSCRIPT_ALEF || char === TATWEEL || char === HAMZA_ABOVE) {
+      out.emit(char, i)
+      i += 1
+      continue
+    }
+
+    let end = i + 1
+    while (end < input.length && input[end] !== undefined && isStackedMark(input[end]!)) {
+      end += 1
+    }
+    const hamza = input.indexOf(HAMZA_ABOVE, i + 1)
+    if (hamza === -1 || hamza >= end || input[hamza - 1] === TATWEEL) {
+      out.emit(char, i)
+      i += 1
+      continue
+    }
+
+    const before: number[] = []
+    for (let k = i + 1; k < hamza; k++) {
+      before.push(k)
+    }
+    // Which of the marks before the hamza are the hamza's own, and which belong
+    // to the letter underneath. Three cases, and all three are read off the
+    // tatweel form of the same words rather than assumed:
+    //
+    //   a vowel after the hamza is already the hamza's, and already in place —
+    //   تَ‍ٔۡ, where the fatha is the taa's and the sukoon is the hamza's;
+    //
+    //   otherwise a sukoon immediately before the hamza is the letter's, and
+    //   everything ahead of it is the hamza's — ٱلَٰۡٔنَ is a sakin laam, then a
+    //   hamza with a fatha and a long alef;
+    //
+    //   otherwise the first mark is the hamza's alone — بَِٔا is a kasra on the
+    //   baa and a fatha on the hamza.
+    const carriesItsOwnAfter = isDiacritic(input[hamza + 1])
+    let moved: number[] = []
+    if (!carriesItsOwnAfter && before.length > 0) {
+      if (input[before[before.length - 1]!] === SUKOON) {
+        moved = before.splice(0, before.length - 1)
+      } else {
+        moved = before.splice(0, 1)
+      }
+    }
+
+    out.emit(char, i)
+    for (const k of before) {
+      out.emit(input[k]!, k)
+    }
+    out.emit(HAMZA, hamza)
+    for (const k of moved) {
+      // Mapped onto the hamza's own position, not the source position they were
+      // read from, so the reordering cannot produce a span whose end precedes
+      // its start.
+      out.emit(input[k]!, hamza)
+    }
+    i = hamza + 1
   }
   return out.build()
 }
@@ -237,7 +332,16 @@ const insertImpliedSukoon: Pass = (input) => {
 
     // A waw after a damma or a yeh after a kasra is the second half of a long
     // vowel, not a sakin consonant.
-    const previous = input[i - 1]
+    //
+    // A shadda on the letter before is stepped over rather than read. Editions
+    // disagree about the order of the two: the muṣḥaf writes letter + shadda +
+    // haraka, quran-ws/quran-text writes letter + haraka + shadda, and both
+    // render as the one stacked mark a reader sees. Looking only at the
+    // immediately preceding character finds the haraka in the first and the
+    // shadda in the second, so on quran-text every long ī and ū in a doubled
+    // syllable — ٱلدِّينِ, تُوَلُّواْ, يُزَكِّيهِمْ — collected a sukoon it does not
+    // have, and was read as a sakin consonant.
+    const previous = input[i - 1] === SHADDA ? input[i - 2] : input[i - 1]
     if (char === WAW && previous === DAMMA) {
       continue
     }
@@ -318,15 +422,36 @@ const PASSES: readonly Pass[] = [
     [ALEF_HAMZA_ABOVE + MADDAH_ABOVE, ALEF_HAMZA_ABOVE + FATHA + ALEF],
   ]),
 
-  // Uthmani draws tanween with positional marks at word end.
+  // Uthmani draws tanween with positional marks at word end, and editions do not
+  // agree on which characters those are. Both families are folded onto the
+  // standalone tanween so that a CASE pattern is written once and matches either.
+  //
+  // The positional marks are what the first edition read here used. The open
+  // tanween is what the KFGQPC digital mushafs use, and therefore what
+  // quran-ws/quran-text carries; without these three lines every tanween rule
+  // silently matches nothing on that text, which is the failure this repository
+  // exists to make impossible.
   substituting([
     [INVERTED_DAMMA, FATHATAN],
     [FATHATAN_VERTICAL, DAMMATAN],
     [SUBSCRIPT_ALEF, KASRATAN],
+    [OPEN_FATHATAN, FATHATAN],
+    [OPEN_DAMMATAN, DAMMATAN],
+    [OPEN_KASRATAN, KASRATAN],
   ]),
 
   // Iqlab is drawn as a haraka with a small meem rather than as tanween.
+  //
+  // The four longer forms are the same thing with a shadda written between the
+  // two, which is where quran-ws/quran-text puts it — غَمَّۢا is meem, fatha,
+  // shadda, small meem there and meem, shadda, fatha, small meem here. Matching
+  // only the contiguous pair left the small meem to be stripped as decoration
+  // and the iqlab with it, on nine ayahs.
   substituting([
+    [DAMMA + SHADDA + SMALL_HIGH_MEEM, DAMMATAN + SHADDA],
+    [FATHA + SHADDA + SMALL_HIGH_MEEM, FATHATAN + SHADDA],
+    [KASRA + SHADDA + SMALL_HIGH_MEEM, KASRATAN + SHADDA],
+    [KASRA + SHADDA + SMALL_LOW_MEEM, KASRATAN + SHADDA],
     [DAMMA + SMALL_HIGH_MEEM, DAMMATAN],
     [FATHA + SMALL_HIGH_MEEM, FATHATAN],
     [KASRA + SMALL_HIGH_MEEM, KASRATAN],
@@ -334,6 +459,7 @@ const PASSES: readonly Pass[] = [
   ]),
 
   recoverBorneHamza,
+  seatUnborneHamza,
   saktahToBreak,
   silenceOrthographicWaw,
   insertImpliedSukoon,

@@ -36,6 +36,22 @@ jobs:
         # to an exact total wherever the total is known.
         run: pnpm rules:verify
 
+      - name: Check both editions are readable
+        # The failure this catches is silent. A mark the normaliser does not
+        # recognise raises nothing; it stops a rule matching, and the rule then
+        # reports no ruling where there is one. Both editions are checked because
+        # they use different characters for the same marks.
+        run: |
+          pnpm edition:check editions/uthmani-hafs.json
+          pnpm edition:check editions/hafs-quran-text.json
+
+      - name: Re-measure the distance between the editions
+        # reports/ is committed, so a change in the numbers shows up as a diff to
+        # review rather than as something nobody noticed.
+        run: |
+          pnpm edition:diff editions/uthmani-hafs.json editions/hafs-quran-text.json
+          git diff --exit-code reports/
+
       - name: Test
         run: pnpm test
 

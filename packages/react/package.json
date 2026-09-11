@@ -16,7 +16,7 @@
   "devDependencies": { "@types/react": "^19.0.1", "react": "^19.0.0" },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quranpedia/tajweed-engine.git",
+    "url": "git+https://github.com/quran-ws/quran-tajweed.git",
     "directory": "packages/react"
   },
   "keywords": ["quran", "tajweed", "react"]
