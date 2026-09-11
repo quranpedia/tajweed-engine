@@ -47,6 +47,7 @@ import {
 const BA = '\u{0628}'
 const MEEM = '\u{0645}'
 const NOON = '\u{0646}'
+const SEEN = '\u{0633}'
 
 describe('tanween, drawn two ways', () => {
   it('reads the open tanween as the standalone tanween', () => {
@@ -117,5 +118,47 @@ describe('marks stacked in either order', () => {
     expect(normalize(LAM + SHADDA + DAMMA + WAW + NOON).text).toBe(
       normalize(LAM + DAMMA + SHADDA + WAW + NOON).text,
     )
+  })
+})
+
+describe('the hamza’s own vowel, when the order does not say', () => {
+  // بَِٔايَٰتِ and بَِٔيسٍ are the same four code points — baa, fatha, kasra, hamza —
+  // and are read bi-'aayaat and ba-'iis. The order of the two vowels cannot
+  // decide between them; the madd letter after the hamza can, because it must
+  // be preceded by its own haraka.
+  const BORNE_BI = BA + KASRA + TATWEEL + HAMZA_ABOVE + FATHA + ALEF
+  const COMPOSED = BA + FATHA + KASRA + HAMZA_ABOVE
+
+  it('gives the hamza a fatha before an alef', () => {
+    expect(normalize(COMPOSED + ALEF).text).toBe(normalize(BORNE_BI).text)
+  })
+
+  it('gives the hamza a kasra before a yeh, from the identical input', () => {
+    const borne = BA + FATHA + TATWEEL + HAMZA_ABOVE + KASRA + YEH
+    expect(normalize(COMPOSED + YEH).text).toBe(normalize(borne).text)
+  })
+
+  it('gives the hamza a damma before a waw', () => {
+    const composed = '\u{0637}' + FATHA + DAMMA + HAMZA_ABOVE + WAW
+    const borne = '\u{0637}' + FATHA + TATWEEL + HAMZA_ABOVE + DAMMA + WAW
+    expect(normalize(composed).text).toBe(normalize(borne).text)
+  })
+})
+
+describe('a seat carrying two vowels', () => {
+  it('splits into the bearer and a hamza, the shadda naming the bearer’s vowel', () => {
+    // سَيِّـَٔاتِ against سَئَِّاتِ — a doubled yeh with a kasra, then a hamza with
+    // a fatha. The shadda is the yeh's, so the kasra written with it is too.
+    const spelled = SEEN + FATHA + YEH + SHADDA + KASRA + TATWEEL + HAMZA_ABOVE + FATHA + ALEF
+    const composed = SEEN + FATHA + '\u{0626}' + FATHA + KASRA + SHADDA + ALEF
+
+    expect(normalize(composed).text).toBe(normalize(spelled).text)
+    expect(normalize(composed).text).toContain(HAMZA)
+  })
+
+  it('leaves a seat carrying one vowel as a hamza alone', () => {
+    // The other 10,790 of them. The seat is not pronounced.
+    const one = '\u{0626}' + KASRA
+    expect(normalize(one).text).not.toContain(YEH)
   })
 })

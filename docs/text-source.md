@@ -59,9 +59,9 @@ nothing here decides them:
 
 ## What that costs, measured
 
-With all four classes handled, **6,168** of 6,236 ayahs normalise to a
-byte-identical string, against **2,357** before any of them were, and the engine finds **147,233** spans on quran-text's Ḥafṣ
-against **147,255** on the current reference — 22 spans apart, with **18** of 164
+With all four classes handled, **6,213** of 6,236 ayahs normalise to a
+byte-identical string, against **2,357** before any of them were, and the engine finds **147,237** spans on quran-text's Ḥafṣ
+against **147,255** on the current reference — 18 spans apart, with **14** of 164
 rules moving.
 
 Before the normaliser was taught the open tanween, that number was not 22. Every
@@ -74,26 +74,24 @@ quietly stops being reported.
 
 ## What is still open
 
-**68 ayahs do not normalise alike**: the 4 above, and 64 more. Every one of the
-64 is the same question — how a hamza and the letter it sits on are stored — in
-three shapes:
+**23 ayahs do not normalise alike**: the 4 above, and 19 more. All 19 are the
+same unfinished business — a hamza this normaliser cannot see — and it is a gap
+on **both** editions, not something the migration introduced:
 
-- **38** where quran-text writes a precomposed ئ (U+0626) and this edition writes
-  a yāʾ plus a borne hamza: سَيِّـَٔاتِ against سَئَِّاتِ, يَـُٔودُهُۥ against
-  ئَُودُهُۥ. One stores two consonants, the other one. That is a reading of the
-  orthography, not an encoding detail, so it is not decided here.
-- **6** — يَطَـُٔونَ, ٱخۡسَـُٔواْ, أَسَـٰٓـُٔواْ — where the letter's vowel and the
-  hamza's both sit *above* the line, and quran-text stores them in the order they
-  are drawn rather than by which of the two they belong to. There the owner
-  cannot be recovered from the file, and the two can be assigned the wrong way
-  round. Wherever the two marks fall on opposite sides of the line the order does
-  resolve it, which is why the other 449 of the 455 unborne hamzas read correctly.
-- **20** in the remaining shapes of the same family — تِلۡقَآيِٕ, هَنِيءًا,
-  خَطِيءَاتِ, ٱمۡرِيٍْ — of which 7 write the hamza below the line as U+0655. The
-  normaliser recovers only a hamza written above, so on those the consonant is
-  dropped on **both** editions and they differ only in the incidental sukoon one
-  mark order provokes. That is a pre-existing gap rather than a migration issue,
-  and closing it would move published offsets.
+- **9** where the hamza is written *below* the line as U+0655 — تِلۡقَآيِٕ (10:15),
+  وَإِيتَآيِٕ (16:90), ءَانَآيِٕ (20:130). `recoverBorneHamza` and
+  `seatUnborneHamza` both recover only a hamza written above, so on these the
+  consonant is dropped from **both** editions and every ruling that turns on it
+  is missing from the published annotations today. The two editions differ here
+  only in an incidental sukoon that one mark order provokes.
+- **6** where the hamza carries a tanwīn — هَنِيٓـًٔا (52:19, 69:24, 77:43) and
+  their neighbours. The tanwīn survives on one edition and folds to a plain
+  haraka on the other.
+- **4** in the remaining shapes — خَطِيٓـَٔاتِ (7:161, 71:25), ٱمۡرِيٍْ (52:21),
+  and 2:245.
+
+Closing the first of those would move published offsets, so it is its own change
+and not part of a text migration.
 
 **Five rules match nothing on quran-text's Ḥafṣ** — `seven-alefs.1`, `.3`, `.4`,
 `.5` and `madd-lazim-kalimi-mukhaffaf.1`. All five carry `matchAgainst: "original"`,

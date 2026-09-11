@@ -89,72 +89,27 @@
   },
   "normalisation": {
     "note": "Ayahs that reach the matchers as the same string. The four real textual differences are included in the remainder and cannot be normalised away.",
-    "alike": 6168,
+    "alike": 6213,
     "apart": [
       "2:245",
-      "2:255",
-      "2:271",
-      "3:193",
-      "3:195",
-      "4:18",
-      "4:31",
-      "5:12",
-      "5:65",
-      "7:153",
+      "4:92",
       "7:161",
-      "7:165",
-      "7:168",
-      "8:29",
-      "9:120",
+      "9:57",
       "10:15",
-      "10:27",
-      "11:9",
-      "11:10",
       "11:41",
-      "11:78",
-      "11:114",
-      "16:34",
-      "16:45",
+      "12:31",
       "16:90",
-      "17:83",
       "20:130",
-      "23:108",
       "25:49",
-      "25:70",
       "27:20",
-      "28:84",
-      "29:4",
-      "29:7",
       "30:8",
-      "30:10",
       "30:16",
-      "33:4",
-      "33:27",
-      "35:10",
       "36:22",
-      "39:48",
-      "39:51",
-      "40:9",
-      "40:45",
-      "41:49",
-      "42:25",
       "42:51",
-      "45:21",
-      "45:33",
-      "46:16",
       "46:33",
-      "47:2",
-      "48:5",
-      "48:25",
       "52:19",
       "52:21",
       "52:37",
-      "53:31",
-      "58:2",
-      "64:9",
-      "65:4",
-      "65:5",
-      "66:8",
       "69:24",
       "71:25",
       "75:40",
@@ -165,15 +120,9 @@
     "compiled": 164,
     "spans": {
       "reference": 147255,
-      "other": 147233
+      "other": 147237
     },
     "matchingDifferently": [
-      {
-        "id": "tafkheem-rank-3-jazari.1",
-        "reference": 2016,
-        "other": 2018,
-        "delta": 2
-      },
       {
         "id": "tafkheem-rank-4-jazari.1",
         "reference": 1746,
@@ -181,10 +130,16 @@
         "delta": -1
       },
       {
-        "id": "tafkheem-rank-2-tahhan.1",
-        "reference": 2016,
-        "other": 2018,
-        "delta": 2
+        "id": "ikhfa-ghunnah-tarqeeq.2",
+        "reference": 470,
+        "other": 469,
+        "delta": -1
+      },
+      {
+        "id": "idgham-naqis-tanween.1",
+        "reference": 655,
+        "other": 654,
+        "delta": -1
       },
       {
         "id": "iqlab-tanween.1",
@@ -199,16 +154,10 @@
         "delta": -1
       },
       {
-        "id": "leen-waw.1",
-        "reference": 1903,
-        "other": 1909,
-        "delta": 6
-      },
-      {
-        "id": "leen-yaa.1",
-        "reference": 2210,
-        "other": 2212,
-        "delta": 2
+        "id": "ikhfa-haqiqi-tanween.1",
+        "reference": 563,
+        "other": 562,
+        "delta": -1
       },
       {
         "id": "madd-iwad.1",
@@ -243,26 +192,8 @@
       {
         "id": "madd-badal.1",
         "reference": 1334,
-        "other": 1335,
-        "delta": 1
-      },
-      {
-        "id": "madd-badal.2",
-        "reference": 209,
-        "other": 200,
-        "delta": -9
-      },
-      {
-        "id": "madd-badal.3",
-        "reference": 65,
-        "other": 61,
-        "delta": -4
-      },
-      {
-        "id": "madd-muttasil.1",
-        "reference": 1564,
-        "other": 1562,
-        "delta": -2
+        "other": 1337,
+        "delta": 3
       },
       {
         "id": "madd-muttasil.3",
