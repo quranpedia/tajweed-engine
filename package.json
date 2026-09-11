@@ -1,5 +1,6 @@
 {
   "name": "tajweed-engine",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@9.15.0",
