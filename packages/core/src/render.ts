@@ -38,6 +38,7 @@ export const TOPIC_COLORS: Readonly<Record<string, string>> = {
   madd: '#be123c',
   qalqalah: '#15803d',
   'ada-khass': '#4338ca',
+  waqf: '#a21caf',
 }
 
 export interface RenderOptions {

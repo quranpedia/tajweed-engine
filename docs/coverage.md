@@ -19,21 +19,21 @@ of mistake.
 | المشددتان | 2 | النون والميم المشددتان |
 | المد | 13 | طبيعي، عوض، صلة صغرى، لين، بدل، واجب متصل، جائز منفصل، **لازم** |
 | القلقلة | 3 | صغرى في وسط الكلمة، متطرفة على حرف ساكن في آخرها، وكبرى على رأس الآية |
-| أداءات خاصة عند حفص | 4 | الإمالة، التسهيل، والإشمام والاختلاس في تأمنا — ثلاثة مواضع بأعيانها |
+| أحكام الوقف | 2 | الإشمام على رؤوس الآي: في المضموم والمنون بتنوين الضم، وفي الهاء على مذهب التفصيل |
 
-القلقلة، المد اللازم and أداءات خاصة were written for this corpus; the source
-system did not have them. Before المد اللازم was added, the engine had nothing to
-say about الحروف المقطعة — the disjoined letters that open some surahs. Every rule
-in these three areas is flagged `needsReview` until a qualified reviewer signs it
-off, and each is tested against passages whose ruling is not in dispute — see
+القلقلة، المد اللازم and الإشمام عند الوقف were authored for this corpus rather than
+inherited from the source; all three were absent, and المد اللازم's absence was why
+every ayah of الحروف المقطعة came back with nothing to say about it. Every rule in
+those three areas is flagged `needsReview` until a qualified reviewer signs it off,
+and each is pinned to passages whose ruling is not in dispute — see
 `scripts/verify-rules.ts`.
 
-The three أداءات خاصة are rulings of specific words at specific places rather than
-patterns: الإمالة in Hūd 41, التسهيل in Fuṣṣilat 44, and الإشمام in Yūsuf 11, which
-also carries a second accepted wajh, الاختلاس. Each is written as the word itself and
-matched against the text as printed, because the mushaf records all three with a mark
-of its own — U+06EA and U+06EC — that normalisation strips. An edition without those
-marks silently loses the rules; `pnpm edition:check` reports it.
+الإشمام is annotated **only at رؤوس الآي**, on the same reasoning that confined
+القلقلة الكبرى there: stopping at a رأس آية is sunnah and usual, while stopping
+anywhere else is the reciter's choice and not something the text records. Written
+for every word end it would mark more than ten thousand positions instead of 911.
+It is also **invisible**: الإشمام يُرى ولا يُسمع, so anything that colours it should
+say what the colour means rather than leave a reader to infer a sound.
 
 Two consequences of the same limit are worth knowing before you rely on the
 output:
@@ -42,13 +42,6 @@ output:
   real, but it falls on the last mīm of the spelled name *mīm*, and the spelled
   name is not in the text. Marking it would mean marking the written mīm, which
   is a different letter.
-
-يوسف ١١ carries two accepted wajh, الإشمام and الاختلاس, and the corpus states
-both. They are alternatives — a reciter performs one or the other — but nothing in
-the model says so, and both are emitted as spans over the identical range. A
-consumer that flattens to a single layer with `resolveOverlaps` therefore shows
-exactly one of them, chosen by rule id, which is not a judgement anyone made. Read
-`analyze` directly if you need to present the choice.
 
 One of them is deliberately less detailed than the classical books:
 
@@ -83,10 +76,14 @@ These are missing from the corpus entirely — not disabled, not partial, missin
   accident; the rule for المخفف is written as an exact word for exactly this
   reason.
 - **مد الصلة الكبرى.** The صغرى is covered; the كبرى is not.
-- **السكت.** The normaliser recognises the saktah mark and uses it to stop rules
-  from matching across it, but no rule reports a saktah as a ruling of its own.
-- **الوقف والابتداء.** Waqf marks are kept in the text and never coloured, but
-  they are not annotated.
+- **السكت.** Normalisation recognises the saktah mark and uses it to stop rules
+  matching across it, but there is no rule that reports a saktah as a ruling of
+  its own.
+- **الوقف والابتداء**, apart from الإشمام. Waqf marks are preserved and never
+  coloured, and where a reciter may stop is not annotated. الروم is not modelled
+  either, so a رأس آية ending in a damma reports that إشمام is permitted there and
+  says nothing about روم, which is permitted too — and a رأس آية ending in a kasra
+  reports nothing at all, although روم is permitted on it.
 - **أحكام الاستعاذة والبسملة.**
 - **المتباعدين**, and the **الكبير** forms of المتماثلين والمتجانسين.
 
@@ -111,10 +108,5 @@ about the ayah.
 
 **Ayahs with no annotations are left out** of a generated annotation set, not
 stored as an empty list. That keeps "no rules matched" and "not computed"
-distinguishable. **6,235 of the muṣḥaf's 6,236 ayahs carry at least one
-annotation; 20:1 طه carries none**, for the reason given above, and is therefore
-absent from the file rather than present with an empty list.
-
-A consumer that looks up an ayah and finds nothing should read that as "no rule
-in this corpus describes anything here", not as an error — and should not assume
-the key exists.
+distinguishable. As of the current corpus, every ayah of the mushaf has at
+least one annotation, so in practice nothing is left out.
