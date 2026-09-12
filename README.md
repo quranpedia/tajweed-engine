@@ -87,16 +87,30 @@ assembling one, brings the two editions to within **4 āyahs**:
 $ pnpm import:quran-text
 $ pnpm edition:diff editions/uthmani-hafs.json editions/hafs-quran-text.json
   6236 ayahs compared
-  345 byte-identical as they stand
-  6232 the same text differently encoded, in four classes
-  4 left over, and those are real differences in the text: 11:41 27:20 36:22 52:37
+  2715 byte-identical as they stand
+  6232 once tanween is allowed for — positional tanween against open tanween
+  4 left over — what the classes above do not account for:
+      11:41  U+06EA -> U+065C ; U+065E -> U+08F1 ; U+065E -> U+08F1
+      27:20  — -> U+0020 (word separation only)
+      36:22  — -> U+0020 (word separation only)
+      52:37  U+06DC -> U+06E3
 ```
 
-The four classes are the order the marks stacked on one letter are stored in,
-precomposed letters against a base plus a combining mark, the two families of
-tanwīn, and whether a hamza rides a tatweel. All four are handled in the
-normaliser; none of them is a difference in the text. The four remaining āyahs
-are, and they are not decided here.
+The declared classes are the order the marks stacked on one letter are stored in,
+precomposed letters against a base plus a combining mark, and the two families of
+tanwīn. All are handled in the normaliser; none is a difference in the text. On
+these two editions only the tanwīn class does any work — quran-text stopped
+applying NFC, so the other two reconcile nothing and are kept because they are
+real differences between Uthmani editions in general.
+
+The four left over are **not** differences in the letters, and the earlier
+wording here said they were. Two are word separation, one is the same ruling
+written with two different code points, and one is unresolved. Strip every
+combining mark, annotation sign, tatweel and hamza mark and compare the bare
+skeletons across all 6,236 āyahs, and the two editions differ in **2** places
+with spaces significant and in **0** ignoring spaces. The two that remain —
+27:20 and 36:22 — are a question about word division, raised upstream rather
+than decided here.
 
 The fix is still not normalising your own text. Either render the edition's own
 text, or run yours through `pnpm edition:check`, and check the digest either way.

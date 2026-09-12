@@ -6,7 +6,16 @@
  * `edition:check` answers "can the engine read this text at all". This answers
  * the harder question: given two editions a reader would call the same muṣḥaf,
  * exactly where do they disagree, how much of that is encoding, and what is
- * left over that is a real difference in the text.
+ * left over that the declared classes do not account for.
+ *
+ * That last phrase used to read "what is left over that is a real difference in
+ * the text", and the printed summary said the same. It was wrong, and wrong in
+ * the direction that matters: a residue is by definition what this tool could
+ * NOT classify, so calling it a difference in the text asserts the one thing the
+ * measurement cannot establish. On the two editions it was written for, all four
+ * residue āyahs turned out to be encoding or word separation, and not one was a
+ * difference in the letters. Every downstream copy of that sentence inherited it
+ * from here, which is why the string is the fix and the copies are not.
  *
  * It exists because the answer has to be a number in a file rather than a
  * paragraph in a README. Every difference between two editions moves offsets,
@@ -158,6 +167,68 @@ for (const cls of CLASSES) {
   cumulative.push({ id: cls.id, what: cls.what, reconciled: shared.filter(agrees).length })
 }
 
+/**
+ * What differs between two āyahs, in codepoints, without saying what it means.
+ *
+ * Deliberately descriptive. It reports that a space was inserted or that one
+ * mark stands where another does, and stops there — whether that is a rasm
+ * question, a re-encoding, or a genuine textual variant is a reading, and this
+ * file does not make readings. The point is that the residue arrives with its
+ * evidence attached, so nobody has to re-derive it or take the summary's word.
+ *
+ * A common-prefix/suffix trim is not enough: 11:41 differs in three separate
+ * places, and trimming from the ends prints the entire āyah as one "difference".
+ * An āyah of Qurʾān dumped as 54 codepoints is output nobody reads, which is the
+ * same failure as printing nothing. So this walks an LCS and reports each run on
+ * its own. The texts are at most a few hundred characters and only the residue
+ * reaches here, so the quadratic table is free.
+ */
+function describeDifference(left: string, right: string): string {
+  const a = [...left]
+  const b = [...right]
+
+  const lcs: number[][] = Array.from({ length: a.length + 1 }, () =>
+    new Array<number>(b.length + 1).fill(0),
+  )
+  for (let i = a.length - 1; i >= 0; i -= 1) {
+    for (let j = b.length - 1; j >= 0; j -= 1) {
+      lcs[i]![j] = a[i] === b[j] ? lcs[i + 1]![j + 1]! + 1 : Math.max(lcs[i + 1]![j]!, lcs[i]![j + 1]!)
+    }
+  }
+
+  const code = (c: string) => `U+${c.codePointAt(0)!.toString(16).toUpperCase().padStart(4, '0')}`
+  const show = (run: string[]) => (run.length === 0 ? '—' : run.map(code).join(' '))
+
+  const parts: string[] = []
+  let i = 0
+  let j = 0
+  while (i < a.length || j < b.length) {
+    if (i < a.length && j < b.length && a[i] === b[j]) {
+      i += 1
+      j += 1
+      continue
+    }
+    const from: string[] = []
+    const to: string[] = []
+    while (i < a.length || j < b.length) {
+      if (i < a.length && j < b.length && a[i] === b[j]) break
+      if (j < b.length && (i >= a.length || lcs[i]![j + 1]! >= lcs[i + 1]![j]!)) {
+        to.push(b[j]!)
+        j += 1
+      } else {
+        from.push(a[i]!)
+        i += 1
+      }
+    }
+    const spaceOnly =
+      (from.length > 0 || to.length > 0) &&
+      [...from, ...to].every((c) => c === ' ')
+    parts.push(`${show(from)} -> ${show(to)}${spaceOnly ? ' (word separation only)' : ''}`)
+  }
+
+  return parts.join(' ; ')
+}
+
 const differing = shared.filter((reference) => !agrees(reference))
 
 /** Where two ayahs first disagree, as code points, so the report can be read without the fonts. */
@@ -255,9 +326,15 @@ console.log(`  ${identical.length} byte-identical as they stand`)
 for (const row of cumulative) {
   console.log(`  ${String(row.reconciled).padStart(5)} once ${row.id} is allowed for — ${row.what}`)
 }
-console.log(`  ${differing.length} left over, and those are real differences in the text:`)
+console.log(
+  `  ${differing.length} left over — what the classes above do not account for.\n` +
+    '      This tool cannot say what these are. A residue is the part the\n' +
+    '      declared classes failed to explain, so naming it needs a reader, not\n' +
+    '      a measurement. Listed with the codepoints that differ, so the next\n' +
+    '      person starts from the evidence rather than from this summary:',
+)
 for (const reference of differing) {
-  console.log(`      ${reference}`)
+  console.log(`      ${reference}  ${describeDifference(left.ayahs[reference]!, right.ayahs[reference]!)}`)
 }
 console.log(`\n  ${normalisedAlike.length} of ${shared.length} normalise to the identical string; ${normalisedApart.length} do not`)
 console.log(`\n  spans: ${leftIncidence.spans} on ${left.id}, ${rightIncidence.spans} on ${right.id}`)
