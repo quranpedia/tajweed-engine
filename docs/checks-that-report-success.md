@@ -134,13 +134,24 @@ result — check that the output looks like output, capture the status into a
 variable before anything else can touch it, and treat a gate that printed
 nothing as a gate that did not run.
 
-*How the third one was actually caught, because it is the transferable part.*
+**A command chain that broke in the middle, and an `echo` that reported success
+anyway.** A shell chain stopped at `git checkout -B` — the branch was held by
+another worktree — so the edit never ran and nothing was committed. The trailing
+`echo "pushed"` was a separate statement and printed regardless. The report said
+the work was done; git said `nothing to commit, working tree clean` two lines
+above it.
+
+That is the same shape as the usage banner: a step that did not happen, followed
+by an unconditional claim that it did. `&&` binds one statement, not a paragraph.
+
+*How two of these were actually caught, because it is the transferable part.*
 Not by re-running anything and not by suspecting the shell. The gate printed
 **"This edition is not one the engine can read as it stands"** directly above an
-`EXIT=0` that had been printed by hand on the next line. **Two halves of one
-piece of output contradicted each other.** No external source was consulted, no
-check was repeated — the report disagreed with itself, in the same paragraph,
-and that was enough. Read your own output as though someone else wrote it.
+`EXIT=0` that had been printed by hand on the next line. The broken chain printed
+**`nothing to commit, working tree clean`** directly above a hand-written
+`pushed`. **Both times, two halves of one piece of output contradicted each
+other.** No external source was consulted and no check was repeated — the report
+disagreed with itself, in the same paragraph, and that was enough.
 
 **A fact asserted about the world because it was very likely true — and it
 was.** A report stated "PR #22" before the pull request had been opened. It was
@@ -266,6 +277,21 @@ moves rather than carrying the figure forward.
   went stale too, because nothing re-ran it.
 - **Record a set, not a count.** "Seventeen āyahs differ" survives nothing. The
   seventeen references survive being copied, re-run, and argued with.
+- **Read your own output as though someone else wrote it.** Twice in one night a
+  defect was caught because two halves of the same paragraph of output
+  contradicted each other — a gate saying the edition could not be read above a
+  hand-printed `EXIT=0`, and git saying `nothing to commit` above a hand-printed
+  `pushed`. Neither was found by re-running anything or by suspecting the tool.
+
+  **This is the only technique here that costs nothing and needs no
+  instrument.** Every other lesson in this document requires a gate, a test or a
+  discipline someone has to maintain. This one requires attention, and it works
+  on the failures that have no gate yet — which is all of them, the first time.
+
+  The cheap version: when you print a summary next to a tool's own output, read
+  them as two witnesses rather than one report. They are the most likely pair in
+  any log to disagree, because one of them is a claim and the other is evidence.
+
 - **When a number is implausible, stop.** Three of the eight above were caught
   that way and no other.
 - **Ask what a check would say if the thing it watches were deleted.** If the
