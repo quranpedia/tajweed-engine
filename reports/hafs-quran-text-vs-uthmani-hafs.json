@@ -83,11 +83,10 @@
   },
   "normalisation": {
     "note": "Ayahs that reach the matchers as the same string. The four real textual differences are included in the remainder and cannot be normalised away.",
-    "alike": 6231,
+    "alike": 6232,
     "apart": [
       "11:41",
       "27:20",
-      "35:43",
       "36:22",
       "52:37"
     ]
@@ -96,15 +95,8 @@
     "compiled": 164,
     "spans": {
       "reference": 147255,
-      "other": 147257
+      "other": 147255
     },
-    "matchingDifferently": [
-      {
-        "id": "madd-muttasil.3",
-        "reference": 25,
-        "other": 26,
-        "delta": 1
-      }
-    ]
+    "matchingDifferently": []
   }
 }

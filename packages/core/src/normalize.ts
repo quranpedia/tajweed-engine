@@ -54,6 +54,7 @@ import {
   ZWSP,
   isDiacritic,
   isStackedMark,
+  isTanween,
   isVowelMark,
   toCodePoints,
 } from './unicode.js'
@@ -142,6 +143,104 @@ const recoverBorneHamza: Pass = (input) => {
   return out.build()
 }
 
+/** The haraka a madd letter must be preceded by: fatha before alef, kasra before yeh, damma before waw. */
+function homogeneousVowel(next: string | undefined): string | undefined {
+  switch (next) {
+    case ALEF:
+    case ALEF_MAQSURA:
+    case SUPERSCRIPT_ALEF:
+      return FATHA
+    case YEH:
+      return KASRA
+    case WAW:
+      return DAMMA
+    default:
+      return undefined
+  }
+}
+
+/**
+ * A seated hamza carrying two vowels is two letters, and is split into them.
+ *
+ * ئ ؤ أ normally stand for a hamza alone: the seat is a writing convention and
+ * is not pronounced. But where the bearer letter is itself sounded — a doubled
+ * yāʾ in سَيِّئَاتِ, a plain one in يَئُودُهُۥ — the muṣḥaf has two letters to vowel
+ * and only one character to hang them on, so the seat carries both harakāt.
+ *
+ * The editions differ on how they write it, and only one of them needs this
+ * pass: where this repository's first edition wrote the two letters out (yāʾ,
+ * then a hamza borne on a tatweel), the KFGQPC muṣḥafs compose them onto the
+ * seat. Left alone, the second vowel lands on a letter that is not there, the
+ * hamza is never a consonant, and every ruling that turns on it is lost.
+ *
+ * Which vowel belongs to which is read off the shadda. A hamza is not doubled
+ * here, so a shadda is the bearer's, and the vowel written with it is the
+ * bearer's too — leaving the other for the hamza. With no shadda the pair is
+ * written bearer first. That covers all 40 occurrences in Ḥafṣ, 36 of one shape
+ * and 4 of the other, and each was checked against the same word spelled out in
+ * the other edition rather than reasoned about.
+ *
+ * A seat carrying one vowel, or none, is untouched: it is a hamza alone, which
+ * is what the other 10,790 of them are.
+ *
+ * Only ئ is attested: all 40 two-vowel seats in Hafs are ئ, and none is ؤ or أ.
+ * Those two branches therefore never run, on either edition. They are written
+ * for symmetry and they are UNTESTED against the mushaf — and the أ branch in
+ * particular says an alef can be a sounded bearer, which is not true of an alef
+ * that is a hamza seat. If either ever fires, it should be reviewed before it is
+ * trusted rather than assumed correct because it is here.
+ */
+const splitSeatedHamza: Pass = (input) => {
+  const SEATS: Record<string, string> = {
+    '\u{0626}': YEH,
+    '\u{0624}': WAW,
+    '\u{0623}': ALEF,
+  }
+  const out = new MappedBuilder()
+  let i = 0
+  while (i < input.length) {
+    const bearer = SEATS[input[i]!]
+    if (bearer === undefined) {
+      out.emit(input[i]!, i)
+      i += 1
+      continue
+    }
+
+    let end = i + 1
+    while (end < input.length && isStackedMark(input[end]!)) {
+      end += 1
+    }
+    const marks: number[] = []
+    for (let k = i + 1; k < end; k++) {
+      marks.push(k)
+    }
+    const vowels = marks.filter((k) => isVowelMark(input[k]))
+    if (vowels.length < 2) {
+      out.emit(input[i]!, i)
+      i += 1
+      continue
+    }
+
+    // The shadda names the bearer's vowel; with no shadda the bearer's is first.
+    const shadda = marks.find((k) => input[k] === SHADDA)
+    const hamzaVowel =
+      shadda === undefined
+        ? vowels[1]!
+        : vowels.reduce((furthest, k) => (Math.abs(k - shadda) > Math.abs(furthest - shadda) ? k : furthest))
+
+    out.emit(bearer, i)
+    for (const k of marks) {
+      if (k !== hamzaVowel) {
+        out.emit(input[k]!, k)
+      }
+    }
+    out.emit(HAMZA, i)
+    out.emit(input[hamzaVowel]!, i)
+    i = end
+  }
+  return out.build()
+}
+
 /**
  * A hamza written directly on its letter, with no tatweel to bear it, becomes a
  * standalone hamza — and its vowel is moved to the far side of it.
@@ -161,15 +260,14 @@ const recoverBorneHamza: Pass = (input) => {
  * belong to the letter underneath, unless the hamza is sakin — in which case its
  * sukoon stays on the far side, where it already reads correctly.
  *
- * That is the rule, and it is measured rather than assumed. It reads 449 of the
- * 455 unborne hamzas in quran-text's Hafs the same way the tatweel form of the
- * same word is read. The six it cannot are the ones where both marks sit above
- * the line, so their order says nothing about which of the two they belong to;
- * they are listed in docs/text-source.md and are not guessed at here.
+ * All of it is measured rather than assumed, against the same words spelled out
+ * in the edition that writes them around a tatweel. An earlier version of this
+ * pass read the FIRST mark as the hamza's, which is right for بَِٔايَٰتِ and wrong
+ * for بَِٔيسٍ — the same four code points — and was wrong on 35 of the 455.
  *
- * `pnpm edition:diff` is what measures it: with this pass and the three other
- * encoding gaps closed, 6,168 of 6,236 ayahs normalise to byte-identical strings
- * across the two editions, against 2,357 before any of them.
+ * `pnpm edition:diff` is what measures the whole of it: with this pass and the
+ * other encoding gaps closed, 6,213 of 6,236 ayahs normalise to byte-identical
+ * strings across the two editions, against 2,357 before any of them.
  */
 const seatUnborneHamza: Pass = (input) => {
   const out = new MappedBuilder()
@@ -196,7 +294,7 @@ const seatUnborneHamza: Pass = (input) => {
       continue
     }
 
-    const before: number[] = []
+    let before: number[] = []
     for (let k = i + 1; k < hamza; k++) {
       before.push(k)
     }
@@ -214,12 +312,68 @@ const seatUnborneHamza: Pass = (input) => {
     //   otherwise the first mark is the hamza's alone — بَِٔا is a kasra on the
     //   baa and a fatha on the hamza.
     const carriesItsOwnAfter = isDiacritic(input[hamza + 1])
+
+    // Which of the vowels written before the hamza is the hamza's own.
+    //
+    // The order they are stored in does not say. بَِٔايَٰتِ and بَِٔيسٍ are the
+    // same four code points — baa, fatha, kasra, hamza — and are read bi-'aayaat
+    // and ba-'iis, the vowels the other way round. Arabic phonology does say: a
+    // madd letter is preceded by its own haraka, so the hamza before an alef
+    // took a fatha, before a yaa a kasra, and before a waw a damma. The letter
+    // after the hamza names the hamza's vowel, and the bearer keeps the rest.
+    //
+    // Where only one vowel is written, it belongs to the hamza if the bearer
+    // cannot hold one — it is already sakin, or carries a maddah or a dagger
+    // alef, which make it a madd letter rather than a vowelled consonant.
     let moved: number[] = []
     if (!carriesItsOwnAfter && before.length > 0) {
+      const vowels = before.filter((k) => isVowelMark(input[k]))
+      const bearerIsLong = before.some(
+        (k) => input[k] === MADDAH_ABOVE || input[k] === SUPERSCRIPT_ALEF,
+      )
       if (input[before[before.length - 1]!] === SUKOON) {
-        moved = before.splice(0, before.length - 1)
-      } else {
-        moved = before.splice(0, 1)
+        // A sukoon written last is the bearer's, and it is all the bearer has:
+        // ٱلَٰۡٔنَ is a sakin laam, then a hamza with a fatha and a long alef.
+        //
+        // A maddah written last does NOT behave this way, though it looks as
+        // though it should: يَٰٓـَٔادَمُ gives the bearer its fatha, its dagger
+        // alef AND its maddah, and only the first mark to the hamza. Treating a
+        // maddah like a sukoon here moved seven ayahs the wrong way.
+        moved = before.slice(0, -1)
+        before = before.slice(-1)
+      } else if (vowels.length >= 2) {
+        // A tanween sits only on the last letter of a word, and of the two
+        // letters here the hamza is the later — so a tanween among the pair is
+        // the hamza's, and nothing else needs consulting. مَلۡجًَٔا is maljaʾan:
+        // the jeem takes the fatha, the hamza the fathatan. Read the other way
+        // it puts a tanween mid-word and a bare fatha on a final hamza, and
+        // manufactures a madd al-badal where the reading is madd al-ʿiwad.
+        const tanween = vowels.filter((k) => isTanween(input[k]))
+        // The letter after the hamza names the hamza's vowel — but only while it
+        // is a BARE madd letter. A yeh carrying a haraka is a consonant and says
+        // nothing about what came before it. Every occurrence in Hafs is bare,
+        // so this changes nothing here; the rule is wrong without it.
+        const wanted = isDiacritic(input[hamza + 2]) ? undefined : homogeneousVowel(input[hamza + 1])
+        const chosen =
+          tanween.length === 1
+            ? tanween[0]!
+            : wanted === undefined
+              ? vowels[0]!
+              : (vowels.find((k) => input[k] === wanted) ?? vowels[0]!)
+        moved = [chosen]
+        before = before.filter((k) => k !== chosen)
+      } else if (bearerIsLong) {
+        // One vowel, and a bearer that cannot hold it: the bearer is already a
+        // madd letter. The vowel is the hamza's, and so is a dagger alef, which
+        // is the hamza's own madd — خَطِيَٰٓٔتِ is a madd yeh, then hamza + fatha
+        // + long alef. The maddah written last is the bearer's own and stays.
+        //
+        // This is only safe here, below the two-vowel case. Applied before it,
+        // يَٰٓـَٔادَمُ — which writes the bearer's fatha AND the hamza's — loses
+        // its bearer's vowel to the hamza, and seven ayahs move the wrong way.
+        moved =
+          input[before[before.length - 1]!] === MADDAH_ABOVE ? before.slice(0, -1) : vowels
+        before = before.filter((k) => !moved.includes(k))
       }
     }
 
@@ -413,6 +567,31 @@ const PASSES: readonly Pass[] = [
 
   substituting([[QURANIC_SUKOON, SUKOON]]),
 
+  // Compose a hamza onto the seat it is written on.
+  //
+  // quran-ws/quran-text publishes the KFGQPC release's own code points, and the
+  // release disagrees with itself: 35:43 ٱلسَّيِّئُ is يَ + U+0654 where the other
+  // 908 occurrences of ئ are the precomposed character. It is composed in the
+  // 2022 package and decomposed in the 2026 one, so it is not something upstream
+  // will correct — quran-text has recorded it rather than edit a muṣḥaf. Left
+  // alone it cost two spurious spans, because a yāʾ kept as a seat reads as a
+  // madd letter before a hamza and is not one.
+  //
+  // This is the COMPOSITION half of NFC and deliberately not the rest of it.
+  // Applying NFC whole also re-sorts the marks on a letter by combining class,
+  // which this pipeline does not need — the passes below already read either
+  // order — and which costs a great deal: measured over this edition, a full NFC
+  // pass moved 12,484 spans across 3,838 ayahs, because a re-sorted cluster can
+  // no longer map each character to its own source index. Composing without
+  // re-sorting fixes 35:43 and moves nothing else.
+  //
+  // ا + ٓ is composed further down, where the two readings of آ are separated.
+  substituting([
+    [YEH + HAMZA_ABOVE, '\u{0626}'],
+    [WAW + HAMZA_ABOVE, '\u{0624}'],
+    [ALEF + HAMZA_ABOVE, ALEF_HAMZA_ABOVE],
+  ]),
+
   // Before the maddah is stripped as decoration, resolve the two ways the script
   // writes آ.
   //
@@ -454,6 +633,9 @@ const PASSES: readonly Pass[] = [
   // only the contiguous pair left the small meem to be stripped as decoration
   // and the iqlab with it, on nine ayahs.
   substituting([
+    // …and where the hamza, with its maddah, sits between them: هَنِيَٓٔۢا writes
+    // fatha, maddah, hamza, small meem, and the tanween is the hamza's.
+    [FATHA + MADDAH_ABOVE + HAMZA_ABOVE + SMALL_HIGH_MEEM, FATHATAN + MADDAH_ABOVE + HAMZA_ABOVE],
     [DAMMA + SHADDA + SMALL_HIGH_MEEM, DAMMATAN + SHADDA],
     [FATHA + SHADDA + SMALL_HIGH_MEEM, FATHATAN + SHADDA],
     [KASRA + SHADDA + SMALL_HIGH_MEEM, KASRATAN + SHADDA],
@@ -465,6 +647,7 @@ const PASSES: readonly Pass[] = [
   ]),
 
   recoverBorneHamza,
+  splitSeatedHamza,
   seatUnborneHamza,
   saktahToBreak,
   silenceOrthographicWaw,
