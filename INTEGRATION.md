@@ -8,6 +8,19 @@ Everything below was run on one machine. **There is no CI on any of it** —
 GitHub Actions has been failing org-wide on a billing problem since 2026-09-11,
 so no pull request in this repository has been checked by anything but a person.
 
+**And these two bodies of evidence are not one body of evidence.** Both audits
+were run against **individual branch heads**; nobody has independently measured
+the merged artefact. The verdicts in this file that come from auditors attach to
+the branches they name, at the commits they named. Everything about the
+integration itself — the union, the resolutions, the totals — is **self-reported
+by the person who built it**, which is me. Read the two accordingly, and do not
+let the audits lend their authority to the merge.
+
+**An audited head is a specific tree.** Several branches moved after the
+auditors recorded their heads, so those verdicts describe trees that no longer
+exist. Where a figure here is attributed to an audit, it describes the commit
+the auditor named and not necessarily the branch tip today.
+
 ---
 
 ## Lead with this: a gate added tonight caught four branches contradicting each other
@@ -61,6 +74,13 @@ for each of `topics`, `categories`, `hukums`, `rules`, start from the state afte
 `#1` and `#2` are merged, then append from `#3` and `#4` every entry whose `id`
 is not already present. Order within each array is main's, then #1's, then #3's,
 then #4's. No entry is edited, none is dropped, and no id appears twice.
+
+**One correction to that description.** It is not quite what happened, and an
+auditor chased the difference as a possible defect before establishing it was
+benign. #2's `raa-tarqeeq.5` is **inserted at index 39**, beside the other
+`raa-tarqeeq` rules, rather than appended — which is why `madd-lazim-harfi.1`
+sits at 182. Arguably better than appending, and not what the paragraph above
+says. The described construction is not the one used.
 
 `rules:validate`, `rules:audit` and `rules:verify` all pass on the result — but
 **all three were written here**, and a validator that does not test for a
