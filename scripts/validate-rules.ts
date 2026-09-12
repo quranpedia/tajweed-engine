@@ -155,8 +155,43 @@ for (const rule of corpus.rules) {
     }
   }
 
+  // A questioned ruling must not ship as settled.
+  //
+  // `status` has two values and `gap` has seven, and not one of them can say
+  // "a qualified reader thinks this ruling is wrong". Every `gap` value is a
+  // limitation of the CASE notation; a disputed ruling is not a notation
+  // problem, and filing it as one would be false. So `disputed` says it, and
+  // this check is what gives it force: a rule cannot carry an open dispute and
+  // `status: "stable"` at the same time.
+  //
+  // What it does NOT do is decide anything. Moving such a rule to `disabled`
+  // removes its spans from the published dataset, which is a decision about the
+  // Qur'an and belongs to a reviewer, not to this script. All this does is stop
+  // the question being shipped as though it had been answered.
+  if (rule.disputed && !rule.disputed.resolved_by && rule.status === 'stable') {
+    problems.push(
+      `rule ${rule.id} carries an unresolved dispute but is status "stable" — ` +
+        `${rule.disputed.finding.slice(0, 120)}${rule.disputed.finding.length > 120 ? '…' : ''} ` +
+        `(fires at ${rule.disputed.occurrences.join(', ')}). A rule whose ruling is ` +
+        'questioned cannot be published as settled; resolve it or take it out of stable.',
+    )
+  }
+
   if (rule.corrections && !rule.needsReview) {
     problems.push(`rule ${rule.id} carries corrections but is not flagged needsReview`)
+  }
+
+  if (rule.status === 'disputed' && !rule.disputed) {
+    problems.push(
+      `rule ${rule.id} is status "disputed" but records no dispute — the objection has to ` +
+        'travel with the rule, or the status is just a label nobody can act on',
+    )
+  }
+  if (rule.status === 'disputed' && rule.disputed?.resolved_by) {
+    problems.push(
+      `rule ${rule.id} records a resolved dispute but is still status "disputed" — ` +
+        'once a reviewer has ruled, the status has to follow',
+    )
   }
 
   if (rule.status === 'disabled' && !rule.gap) {

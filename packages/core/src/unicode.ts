@@ -37,6 +37,26 @@ export const SMALL_LOW_MEEM = '\u{06ED}' // ۭ
 export const SMALL_WAW = '\u{06E5}' // ۥ
 export const SMALL_YEH = '\u{06E6}' // ۦ
 export const SMALL_HIGH_SEEN = '\u{06DC}' // ۜ
+
+/**
+ * The small seen written BELOW the letter, U+06E3.
+ *
+ * PROVISIONAL. It is treated here exactly as SMALL_HIGH_SEEN is treated, and
+ * that is a decision about this pipeline rather than about the text.
+ *
+ * KFGQPC moved 52:37 from the mark above to the mark below while leaving 2:245
+ * and 7:69 alone, and a re-encoding does not produce that asymmetry — so what
+ * the move MEANS is an open question for a qualified reviewer, recorded in
+ * docs/text-source.md as unresolved.
+ *
+ * What is not open is whether the normaliser knows the character exists.
+ * Leaving it unhandled does not leave the question open; it silently wedges an
+ * implied sukoon onto the ṣād and tells nobody. Treating it differently from its
+ * sibling would itself assert that the position changes the ruling, which is the
+ * very thing nobody has established. So it matches U+06DC until someone
+ * qualified says otherwise, and if they do, this is the line to change.
+ */
+export const SMALL_LOW_SEEN = '\u{06E3}' // ۣ
 export const MADDAH_ABOVE = '\u{0653}' // ٓ
 export const HAMZA_ABOVE = '\u{0654}' // ٔ
 export const TATWEEL = '\u{0640}' // ـ
@@ -44,6 +64,19 @@ export const INVERTED_DAMMA = '\u{0657}' // ٗ
 export const SUBSCRIPT_ALEF = '\u{0656}' // ٖ
 export const FATHATAN_VERTICAL = '\u{065E}' // ٞ
 export const RECTANGULAR_ZERO = '\u{06E0}' // ۠
+
+/**
+ * The open tanween of the Arabic Extended-A block.
+ *
+ * The two families are the same three marks drawn differently, and an edition
+ * uses one or the other throughout. The KFGQPC digital muṣḥafs — and so
+ * quran-ws/quran-text — write these; the older positional marks above are what
+ * the first edition read here used. Both fold onto the standalone tanween, so a
+ * CASE pattern is written once and matches either.
+ */
+export const OPEN_FATHATAN = '\u{08F0}' // ࣰ
+export const OPEN_DAMMATAN = '\u{08F1}' // ࣱ
+export const OPEN_KASRATAN = '\u{08F2}' // ࣲ
 
 /**
  * Marks that appear in mushaf text but never in a CASE pattern. They are removed
@@ -70,6 +103,7 @@ export const OPTIONAL_MARKS: readonly string[] = [
   TATWEEL,
   '\u{06DB}', // ۛ small high three dots
   SMALL_HIGH_SEEN,
+  SMALL_LOW_SEEN,
   MADDAH_ABOVE,
 ]
 
@@ -95,6 +129,36 @@ export function isDiacritic(char: string | undefined): boolean {
   }
   const code = char.codePointAt(0)!
   return code >= 0x064b && code <= 0x0652
+}
+
+/**
+ * Marks that are written on a letter rather than between letters: harakat,
+ * tanween, sukoon, and the small signs the Uthmani script stacks above and below.
+ * Waqf signs are deliberately excluded — they sit between words, and a cluster
+ * ends at one.
+ */
+export function isStackedMark(char: string | undefined): boolean {
+  if (char === undefined) {
+    return false
+  }
+  const code = char.codePointAt(0)!
+  return (
+    (code >= 0x064b && code <= 0x0656) ||
+    code === 0x0657 ||
+    code === 0x0658 ||
+    code === 0x065c ||
+    code === 0x065e ||
+    code === 0x0670 ||
+    code === 0x06e1 ||
+    code === 0x06e2 ||
+    code === 0x06e4 ||
+    code === 0x06e5 ||
+    code === 0x06e6 ||
+    code === 0x06e7 ||
+    code === 0x06e8 ||
+    code === 0x06ed ||
+    (code >= 0x08f0 && code <= 0x08f2)
+  )
 }
 
 /** Vowel marks only — excludes shadda and sukoon. U+064B..U+0650. */

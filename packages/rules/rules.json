@@ -2648,7 +2648,7 @@
       "hukum": "qalqalah-kubra",
       "case": "[ق ط ب ج د] + نهاية الآية",
       "scope": "within-word",
-      "status": "stable",
+      "status": "disputed",
       "needsReview": true,
       "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
       "label": {
@@ -2656,6 +2656,13 @@
       },
       "notes": {
         "ar": "القلقلة الكبرى تكون بالوقف على الحرف المتطرف، والوقف على رؤوس الآي سنة، فالحكم واقع في الغالب. ومن وصل الآية بما بعدها فلا قلقلة فيه إن كان الحرف متحركا. وقد اقتُصر على رؤوس الآي دون سائر الكلمات لأن الوقف في غيرها اختيار من القارئ لا يدل عليه الرسم."
+      },
+      "disputed": {
+        "finding": "Fires on the qāf of the opening of 42:2, where the auditor holds there is no qalqala at all. Its reasoning, recorded as given: the opening is recited ʿayn sīn qāf, so the letter stopped on is the fāʾ of the name قاف, not the qāf — the qāf is the first letter of a three-letter name and is not sākin at the stop, and fāʾ is not a qalqala letter. The correct annotation is none. The auditor checked all 29 openings and found this the only instance: 50:1 and 38:1 correctly stay silent because they continue into more text. Same class as the madd-lazim-harfi.1 finding — the engine reading a letter NAME as if it were a letter. One false span in the muṣḥaf, out of 422 the rule emits; the other 421 are not in question. Unresolved pending a human scholar. Narrowing the pattern would be writing a rule, which is not done here.",
+        "raised_by": "integration audit, 2026-09-12; all 29 openings checked",
+        "occurrences": [
+          "42:2"
+        ]
       }
     },
     {
@@ -2723,7 +2730,7 @@
       "case": "[لٓ مٓ سٓ صٓ عٓ قٓ كٓ نٓ]",
       "scope": "within-word",
       "matchAgainst": "original",
-      "status": "stable",
+      "status": "disputed",
       "needsReview": true,
       "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to passages whose ruling is not in dispute (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
       "label": {
@@ -2731,6 +2738,14 @@
       },
       "notes": {
         "ar": "يُطابَق على الرسم لا على النص المُطبَّع، لأن علامة المد (ٓ) تُحذف في التطبيع. والتفريق بين المثقل والمخفف يقوم على إدغام آخر الحرف فيما بعده، وهو ما لا تستطيع الصيغة التعبير عنه، فجُمعا في حكم واحد."
+      },
+      "disputed": {
+        "finding": "Rules the ʿayn of the ḥurūf muqaṭṭaʿāt as madd lāzim ḥarfī. The auditor holds that this is wrong. Its reasoning, recorded as given: the eight letters نقص عسلكم are the right set to gather, but ʿayn is the standing exception. Its name عَيْن has a līn letter in the middle, not a madd letter, so it takes madd līn ḥarfī with two accepted wujūh — tawassuṭ or ṭūl — where madd lāzim is obligatorily six ḥarakāt. Ruling it flatly lāzim removes a خلاف that every primer preserves (وعينُ ذو وجهين). Unresolved: the auditor reasoned from the standard treatment and did not cite a page, and neither the auditor nor this repository is a qualified reviewer. Pending a human scholar. No pattern, no Arabic and no ruling has been changed here — only the claim that the question is settled.",
+        "raised_by": "scholarly audit, 2026-09-12; reasoned from the standard treatment, no page cited",
+        "occurrences": [
+          "19:1",
+          "42:2"
+        ]
       }
     }
   ]

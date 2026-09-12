@@ -6,7 +6,7 @@ rewritten.
 
 | Package | Version | Spans | Rules |
 |---|---|---|---|
-| `@tajweed/annotations` — **not yet published to npm** | `0.1.0`, corpus `0.4.2` | 147,255 | 182 authored, 164 currently producing spans |
+| `@tajweed/annotations` — **not yet published to npm** | `0.1.0`, corpus `0.4.2` | 147,255 | 182 authored, 164 compiled, 127 producing spans |
 
 *Tajwīd* is the set of rules that govern how the Qurʾān is pronounced when it is
 recited: where a sound is lengthened, merged into the next, held silent, or read
@@ -78,13 +78,52 @@ demo — which is why it passed ours. It does not survive checking:
 al-Fatiha: 59 spans, 11 landing on different characters when indexed into the join
 ```
 
-Four systematic causes: shadda written before the vowel rather than after,
-precomposed آ (U+0622) against alif + maddah (U+0627 U+0653), positional tanwīn
-forms, and waqf marks the edition carries inline.
+The join was also the wrong way to read quran-text: its waqf, sajdah and
+division signs are a separate layer, and the words alone are a text those signs
+have been removed from. Asking quran-text for the Ḥafṣ it serves, rather than
+assembling one, brings the two editions to within **4 āyahs**:
 
-The fix is not normalisation. Either render the edition's own text, or run your
-text through `pnpm edition:check` and see the difference measured, and check the
-digest either way. See [`docs/editions.md`](./docs/editions.md).
+```
+$ pnpm import:quran-text
+$ pnpm edition:diff editions/uthmani-hafs.json editions/hafs-quran-text.json
+  6236 ayahs compared
+  2715 byte-identical as they stand
+  6232 once tanween is allowed for — positional tanween against open tanween
+  RAW BYTE DIFFERENCES: 4 — what the classes above do not account for:
+      11:41  U+06EA -> U+065C ; U+065E -> U+08F1 ; U+065E -> U+08F1
+      27:20  — -> U+0020 (word separation only)
+      36:22  — -> U+0020 (word separation only)
+      52:37  U+06DC -> U+06E3
+```
+
+The declared classes are the order the marks stacked on one letter are stored in,
+precomposed letters against a base plus a combining mark, and the two families of
+tanwīn. All are handled in the normaliser; none is a difference in the text. On
+these two editions only the tanwīn class does any work — quran-text stopped
+applying NFC, so the other two reconcile nothing and are kept because they are
+real differences between Uthmani editions in general.
+
+**Two numbers, two names, and they are not interchangeable.** *Raw byte
+differences* counts āyahs whose stored bytes still differ once the declared
+classes are allowed for. *Residue after normalisation* counts āyahs that still
+differ after the normaliser runs — the number that decides whether a rule can
+match. They are not the same and neither bounds the other: on this branch they
+are 4 and 5, because normalisation can introduce a difference as well as remove
+one. Quote the name with the number.
+
+The four raw differences are **not** differences in the letters, and the earlier
+wording here said they were. Two are word separation, one is the same ruling
+written with two different code points, and one is unresolved. Strip every
+combining mark, annotation sign, tatweel and hamza mark and compare the bare
+skeletons across all 6,236 āyahs, and the two editions differ in **2** places
+with spaces significant and in **0** ignoring spaces. The two that remain —
+27:20 and 36:22 — are a question about word division, raised upstream rather
+than decided here.
+
+The fix is still not normalising your own text. Either render the edition's own
+text, or run yours through `pnpm edition:check`, and check the digest either way.
+See [`docs/editions.md`](./docs/editions.md) and, for where the text itself comes
+from, [`docs/text-source.md`](./docs/text-source.md).
 
 ### What the corpus does not cover
 
@@ -159,7 +198,8 @@ treat that as an error, not a setting you can flip.
 |---|---|
 | Source | The tajwīd system behind [tajweed.quranpedia.net](https://tajweed.quranpedia.net), where the rules were compiled and have been in use |
 | Port check | Every rule compared against that implementation over the whole muṣḥaf — normalised text character by character, each rule's matching ayahs set by set — frozen in [`conformance/`](./conformance) |
-| Edition | `uthmani-hafs`, 6,236 ayahs, the text published at tajweed.quranpedia.net |
+| Edition | `uthmani-hafs`, 6,236 ayahs, exported from tajweed.quranpedia.net. Where that text came from before it was not recorded — see [`docs/text-source.md`](./docs/text-source.md) |
+| Second edition | `hafs-quran-text`, built by `pnpm import:quran-text` from [Quran Text](https://quran.ws/blocks/quran-text/), which records the KFGQPC package and its SHA-256. The published spans are not measured against it yet |
 | Edition digest | `b5d29736bb3ef49d9d331c4e60a59d83fe899b921e9e8dc35911bd4a18ce55f3` |
 | Divergences | Recorded in [`docs/divergences.md`](./docs/divergences.md) |
 
