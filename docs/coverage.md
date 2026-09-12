@@ -19,13 +19,22 @@ of mistake.
 | المشددتان | 2 | النون والميم المشددتان |
 | المد | 13 | طبيعي، عوض، صلة صغرى، لين، بدل، واجب متصل، جائز منفصل، **لازم** |
 | القلقلة | 3 | صغرى في وسط الكلمة، متطرفة على حرف ساكن في آخرها، وكبرى على رأس الآية |
+| أحكام الوقف | 3 | الروم على رؤوس الآي: في المضموم والمكسور والمنون بهما، وفي الهاء على مذهب التفصيل |
 
-القلقلة and المد اللازم were written for this corpus; the source system did not
-have them. Before المد اللازم was added, the engine had nothing to say about
-الحروف المقطعة — the disjoined letters that open some surahs. Every rule in
-these two areas is flagged `needsReview` until
-a qualified reviewer signs it off, and each is tested against passages whose
-ruling is not in dispute — see `scripts/verify-rules.ts`.
+القلقلة، المد اللازم and الروم were written for this corpus; the source system did
+not have them. Before المد اللازم was added, the engine had nothing to say about
+الحروف المقطعة — the disjoined letters that open some surahs. Every rule in these
+three areas is flagged `needsReview` until a qualified reviewer signs it off, and
+each is tested against passages whose ruling is not in dispute — see
+`scripts/verify-rules.ts`.
+
+الروم is annotated **only at رؤوس الآي**, on the same reasoning that confined
+القلقلة الكبرى there: stopping at a رأس آية is sunnah and usual, while stopping
+anywhere else is the reciter's choice and not something the text records. Written
+for every word end it would mark 22,197 positions instead of 1,920 — a permission
+the reciter usually does not take, on nearly every word. Two of the four موانع —
+ميم الجمع and الحركة العارضة — cannot arise at a رأس آية at all, since both need a
+following word.
 
 Two consequences of the same limit are worth knowing before you rely on the
 output:
@@ -70,8 +79,10 @@ These are missing from the corpus entirely — not disabled, not partial, missin
 - **مد الصلة الكبرى.** The صغرى is covered; the كبرى is not.
 - **السكت.** The normaliser recognises the saktah mark and uses it to stop rules
   from matching across it, but no rule reports a saktah as a ruling of its own.
-- **الوقف والابتداء.** Waqf marks are kept in the text and never coloured, but
-  they are not annotated.
+- **الوقف والابتداء**, apart from الروم. Waqf marks are kept in the text and never
+  coloured, and where a reciter may stop is not annotated. الإشمام عند الوقف is
+  not modelled either, so a رأس آية ending in a damma reports that روم is
+  permitted there and says nothing about إشمام, which is permitted too.
 - **أحكام الاستعاذة والبسملة.**
 - **المتباعدين**, and the **الكبير** forms of المتماثلين والمتجانسين.
 
@@ -96,5 +107,10 @@ about the ayah.
 
 **Ayahs with no annotations are left out** of a generated annotation set, not
 stored as an empty list. That keeps "no rules matched" and "not computed"
-distinguishable. As of the current corpus, every ayah of the mushaf has at
-least one annotation, so in practice nothing is left out.
+distinguishable. **6,235 of the muṣḥaf's 6,236 ayahs carry at least one
+annotation; 20:1 طه carries none**, for the reason given above, and is therefore
+absent from the file rather than present with an empty list.
+
+A consumer that looks up an ayah and finds nothing should read that as "no rule
+in this corpus describes anything here", not as an error — and should not assume
+the key exists.
