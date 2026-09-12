@@ -113,14 +113,26 @@ const CLASSES: ReadonlyArray<{ id: string; what: string; apply: (text: string) =
     what: 'positional tanween (U+0657 U+065E U+0656) against open tanween (U+08F0 U+08F1 U+08F2)',
     apply: (text) => text.replace(/\u{0657}/gu, '\u{08F0}').replace(/\u{065E}/gu, '\u{08F1}').replace(/\u{0656}/gu, '\u{08F2}'),
   },
-  {
-    id: 'bearer',
-    what: 'a hamza borne on a tatweel (U+0640) against one written on its letter',
-    apply: (text) => text.replace(/\u{0640}/gu, ''),
-  },
 ]
 
-/** The two classes that are not character substitutions, reported for completeness. */
+/**
+ * Two classes that are folded rather than substituted, and one that is gone.
+ *
+ * `order` and `composition` are handled by fold() below. Neither now does any
+ * work on these two editions: quran-ws/quran-text stopped applying NFC in #21
+ * and publishes the release's own code points, which write a shaddah before its
+ * vowel and ا + ٓ uncomposed — the same as the edition here. They are still
+ * declared because they are real differences between Uthmani editions in
+ * general, and because a future edition may reintroduce them.
+ *
+ * `bearer` — a hamza on a tatweel against one written on its letter — is no
+ * longer a class at all. quran-text#21 restored the kashida the build had been
+ * deleting, so both editions now carry 535 of them and 495 borne hamzas. This
+ * script used to strip the tatweel from the left-hand side to bring it towards
+ * the right; against the corrected data that transformation INVENTED 494
+ * differences that are not there. A class that describes an old shape of the
+ * data is worse than no class, because it reports with confidence.
+ */
 const FOLDED_CLASSES = [
   { id: 'order', what: 'the order of the marks stacked on one letter' },
   { id: 'composition', what: 'a precomposed letter (آ أ ؤ ئ) against a base letter plus a combining mark' },
