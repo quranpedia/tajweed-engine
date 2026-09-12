@@ -567,6 +567,31 @@ const PASSES: readonly Pass[] = [
 
   substituting([[QURANIC_SUKOON, SUKOON]]),
 
+  // Compose a hamza onto the seat it is written on.
+  //
+  // quran-ws/quran-text publishes the KFGQPC release's own code points, and the
+  // release disagrees with itself: 35:43 ٱلسَّيِّئُ is يَ + U+0654 where the other
+  // 908 occurrences of ئ are the precomposed character. It is composed in the
+  // 2022 package and decomposed in the 2026 one, so it is not something upstream
+  // will correct — quran-text has recorded it rather than edit a muṣḥaf. Left
+  // alone it cost two spurious spans, because a yāʾ kept as a seat reads as a
+  // madd letter before a hamza and is not one.
+  //
+  // This is the COMPOSITION half of NFC and deliberately not the rest of it.
+  // Applying NFC whole also re-sorts the marks on a letter by combining class,
+  // which this pipeline does not need — the passes below already read either
+  // order — and which costs a great deal: measured over this edition, a full NFC
+  // pass moved 12,484 spans across 3,838 ayahs, because a re-sorted cluster can
+  // no longer map each character to its own source index. Composing without
+  // re-sorting fixes 35:43 and moves nothing else.
+  //
+  // ا + ٓ is composed further down, where the two readings of آ are separated.
+  substituting([
+    [YEH + HAMZA_ABOVE, '\u{0626}'],
+    [WAW + HAMZA_ABOVE, '\u{0624}'],
+    [ALEF + HAMZA_ABOVE, ALEF_HAMZA_ABOVE],
+  ]),
+
   // Before the maddah is stripped as decoration, resolve the two ways the script
   // writes آ.
   //
