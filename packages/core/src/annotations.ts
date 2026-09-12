@@ -10,6 +10,7 @@
  */
 
 import type { Corpus, Span } from './types.js'
+import { resolveRuleId } from './aliases.js'
 
 /** `[start, end, ruleIndex]` — indices into `ruleIds`. */
 export type PackedSpan = readonly [start: number, end: number, rule: number]
@@ -52,7 +53,10 @@ export function unpack(annotations: Annotations, corpus: Corpus, reference: stri
           `but only ${annotations.ruleIds.length} rule ids are declared.`,
       )
     }
-    const found = lineage.get(ruleId)
+    // An annotation set published before a rule was renamed names it by the
+    // old id. Resolving through the alias table is what keeps that data
+    // readable instead of stranding it — see aliases.ts.
+    const found = lineage.get(ruleId) ?? lineage.get(resolveRuleId(ruleId))
     if (!found) {
       throw new Error(
         `Annotations reference rule ${ruleId}, which is not in corpus ` +

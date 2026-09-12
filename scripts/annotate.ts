@@ -15,6 +15,7 @@ import { dirname, join, resolve } from 'node:path'
 import corpus from '../packages/rules/rules.json' with { type: 'json' }
 import { Tajweed } from '../packages/core/src/engine.js'
 import { editionDigest, orderedReferences, type Edition } from '../packages/core/src/edition.js'
+import { sameRiwayah } from '../packages/core/src/aliases.js'
 import type { Annotations, PackedSpan } from '../packages/core/src/annotations.js'
 import type { Corpus } from '../packages/core/src/types.js'
 
@@ -29,9 +30,13 @@ if (!editionPath) {
 const edition = JSON.parse(readFileSync(resolve(editionPath), 'utf8')) as Edition
 const typed = corpus as unknown as Corpus
 
-if (edition.riwayah !== typed.riwayah) {
+if (!sameRiwayah(edition.riwayah, typed.riwayah)) {
   // Both the rulings and the orthography differ between riwayat, so this is a
   // data error rather than a warning to be stepped over.
+  //
+  // Compared through the alias table rather than by string equality: the same
+  // riwayah is written `hafs-an-asim` here and `hafs_an_asim` in the guidelines,
+  // and an edition is not wrong for using either.
   console.error(
     `Refusing to annotate: the corpus is ${typed.riwayah} but the edition is ${edition.riwayah}.`,
   )
