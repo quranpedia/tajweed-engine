@@ -32,68 +32,73 @@ Regenerate with `pnpm edition:diff`; the numbers below are read from
 [`reports/hafs-quran-text-vs-uthmani-hafs.json`](../reports/hafs-quran-text-vs-uthmani-hafs.json),
 which is committed so that a change in them arrives as a diff.
 
-Of **6,236** ayahs, **345** are byte-identical as they stand. **6,232** are the
-same text written differently, in four classes:
+Of **6,236** ayahs, **2,715** are byte-identical as they stand. **6,232** are the
+same text written differently — and since quran-ws/quran-text#21 that is **one
+class**, not four:
 
 | Class | What differs |
 |---|---|
-| **order** | which order the marks stacked on one letter are stored in — the muṣḥaf writes letter + shadda + haraka, quran-text writes letter + haraka + shadda |
-| **composition** | a precomposed letter (آ أ ؤ ئ) against a base letter plus a combining mark |
 | **tanween** | positional tanween U+0657 U+065E U+0656 against open tanween U+08F0 U+08F1 U+08F2 |
-| **bearer** | a hamza riding a tatweel U+0640 against one written straight onto its letter |
 
-All four print identically. None of them is a difference in the text, and none of
-them may be a difference in what the engine reads — so each is handled in
+Three classes that used to be here are gone, and it is worth saying why rather
+than quietly dropping them. **bearer** — a hamza riding a tatweel against one
+written on its letter — existed because quran-text's build was deleting the
+kashida the KFGQPC release uses to seat a hamza that has no letter of its own.
+#21 restored it: both editions now carry 535 kashidas and 495 borne hamzas.
+**order** and **composition** existed because quran-text applied NFC, which
+reorders a shaddah past its vowel and composes ا + ٓ into آ. It no longer does;
+the releases' own code points are published, and they agree with this edition.
+
+Neither is a change in the text. Both are the upstream file coming to say what
+the printed page already said.
+
+It prints identically. It is not a difference in the text, and it may not be a
+difference in what the engine reads — so each is handled in
 `packages/core/src/normalize.ts`, and `packages/core/test/encodings.test.ts`
 writes every case twice, once in each encoding, and asserts the two normalise to
 the same string.
 
-**4 ayahs are a real difference in the text.** They are not normalisation, and
-nothing here decides them:
+**4 ayahs still differ, and they are not one kind of thing.** Three are the same
+printed mark drawn with a different code point — the same shape of difference as
+the tanween class above, a fifth normalisation class rather than a disagreement
+about the text. One is a genuine difference in the rasm. Nothing here decides
+any of them:
 
 | | |
 |---|---|
-| **11:41** | quran-text marks the rāʾ of مَجۡرٜىٰهَا with U+065C (vowel sign dot below); this repository's edition uses U+06EA. The imāla. |
-| **27:20**, **36:22** | مَا لِيَ is two words in quran-text and one, مَالِيَ, here. A rule can match across a word boundary or not, so this is not cosmetic. |
-| **52:37** | ٱلۡمُصَۣيۡطِرُونَ carries U+06E3 (small low seen) in quran-text and U+06DC (small high seen) here — the ṣād/sīn variant, and U+06DC is the character the normaliser reads as a saktah. |
+| **11:41** | *mark encoding.* The imāla on the rāʾ of مَجۡرٜىٰهَا: U+065C here, U+06EA there. Both draw the same mark, and PR #2 now reads either. |
+| **27:20**, **36:22** | *rasm.* مَا لِيَ is two words in quran-text and one, مَالِيَ, here — the only genuine difference in the written text of the two editions. A rule can match across a word boundary or not, so this is not cosmetic. |
+| **52:37** | *mark encoding.* The ṣād/sīn variant on ٱلۡمُصَۣيۡطِرُونَ: U+06E3 below there, U+06DC above here. Note U+06DC is also what the normaliser reads as a saktah at a word end, so the two are not interchangeable in code. |
 
 ## What that costs, measured
 
-With all four classes handled, **6,168** of 6,236 ayahs normalise to a
-byte-identical string, against **2,357** before any of them were, and the engine finds **147,233** spans on quran-text's Ḥafṣ
-against **147,255** on the current reference — 22 spans apart, with **18** of 164
-rules moving.
+With the one class handled, **6,231** of 6,236 ayahs normalise to a
+byte-identical string, and the engine finds **147,257** spans on quran-text's
+Ḥafṣ against **147,255** on this edition — two apart, with **1** of 164 rules
+moving.
 
-Before the normaliser was taught the open tanween, that number was not 22. Every
-rule in the tanween family — idghām, ikhfāʾ, iqlāb, iẓhār — matched **zero** ayahs
-on quran-text's text, because U+08F0 U+08F1 U+08F2 were unrecognised and stripped
-as decoration. `pnpm edition:check` reported 24 rules drifting; it now reports
-none. Nothing raised an error at any point. That is the failure mode this whole
-file exists to describe: a missing mark is not an error, it is a ruling that
-quietly stops being reported.
+Before the normaliser was taught the open tanween, every rule in the tanween
+family — idghām, ikhfāʾ, iqlāb, iẓhār — matched **zero** ayahs on quran-text's
+text, because U+08F0 U+08F1 U+08F2 were unrecognised and stripped as decoration.
+`pnpm edition:check` reported 24 rules drifting and exited 0; it now reports none
+and, since the gate was fixed, would exit 1 if it did. Nothing raised an error at
+any point. That is the failure mode this whole file exists to describe: a missing
+mark is not an error, it is a ruling that quietly stops being reported.
 
 ## What is still open
 
-**68 ayahs do not normalise alike**: the 4 above, and 64 more. Every one of the
-64 is the same question — how a hamza and the letter it sits on are stored — in
-three shapes:
+**5 ayahs do not normalise alike**: the 4 above, and **35:43**.
 
-- **38** where quran-text writes a precomposed ئ (U+0626) and this edition writes
-  a yāʾ plus a borne hamza: سَيِّـَٔاتِ against سَئَِّاتِ, يَـُٔودُهُۥ against
-  ئَُودُهُۥ. One stores two consonants, the other one. That is a reading of the
-  orthography, not an encoding detail, so it is not decided here.
-- **6** — يَطَـُٔونَ, ٱخۡسَـُٔواْ, أَسَـٰٓـُٔواْ — where the letter's vowel and the
-  hamza's both sit *above* the line, and quran-text stores them in the order they
-  are drawn rather than by which of the two they belong to. There the owner
-  cannot be recovered from the file, and the two can be assigned the wrong way
-  round. Wherever the two marks fall on opposite sides of the line the order does
-  resolve it, which is why the other 449 of the 455 unborne hamzas read correctly.
-- **20** in the remaining shapes of the same family — تِلۡقَآيِٕ, هَنِيءًا,
-  خَطِيءَاتِ, ٱمۡرِيٍْ — of which 7 write the hamza below the line as U+0655. The
-  normaliser recovers only a hamza written above, so on those the consonant is
-  dropped on **both** editions and they differ only in the incidental sukoon one
-  mark order provokes. That is a pre-existing gap rather than a migration issue,
-  and closing it would move published offsets.
+35:43 is the only unborne hamza left in the muṣḥaf. quran-text writes
+ٱلسَّيِّئُ as yāʾ + U+0654 + ḍammah where this edition writes the precomposed ئ,
+and the normaliser keeps the seat, producing a yāʾ before a hamza — which reads
+as a madd and is not one. It costs **two spurious spans**, `madd-muttasil.3` and
+`madd-tabee-kalimi.3`.
+
+It looks like an upstream inconsistency rather than an encoding choice: the same
+word-shape occurs in **11 ayahs in this edition and 10 in quran-text**, and
+35:43 is the single place it is decomposed, out of 907 ئ seats. Raised rather
+than worked around.
 
 **Five rules match nothing on quran-text's Ḥafṣ** — `seven-alefs.1`, `.3`, `.4`,
 `.5` and `madd-lazim-kalimi-mukhaffaf.1`. All five carry `matchAgainst: "original"`,
