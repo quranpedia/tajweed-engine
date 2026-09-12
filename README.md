@@ -23,9 +23,10 @@ Use it for Tajweed colouring, explaining rules while reading, and building recit
 | **Licence** | CC BY 4.0 (the corpus, annotations and editions) · MIT (the engine and tools) |
 
 ```sh
-# Not published yet: every package name in this repository 404s on the npm
-# registry today, and `tajweed` 404s on PyPI. Publication is intended.
-# Until then, take the data from a release — the assets are the whole dataset:
+npm i @quran.ws/tajwid @quran.ws/tajwid-rules @quran.ws/tajwid-annotations
+
+# The Python package is not published; take the dataset from a release,
+# whose assets are the whole corpus:
 gh release download v0.4.3 -R quran-ws/quran-tajweed
 ```
 
