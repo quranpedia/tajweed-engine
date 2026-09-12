@@ -21,7 +21,7 @@ WHAT IS COVERED BY WHAT
   .github/     MIT
   conformance/ CC BY 4.0
   docs/        CC BY 4.0
-  editions/    CC BY 4.0    — derived from KFGQPC text editions
+  editions/    CC BY 4.0    — see the note below; not all of it is ours to license
   packages/    MIT
   playground/  MIT
   python/      MIT
@@ -29,6 +29,25 @@ WHAT IS COVERED BY WHAT
 
 Where a directory or file carries its own LICENSE or NOTICE, that notice
 governs for that material. Names, logos and trademarks are not licensed.
+
+On editions/, which is not one thing:
+
+  hafs-quran-text.json  is taken from quran-ws/quran-text, and through it from
+                        the KFGQPC package named in the file's own `source`
+                        block, with that package's SHA-256. The KFGQPC terms
+                        below govern it.
+
+  uthmani-hafs.json     was exported from an earlier application and where its
+                        text came from before that was not recorded. It is NOT
+                        the KFGQPC text: of its 6,236 ayahs, 345 are byte-
+                        identical to the KFGQPC Hafs and the rest are not. We
+                        do not know what it derives from, so we do not assert a
+                        derivation for it, and we cannot license it as though we
+                        did. The file says the same thing in its own `source`.
+
+Naming this rather than covering both with one clause is deliberate: a licence
+that asserts a provenance nobody can check is worth less than one that says
+which of the two is which.
 
 
 ═══════════════════════════════════════════════════════════════════════════════
