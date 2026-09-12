@@ -21,11 +21,19 @@ of mistake.
 | القلقلة | 3 | صغرى في وسط الكلمة، متطرفة على حرف ساكن في آخرها، وكبرى على رأس الآية |
 
 القلقلة and المد اللازم were written for this corpus; the source system did not
-have them. Before المد اللازم was added, the engine had nothing to say about
-الحروف المقطعة — the disjoined letters that open some surahs. Every rule in
-these two areas is flagged `needsReview` until
-a qualified reviewer signs it off, and each is tested against passages whose
-ruling is not in dispute — see `scripts/verify-rules.ts`.
+have them. Adding المد اللازم gave the engine something to say about الحروف
+المقطعة — the disjoined letters that open some surahs — but **not about all of
+them, and not yet about 20:1**, which still carries no annotation of any kind.
+The gap is described below; it is recorded, not filled.
+
+Every rule in these two areas is flagged `needsReview` until a qualified
+reviewer signs it off, and each is tested against passages whose ruling is not
+in dispute — see `scripts/verify-rules.ts`. **That is a statement about the test
+fixtures and nothing more.** Two rules in this area now carry recorded disputes
+about their rulings — `madd-lazim-harfi.1` and `qalqalah-kubra.1`, both
+`status: "disputed"` — and the fixtures pinning them are not the passages under
+question. A passing fixture is not a settled ruling, and this sentence has been
+read as though it were.
 
 Two consequences of the same limit are worth knowing before you rely on the
 output:
@@ -50,6 +58,33 @@ These are missing from the corpus entirely — not disabled, not partial, missin
   `طه` is the single ayah in the mushaf with no ruling at all: it is ṭā-hā and
   nothing else. Until this was corrected the ṭāʾ was marked قلقلة, which made
   the gap invisible rather than absent.
+
+  **This is the largest single gap in the corpus, and unlike the others it is
+  not disputed by anyone.** Two ḥarakāt on these five letters is undisputed;
+  there is no خلاف to preserve, no spelled-out name the notation cannot see, and
+  nothing waiting on a reviewer. It is simply absent.
+
+  It reaches **19 of the 30 opening āyahs** (29 surahs; 42 opens across two
+  āyahs). Derived from the edition rather than counted by hand — the openings
+  carrying at least one of ط ه ي ح ر are:
+
+  | letter | openings |
+  |---|---|
+  | ر | 10:1, 11:1, 12:1, 13:1, 14:1, 15:1 |
+  | ح | 40:1, 41:1, 42:1, 43:1, 44:1, 45:1, 46:1 |
+  | ط | 20:1, 26:1, 27:1, 28:1 |
+  | ي | 19:1, 36:1 |
+  | ه | 19:1, 20:1 |
+
+  **Filling this is what would close 20:1. Documenting it is not.** 20:1 is the
+  only one of those openings that currently receives nothing at all — every
+  other one already carries some annotation from a neighbouring rule, so the gap
+  is invisible there. As long as this rule is missing, "6,235 of 6,236 āyahs are
+  annotated" stays true and stays quoted, and the one āyah left out is left out
+  for a reason that has no scholarly disagreement behind it.
+
+  **No rule is written here.** Writing it is a rule change, and rule changes in
+  this corpus go to a qualified reviewer, not into a documentation commit.
 
 - **القلقلة عند الوقف في وسط الآية.** A qalqalah letter that carries a vowel at
   the end of a word — the ط of صِرَٰطَ, the ب of ٱلۡمَغۡضُوبِ — only becomes qalqalah
