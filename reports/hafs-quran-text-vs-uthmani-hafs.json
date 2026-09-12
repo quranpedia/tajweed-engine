@@ -17,13 +17,12 @@
     "other": {
       "id": "hafs-quran-text",
       "path": "editions/hafs-quran-text.json",
-      "sha256": "a347fc574933e439099e8d0e1883d15638b02983013859a7a3040f70277d000b",
+      "sha256": "9e8f389fd43a2b5d159d080c2153cc1b67373663a560bc4fc294267b852d4d88",
       "source": {
         "repository": "quran-ws/quran-text",
-        "read": "https://text.quran.ws/download?edition=hafs&format=json",
+        "read": "/Users/abdullah/Documents/Github/quran-text/data/mushaf/hafs.json",
         "dataset": "2026-09-08",
         "edition": "hafs",
-        "file_sha256": "a3e96d4ce78c7c4f1142e1d22ae51bd2aec1efeaaa8e0bf1e4c3f77647996c0a",
         "kfgqpc": {
           "package": "UthmanicHafs-v-3.0.zip",
           "member": "UthmanicHafs-v-3.0.docx",
@@ -36,26 +35,21 @@
   "text": {
     "ayahsCompared": 6236,
     "onlyInReference": [],
-    "identical": 345,
+    "identical": 2715,
     "reconciledBy": [
       {
         "id": "order",
         "what": "the order of the marks stacked on one letter",
-        "reconciled": 2548
+        "reconciled": 2715
       },
       {
         "id": "composition",
         "what": "a precomposed letter (آ أ ؤ ئ) against a base letter plus a combining mark",
-        "reconciled": 2548
+        "reconciled": 2715
       },
       {
         "id": "tanween",
         "what": "positional tanween (U+0657 U+065E U+0656) against open tanween (U+08F0 U+08F1 U+08F2)",
-        "reconciled": 5738
-      },
-      {
-        "id": "bearer",
-        "what": "a hamza borne on a tatweel (U+0640) against one written on its letter",
         "reconciled": 6232
       }
     ],
@@ -89,67 +83,27 @@
   },
   "normalisation": {
     "note": "Ayahs that reach the matchers as the same string. The four real textual differences are included in the remainder and cannot be normalised away.",
-    "alike": 6227,
+    "alike": 6231,
     "apart": [
-      "2:245",
       "11:41",
-      "25:49",
       "27:20",
+      "35:43",
       "36:22",
-      "46:33",
-      "52:21",
-      "52:37",
-      "75:40"
+      "52:37"
     ]
   },
   "rules": {
     "compiled": 164,
     "spans": {
-      "reference": 147261,
-      "other": 147255
+      "reference": 147255,
+      "other": 147257
     },
     "matchingDifferently": [
       {
-        "id": "tafkheem-rank-4-jazari.1",
-        "reference": 1746,
-        "other": 1745,
-        "delta": -1
-      },
-      {
-        "id": "iqlab-tanween.3",
-        "reference": 82,
-        "other": 81,
-        "delta": -1
-      },
-      {
-        "id": "seven-alefs.1",
-        "reference": 1,
-        "other": 0,
-        "delta": -1
-      },
-      {
-        "id": "seven-alefs.3",
-        "reference": 1,
-        "other": 0,
-        "delta": -1
-      },
-      {
-        "id": "seven-alefs.4",
-        "reference": 1,
-        "other": 0,
-        "delta": -1
-      },
-      {
-        "id": "seven-alefs.5",
-        "reference": 1,
-        "other": 0,
-        "delta": -1
-      },
-      {
-        "id": "madd-lazim-kalimi-mukhaffaf.1",
-        "reference": 2,
-        "other": 0,
-        "delta": -2
+        "id": "madd-muttasil.3",
+        "reference": 25,
+        "other": 26,
+        "delta": 1
       }
     ]
   }

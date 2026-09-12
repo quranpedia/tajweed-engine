@@ -135,11 +135,21 @@ if (existsSync(frozenPath)) {
     }
   }
 
+  // A rule that moves is worth a look. A rule that stops matching ENTIRELY is a
+  // different thing: it is what a stripped or unrecognised mark looks like from
+  // here, and it is the failure this whole check exists to catch. Removing the
+  // open tanween from a valid edition silences twenty-four rules at once, and
+  // this used to report that and exit 0.
+  const collapsed: Array<{ id: string; here: number; reference: number }> = []
   const drifted: Array<{ id: string; here: number; reference: number }> = []
   for (const rule of engine.rules) {
     const baseline = frozen.incidence[rule.id]?.ayahs ?? 0
     const actual = matched.get(rule.id) ?? 0
     if (baseline < 20) {
+      continue
+    }
+    if (actual === 0) {
+      collapsed.push({ id: rule.id, here: actual, reference: baseline })
       continue
     }
     const ratio = actual / baseline
@@ -149,10 +159,22 @@ if (existsSync(frozenPath)) {
   }
 
   console.log(`\nRules, against the reference edition:\n`)
-  console.log(`  ${engine.rules.length} rules run, ${drifted.length} matching a very different number of ayahs`)
+  console.log(
+    `  ${engine.rules.length} rules run, ${collapsed.length} matching nothing at all, ` +
+      `${drifted.length} matching a very different number of ayahs`,
+  )
 
-  for (const entry of drifted.slice(0, 20)) {
+  for (const entry of [...collapsed, ...drifted].slice(0, 20)) {
     console.log(`    ${entry.id.padEnd(34)} ${String(entry.here).padStart(5)} here vs ${entry.reference} in the reference`)
+  }
+
+  if (collapsed.length > 0) {
+    problems.push(
+      `${collapsed.length} rules match nothing at all here, against ${collapsed[0]!.reference} ` +
+        `and more in the reference — ${collapsed.slice(0, 4).map((c) => c.id).join(', ')}` +
+        `${collapsed.length > 4 ? ', …' : ''}. A rule that finds nothing is what an unreadable ` +
+        'mark looks like from here, and it reports no ruling where there is one.',
+    )
   }
 
   if (drifted.length > 0) {
