@@ -98,8 +98,28 @@ diff, rather than taking the passing gates as proof.
 | spans, edition against edition | **150,096 and 150,096 — identical** |
 | rules matching a different number of āyahs | **0 of 178** |
 | āyahs normalising alike | **6,233 of 6,236** |
-| residue | **3** |
+| residue after normalisation | **3** |
+| raw byte differences | **4** |
 | tests | **83** |
+
+**Those last two are different measurements and must not share a word.** *Raw
+byte differences* counts āyahs whose stored bytes still differ once the declared
+classes are allowed for. *Residue after normalisation* counts āyahs that still
+differ after the normaliser runs — the number that decides whether a rule can
+match. Neither bounds the other: normalisation can introduce a difference as
+well as remove one, and on #7 alone they are 4 and 5. One word for both is how
+"182 rules" and "164 rule ids" came to be quoted interchangeably, and how a
+stale "57 aḥkām" survived four branches. `edition:diff` now labels them apart at
+the source.
+
+**A known-wrong output in this tree, so nobody quotes it.** `pnpm edition:diff`
+here still prints `4 left over, and those are real differences in the text`.
+**Not one of those four is a difference in the letters** — two are word
+separation (27:20, 36:22), one is the same ruling recorded with two different
+code points (11:41), and one is unresolved (52:37). The corrected tool lives on
+#7, which is held, so this tree cannot carry the fix yet. Strip every mark and
+decompose every seat and the two editions differ in 2 places with spaces
+significant and **0** ignoring spaces.
 
 **The residue of three is the best single number here.** On any branch alone it
 is four. #2's imāla alternation resolves 11:41 — but only once #7's second
