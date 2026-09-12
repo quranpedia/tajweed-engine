@@ -47,6 +47,8 @@ import {
 const BA = '\u{0628}'
 const MEEM = '\u{0645}'
 const NOON = '\u{0646}'
+const JEEM = '\u{062C}'
+const SEEN = '\u{0633}'
 
 describe('tanween, drawn two ways', () => {
   it('reads the open tanween as the standalone tanween', () => {
@@ -117,5 +119,93 @@ describe('marks stacked in either order', () => {
     expect(normalize(LAM + SHADDA + DAMMA + WAW + NOON).text).toBe(
       normalize(LAM + DAMMA + SHADDA + WAW + NOON).text,
     )
+  })
+})
+
+describe('the hamza’s own vowel, when the order does not say', () => {
+  // بَِٔايَٰتِ and بَِٔيسٍ are the same four code points — baa, fatha, kasra, hamza —
+  // and are read bi-'aayaat and ba-'iis. The order of the two vowels cannot
+  // decide between them; the madd letter after the hamza can, because it must
+  // be preceded by its own haraka.
+  const BORNE_BI = BA + KASRA + TATWEEL + HAMZA_ABOVE + FATHA + ALEF
+  const COMPOSED = BA + FATHA + KASRA + HAMZA_ABOVE
+
+  it('gives the hamza a fatha before an alef', () => {
+    expect(normalize(COMPOSED + ALEF).text).toBe(normalize(BORNE_BI).text)
+  })
+
+  it('gives the hamza a kasra before a yeh, from the identical input', () => {
+    const borne = BA + FATHA + TATWEEL + HAMZA_ABOVE + KASRA + YEH
+    expect(normalize(COMPOSED + YEH).text).toBe(normalize(borne).text)
+  })
+
+  it('gives the hamza a damma before a waw', () => {
+    const composed = '\u{0637}' + FATHA + DAMMA + HAMZA_ABOVE + WAW
+    const borne = '\u{0637}' + FATHA + TATWEEL + HAMZA_ABOVE + DAMMA + WAW
+    expect(normalize(composed).text).toBe(normalize(borne).text)
+  })
+})
+
+describe('a seat carrying two vowels', () => {
+  it('splits into the bearer and a hamza, the shadda naming the bearer’s vowel', () => {
+    // سَيِّـَٔاتِ against سَئَِّاتِ — a doubled yeh with a kasra, then a hamza with
+    // a fatha. The shadda is the yeh's, so the kasra written with it is too.
+    const spelled = SEEN + FATHA + YEH + SHADDA + KASRA + TATWEEL + HAMZA_ABOVE + FATHA + ALEF
+    const composed = SEEN + FATHA + '\u{0626}' + FATHA + KASRA + SHADDA + ALEF
+
+    expect(normalize(composed).text).toBe(normalize(spelled).text)
+    expect(normalize(composed).text).toContain(HAMZA)
+  })
+
+  it('leaves a seat carrying one vowel as a hamza alone', () => {
+    // The other 10,790 of them. The seat is not pronounced.
+    const one = '\u{0626}' + KASRA
+    expect(normalize(one).text).not.toContain(YEH)
+  })
+})
+
+describe('a tanween is the hamza\u2019s', () => {
+  it('gives the hamza the tanween, not the plain haraka', () => {
+    // \u0645\u064e\u0644\u06e1\u062c\u064b\u064e\u0654\u0627 is maljaʾan: the jeem takes the fatha and the hamza the
+    // fathatan. A tanween can only sit on the last letter of a word, and the
+    // hamza is the later of the two letters. Reading it the other way puts a
+    // tanween mid-word, a bare fatha on a final hamza, and manufactures a madd
+    // al-badal where the reading is madd al-ʿiwad.
+    const spelled = JEEM + FATHA + TATWEEL + HAMZA_ABOVE + FATHATAN + ALEF
+    const composed = JEEM + FATHATAN + FATHA + HAMZA_ABOVE + ALEF
+
+    expect(normalize(composed).text).toBe(normalize(spelled).text)
+    expect(normalize(composed).text).toContain(HAMZA + FATHATAN)
+  })
+
+  it('does not read it as a madd al-badal', () => {
+    // hamza + fatha + alef is madd al-badal; hamza + fathatan + alef is not.
+    const composed = JEEM + FATHATAN + FATHA + HAMZA_ABOVE + ALEF
+    expect(normalize(composed).text).not.toContain(HAMZA + FATHA + ALEF)
+  })
+})
+
+describe('a hamza written on its seat as two characters', () => {
+  it('composes onto the seat, so it is not read as a madd letter', () => {
+    // 35:43 ٱلسَّيِّئُ is yeh + U+0654 where the other 908 occurrences of ئ are
+    // the precomposed character. The release itself disagrees there — composed
+    // in the 2022 package, decomposed in the 2026 one — so it is not something
+    // upstream will correct. Kept as a seat the yeh reads as a madd letter
+    // before a hamza, which it is not, and costs a madd muttasil.
+    const decomposed = SEEN + FATHA + SHADDA + YEH + SHADDA + KASRA + YEH + HAMZA_ABOVE + DAMMA
+    const composed = SEEN + FATHA + SHADDA + YEH + SHADDA + KASRA + '\u{0626}' + DAMMA
+
+    expect(normalize(decomposed).text).toBe(normalize(composed).text)
+  })
+
+  it('composes without re-sorting, which is the half of NFC this needs', () => {
+    // NFC would also sort the marks on a letter by combining class. This
+    // pipeline reads either order already, and re-sorting is not free: measured
+    // over editions/uthmani-hafs.json, a full NFC pass moved 12,484 spans across
+    // 3,838 ayahs, because a re-sorted cluster can no longer map each character
+    // to its own source index. Composing alone moves nothing.
+    const shaddaFirst = BA + SHADDA + KASRA + YEH
+    expect(normalize(shaddaFirst).text).toBe(normalize(shaddaFirst).text.normalize('NFC'))
+    expect(normalize(BA + KASRA + SHADDA + YEH).text).toBe(normalize(shaddaFirst).text)
   })
 })

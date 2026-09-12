@@ -22,7 +22,8 @@
     "edition:diff": "tsx scripts/compare-editions.ts",
     "inspect": "tsx scripts/inspect.ts",
     "make-edition": "tsx scripts/make-edition.ts",
-    "import:quran-text": "tsx scripts/import-quran-text.ts"
+    "import:quran-text": "tsx scripts/import-quran-text.ts",
+    "recheck": "tsx scripts/recheck-quran-text.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
