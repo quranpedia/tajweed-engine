@@ -48,19 +48,28 @@ compared character for character, and rule-to-ayah incidence compared set for
 set. Both agreed exactly, for every ayah and for every comparable rule.
 
 **That was the state at the snapshot, and it is no longer the state at HEAD.**
-Seven rules have deliberately moved since: three madd rules whose patterns
-searched for the wrong letter, and four that stopped mis-reading الحروف المقطعة.
-Each is recorded in [docs/divergences.md](../docs/divergences.md). A reader who
-quotes "agreed exactly" about today's engine is quoting the wrong sentence.
+The current figure, and the one to quote:
 
-Seven, not fifteen, and which number you get depends on which legacy rule table
-you compare against — so say which. Eight further rules (`seven-alefs.1`–`.6`,
-`seven-alefs-khulf.1`, `raa-either-permissible.2`) differ from the authored
-spreadsheet but **match the legacy database exactly**: they were hand-edited
-there in February 2026 and the workbook was never updated. This corpus carries
-the database value, so those eight are inherited rather than authored here.
-`node scripts/differential-legacy.mjs` reports both numbers — 147/154 against
-`--rules deployed`, 139/154 against `--rules spreadsheet`.
+> **147 of 154 comparable rules agree set-for-set with the legacy engine as it
+> actually ran** (`pnpm differential --rules deployed`). The seven that differ are
+> every deliberate change this engine has made and nothing else: three madd rules
+> whose patterns searched for the wrong madd letter, and four that stopped
+> reading the letter names of الحروف المقطعة as sakin consonants.
+
+Each of the seven is recorded in [docs/divergences.md](../docs/divergences.md). A
+reader who quotes "agreed exactly" about today's engine is quoting the wrong
+sentence.
+
+The same run against the *authored workbook* reports **139 of 154**, and both
+numbers have to travel together or neither means anything. The difference is
+eight rules — `seven-alefs.1`–`.6`, `seven-alefs-khulf.1` and
+`raa-either-permissible.2` — which **production stopped matching in February
+2026**: they were hand-edited in the legacy database on 2026-02-24 and -25, nine
+hours after the workbook was imported, and the workbook was never updated to
+match. This corpus carries the database value for all eight, so they are
+inherited rather than authored here. 139 is not a worse 147; it is the answer to
+a different question — *does a rule still say what its author wrote* — and on
+eight rules the author's last word was typed into a database, not a spreadsheet.
 
 **Comparable is 154 rules, not 164.** 164 is the number of *enabled* rules
 (182 − 18 disabled), and it is the wrong denominator for a comparison against the

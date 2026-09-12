@@ -1,21 +1,28 @@
 {
  "$comment": [
-  "Derived artifact. The legacy rule table AS DEPLOYED - what the PHP engine actually",
-  "ran with in production, which is not the same as the authored spreadsheet.",
+  "DERIVED FROM A PRODUCTION DATABASE DUMP taken 2026-09-12 from the live",
+  "tajweed application (qaws-net/tajweed), table `tajweed_rules` only. It contains",
+  "rule patterns and nothing else: no user data, no credentials, no reader activity.",
   "",
-  "Eight rules were hand-edited in the database in Feb 2026 and the spreadsheet was",
-  "never updated to match: seven-alefs.1-.6, seven-alefs-khulf.1 (2026-02-24 evening)",
-  "and raa-either-permissible.2 (2026-02-25). Our corpus carries the DATABASE value",
-  "for all eight, so they are inherited, not authored here.",
+  "This is the legacy rule table AS DEPLOYED - what the PHP engine actually ran",
+  "with, which is NOT the same as the authored workbook. Use",
+  "rules-from-spreadsheet.json for that.",
+  "",
+  "EIGHT RULES DIFFER FROM THE WORKBOOK, listed in full under differsFromWorkbook",
+  "below. Each was hand-edited in the database in February 2026 - nine hours to a",
+  "day after the workbook was imported - and the workbook was never updated to",
+  "match. This corpus carries the DATABASE value for all eight, so they are",
+  "inherited rather than authored here.",
   "",
   "IS THIS CIRCULAR? For rules 1-172 before 2026-08-18, no: they predate this",
-  "engine. Seven rows WERE written by us on 2026-08-18 (3 tahhan, 4 madd) and are",
-  "reverted here to their spreadsheet value, which is what the legacy engine ran",
-  "with; revertedToSpreadsheet marks them. Rules 175-182 are ours entirely and are",
-  "absent. tajweed_ayah_spans IS downstream of us - 147,255 rows, our published span",
-  "count - and is never used here.",
+  "engine entirely. Seven rows WERE written by us on 2026-08-18 (three tahhan,",
+  "four madd) and are reverted here to their pre-our-write workbook value, which is",
+  "what the legacy engine ran with; revertedToSpreadsheet names them. Rules 175-182",
+  "are ours entirely and are absent. The `tajweed_ayah_spans` table IS downstream",
+  "of us - 147,255 rows, exactly our published span count - and is never used here.",
   "",
-  "Regenerate from a dump with: node scripts/differential-legacy.mjs --rebuild-deployed <dump.sql>"
+  "Regenerate from a dump with:",
+  "  node scripts/differential-legacy.mjs --rebuild-deployed <dump.sql>"
  ],
  "source": {
   "database": "tajweed (production)",
@@ -23,6 +30,67 @@
   "capturedAt": "2026-09-12",
   "importedAt": "2026-02-24 09:35:07/08",
   "ourWriteAt": "2026-08-18 11:48:40 and 11:49:23"
+ },
+ "differsFromWorkbook": {
+  "$comment": "The eight rules where the database and the authored workbook disagree. This corpus carries the `database` value for every one.",
+  "rules": [
+   {
+    "id": 41,
+    "slug": "raa-either-permissible.2",
+    "workbook": "[ــــــــِـــ] + [ خْ صْ ضْ غْ طْ قْ ظْ] + رْ",
+    "database": "فِرْقٍ",
+    "dbUpdatedAt": "2026-02-25 09:48:15"
+   },
+   {
+    "id": 156,
+    "slug": "seven-alefs.1",
+    "workbook": "لكنا",
+    "database": "لَّٰكِنَّا۠",
+    "dbUpdatedAt": "2026-02-24 19:23:48"
+   },
+   {
+    "id": 157,
+    "slug": "seven-alefs.2",
+    "workbook": "قواريرا",
+    "database": "قَوَارِيرَا۠",
+    "dbUpdatedAt": "2026-02-24 19:22:45"
+   },
+   {
+    "id": 158,
+    "slug": "seven-alefs.3",
+    "workbook": "الظنونا",
+    "database": "ٱلظُّنُونَا۠",
+    "dbUpdatedAt": "2026-02-24 19:23:48"
+   },
+   {
+    "id": 159,
+    "slug": "seven-alefs.4",
+    "workbook": "الرسولا",
+    "database": "ٱلرَّسُولَا۠",
+    "dbUpdatedAt": "2026-02-24 19:23:48"
+   },
+   {
+    "id": 160,
+    "slug": "seven-alefs.5",
+    "workbook": "السبيلا",
+    "database": "ٱلسَّبِيلَا۠",
+    "dbUpdatedAt": "2026-02-24 19:23:48"
+   },
+   {
+    "id": 161,
+    "slug": "seven-alefs.6",
+    "workbook": "أنا + [ء أ ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي]",
+    "database": "أَنَا۠",
+    "dbUpdatedAt": "2026-02-24 19:23:02"
+   },
+   {
+    "id": 162,
+    "slug": "seven-alefs-khulf.1",
+    "workbook": "سلاسلا",
+    "database": "سَلَاسِلَاْ",
+    "dbUpdatedAt": "2026-02-24 19:26:02"
+   }
+  ]
  },
  "revertedToSpreadsheet": [
   "tafkheem-rank-1-tahhan.3",
