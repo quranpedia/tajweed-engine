@@ -2791,7 +2791,7 @@
     {
       "id": "imalah-kubra.1",
       "hukum": "imalah-kubra",
-      "case": "[مَجۡر۪ىٰهَا]",
+      "case": "[مَجۡر۪ىٰهَا مَجۡرٜىٰهَا]",
       "scope": "within-word",
       "matchAgainst": "original",
       "status": "stable",
@@ -2807,7 +2807,7 @@
     {
       "id": "tashil-hamza.1",
       "hukum": "tashil-hamza",
-      "case": "[ءَا۬عۡجَمِيّٞ]",
+      "case": "[ءَا۬عۡجَمِيّٞ ءَا۬عۡجَمِيࣱّ]",
       "scope": "within-word",
       "matchAgainst": "original",
       "status": "stable",
