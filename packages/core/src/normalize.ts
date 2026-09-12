@@ -54,6 +54,7 @@ import {
   ZWSP,
   isDiacritic,
   isStackedMark,
+  isTanween,
   isVowelMark,
   toCodePoints,
 } from './unicode.js'
@@ -181,6 +182,13 @@ function homogeneousVowel(next: string | undefined): string | undefined {
  *
  * A seat carrying one vowel, or none, is untouched: it is a hamza alone, which
  * is what the other 10,790 of them are.
+ *
+ * Only ئ is attested: all 40 two-vowel seats in Hafs are ئ, and none is ؤ or أ.
+ * Those two branches therefore never run, on either edition. They are written
+ * for symmetry and they are UNTESTED against the mushaf — and the أ branch in
+ * particular says an alef can be a sounded bearer, which is not true of an alef
+ * that is a hamza seat. If either ever fires, it should be reviewed before it is
+ * trusted rather than assumed correct because it is here.
  */
 const splitSeatedHamza: Pass = (input) => {
   const SEATS: Record<string, string> = {
@@ -326,16 +334,46 @@ const seatUnborneHamza: Pass = (input) => {
       if (input[before[before.length - 1]!] === SUKOON) {
         // A sukoon written last is the bearer's, and it is all the bearer has:
         // ٱلَٰۡٔنَ is a sakin laam, then a hamza with a fatha and a long alef.
+        //
+        // A maddah written last does NOT behave this way, though it looks as
+        // though it should: يَٰٓـَٔادَمُ gives the bearer its fatha, its dagger
+        // alef AND its maddah, and only the first mark to the hamza. Treating a
+        // maddah like a sukoon here moved seven ayahs the wrong way.
         moved = before.slice(0, -1)
         before = before.slice(-1)
       } else if (vowels.length >= 2) {
-        const wanted = homogeneousVowel(input[hamza + 1])
-        const chosen = wanted === undefined ? vowels[0]! : (vowels.find((k) => input[k] === wanted) ?? vowels[0]!)
+        // A tanween sits only on the last letter of a word, and of the two
+        // letters here the hamza is the later — so a tanween among the pair is
+        // the hamza's, and nothing else needs consulting. مَلۡجًَٔا is maljaʾan:
+        // the jeem takes the fatha, the hamza the fathatan. Read the other way
+        // it puts a tanween mid-word and a bare fatha on a final hamza, and
+        // manufactures a madd al-badal where the reading is madd al-ʿiwad.
+        const tanween = vowels.filter((k) => isTanween(input[k]))
+        // The letter after the hamza names the hamza's vowel — but only while it
+        // is a BARE madd letter. A yeh carrying a haraka is a consonant and says
+        // nothing about what came before it. Every occurrence in Hafs is bare,
+        // so this changes nothing here; the rule is wrong without it.
+        const wanted = isDiacritic(input[hamza + 2]) ? undefined : homogeneousVowel(input[hamza + 1])
+        const chosen =
+          tanween.length === 1
+            ? tanween[0]!
+            : wanted === undefined
+              ? vowels[0]!
+              : (vowels.find((k) => input[k] === wanted) ?? vowels[0]!)
         moved = [chosen]
         before = before.filter((k) => k !== chosen)
       } else if (bearerIsLong) {
-        moved = vowels
-        before = before.filter((k) => !vowels.includes(k))
+        // One vowel, and a bearer that cannot hold it: the bearer is already a
+        // madd letter. The vowel is the hamza's, and so is a dagger alef, which
+        // is the hamza's own madd — خَطِيَٰٓٔتِ is a madd yeh, then hamza + fatha
+        // + long alef. The maddah written last is the bearer's own and stays.
+        //
+        // This is only safe here, below the two-vowel case. Applied before it,
+        // يَٰٓـَٔادَمُ — which writes the bearer's fatha AND the hamza's — loses
+        // its bearer's vowel to the hamza, and seven ayahs move the wrong way.
+        moved =
+          input[before[before.length - 1]!] === MADDAH_ABOVE ? before.slice(0, -1) : vowels
+        before = before.filter((k) => !moved.includes(k))
       }
     }
 
@@ -570,6 +608,9 @@ const PASSES: readonly Pass[] = [
   // only the contiguous pair left the small meem to be stripped as decoration
   // and the iqlab with it, on nine ayahs.
   substituting([
+    // …and where the hamza, with its maddah, sits between them: هَنِيَٓٔۢا writes
+    // fatha, maddah, hamza, small meem, and the tanween is the hamza's.
+    [FATHA + MADDAH_ABOVE + HAMZA_ABOVE + SMALL_HIGH_MEEM, FATHATAN + MADDAH_ABOVE + HAMZA_ABOVE],
     [DAMMA + SHADDA + SMALL_HIGH_MEEM, DAMMATAN + SHADDA],
     [FATHA + SHADDA + SMALL_HIGH_MEEM, FATHATAN + SHADDA],
     [KASRA + SHADDA + SMALL_HIGH_MEEM, KASRATAN + SHADDA],

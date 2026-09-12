@@ -47,6 +47,7 @@ import {
 const BA = '\u{0628}'
 const MEEM = '\u{0645}'
 const NOON = '\u{0646}'
+const JEEM = '\u{062C}'
 const SEEN = '\u{0633}'
 
 describe('tanween, drawn two ways', () => {
@@ -160,5 +161,26 @@ describe('a seat carrying two vowels', () => {
     // The other 10,790 of them. The seat is not pronounced.
     const one = '\u{0626}' + KASRA
     expect(normalize(one).text).not.toContain(YEH)
+  })
+})
+
+describe('a tanween is the hamza\u2019s', () => {
+  it('gives the hamza the tanween, not the plain haraka', () => {
+    // \u0645\u064e\u0644\u06e1\u062c\u064b\u064e\u0654\u0627 is maljaʾan: the jeem takes the fatha and the hamza the
+    // fathatan. A tanween can only sit on the last letter of a word, and the
+    // hamza is the later of the two letters. Reading it the other way puts a
+    // tanween mid-word, a bare fatha on a final hamza, and manufactures a madd
+    // al-badal where the reading is madd al-ʿiwad.
+    const spelled = JEEM + FATHA + TATWEEL + HAMZA_ABOVE + FATHATAN + ALEF
+    const composed = JEEM + FATHATAN + FATHA + HAMZA_ABOVE + ALEF
+
+    expect(normalize(composed).text).toBe(normalize(spelled).text)
+    expect(normalize(composed).text).toContain(HAMZA + FATHATAN)
+  })
+
+  it('does not read it as a madd al-badal', () => {
+    // hamza + fatha + alef is madd al-badal; hamza + fathatan + alef is not.
+    const composed = JEEM + FATHATAN + FATHA + HAMZA_ABOVE + ALEF
+    expect(normalize(composed).text).not.toContain(HAMZA + FATHA + ALEF)
   })
 })
