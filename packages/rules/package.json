@@ -1,5 +1,5 @@
 {
-  "name": "@tajweed/rules",
+  "name": "@quran-ws/tajwid-rules",
   "version": "0.1.0",
   "description": "A scholar-authored corpus of tajweed rules for the riwayah of Hafs 'an 'Asim, as versioned JSON.",
   "license": "CC-BY-4.0",

@@ -23,7 +23,7 @@ Before filing, worth checking:
 - [`docs/coverage.md`](../../docs/coverage.md) — the corpus is deep in seven
   topics and silent outside them. مد الفرق, مد الصلة الكبرى and السكت are among
   the things it does not model at all, and silence there is expected.
-- `npx @tajweed/cli explain <rule-id>` — a rule may already be `disabled`, with a
+- `npx @quran-ws/tajwid-cli explain <rule-id>` — a rule may already be `disabled`, with a
   recorded reason, or flagged `needsReview`.
-- `npx @tajweed/cli gaps` — 18 rules exist but cannot be expressed yet, and each
+- `npx @quran-ws/tajwid-cli gaps` — 18 rules exist but cannot be expressed yet, and each
   records which limitation of the notation blocks it.

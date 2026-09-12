@@ -1,9 +1,9 @@
-# @tajweed/cli
+# @quran-ws/tajwid-cli
 
 ```bash
-npx @tajweed/cli rules qalqalah
-npx @tajweed/cli explain madd-lazim-harfi.1
-npx @tajweed/cli gaps
+npx @quran-ws/tajwid-cli rules qalqalah
+npx @quran-ws/tajwid-cli explain madd-lazim-harfi.1
+npx @quran-ws/tajwid-cli gaps
 ```
 
 The CLI does two kinds of thing.

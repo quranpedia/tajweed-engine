@@ -6,7 +6,7 @@ rewritten.
 
 | Package | Version | Spans | Rules |
 |---|---|---|---|
-| `@tajweed/annotations` — **not yet published to npm** | `0.1.0`, corpus `0.4.2` | 147,255 | 182 authored, 164 compiled, 127 producing spans |
+| `@quran-ws/tajwid-annotations` — **not yet published to npm** | `0.1.0`, corpus `0.4.2` | 147,255 | 182 authored, 164 compiled, 127 producing spans |
 
 *Tajwīd* is the set of rules that govern how the Qurʾān is pronounced when it is
 recited: where a sound is lengthened, merged into the next, held silent, or read
@@ -161,7 +161,7 @@ cannot tell an absent rule from an absent ruling.
 | The Qurʾānic text itself — no published package here contains any | [Quran Text](https://quran.ws/blocks/quran-text/) |
 | To colour a printed, vectorised page rather than a string | [Quran SVG Elements](https://quran.ws/blocks/quran-svg-elements/), which addresses the word and the mark inside a page |
 | To draw those spans over a page on a phone, fast | [Quran Engine](https://quran.ws/blocks/quran-engine/) |
-| Ready-made coloured HTML | Nothing here returns markup. `@tajweed/react` renders; everything else reports positions |
+| Ready-made coloured HTML | Nothing here returns markup. `@quran-ws/tajwid-react` renders; everything else reports positions |
 | Tajwīd for Warsh, Qālūn, al-Dūrī or any other riwayah | Nothing yet. The corpus is Ḥafṣ only, and the tools refuse other riwayāt rather than produce plausible-looking wrong answers |
 
 ## See it work
@@ -217,8 +217,8 @@ character sequence build it from named code points.
 ## Quick start
 
 **There is no install line, because none of the packages are published.**
-`@tajweed/annotations`, `@tajweed/rules`, `@tajweed/core`, `@tajweed/react` and
-`@tajweed/cli` all return 404 on the npm registry today, and `tajweed` returns
+`@quran-ws/tajwid-annotations`, `@quran-ws/tajwid-rules`, `@quran-ws/tajwid`, `@quran-ws/tajwid-react` and
+`@quran-ws/tajwid-cli` all return 404 on the npm registry today, and `tajweed` returns
 404 on PyPI. Publication is intended; until then, read the files directly.
 
 The most recent release is `v0.4.0`, and it is behind `main`: it carries corpus
@@ -261,14 +261,14 @@ Three things that catch everyone:
    as an id returns `undefined` for every span.
 2. **Spans overlap on purpose** — one letter can demonstrate more than one
    ruling, and all of them are reported. Which to draw is a display decision;
-   `resolveOverlaps` in `@tajweed/core` flattens them if you want that.
+   `resolveOverlaps` in `@quran-ws/tajwid` flattens them if you want that.
 3. **Every label in the corpus is Arabic only.** There are no English or
    transliterated labels on the 7 topics, the 58 aḥkām or the 182 rules, so a
    non-Arabic interface has to supply its own mapping — and that mapping is a
    translation of scholarly terms, which deserves review.
 
 To go the other way — run the rules over your own text rather than read
-precomputed positions — clone the repository and use `@tajweed/core`:
+precomputed positions — clone the repository and use `@quran-ws/tajwid`:
 `new Tajweed(corpus).analyze(text)` returns `{ start, end, ruleId, hukumId,
 categoryId, topicId }`, measured against the string you passed in. Your text is
 never modified: matching runs on an internal normalised copy and every match is
@@ -295,9 +295,9 @@ mapped back.
 
 | What | Licence |
 |---|---|
-| Code — `@tajweed/core`, `@tajweed/react`, `@tajweed/cli`, `python/` | MIT |
-| The rule corpus — `@tajweed/rules` | CC BY 4.0, as a separate work ([`packages/rules/LICENSE`](./packages/rules/LICENSE)) |
-| The precomputed annotations — `@tajweed/annotations` | CC BY 4.0 |
+| Code — `@quran-ws/tajwid`, `@quran-ws/tajwid-react`, `@quran-ws/tajwid-cli`, `python/` | MIT |
+| The rule corpus — `@quran-ws/tajwid-rules` | CC BY 4.0, as a separate work ([`packages/rules/LICENSE`](./packages/rules/LICENSE)) |
+| The precomputed annotations — `@quran-ws/tajwid-annotations` | CC BY 4.0 |
 
 The text edition in `editions/` is not covered by either and is not published as
 a package.

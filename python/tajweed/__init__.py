@@ -36,7 +36,7 @@ __all__ = [
 
 # Separators for the canonical form an edition digest is taken over. Control
 # characters, because neither can occur in a reference or in Quranic text. These
-# must match editionDigest in @tajweed/core exactly; a different byte on either
+# must match editionDigest in @quran-ws/tajwid exactly; a different byte on either
 # side makes every edition look like a different edition.
 _FIELD_SEPARATOR = "\u0000"
 _RECORD_SEPARATOR = "\u0001"
@@ -208,7 +208,7 @@ class Annotations:
 
 
 def edition_digest(ayahs: Mapping[str, str]) -> str:
-    """The digest of a text edition, as ``@tajweed/core`` computes it.
+    """The digest of a text edition, as ``@quran-ws/tajwid`` computes it.
 
     Hashes the content rather than the file, so it does not depend on key order,
     indentation or escaping: each reference and its text, in mushaf order,
