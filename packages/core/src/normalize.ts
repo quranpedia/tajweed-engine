@@ -44,12 +44,14 @@ import {
   SUBSCRIPT_ALEF,
   SUKOON,
   SUPERSCRIPT_ALEF,
+  TASHIL_MARK,
   TATWEEL,
   TEH_MARBUTA,
   WAW,
   YEH,
   ZWSP,
   isDiacritic,
+  isImalahMark,
   isVowelMark,
   toCodePoints,
 } from './unicode.js'
@@ -231,7 +233,16 @@ const insertImpliedSukoon: Pass = (input) => {
     // pipeline as decoration, so without this the letter arrives at the
     // matchers looking like a sakin consonant, and قٓ and عٓسٓقٓ were being
     // reported as قلقلة متطرفة.
-    if (next === MADDAH_ABOVE) {
+    //
+    // The imāla and tashīl marks say the same thing in a different way: they
+    // record how the letter is performed, so the letter is vowelled even though
+    // no haraka is written. The reh in Hūd 41 carries the imāla mark and nothing
+    // else — its fatha is inclined towards a kasra, not absent — and reading it
+    // as bare handed it the rulings of a sakin reh. In this edition only the
+    // imāla mark reaches here, since the other two places write a haraka as
+    // well, but both are handled: what makes this true is the mark, not the
+    // place.
+    if (next === MADDAH_ABOVE || isImalahMark(next) || next === TASHIL_MARK) {
       continue
     }
 

@@ -1104,6 +1104,22 @@
       }
     },
     {
+      "id": "raa-tarqeeq.5",
+      "hukum": "raa-tarqeeq",
+      "case": "[ر۪ رٜ]",
+      "scope": "within-word",
+      "matchAgainst": "original",
+      "status": "stable",
+      "needsReview": true,
+      "statusReason": "Authored for this corpus rather than inherited from the source. The pattern was derived from the text and pinned to the only place it occurs (see scripts/verify-rules.ts), but it has not been signed off by a qualified reviewer.",
+      "label": {
+        "ar": "إذا كانت الراء ممالة"
+      },
+      "notes": {
+        "ar": "الراء الممالة مرققة، ولا إمالة لحفص إلا في موضع واحد (هود ٤١). ويُطابَق على الرسم لا على النص المُطبَّع، لأن علامة الإمالة تُحذف في التطبيع، والطبعات تختلف في رسمها: U+06EA في الطبعة الأولى، وU+065C في مصاحف مجمع الملك فهد؛ وكلاهما في القاعدة، ولا يقع أحدهما إلا في هذا الموضع. وكانت هذه الراء قبل هذا التغيير تُعَدُّ ساكنة فتدخل في تفخيم الراء، وذلك أثر من آثار التطبيع لا وصف للنص، إذ الراء متحركة بفتحة ممالة."
+      }
+    },
+    {
       "id": "raa-either-permissible.1",
       "hukum": "raa-either-permissible",
       "case": "كلمة فرق - الشعراء 63",
