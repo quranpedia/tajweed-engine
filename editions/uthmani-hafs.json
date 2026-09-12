@@ -9,7 +9,13 @@
         "release_year": 2022,
         "sha256": "a7b0e5591945712ec5e4d6142938ae4d1e9b49bdc89dff06222789bfebdfd72c",
         "confidence": "measured, not asserted: all 6236 ayahs are byte-identical to that column after three mechanical steps — strip the CSV quoting, strip the trailing ayah-number presentation glyph, and replace the 199 non-breaking spaces after the hizb sign with ordinary spaces. Nothing else differs anywhere.",
-        "how_to_reproduce": "Take aya_text from the CSV, apply those three steps, and compare. 6236 of 6236.",
+        "how_to_reproduce": [
+            "1. Take UthmanicHafs_v2-0.zip, sha256 a7b0e5591945712ec5e4d6142938ae4d1e9b49bdc89dff06222789bfebdfd72c.",
+            "2. Read 'UthmanicHafs_v2-0 data/hafsData_v2-0.csv' as UTF-8. It is comma-separated with a BOM; the columns used are sura_no, aya_no and aya_text.",
+            "3. For each row take aya_text and apply, in order: strip one leading and one trailing double quote; strip a trailing run of Arabic presentation forms (U+FB50..U+FDFF, U+FE70..U+FEFF) together with any whitespace or U+00A0 before it — that is the ayah-number glyph, e.g. U+FC00 on 1:1; then trim.",
+            "4. Replace every U+00A0 with U+0020. There are exactly 199, one after each hizb sign, and 199 is the number of hizb signs in Hafs.",
+            "5. Compare with this file's ayahs, keyed sura:ayah. All 6236 are equal."
+        ],
         "note": "This was open for a long time. The file said only 'legacy application export', the README said it was the text published at tajweed.quranpedia.net, and LICENSE asserted a KFGQPC derivation that nobody could check. The derivation is now checkable: it is the 2022 v2 release, not the 2026 v3.0 one that quran-ws/quran-text carries. That is why 35:43 is composed here and decomposed there, and why only 2715 of 6236 ayahs match quran-text byte for byte.",
         "found_by": "quran-ws/quran-text, which noticed that 35:43 differs between the two releases and pointed at the v2 line as the likely origin."
     },
