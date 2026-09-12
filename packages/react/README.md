@@ -41,13 +41,15 @@ pause; they are not part of the letter the ruling is about.
 says nothing to a reader who cannot see it — a serious flaw in something meant
 to teach recitation.
 
-**Colour is keyed by topic, of which there are seven** — not by hukum, of which
-there are 57. Past roughly a dozen colours, readers stop being able to tell
-them apart.
+**Colour is keyed by topic, not by hukum.** There are an order of magnitude more
+ahkam than topics, and past roughly a dozen colours readers stop being able to
+tell them apart. `TOPIC_COLORS` therefore carries one colour per topic, and a
+test holds it equal to the corpus's topic list.
 
-Render `<TajweedLegend />`. The corpus covers seven topics and says nothing
-outside them; colour without a legend suggests the colouring is complete when
-it is not — see [docs/coverage.md](../../docs/coverage.md).
+Render `<TajweedLegend />`. It iterates the corpus, so it is right whatever the
+topics are. The corpus says nothing outside them; colour without a legend
+suggests the colouring is complete when it is not — see
+[docs/coverage.md](../../docs/coverage.md).
 
 ## Props
 

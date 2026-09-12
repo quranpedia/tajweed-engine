@@ -14,19 +14,25 @@ import { ALLOWED_MARKS, toCodePoints } from './unicode.js'
 import type { Corpus, Span } from './types.js'
 
 /**
- * Colours keyed by TOPIC, of which there are seven.
+ * Colours keyed by TOPIC — one entry per topic in the corpus, and a test holds
+ * the two sets equal so a new topic cannot ship without a colour.
  *
- * The corpus has more ahkam than a reader can hold apart by colour, and the
- * application this came from gave each its own
- * colour. Fifty-seven colours are not fifty-seven distinctions — past roughly a
- * dozen, a reader stops decoding the colour and starts ignoring it, and the
- * palette necessarily contains pairs no one can separate, least of all on a
- * phone or with a colour vision deficiency.
+ * The corpus has far more ahkam than a reader can hold apart by colour, and the
+ * application this came from gave each its own colour. One colour per hukum is
+ * not one distinction per hukum — past roughly a dozen, a reader stops decoding
+ * the colour and starts ignoring it, and the palette necessarily contains pairs
+ * no one can separate, least of all on a phone or with a colour vision
+ * deficiency.
  *
- * Seven is legible. Anything needing finer granularity should say so in words: a
- * tooltip, a legend, a label. Colour carries the category; text carries the
- * ruling — which is also why every renderer here writes the ruling into
- * aria-label, so colour is never the only thing carrying meaning.
+ * A colour per topic is legible. Anything needing finer granularity should say
+ * so in words: a tooltip, a legend, a label. Colour carries the category; text
+ * carries the ruling — which is also why every renderer here writes the ruling
+ * into aria-label, so colour is never the only thing carrying meaning.
+ *
+ * This comment used to state the number of topics and the number of ahkam. Both
+ * were written by hand, and the second was wrong for four branches. The argument
+ * does not need either, so it no longer carries them; the palette is held to the
+ * corpus by a test instead.
  *
  * Chosen for contrast against both light and dark backgrounds.
  */
