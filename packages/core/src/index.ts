@@ -3,6 +3,7 @@ export { normalize, type Normalized } from './normalize.js'
 export { compileRule, compileGroup, parseCase, parseGroup, type Scope, type CompilableRule } from './compile.js'
 export { toSourceRange, type Mapped } from './mapped.js'
 export { toHtml, toAnsi, TOPIC_COLORS, type RenderOptions } from './render.js'
+export { bridgeJoins, clusterEnd, ZWJ } from './shaping.js'
 export {
   editionDigest,
   orderedReferences,
