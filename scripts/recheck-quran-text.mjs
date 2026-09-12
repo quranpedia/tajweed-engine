@@ -102,11 +102,18 @@ for (const r of UNRECOVERABLE_6) {
   const w = word(R[r] ?? '', /ٔ/)
   const o = word(L[r] ?? '', /ـٔ|ٔ/)
   const marks = [...w].filter(isMark)
-  const vowelsAbove = marks.filter((c) => isVowel(c) && c !== 'ِ' && c !== 'ٍ').length
+  // Ownership is a question about the KASHIDA, not about where the vowels sit.
+  // The release seats a hamzah that has no letter of its own on U+0640: what
+  // precedes the seat belongs to the letter before it, what follows belongs to
+  // the sign on it. With the kashida present there is nothing to infer, however
+  // the two vowels are drawn — this used to ask whether both sat above the line,
+  // which was the right question only while the seat was missing.
+  const borne = /\u0640[\u064B-\u065F\u0670]*\u0654/u.test(w)
   console.log(`  ${r}`)
   console.log(`     now    ${JSON.stringify(w)}  ${cp(w)}`)
   console.log(`     oracle ${JSON.stringify(o)}  ${cp(o)}`)
-  console.log(`     two vowels both above the line: ${vowelsAbove >= 2 ? 'YES — still ambiguous' : 'no — ownership now readable'}`)
+  console.log(`     kashida seats the hamzah: ${borne ? 'YES — ownership is stated, nothing to infer' : 'no — still unrecoverable from the file'}`)
+  if (w && o && w === o) console.log('     byte-identical to the oracle')
 }
 
 // ------------------------------------------------- 3. does PR #9's rule still hold
