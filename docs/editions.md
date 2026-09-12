@@ -80,3 +80,20 @@ The corpus is for Hafs ʿan ʿĀsim. Other riwayat differ in both the rulings an
 the spelling of the text, so pointing this at a Warsh or Qālūn edition gives
 wrong answers — the tools refuse it rather than produce output that merely
 looks right.
+
+## A dependency worth knowing before you try to regenerate anything
+
+`scripts/compare-editions.ts` (`pnpm edition:diff`) and `docs/text-source.md` do
+**not exist on `main`**. They live on the branch that introduces the quran-text
+edition, which is held pending review.
+
+Three documents are generated from that tool — this repository's `README.md`
+section on edition distance, `docs/text-source.md`, and the figures quoted in
+`docs/coverage.md`. **None of them can be regenerated until that branch lands.**
+
+This is written down because it was rediscovered rather than known: a correction
+was made to the sentence that tool prints, and the copies downstream could not
+be brought back into line from `main`, because the generator was not there. If
+you are looking at a stale number in one of those three documents and cannot
+find the script that produced it, this is why — the fix belongs on that branch,
+not on a copy.

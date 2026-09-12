@@ -8,8 +8,21 @@ This is worse than having no check. No check is a known gap. A check that cannot
 fire is a gap that someone has already decided is covered, and the green tick is
 the evidence they will cite.
 
-Eight instances follow. Each is recorded with what it would have cost, because
-the cost is the argument.
+**See also [`silent-success.md`](silent-success.md)**, which names the same
+class from four earlier instances — a regex, a rule corpus, a spreadsheet and a
+git checkout — and states the instinct it corrects: *"no error" and "no
+output" are indistinguishable unless something asserts the output is
+non-empty*. The two documents were written a year apart without reference to
+each other, which is its own evidence. Whether they should be one file is an
+editorial decision nobody has made.
+
+Fourteen instances follow. Each is recorded with what it would have cost,
+because the cost is the argument.
+
+The last five were found after the first eight were written down, by people who
+had just written them down. That is not an embarrassment to be trimmed out of
+the document — it is the strongest evidence in it that the pattern is not about
+carelessness.
 
 ## The three in the repository's own gates
 
@@ -94,6 +107,183 @@ byte-identical to the reference.
 *Cost if unfixed:* the answer to the question the whole upstream investigation
 was for, reported backwards.
 
+## The six found after this document was written
+
+These were all found while fixing the eight above, by people holding this list
+in their heads. Five of them are mine. The last is not like the others.
+
+**A check reported success from a command that never ran.** `annotate.ts` was
+invoked without its arguments, printed its usage banner, and exited. The next
+line, `git diff --exit-code`, passed — against an artefact that nothing had
+regenerated — and the run was reported as "NO DRIFT". Every part was true. The
+command ran, the diff was clean, the exit code was 0. The only false thing was
+the sentence joining them.
+
+It has three siblings from the same night, and they are one mistake: reading
+`$?` after a pipeline, so the exit status belongs to `tail` rather than to the
+gate; and reading `$?` inside `echo "$(basename "$f") EXIT=$?"`, where the
+command substitution runs first and the status belongs to `basename`. In every
+case a real gate ran and produced a real verdict, and the verdict reported was
+somebody else's.
+
+*Cost if unfixed:* every "all gates pass" in every report built on them. Four
+separate green results, none of which was the green of the thing being claimed.
+
+*The fix is not care.* It is to confirm the run executed before reading its
+result — check that the output looks like output, capture the status into a
+variable before anything else can touch it, and treat a gate that printed
+nothing as a gate that did not run.
+
+**A command chain that broke in the middle, and an `echo` that reported success
+anyway.** A shell chain stopped at `git checkout -B` — the branch was held by
+another worktree — so the edit never ran and nothing was committed. The trailing
+`echo "pushed"` was a separate statement and printed regardless. The report said
+the work was done; git said `nothing to commit, working tree clean` two lines
+above it.
+
+That is the same shape as the usage banner: a step that did not happen, followed
+by an unconditional claim that it did. `&&` binds one statement, not a paragraph.
+
+*How two of these were actually caught, because it is the transferable part.*
+Not by re-running anything and not by suspecting the shell. The gate printed
+**"This edition is not one the engine can read as it stands"** directly above an
+`EXIT=0` that had been printed by hand on the next line. The broken chain printed
+**`nothing to commit, working tree clean`** directly above a hand-written
+`pushed`. **Both times, two halves of one piece of output contradicted each
+other.** No external source was consulted and no check was repeated — the report
+disagreed with itself, in the same paragraph, and that was enough.
+
+**A fact asserted about the world because it was very likely true — and it
+was.** A report stated "PR #22" before the pull request had been opened. It was
+then opened, and GitHub assigned it 22.
+
+This belongs here rather than in a list of near-misses, and the luck is what
+makes it worse. A wrong prediction is caught by the first person who follows the
+link. A *correct* one teaches everybody, the author included, that the number
+can be stated in advance — so the next time it is off by one it will read
+exactly as authoritative as this one did.
+
+It is a purer instance than the three above: those were "the command ran and I
+read the wrong output". This one had no command at all. It is the same shape as
+a release body asserting a licence nobody checked, a version string that read
+reassuringly and was false, and a count relayed from a report without being
+derived — **a statement that was never checked because checking it felt
+unnecessary.**
+
+*The rule is narrow and usable:* an identifier that a system assigns is not
+knowable before the system assigns it. Open it, then quote it.
+
+**A verification run in the wrong tree produced the expected output for the
+opposite reason.** To prove that a fix to the unknown-marks gate removed a false
+positive on U+0655, the mark was deleted from `OPTIONAL_MARKS` on `main` alone.
+The gate flagged it, which is what the broken version did, and it looked like a
+clean reproduction. It was the reverse: on `main` there is no pass that recovers
+that mark, so it genuinely does survive normalisation, and the gate was right to
+flag it. The condition being tested only exists where the other branch's
+recovery pass and the gate are in the same tree.
+
+*Cost if unfixed:* a proof, in a pull request, demonstrating the opposite of
+what it claimed — and a fix merged on the strength of it.
+
+*What it teaches:* the output of a verification is not evidence until you can
+say which tree produced it. An expected result from the wrong base is
+indistinguishable from a correct one.
+
+**A defect that lived only in the text a human reads.** `edition:diff` printed
+`4 left over, and those are real differences in the text`. Not one of the four
+was a difference in the letters: two were word separation, one was the same
+ruling written with two different code points, and one was unresolved. The
+sentence was wrong about all four.
+
+The committed JSON report — the thing consumers actually read — **never carried
+that phrase**. It was print-only. So no test could fail, no consumer could
+notice, and no downstream check could contradict it. The only place the defect
+existed was the summary a person reads, and every copy of it downstream was
+correct about its source and wrong about the world, because the tool supplied
+the sentence.
+
+*Cost if unfixed:* a claim, in this repository's voice, that four āyahs of the
+Qurʾān differ between two editions of one riwāyah.
+
+*What it teaches:* prose emitted by a tool is not documentation, it is output,
+and it needs the same suspicion. A defect no consumer can see is not a small
+defect; it is an undetectable one.
+
+**A gate that watched a set and reported a count.** Deleting an expectation from
+`verify-rules.ts` — including the single fixture pinning the repository's only
+imāla rule to its only location — leaves it printing `all 22 pinned rules behave
+as expected` and exiting 0. `EXPECTATIONS.length` appeared once in the codebase,
+inside a `console.log`.
+
+This is the document's own test — *ask what a check would say if the thing it
+watches were deleted* — and the answer was not "nothing". It was a number, which
+is worse, because a number looks like a measurement.
+
+*Cost if unfixed:* the only protection the byte-literal rules have, removable in
+a merge without a single failing check, in a file three branches modify.
+
+*One thing came free.* While proving the replacement gate fires, a fault
+injection truncated `verify-rules.ts` to zero bytes — Python opens a file for
+writing before evaluating what to write — and the new gate caught that too,
+through the assertion that exists to check the file is still readable in the
+shape the test parses. A gate whose only proof is a deliberate test is weaker
+than one that has also failed by surprise.
+
+**An approval names a tree, and a branch that moves is no longer the approved
+thing.** A pull request was audited at one commit, two further commits were
+pushed to it, and it was merged at the later tree under the earlier
+authorisation. Both commits had been requested and nothing moved that could not
+be explained — which is precisely why it is worth recording, because the
+instance that costs nothing is the one that establishes the habit.
+
+It bit in both directions the same night: a stale SHA was handed to auditors and
+their verdicts attached to a tree that had already moved.
+
+*Cost if unfixed:* every audit verdict in the repository silently describing
+something other than what ships.
+
+*What it teaches:* an approval, an audit verdict and a measured number all name
+a specific tree. Quote the SHA with the number, and re-measure when the base
+moves rather than carrying the figure forward.
+
+### And one that is not like the others: a correct label everybody completed wrongly
+
+`edition:diff` reported two different measurements under one word, *residue*.
+One counts āyahs whose stored bytes still differ once the declared classes are
+allowed for. The other counts āyahs that still differ **after the normaliser has
+run** — the number that decides whether a rule can match.
+
+On one branch they are **4 and 5**. The residue is *larger* than the raw
+difference, and neither bounds the other, because normalisation can **introduce**
+a difference as well as remove one.
+
+Every other instance in this document is something that reported success while
+doing nothing. This one reported the truth. The label was not wrong, it was
+incomplete — and it survived because **every reader silently supplied the same
+missing half, and supplied it wrongly.** Everyone who saw the word *residue*
+completed it with *residue ≤ raw*, because the intuition that normalisation only
+ever reconciles is very strong.
+
+**The evidence for that is the person who wrote the tool.** I held the same wrong
+inequality while writing the code that disproves it, and only questioned it when
+the numbers came back 4 and 5 and I went looking for the bug I assumed I had
+introduced. The label read as sufficient to its own author.
+
+*Cost if unfixed:* the two numbers quoted interchangeably, exactly as `182
+rules` and `164 rule ids` were, and exactly as a stale `57 aḥkām` travelled
+across four branches. Each of those is the same mechanism: a description that a
+reader completes from expectation.
+
+*What it teaches, and it is the general case behind several entries above:*
+**reading is not checking.** A reader fills the gaps in a description from what
+they expect, and expectation is precisely what a description cannot correct. If
+two numbers can differ, they need two names — not a clearer sentence about one
+name, which is what the reader will complete wrongly again.
+
+*The fix belongs at the source.* The tool now prints `RAW BYTE DIFFERENCES` and
+`RESIDUE AFTER NORMALISATION`, so every copy downstream inherits the distinction
+instead of the ambiguity.
+
 ## What they have in common
 
 1. **Every one produced a passing result.** None errored, none warned, none was
@@ -107,6 +297,12 @@ was for, reported backwards.
 3. **The measurement always existed.** `frozen.json` already recorded the
    occurrence counts. The annotation file already recorded the edition digest.
    The information needed to catch these was present and unread.
+4. **Several were not wrong about anything.** The command ran. The diff was
+   clean. The exit code was 0. The count was accurate. What failed was the
+   sentence joining two true things, or the assumption about which tree, which
+   process or which file the true thing described. A defect does not have to
+   live inside a measurement to survive every check — it can live in the space
+   between two of them.
 
 ## What to do about it
 
@@ -117,9 +313,47 @@ was for, reported backwards.
   derived — a README's prose — guard it with a test that reads it back and
   compares. Seven counts in this repository were stale; the one with a generator
   went stale too, because nothing re-ran it.
+- **If two numbers can differ, give them two names.** Not a clearer sentence
+  about one name — a reader completes a description from expectation, and
+  expectation is exactly what a description cannot correct. *Reading is not
+  checking.* The residue entry above survived review by its own author for
+  precisely this reason.
+
 - **Record a set, not a count.** "Seventeen āyahs differ" survives nothing. The
   seventeen references survive being copied, re-run, and argued with.
+- **Read your own output as though someone else wrote it.** Twice in one night a
+  defect was caught because two halves of the same paragraph of output
+  contradicted each other — a gate saying the edition could not be read above a
+  hand-printed `EXIT=0`, and git saying `nothing to commit` above a hand-printed
+  `pushed`. Neither was found by re-running anything or by suspecting the tool.
+
+  **This is the only technique here that costs nothing and needs no
+  instrument.** Every other lesson in this document requires a gate, a test or a
+  discipline someone has to maintain. This one requires attention, and it works
+  on the failures that have no gate yet — which is all of them, the first time.
+
+  The cheap version: when you print a summary next to a tool's own output, read
+  them as two witnesses rather than one report. They are the most likely pair in
+  any log to disagree, because one of them is a claim and the other is evidence.
+
 - **When a number is implausible, stop.** Three of the eight above were caught
   that way and no other.
 - **Ask what a check would say if the thing it watches were deleted.** If the
-  answer is "nothing", it is not watching.
+  answer is "nothing", it is not watching. If the answer is a number, it is
+  worse than not watching, because a number looks like a measurement. Watch the
+  set, and pin its size.
+- **Confirm a command ran before reading its result.** A gate that printed
+  nothing did not run. Capture an exit status into a variable before anything
+  else can touch it — not after a pipe, and never inside a string that also
+  contains a command substitution.
+- **Say which tree a number came from.** An approval, an audit verdict and a
+  measured figure all name a specific commit. An expected result produced from
+  the wrong base is indistinguishable from a correct one, and can be expected
+  for the opposite reason.
+- **Treat prose a tool prints as output, not as documentation.** It is the one
+  place a defect can live where no consumer, no test and no downstream check can
+  see it — and every copy of it downstream will be faithful to its source and
+  wrong about the world.
+- **Fix the tool, never the copies.** Where a wrong sentence is emitted, the
+  copies are consequences. Correcting them while the generator keeps producing
+  the sentence is this entire document performed as a single action.

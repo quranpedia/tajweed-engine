@@ -6,6 +6,10 @@ Each time the mechanism was invisible, each time the output looked reasonable,
 and each time the thing that eventually exposed it was a number somebody
 bothered to check against a second source.
 
+**See also [`checks-that-report-success.md`](checks-that-report-success.md)**,
+which records thirteen further instances of this same class, five of them
+found by people who had just finished writing the other eight down.
+
 The class is worth naming because the instinct it corrects is a strong one. When
 a program does not error, we read that as evidence it worked. **It is not. "No
 error" and "no output" are indistinguishable unless something asserts the output
