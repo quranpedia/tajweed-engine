@@ -10,7 +10,7 @@
         "known": "Exported from the tajweed application at tajweed.quranpedia.net. That is where the file came from, not where the text came from, and the step before it was not recorded.",
         "verified": false,
         "not": "This is not the KFGQPC text the rest of the organisation uses. Against quran-ws/quran-text's Hafs, 345 of 6236 ayahs are byte-identical and 6232 are the same text differently encoded; see reports/hafs-quran-text-vs-uthmani-hafs.json.",
-        "why_it_matters": "Every offset in @quran-ws/tajwid-annotations is measured against this file. Until the line above is filled in, the annotations are traceable to a digest but not to a printed mushaf.",
+        "why_it_matters": "Every offset in @quran.ws/tajwid-annotations is measured against this file. Until the line above is filled in, the annotations are traceable to a digest but not to a printed mushaf.",
         "replacement": "editions/hafs-quran-text.json, which records the KFGQPC package and its SHA-256."
       }
     },

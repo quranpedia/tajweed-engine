@@ -1,8 +1,11 @@
 {
-  "name": "@quran-ws/tajwid-react",
+  "name": "@quran.ws/tajwid-react",
   "version": "0.1.0",
   "description": "React components for rendering Quranic text with its tajweed rulings marked.",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,7 +15,7 @@
   "files": ["dist/", "README.md"],
   "scripts": { "build": "tsc -p tsconfig.json" },
   "peerDependencies": { "react": ">=18" },
-  "dependencies": { "@quran-ws/tajwid": "workspace:*" },
+  "dependencies": { "@quran.ws/tajwid": "workspace:*" },
   "devDependencies": { "@types/react": "^19.0.1", "react": "^19.0.0" },
   "repository": {
     "type": "git",

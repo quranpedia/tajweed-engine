@@ -1,14 +1,14 @@
-# @quran-ws/tajwid-react
+# @quran.ws/tajwid-react
 
 ```bash
-npm install @quran-ws/tajwid-react @quran-ws/tajwid-rules @quran-ws/tajwid-annotations
+npm install @quran.ws/tajwid-react @quran.ws/tajwid-rules @quran.ws/tajwid-annotations
 ```
 
 ```tsx
-import corpus from '@quran-ws/tajwid-rules'
-import annotations from '@quran-ws/tajwid-annotations'
-import { TajweedText, TajweedLegend } from '@quran-ws/tajwid-react'
-import { unpack } from '@quran-ws/tajwid'
+import corpus from '@quran.ws/tajwid-rules'
+import annotations from '@quran.ws/tajwid-annotations'
+import { TajweedText, TajweedLegend } from '@quran.ws/tajwid-react'
+import { unpack } from '@quran.ws/tajwid'
 
 <TajweedText text={ayahText} corpus={corpus} spans={unpack(annotations, corpus, '2:255')} />
 <TajweedLegend corpus={corpus} />
@@ -16,7 +16,7 @@ import { unpack } from '@quran-ws/tajwid'
 
 Pass `spans` in production. The Quran is a fixed text, so there is no reason to
 run a matching engine in the browser — look the ayah up in
-[`@quran-ws/tajwid-annotations`](../annotations) instead. If you leave `spans` out, the
+[`@quran.ws/tajwid-annotations`](../annotations) instead. If you leave `spans` out, the
 component analyses the text itself, which is what a playground or an arbitrary
 passage needs.
 
@@ -31,7 +31,7 @@ neighbours: `عَلَيۡهِمۡ` becomes `عَ` `لَيۡهِ` `مۡ`. Every c
 zero-width joiner where the letters either side join, and pushed past the marks
 written on the letter it lands on. Both belong to the drawing: nothing reaches
 the offsets or the text. `clusterEnd` and `bridgeJoins` are exported from
-[`@quran-ws/tajwid`](../core) for anyone rendering this some other way — see
+[`@quran.ws/tajwid`](../core) for anyone rendering this some other way — see
 [docs/rendering.md](../../docs/rendering.md).
 
 **Waqf marks keep the colour around them.** They tell the reciter where to
@@ -56,7 +56,7 @@ suggests the colouring is complete when it is not — see
 | Prop | |
 |---|---|
 | `text` | the ayah text, unmodified |
-| `corpus` | pass `@quran-ws/tajwid-rules` |
+| `corpus` | pass `@quran.ws/tajwid-rules` |
 | `spans` | precomputed spans; leave out to analyse on the fly |
 | `options` | engine options when `spans` is left out (`only`, `school`) |
 | `colors` | override the palette, keyed by topic id |

@@ -14,7 +14,7 @@
  * in a separate box that says what it is.
  */
 
-import corpus from '@quran-ws/tajwid-rules' with { type: 'json' }
+import corpus from '@quran.ws/tajwid-rules' with { type: 'json' }
 import edition from '../../editions/uthmani-hafs.json' with { type: 'json' }
 import surahNames from './surahs.json' with { type: 'json' }
 import {
@@ -28,7 +28,7 @@ import {
   type Corpus,
   type Edition,
   type Span,
-} from '@quran-ws/tajwid'
+} from '@quran.ws/tajwid'
 
 const typed = corpus as unknown as Corpus
 const mushaf = edition as unknown as Edition

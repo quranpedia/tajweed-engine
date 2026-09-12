@@ -1,15 +1,15 @@
-# @quran-ws/tajwid
+# @quran.ws/tajwid
 
 Compiles the [tajweed rule corpus](../rules) and reports where each rule
 applies in Quranic text.
 
 ```bash
-npm install @quran-ws/tajwid @quran-ws/tajwid-rules
+npm install @quran.ws/tajwid @quran.ws/tajwid-rules
 ```
 
 ```ts
-import corpus from '@quran-ws/tajwid-rules'
-import { Tajweed, sliceSpan } from '@quran-ws/tajwid'
+import corpus from '@quran.ws/tajwid-rules'
+import { Tajweed, sliceSpan } from '@quran.ws/tajwid'
 
 const tajweed = new Tajweed(corpus)
 
@@ -58,13 +58,13 @@ it. The text is unaltered either way, nothing is raised, and it reads as a font
 problem. Two exports carry the fix:
 
 ```ts
-import { bridgeJoins, clusterEnd } from '@quran-ws/tajwid'
+import { bridgeJoins, clusterEnd } from '@quran.ws/tajwid'
 
 const end = clusterEnd(text, span.end)          // past the marks on that letter
 const chunks = bridgeJoins([before, span, after]) // joiners across each cut
 ```
 
-`toHtml` and [`@quran-ws/tajwid-react`](../react) already use both. Write your
+`toHtml` and [`@quran.ws/tajwid-react`](../react) already use both. Write your
 own renderer — an SVG overlay, a canvas, a native view — and you need them:
 [docs/rendering.md](../../docs/rendering.md) says why, including why the joiner
 has to be conditional.
@@ -75,7 +75,7 @@ One letter can demonstrate more than one ruling, and `analyze` reports all of
 them. Choosing what to draw is a display decision, not an engine decision:
 
 ```ts
-import { resolveOverlaps } from '@quran-ws/tajwid'
+import { resolveOverlaps } from '@quran.ws/tajwid'
 
 resolveOverlaps(spans) // earliest wins, longest wins on a tie
 ```

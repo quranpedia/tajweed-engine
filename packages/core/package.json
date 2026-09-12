@@ -1,8 +1,11 @@
 {
-  "name": "@quran-ws/tajwid",
+  "name": "@quran.ws/tajwid",
   "version": "0.1.0",
   "description": "Compiles the tajweed rule corpus and reports where each rule applies in Quranic text, as code-point offsets.",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

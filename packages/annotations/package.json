@@ -1,8 +1,11 @@
 {
-  "name": "@quran-ws/tajwid-annotations",
+  "name": "@quran.ws/tajwid-annotations",
   "version": "0.1.0",
   "description": "Precomputed tajweed annotations for the whole mushaf: spans as code-point offsets, pinned to the digest of the text edition they were computed against.",
   "license": "CC-BY-4.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "./uthmani-hafs.json",
   "exports": {
