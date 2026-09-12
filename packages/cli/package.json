@@ -1,5 +1,5 @@
 {
-  "name": "@tajweed/cli",
+  "name": "@quran-ws/tajwid-cli",
   "version": "0.1.0",
   "description": "Command line for the tajweed rule corpus and engine.",
   "license": "MIT",
@@ -8,8 +8,8 @@
   "files": ["dist/", "README.md"],
   "scripts": { "build": "tsc -p tsconfig.json" },
   "dependencies": {
-    "@tajweed/core": "workspace:*",
-    "@tajweed/rules": "workspace:*"
+    "@quran-ws/tajwid": "workspace:*",
+    "@quran-ws/tajwid-rules": "workspace:*"
   },
   "repository": {
     "type": "git",

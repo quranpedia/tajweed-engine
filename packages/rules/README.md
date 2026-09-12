@@ -1,16 +1,16 @@
-# @tajweed/rules
+# @quran-ws/tajwid-rules
 
 The tajweed rule corpus: **7 topics → 27 categories → 58 ahkam → 182 rules**, for the riwayah of **Hafs ʿan ʿĀsim**.
 
 This package is data only. It has no dependencies and no code. The engine that
-runs it lives in [`@tajweed/core`](../core).
+runs it lives in [`@quran-ws/tajwid`](../core).
 
 ```bash
-npm install @tajweed/rules
+npm install @quran-ws/tajwid-rules
 ```
 
 ```js
-import corpus from '@tajweed/rules'
+import corpus from '@quran-ws/tajwid-rules'
 
 corpus.riwayah // 'hafs-an-asim'
 corpus.rules.filter((rule) => rule.status === 'stable').length // 164

@@ -13,7 +13,7 @@
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
-import corpus from '@tajweed/rules' with { type: 'json' }
+import corpus from '@quran-ws/tajwid-rules' with { type: 'json' }
 import {
   Tajweed,
   editionDigest,
@@ -26,7 +26,7 @@ import {
   type Edition,
   type Rule,
   type Span,
-} from '@tajweed/core'
+} from '@quran-ws/tajwid'
 
 const typed = corpus as unknown as Corpus
 

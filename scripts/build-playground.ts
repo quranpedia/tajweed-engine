@@ -33,8 +33,8 @@ const result = await build({
   // The playground is not a workspace package — it is one page, built from the
   // sources directly, so there is nothing to install or keep in step.
   alias: {
-    '@tajweed/core': join(root, 'packages', 'core', 'src', 'index.ts'),
-    '@tajweed/rules': join(root, 'packages', 'rules', 'rules.json'),
+    '@quran-ws/tajwid': join(root, 'packages', 'core', 'src', 'index.ts'),
+    '@quran-ws/tajwid-rules': join(root, 'packages', 'rules', 'rules.json'),
   },
 })
 

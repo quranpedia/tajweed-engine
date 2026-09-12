@@ -1,5 +1,5 @@
 {
-  "name": "@tajweed/core",
+  "name": "@quran-ws/tajwid",
   "version": "0.1.0",
   "description": "Compiles the tajweed rule corpus and reports where each rule applies in Quranic text, as code-point offsets.",
   "license": "MIT",

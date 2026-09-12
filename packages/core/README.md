@@ -1,15 +1,15 @@
-# @tajweed/core
+# @quran-ws/tajwid
 
 Compiles the [tajweed rule corpus](../rules) and reports where each rule
 applies in Quranic text.
 
 ```bash
-npm install @tajweed/core @tajweed/rules
+npm install @quran-ws/tajwid @quran-ws/tajwid-rules
 ```
 
 ```ts
-import corpus from '@tajweed/rules'
-import { Tajweed, sliceSpan } from '@tajweed/core'
+import corpus from '@quran-ws/tajwid-rules'
+import { Tajweed, sliceSpan } from '@quran-ws/tajwid'
 
 const tajweed = new Tajweed(corpus)
 
@@ -55,7 +55,7 @@ One letter can demonstrate more than one ruling, and `analyze` reports all of
 them. Choosing what to draw is a display decision, not an engine decision:
 
 ```ts
-import { resolveOverlaps } from '@tajweed/core'
+import { resolveOverlaps } from '@quran-ws/tajwid'
 
 resolveOverlaps(spans) // earliest wins, longest wins on a tie
 ```

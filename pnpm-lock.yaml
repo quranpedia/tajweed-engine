@@ -31,10 +31,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@tajweed/core':
+      '@quran-ws/tajwid':
         specifier: workspace:*
         version: link:../core
-      '@tajweed/rules':
+      '@quran-ws/tajwid-rules':
         specifier: workspace:*
         version: link:../rules
 
@@ -42,7 +42,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@tajweed/core':
+      '@quran-ws/tajwid':
         specifier: workspace:*
         version: link:../core
     devDependencies:

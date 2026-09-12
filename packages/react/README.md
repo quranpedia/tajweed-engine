@@ -1,14 +1,14 @@
-# @tajweed/react
+# @quran-ws/tajwid-react
 
 ```bash
-npm install @tajweed/react @tajweed/rules @tajweed/annotations
+npm install @quran-ws/tajwid-react @quran-ws/tajwid-rules @quran-ws/tajwid-annotations
 ```
 
 ```tsx
-import corpus from '@tajweed/rules'
-import annotations from '@tajweed/annotations'
-import { TajweedText, TajweedLegend } from '@tajweed/react'
-import { unpack } from '@tajweed/core'
+import corpus from '@quran-ws/tajwid-rules'
+import annotations from '@quran-ws/tajwid-annotations'
+import { TajweedText, TajweedLegend } from '@quran-ws/tajwid-react'
+import { unpack } from '@quran-ws/tajwid'
 
 <TajweedText text={ayahText} corpus={corpus} spans={unpack(annotations, corpus, '2:255')} />
 <TajweedLegend corpus={corpus} />
@@ -16,7 +16,7 @@ import { unpack } from '@tajweed/core'
 
 Pass `spans` in production. The Quran is a fixed text, so there is no reason to
 run a matching engine in the browser — look the ayah up in
-[`@tajweed/annotations`](../annotations) instead. If you leave `spans` out, the
+[`@quran-ws/tajwid-annotations`](../annotations) instead. If you leave `spans` out, the
 component analyses the text itself, which is what a playground or an arbitrary
 passage needs.
 
@@ -45,7 +45,7 @@ it is not — see [docs/coverage.md](../../docs/coverage.md).
 | Prop | |
 |---|---|
 | `text` | the ayah text, unmodified |
-| `corpus` | pass `@tajweed/rules` |
+| `corpus` | pass `@quran-ws/tajwid-rules` |
 | `spans` | precomputed spans; leave out to analyse on the fly |
 | `options` | engine options when `spans` is left out (`only`, `school`) |
 | `colors` | override the palette, keyed by topic id |

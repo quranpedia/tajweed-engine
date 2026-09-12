@@ -18,17 +18,17 @@ import {
   type Corpus,
   type Span,
   type TajweedOptions,
-} from '@tajweed/core'
+} from '@quran-ws/tajwid'
 
 const WAQF_MARKS = new Set(['\u{06DA}', '\u{06D7}', '\u{06D6}', '\u{06D9}', '\u{06D8}', '\u{06DE}', '\u{06E9}'])
 
 export interface TajweedTextProps {
   /** The ayah text, exactly as your source has it. It is never modified. */
   readonly text: string
-  /** The rule corpus. Pass `@tajweed/rules`. */
+  /** The rule corpus. Pass `@quran-ws/tajwid-rules`. */
   readonly corpus: Corpus
   /**
-   * Precomputed spans. Supply these from `@tajweed/annotations` in production —
+   * Precomputed spans. Supply these from `@quran-ws/tajwid-annotations` in production —
    * the Quran is a fixed corpus, so there is no reason to analyse it in a
    * browser. Omit to analyse `text` on the fly, which is what a playground or an
    * arbitrary passage needs.
@@ -36,7 +36,7 @@ export interface TajweedTextProps {
   readonly spans?: readonly Span[]
   /** Passed to the engine when `spans` is omitted. */
   readonly options?: TajweedOptions
-  /** Colour per topic id. Defaults to the six-colour palette in @tajweed/core. */
+  /** Colour per topic id. Defaults to the six-colour palette in @quran-ws/tajwid. */
   readonly colors?: Readonly<Record<string, string>>
   /** Show all overlapping rulings rather than the topmost. Off by default. */
   readonly overlapping?: boolean
@@ -218,5 +218,5 @@ export function TajweedLegend({ corpus, topics, colors = TOPIC_COLORS, className
   )
 }
 
-export { TOPIC_COLORS } from '@tajweed/core'
-export type { Span, Corpus } from '@tajweed/core'
+export { TOPIC_COLORS } from '@quran-ws/tajwid'
+export type { Span, Corpus } from '@quran-ws/tajwid'
