@@ -21,7 +21,7 @@ WHAT IS COVERED BY WHAT
   .github/     MIT
   conformance/ CC BY 4.0
   docs/        CC BY 4.0
-  editions/    CC BY 4.0    — see the note below; not all of it is ours to license
+  editions/    CC BY 4.0    — KFGQPC text; see the note below, and their terms
   packages/    MIT
   playground/  MIT
   python/      MIT
@@ -34,20 +34,27 @@ On editions/, which is not one thing:
 
   hafs-quran-text.json  is taken from quran-ws/quran-text, and through it from
                         the KFGQPC package named in the file's own `source`
-                        block, with that package's SHA-256. The KFGQPC terms
-                        below govern it.
+                        block — UthmanicHafs-v-3.0.zip, the 2026 release — with
+                        that package's SHA-256.
 
-  uthmani-hafs.json     was exported from an earlier application and where its
-                        text came from before that was not recorded. It is NOT
-                        the KFGQPC text: of its 6,236 ayahs, 345 are byte-
-                        identical to the KFGQPC Hafs and the rest are not. We
-                        do not know what it derives from, so we do not assert a
-                        derivation for it, and we cannot license it as though we
-                        did. The file says the same thing in its own `source`.
+  uthmani-hafs.json     is the KFGQPC UthmanicHafs_v2-0 release of 2022, the
+                        `aya_text` column of its CSV. All 6,236 ayahs are
+                        byte-identical to it after stripping the CSV quoting and
+                        the trailing ayah-number glyph and replacing 199
+                        non-breaking spaces with ordinary ones. Measured, and
+                        reproducible from the package; the file's own `source`
+                        block says how.
 
-Naming this rather than covering both with one clause is deliberate: a licence
-that asserts a provenance nobody can check is worth less than one that says
-which of the two is which.
+Both are therefore KFGQPC material, from two different releases, and the
+Complex's terms below govern both.
+
+Naming the release rather than covering both with one clause is deliberate. This
+clause previously asserted a KFGQPC derivation that nobody had checked, over a
+file whose own metadata said "legacy application export" — and for a long time
+the honest position was that we did not know. We do now, and the point of saying
+which release is that the two disagree: 35:43 is composed in the 2022 line and
+decomposed in the 2026 one, which is why only 2,715 of 6,236 ayahs are
+byte-identical between the two files in this directory.
 
 
 ═══════════════════════════════════════════════════════════════════════════════

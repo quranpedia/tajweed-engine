@@ -209,3 +209,28 @@ describe('a tanween is the hamza\u2019s', () => {
     expect(normalize(composed).text).not.toContain(HAMZA + FATHA + ALEF)
   })
 })
+
+describe('a hamza written on its seat as two characters', () => {
+  it('composes onto the seat, so it is not read as a madd letter', () => {
+    // 35:43 ٱلسَّيِّئُ is yeh + U+0654 where the other 908 occurrences of ئ are
+    // the precomposed character. The release itself disagrees there — composed
+    // in the 2022 package, decomposed in the 2026 one — so it is not something
+    // upstream will correct. Kept as a seat the yeh reads as a madd letter
+    // before a hamza, which it is not, and costs a madd muttasil.
+    const decomposed = SEEN + FATHA + SHADDA + YEH + SHADDA + KASRA + YEH + HAMZA_ABOVE + DAMMA
+    const composed = SEEN + FATHA + SHADDA + YEH + SHADDA + KASRA + '\u{0626}' + DAMMA
+
+    expect(normalize(decomposed).text).toBe(normalize(composed).text)
+  })
+
+  it('composes without re-sorting, which is the half of NFC this needs', () => {
+    // NFC would also sort the marks on a letter by combining class. This
+    // pipeline reads either order already, and re-sorting is not free: measured
+    // over editions/uthmani-hafs.json, a full NFC pass moved 12,484 spans across
+    // 3,838 ayahs, because a re-sorted cluster can no longer map each character
+    // to its own source index. Composing alone moves nothing.
+    const shaddaFirst = BA + SHADDA + KASRA + YEH
+    expect(normalize(shaddaFirst).text).toBe(normalize(shaddaFirst).text.normalize('NFC'))
+    expect(normalize(BA + KASRA + SHADDA + YEH).text).toBe(normalize(shaddaFirst).text)
+  })
+})

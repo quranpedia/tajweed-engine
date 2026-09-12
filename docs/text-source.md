@@ -9,8 +9,8 @@ answer it.
 
 | | `editions/uthmani-hafs.json` | `editions/hafs-quran-text.json` |
 |---|---|---|
-| Provenance | exported from the tajweed application; the step before that was not recorded | quran-ws/quran-text → KFGQPC `UthmanicHafs-v-3.0.zip`, with its SHA-256 |
-| Checkable | no | yes, to a published package digest |
+| Provenance | KFGQPC `UthmanicHafs_v2-0` (2022), measured — see below | quran-ws/quran-text → KFGQPC `UthmanicHafs-v-3.0.zip`, with its SHA-256 |
+| Checkable | yes, to a published package digest | yes, to a published package digest |
 | What the published annotations are measured against | **this one** | not yet |
 
 The second is built by
@@ -25,6 +25,29 @@ knowing, because reading quran-text's `data/mushaf/hafs.json` naively does not:
 the waqf, sajdah and division signs live in a separate layer there and have to be
 put back, and a text without them is a different string in which every offset is a
 different number. The importer does that, and the two routes agreeing is the check.
+
+## Where this edition came from, answered
+
+For a long time the honest answer was that nobody knew. The file said `"source":
+"legacy application export"`, the README said it was the text published at
+tajweed.quranpedia.net, and `LICENSE` asserted a KFGQPC derivation that nobody
+had checked — three claims, none of them verifiable.
+
+It is the **KFGQPC `UthmanicHafs_v2-0` release of 2022**, the `aya_text` column
+of `UthmanicHafs_v2-0 data/hafsData_v2-0.csv`, package SHA-256
+`a7b0e559…`. All **6,236 of 6,236** āyahs are byte-identical to it after three
+mechanical steps:
+
+1. strip the CSV's surrounding quotes;
+2. strip the trailing āyah-number presentation glyph;
+3. replace the 199 non-breaking spaces after ۞ with ordinary spaces.
+
+Nothing else differs anywhere. That is measured and reproducible, not inferred.
+
+quran-ws/quran-text found the thread: 35:43 ٱلسَّيِّئُ is composed in the 2022
+package and decomposed in the 2026 one, and this edition has it composed. So the
+two files in `editions/` are the same muṣḥaf from two different KFGQPC releases —
+which is also why only 2,715 of 6,236 āyahs are byte-identical between them.
 
 ## What the two editions disagree about
 
@@ -114,3 +137,22 @@ span a provenance that reaches a printed muṣḥaf — and would move every off
 the file, change `conformance/frozen.json`, and invalidate the generated files in
 every open rule pull request. It is a decision about ordering, not about
 engineering, and it is not taken here.
+
+---
+
+## A note for issue #5, not an argument for anything here
+
+This corpus is Ḥafṣ only. `scripts/annotate.ts` refuses any other riwayah by
+design, and everything above is measured on Ḥafṣ.
+
+One fact is worth leaving for whoever takes up
+[#5](https://github.com/quran-ws/quran-tajweed/issues/5), support for other
+riwayat. The KFGQPC releases differ in how consistently they compose a seated
+hamza. In Ḥafṣ, ئ is written as يـ + U+0654 **once in 909** — 35:43, which is why
+this repository composes before analysing. In the other published editions the
+same inconsistency runs from once to twenty-two times each.
+
+So the composition step is load-bearing rather than cosmetic the moment this
+corpus is pointed at a second riwayah, and it would be worth re-measuring rather
+than assuming it carries over. That is all: a fact recorded where it will be
+found, not a reason for anything being done today.
