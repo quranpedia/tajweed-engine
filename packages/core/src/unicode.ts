@@ -39,6 +39,7 @@ export const SMALL_YEH = '\u{06E6}' // ۦ
 export const SMALL_HIGH_SEEN = '\u{06DC}' // ۜ
 export const MADDAH_ABOVE = '\u{0653}' // ٓ
 export const HAMZA_ABOVE = '\u{0654}' // ٔ
+export const HAMZA_BELOW = '\u{0655}' // ٕ
 export const TATWEEL = '\u{0640}' // ـ
 export const INVERTED_DAMMA = '\u{0657}' // ٗ
 export const SUBSCRIPT_ALEF = '\u{0656}' // ٖ
@@ -105,7 +106,6 @@ export const OPTIONAL_MARKS: readonly string[] = [
   IMALAH_MARK_KFGQPC,
   TASHIL_MARK,
   HAMZA_ABOVE,
-  '\u{0655}', // ٕ hamza below
   TATWEEL,
   '\u{06DB}', // ۛ small high three dots
   SMALL_HIGH_SEEN,
