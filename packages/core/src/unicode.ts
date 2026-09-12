@@ -37,6 +37,26 @@ export const SMALL_LOW_MEEM = '\u{06ED}' // ۭ
 export const SMALL_WAW = '\u{06E5}' // ۥ
 export const SMALL_YEH = '\u{06E6}' // ۦ
 export const SMALL_HIGH_SEEN = '\u{06DC}' // ۜ
+
+/**
+ * The small seen written BELOW the letter, U+06E3.
+ *
+ * PROVISIONAL. It is treated here exactly as SMALL_HIGH_SEEN is treated, and
+ * that is a decision about this pipeline rather than about the text.
+ *
+ * KFGQPC moved 52:37 from the mark above to the mark below while leaving 2:245
+ * and 7:69 alone, and a re-encoding does not produce that asymmetry — so what
+ * the move MEANS is an open question for a qualified reviewer, recorded in
+ * docs/text-source.md as unresolved.
+ *
+ * What is not open is whether the normaliser knows the character exists.
+ * Leaving it unhandled does not leave the question open; it silently wedges an
+ * implied sukoon onto the ṣād and tells nobody. Treating it differently from its
+ * sibling would itself assert that the position changes the ruling, which is the
+ * very thing nobody has established. So it matches U+06DC until someone
+ * qualified says otherwise, and if they do, this is the line to change.
+ */
+export const SMALL_LOW_SEEN = '\u{06E3}' // ۣ
 export const MADDAH_ABOVE = '\u{0653}' // ٓ
 export const HAMZA_ABOVE = '\u{0654}' // ٔ
 export const TATWEEL = '\u{0640}' // ـ
@@ -83,6 +103,7 @@ export const OPTIONAL_MARKS: readonly string[] = [
   TATWEEL,
   '\u{06DB}', // ۛ small high three dots
   SMALL_HIGH_SEEN,
+  SMALL_LOW_SEEN,
   MADDAH_ABOVE,
 ]
 

@@ -43,6 +43,7 @@ import {
   SHADDA,
   SMALL_HIGH_MEEM,
   SMALL_HIGH_SEEN,
+  SMALL_LOW_SEEN,
   SMALL_LOW_MEEM,
   SUBSCRIPT_ALEF,
   SUKOON,
@@ -240,13 +241,19 @@ const seatUnborneHamza: Pass = (input) => {
 }
 
 /**
- * A small high seen at the end of a word marks a saktah — a deliberate pause
- * without breathing. It is replaced with a zero-width space, which no rule can
- * match across, so that a rule such as idghaam does not join the two words the
+ * A small seen at the end of a word marks a saktah — a deliberate pause without
+ * breathing. It is replaced with a zero-width space, which no rule can match
+ * across, so that a rule such as idghaam does not join the two words the
  * reciter is required to keep apart.
  *
  * The same character inside a word is a variant-spelling marker with no bearing
  * on recitation, and is left to be stripped with the other decoration.
+ *
+ * Both the mark above (U+06DC) and the mark below (U+06E3) are read here, and
+ * the mark below is PROVISIONAL — see SMALL_LOW_SEEN in unicode.ts. Handling
+ * only the one above would not have left the 52:37 question open; it would have
+ * answered it, by treating position as meaningful without anyone having ruled
+ * that it is.
  */
 const saktahToBreak: Pass = (input) => {
   const out = new MappedBuilder()
@@ -254,7 +261,8 @@ const saktahToBreak: Pass = (input) => {
     const char = input[i]!
     const next = input[i + 1]
     const atWordEnd = next === undefined || /\s/u.test(next)
-    out.emit(char === SMALL_HIGH_SEEN && atWordEnd ? ZWSP : char, i)
+    const isSaktahMark = char === SMALL_HIGH_SEEN || char === SMALL_LOW_SEEN
+    out.emit(isSaktahMark && atWordEnd ? ZWSP : char, i)
   }
   return out.build()
 }
