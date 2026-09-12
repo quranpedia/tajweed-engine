@@ -1,0 +1,1781 @@
+{
+ "$comment": [
+  "Derived artifact. The legacy rule table AS DEPLOYED - what the PHP engine actually",
+  "ran with in production, which is not the same as the authored spreadsheet.",
+  "",
+  "Eight rules were hand-edited in the database in Feb 2026 and the spreadsheet was",
+  "never updated to match: seven-alefs.1-.6, seven-alefs-khulf.1 (2026-02-24 evening)",
+  "and raa-either-permissible.2 (2026-02-25). Our corpus carries the DATABASE value",
+  "for all eight, so they are inherited, not authored here.",
+  "",
+  "IS THIS CIRCULAR? For rules 1-172 before 2026-08-18, no: they predate this",
+  "engine. Seven rows WERE written by us on 2026-08-18 (3 tahhan, 4 madd) and are",
+  "reverted here to their spreadsheet value, which is what the legacy engine ran",
+  "with; revertedToSpreadsheet marks them. Rules 175-182 are ours entirely and are",
+  "absent. tajweed_ayah_spans IS downstream of us - 147,255 rows, our published span",
+  "count - and is never used here.",
+  "",
+  "Regenerate from a dump with: node scripts/differential-legacy.mjs --rebuild-deployed <dump.sql>"
+ ],
+ "source": {
+  "database": "tajweed (production)",
+  "table": "tajweed_rules",
+  "capturedAt": "2026-09-12",
+  "importedAt": "2026-02-24 09:35:07/08",
+  "ourWriteAt": "2026-08-18 11:48:40 and 11:49:23"
+ },
+ "revertedToSpreadsheet": [
+  "tafkheem-rank-1-tahhan.3",
+  "tafkheem-rank-2-tahhan.3",
+  "tafkheem-rank-3-relative-tahhan.3",
+  "madd-muttasil.2",
+  "madd-muttasil.3",
+  "madd-munfasil.2",
+  "madd-munfasil.4"
+ ],
+ "excludedByLegacyScope": {
+  "$comment": "ExcludeUnprocessedRulesScope - never run by the legacy engine.",
+  "ids": [
+   4,
+   5,
+   13,
+   16,
+   19,
+   20,
+   29,
+   30,
+   34,
+   35,
+   40,
+   42,
+   43,
+   73,
+   74,
+   75,
+   76,
+   142
+  ]
+ },
+ "rules": [
+  {
+   "id": 1,
+   "case": "[ خَ صَ ضَ غَ طَ قَ ظَ] + ا",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-1-jazari.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خَ صَ ضَ غَ طَ قَ ظَ] + ا",
+   "notes": ""
+  },
+  {
+   "id": 2,
+   "case": "[ خَّ صَّ ضَّ غَّ طَّ قَّ ظَّ] + ا",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-1-jazari.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خَّ صَّ ضَّ غَّ طَّ قَّ ظَّ] + ا",
+   "notes": ""
+  },
+  {
+   "id": 3,
+   "case": "[ خ ص ض غ ط ق ظ] + ًا",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-1-jazari.3",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خ ص ض غ ط ق ظ] + ًا",
+   "notes": ""
+  },
+  {
+   "id": 4,
+   "case": "[ خَ صَ ضَ غَ طَ قَ ظَ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-2-jazari.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خَ صَ ضَ غَ طَ قَ ظَ]",
+   "notes": ""
+  },
+  {
+   "id": 5,
+   "case": "[ خَّ صَّ ضَّ غَّ طَّ قَّ ظَّ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-2-jazari.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خَّ صَّ ضَّ غَّ طَّ قَّ ظَّ]",
+   "notes": ""
+  },
+  {
+   "id": 6,
+   "case": "[ خُ صُ ضُ غُ طُ قُ ظُ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-3-jazari.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خُ صُ ضُ غُ طُ قُ ظُ]",
+   "notes": ""
+  },
+  {
+   "id": 7,
+   "case": "[ خُّ صُّ ضُّ غُّ طُّ قُّ ظُّ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-3-jazari.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خُّ صُّ ضُّ غُّ طُّ قُّ ظُّ]",
+   "notes": ""
+  },
+  {
+   "id": 8,
+   "case": "[ خْ صْ ضْ غْ طْ قْ ظْ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-4-jazari.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خْ صْ ضْ غْ طْ قْ ظْ]",
+   "notes": ""
+  },
+  {
+   "id": 9,
+   "case": "[ خِ صِ ضِ غِ طِ قِ ظِ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-5-relative-jazari.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خِ صِ ضِ غِ طِ قِ ظِ]",
+   "notes": ""
+  },
+  {
+   "id": 10,
+   "case": "[ خِّ صِّ ضِّ غِّ طِّ قِّ ظِّ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-5-relative-jazari.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خِّ صِّ ضِّ غِّ طِّ قِّ ظِّ]",
+   "notes": ""
+  },
+  {
+   "id": 11,
+   "case": "[ خَ صَ ضَ غَ طَ قَ ظَ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-1-tahhan.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خَ صَ ضَ غَ طَ قَ ظَ]",
+   "notes": ""
+  },
+  {
+   "id": 12,
+   "case": "[ خَّ صَّ ضَّ غَّ طَّ قَّ ظَّ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-1-tahhan.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خَّ صَّ ضَّ غَّ طَّ قَّ ظَّ]",
+   "notes": ""
+  },
+  {
+   "id": 13,
+   "case": "[ءَ أَ ؤَ ئَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ] + [ همزة وصل أو بدون] + [خْ صْ ضْ غْ طْ قْ ظْ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "tafkheem-rank-1-tahhan.3",
+   "dbUpdatedAt": "2026-08-18 11:49:23",
+   "revertedToSpreadsheet": true,
+   "start_from": "[ءَ أَ ؤَ ئَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ] + [ همزة وصل أو بدون] + [خْ صْ ضْ غْ طْ قْ ظْ]",
+   "notes": ""
+  },
+  {
+   "id": 14,
+   "case": "[ خُ صُ ضُ غُ طُ قُ ظُ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-2-tahhan.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خُ صُ ضُ غُ طُ قُ ظُ]",
+   "notes": ""
+  },
+  {
+   "id": 15,
+   "case": "[ خُّ صُّ ضُّ غُّ طُّ قُّ ظُّ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-2-tahhan.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خُّ صُّ ضُّ غُّ طُّ قُّ ظُّ]",
+   "notes": ""
+  },
+  {
+   "id": 16,
+   "case": "[ءُ أُ ؤُ ئُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ] + [ همزة وصل أو بدون] + [خْ صْ ضْ غْ طْ قْ ظْ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "tafkheem-rank-2-tahhan.3",
+   "dbUpdatedAt": "2026-08-18 11:49:23",
+   "revertedToSpreadsheet": true,
+   "start_from": "[ءُ أُ ؤُ ئُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ] + [ همزة وصل أو بدون] + [خْ صْ ضْ غْ طْ قْ ظْ]",
+   "notes": ""
+  },
+  {
+   "id": 17,
+   "case": "[ خِ صِ ضِ غِ طِ قِ ظِ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-3-relative-tahhan.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خِ صِ ضِ غِ طِ قِ ظِ]",
+   "notes": ""
+  },
+  {
+   "id": 18,
+   "case": "[ خِّ صِّ ضِّ غِّ طِّ قِّ ظِّ]",
+   "white_spaces_pattern": null,
+   "slug": "tafkheem-rank-3-relative-tahhan.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ خِّ صِّ ضِّ غِّ طِّ قِّ ظِّ]",
+   "notes": ""
+  },
+  {
+   "id": 19,
+   "case": "[ءِ أِ ؤِ ئِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ إِ] + [ همزة وصل أو بدون] [خْ صْ ضْ غْ طْ قْ ظْ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "tafkheem-rank-3-relative-tahhan.3",
+   "dbUpdatedAt": "2026-08-18 11:49:23",
+   "revertedToSpreadsheet": true,
+   "start_from": "[ءِ أِ ؤِ ئِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ إِ] + [ همزة وصل أو بدون] [خْ صْ ضْ غْ طْ قْ ظْ]",
+   "notes": ""
+  },
+  {
+   "id": 20,
+   "case": "[ء أ ؤ ئ ب ت ث ج ح د ذ ر ز س ش ع ف ك ل م ن ه و ي ة]",
+   "white_spaces_pattern": null,
+   "slug": "always-tarqeeq.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ء أ ؤ ئ ب ت ث ج ح د ذ ر ز س ش ع ف ك ل م ن ه و ي ة]",
+   "notes": "باستثناء لام لفظ الجلالة فلها أحكام خاصة بها"
+  },
+  {
+   "id": 21,
+   "case": "نْ + [ ذ ث ك ج ش س د ز ف ت ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-ghunnah-tarqeeq.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ + [ ذ ث ك ج ش س د ز ف ت ]",
+   "notes": ""
+  },
+  {
+   "id": 22,
+   "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً] + [ ذ ث ك ج ش س د ز ف ت ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-ghunnah-tarqeeq.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً] + [ ذ ث ك ج ش س د ز ف ت ]",
+   "notes": ""
+  },
+  {
+   "id": 23,
+   "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ذ ث ك ج ش س د ز ف ت ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-ghunnah-tarqeeq.3",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ذ ث ك ج ش س د ز ف ت ]",
+   "notes": ""
+  },
+  {
+   "id": 24,
+   "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ ًى] + [ ذ ث ك ج ش س د ز ف ت ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-ghunnah-tarqeeq.4",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ ًى] + [ ذ ث ك ج ش س د ز ف ت ]",
+   "notes": ""
+  },
+  {
+   "id": 25,
+   "case": "نْ + [ ص ق ط ض ظ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-ghunnah-tafkheem.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ + [ ص ق ط ض ظ]",
+   "notes": ""
+  },
+  {
+   "id": 26,
+   "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ص ق ط ض ظ ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-ghunnah-tafkheem.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ص ق ط ض ظ ]",
+   "notes": ""
+  },
+  {
+   "id": 27,
+   "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ص ق ط ض ظ ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-ghunnah-tafkheem.3",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ص ق ط ض ظ ]",
+   "notes": ""
+  },
+  {
+   "id": 28,
+   "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ص ق ط ض ظ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-ghunnah-tafkheem.4",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ص ق ط ض ظ]",
+   "notes": ""
+  },
+  {
+   "id": 29,
+   "case": "[ــــــــَ ـــــــــُـــــــ ـــــَّـــــ ـــــــــُّــــــــــــ] + [الله اللهم]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "lam-jalalah-tafkheem.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ــــــــَ ـــــــــُـــــــ ـــــَّـــــ ـــــــــُّــــــــــــ] + [الله اللهم]",
+   "notes": ""
+  },
+  {
+   "id": 30,
+   "case": "[ ــــــــِـــــــ ــــِّـــــــ ـــــــــٌ ــــــــً ـــــــٍ ًا ةً ًى] + [الله اللهم]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "lam-jalalah-tarqeeq.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ ــــــــِـــــــ ــــِّـــــــ ـــــــــٌ ــــــــً ـــــــٍ ًا ةً ًى] + [الله اللهم]",
+   "notes": ""
+  },
+  {
+   "id": 31,
+   "case": "[رَ رُ رَّ رُّ]",
+   "white_spaces_pattern": null,
+   "slug": "raa-tafkheem.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[رَ رُ رَّ رُّ]",
+   "notes": ""
+  },
+  {
+   "id": 32,
+   "case": "[ــــــــَ ـــــــــُـــــــ ـــــَّـــــ ـــــــــُّــــــــــــ] + رْ",
+   "white_spaces_pattern": null,
+   "slug": "raa-tafkheem.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ــــــــَ ـــــــــُـــــــ ـــــَّـــــ ـــــــــُّــــــــــــ] + رْ",
+   "notes": ""
+  },
+  {
+   "id": 33,
+   "case": "[ــــــــَ ـــــــــُـــــــ ـــــَّـــــ ـــــــــُّــــــــــــ] + [ءْ أْ ؤْ ئْ بْ تْ ثْ جْ حْ خْ دْ ذْ رْ زْ سْ شْ صْ ضْ طْ ظْ عْ غْ فْ قْ كْ لْ مْ نْ هْ وْ ] + رْ",
+   "white_spaces_pattern": null,
+   "slug": "raa-tafkheem.3",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ــــــــَ ـــــــــُـــــــ ـــــَّـــــ ـــــــــُّــــــــــــ] + [ءْ أْ ؤْ ئْ بْ تْ ثْ جْ حْ خْ دْ ذْ رْ زْ سْ شْ صْ ضْ طْ ظْ عْ غْ فْ قْ كْ لْ مْ نْ هْ وْ ] + رْ",
+   "notes": ""
+  },
+  {
+   "id": 34,
+   "case": "همزة وصل + رْ",
+   "white_spaces_pattern": null,
+   "slug": "raa-tafkheem.4",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "همزة وصل + رْ",
+   "notes": "بمعنى أن الراء الساكنة في أول الكلمة"
+  },
+  {
+   "id": 35,
+   "case": "[ــــــــِــــ] + رْ + [خ ص ض غ ط ق ظ]",
+   "white_spaces_pattern": null,
+   "slug": "raa-tafkheem.5",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ــــــــِــــ] + رْ + [خ ص ض غ ط ق ظ]",
+   "notes": "باستثناء كلمة فرق - الشعراء 63"
+  },
+  {
+   "id": 36,
+   "case": "[ رِ رِّ ]",
+   "white_spaces_pattern": null,
+   "slug": "raa-tarqeeq.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ رِ رِّ ]",
+   "notes": ""
+  },
+  {
+   "id": 37,
+   "case": "[ـــــــِــــ ــــــــِّـــــــ ] + رْ + [ء ؤ ئ أ ي ت ث ج ح د ذ ر ز س ش ع ف ك ل م ن ه و ي ة]",
+   "white_spaces_pattern": null,
+   "slug": "raa-tarqeeq.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ـــــــِــــ ــــــــِّـــــــ ] + رْ + [ء ؤ ئ أ ي ت ث ج ح د ذ ر ز س ش ع ف ك ل م ن ه و ي ة]",
+   "notes": ""
+  },
+  {
+   "id": 38,
+   "case": "يْ + رْ",
+   "white_spaces_pattern": null,
+   "slug": "raa-tarqeeq.3",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "يْ + رْ",
+   "notes": ""
+  },
+  {
+   "id": 39,
+   "case": "[ـــــــِــــ ــــــــِّـــــــ ] + [ءْ أْ ؤْ ئْ بْ تْ ثْ جْ حْ دْ ذْ رْ زْ سْ شْ عْ فْ كْ لْ مْ نْ هْ وْ يْ] + رْ",
+   "white_spaces_pattern": null,
+   "slug": "raa-tarqeeq.4",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ـــــــِــــ ــــــــِّـــــــ ] + [ءْ أْ ؤْ ئْ بْ تْ ثْ جْ حْ دْ ذْ رْ زْ سْ شْ عْ فْ كْ لْ مْ نْ هْ وْ يْ] + رْ",
+   "notes": ""
+  },
+  {
+   "id": 40,
+   "case": "كلمة فرق - الشعراء 63",
+   "white_spaces_pattern": null,
+   "slug": "raa-either-permissible.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "كلمة فرق - الشعراء 63",
+   "notes": "حالة وحيدة"
+  },
+  {
+   "id": 41,
+   "case": "فِرْقٍ",
+   "white_spaces_pattern": null,
+   "slug": "raa-either-permissible.2",
+   "dbUpdatedAt": "2026-02-25 09:48:15",
+   "revertedToSpreadsheet": false,
+   "start_from": "فِرْقٍ",
+   "notes": ""
+  },
+  {
+   "id": 42,
+   "case": "[أي حرف حكمه التفخيم] + ا",
+   "white_spaces_pattern": null,
+   "slug": "alef-tafkheem.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[أي حرف حكمه التفخيم] + ا",
+   "notes": ""
+  },
+  {
+   "id": 43,
+   "case": "[أي حرف حكمه الترقيق] + ا",
+   "white_spaces_pattern": null,
+   "slug": "alef-tarqeeq.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[أي حرف حكمه الترقيق] + ا",
+   "notes": ""
+  },
+  {
+   "id": 44,
+   "case": "[ ءْ أْ ؤْ ئْ] + [ ء أ ؤ ئ إ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ ءْ أْ ؤْ ئْ] + [ ء أ ؤ ئ إ]",
+   "notes": ""
+  },
+  {
+   "id": 45,
+   "case": "بْ + ب",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "بْ",
+   "notes": ""
+  },
+  {
+   "id": 46,
+   "case": "تْ + [ت ة]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.3",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "تْ",
+   "notes": ""
+  },
+  {
+   "id": 47,
+   "case": "ثْ + ث",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.4",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "ثْ",
+   "notes": ""
+  },
+  {
+   "id": 48,
+   "case": "جْ + ج",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.5",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "جْ",
+   "notes": ""
+  },
+  {
+   "id": 49,
+   "case": "حْ + ح",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.6",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "حْ",
+   "notes": ""
+  },
+  {
+   "id": 50,
+   "case": "خْ + خ",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.7",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "خْ",
+   "notes": ""
+  },
+  {
+   "id": 51,
+   "case": "دْ + د",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.8",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "دْ",
+   "notes": ""
+  },
+  {
+   "id": 52,
+   "case": "ذْ + ذ",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.9",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "ذْ",
+   "notes": ""
+  },
+  {
+   "id": 53,
+   "case": "رْ + ر",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.10",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "رْ",
+   "notes": ""
+  },
+  {
+   "id": 54,
+   "case": "زْ + ز",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.11",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "زْ",
+   "notes": ""
+  },
+  {
+   "id": 55,
+   "case": "سْ + س",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.12",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "سْ",
+   "notes": ""
+  },
+  {
+   "id": 56,
+   "case": "شْ + ش",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.13",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "شْ",
+   "notes": ""
+  },
+  {
+   "id": 57,
+   "case": "صْ + ص",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.14",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "صْ",
+   "notes": ""
+  },
+  {
+   "id": 58,
+   "case": "ضْ + ض",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.15",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "ضْ",
+   "notes": ""
+  },
+  {
+   "id": 59,
+   "case": "طْ + ط",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.16",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "طْ",
+   "notes": ""
+  },
+  {
+   "id": 60,
+   "case": "ظْ + ظ",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.17",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "ظْ",
+   "notes": ""
+  },
+  {
+   "id": 61,
+   "case": "عْ + ع",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.18",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "عْ",
+   "notes": ""
+  },
+  {
+   "id": 62,
+   "case": "غْ + غ",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.19",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "غْ",
+   "notes": ""
+  },
+  {
+   "id": 63,
+   "case": "فْ + ف",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.20",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "فْ",
+   "notes": ""
+  },
+  {
+   "id": 64,
+   "case": "قْ + ق",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.21",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "قْ",
+   "notes": ""
+  },
+  {
+   "id": 65,
+   "case": "كْ + ك",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.22",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "كْ",
+   "notes": ""
+  },
+  {
+   "id": 66,
+   "case": "لْ + ل",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.23",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "لْ",
+   "notes": ""
+  },
+  {
+   "id": 67,
+   "case": "مْ + م",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.24",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "مْ",
+   "notes": ""
+  },
+  {
+   "id": 68,
+   "case": "نْ + ن",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.25",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ",
+   "notes": ""
+  },
+  {
+   "id": 69,
+   "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ن ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.26",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ن ]",
+   "notes": ""
+  },
+  {
+   "id": 70,
+   "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ن ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.27",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ن ]",
+   "notes": ""
+  },
+  {
+   "id": 71,
+   "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ن ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.28",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ن ]",
+   "notes": ""
+  },
+  {
+   "id": 72,
+   "case": "هْ + ه",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.29",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "هْ",
+   "notes": ""
+  },
+  {
+   "id": 73,
+   "case": "ــــــــــــــــــَ وْ + و",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.30",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "ــــــــــــــــــَ وْ",
+   "notes": ""
+  },
+  {
+   "id": 74,
+   "case": "ــــــــــــــــــَ يْ + ي",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.31",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "ــــــــــــــــــَ يْ",
+   "notes": ""
+  },
+  {
+   "id": 75,
+   "case": "ــــــــــــــــــُ وْ + و",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.1",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "ــــــــــــــــــُ وْ",
+   "notes": ""
+  },
+  {
+   "id": 76,
+   "case": "ــــــــــــــــــِ يْ + ي",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.2",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "ــــــــــــــــــِ يْ",
+   "notes": ""
+  },
+  {
+   "id": 77,
+   "case": "دْ + ت",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.32",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "دْ",
+   "notes": ""
+  },
+  {
+   "id": 78,
+   "case": "ذْ + ظ",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.33",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "ذْ",
+   "notes": ""
+  },
+  {
+   "id": 79,
+   "case": "تْ + ط",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.34",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "تْ",
+   "notes": ""
+  },
+  {
+   "id": 80,
+   "case": "تْ + د",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.35",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "تْ",
+   "notes": ""
+  },
+  {
+   "id": 81,
+   "case": "بْ + م",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.36",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "بْ",
+   "notes": ""
+  },
+  {
+   "id": 82,
+   "case": "ثْ + ذ",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-idgham-kamil.37",
+   "dbUpdatedAt": "2026-02-24 09:35:07",
+   "revertedToSpreadsheet": false,
+   "start_from": "ثْ",
+   "notes": ""
+  },
+  {
+   "id": 83,
+   "case": "طْ + ت",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutajanisain-idgham-naqis.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "طْ",
+   "notes": ""
+  },
+  {
+   "id": 84,
+   "case": "مْ + ب",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutajanisain-ikhfa-shafawi.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "مْ",
+   "notes": ""
+  },
+  {
+   "id": 85,
+   "case": "[ ءْ أْ ؤْ ئْ] + ه",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ ءْ أْ ؤْ ئْ]",
+   "notes": ""
+  },
+  {
+   "id": 86,
+   "case": "هْ + [ ء أ ؤ ئ إ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.4",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "هْ",
+   "notes": ""
+  },
+  {
+   "id": 87,
+   "case": "حْ + ع",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.5",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "حْ",
+   "notes": ""
+  },
+  {
+   "id": 88,
+   "case": "عْ + ح",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.6",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "عْ",
+   "notes": ""
+  },
+  {
+   "id": 89,
+   "case": "غْ + خ",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.7",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "غْ",
+   "notes": ""
+  },
+  {
+   "id": 90,
+   "case": "خْ + غ",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.8",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "خْ",
+   "notes": ""
+  },
+  {
+   "id": 91,
+   "case": "جْ + ش",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.9",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "جْ",
+   "notes": ""
+  },
+  {
+   "id": 92,
+   "case": "جْ + ي",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.10",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "جْ",
+   "notes": ""
+  },
+  {
+   "id": 93,
+   "case": "يْ + ش",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.11",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "يْ",
+   "notes": ""
+  },
+  {
+   "id": 94,
+   "case": "يْ + ج",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.12",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "يْ",
+   "notes": ""
+  },
+  {
+   "id": 95,
+   "case": "شْ + ي",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.13",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "شْ",
+   "notes": ""
+  },
+  {
+   "id": 96,
+   "case": "شْ + ج",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.14",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "شْ",
+   "notes": ""
+  },
+  {
+   "id": 97,
+   "case": "دْ + ط",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.15",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "دْ",
+   "notes": ""
+  },
+  {
+   "id": 98,
+   "case": "طْ + د",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.16",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "طْ",
+   "notes": ""
+  },
+  {
+   "id": 99,
+   "case": "سْ + ز",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.17",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "سْ",
+   "notes": ""
+  },
+  {
+   "id": 100,
+   "case": "سْ + ص",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.18",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "سْ",
+   "notes": ""
+  },
+  {
+   "id": 101,
+   "case": "زْ + س",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.19",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "زْ",
+   "notes": ""
+  },
+  {
+   "id": 102,
+   "case": "زْ + ص",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.20",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "زْ",
+   "notes": ""
+  },
+  {
+   "id": 103,
+   "case": "صْ + ز",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.21",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "صْ",
+   "notes": ""
+  },
+  {
+   "id": 104,
+   "case": "صْ + س",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.22",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "صْ",
+   "notes": ""
+  },
+  {
+   "id": 105,
+   "case": "ذْ + ث",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.23",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "ذْ",
+   "notes": ""
+  },
+  {
+   "id": 106,
+   "case": "ثْ + ظ",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.24",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "ثْ",
+   "notes": ""
+  },
+  {
+   "id": 107,
+   "case": "ظْ + ذ",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.25",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "ظْ",
+   "notes": ""
+  },
+  {
+   "id": 108,
+   "case": "ظْ + ث",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.26",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "ظْ",
+   "notes": ""
+  },
+  {
+   "id": 109,
+   "case": "وْ + م",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.27",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "وْ",
+   "notes": ""
+  },
+  {
+   "id": 110,
+   "case": "وْ + ب",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.28",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "وْ",
+   "notes": ""
+  },
+  {
+   "id": 111,
+   "case": "مْ + و",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.29",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "مْ",
+   "notes": ""
+  },
+  {
+   "id": 112,
+   "case": "بْ + و",
+   "white_spaces_pattern": "\\s*",
+   "slug": "mutamathilain-izhar.30",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "بْ",
+   "notes": ""
+  },
+  {
+   "id": 113,
+   "case": "نْ + [ ء أ ؤ ئ ه ع ح غ خ إ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "izhar-halqi-noon.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ + [ ء أ ؤ ئ ه ع ح غ خ إ]",
+   "notes": ""
+  },
+  {
+   "id": 114,
+   "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ء أ ؤ ئ إ ه ع ح غ خ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "izhar-halqi-tanween.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ء أ ؤ ئ إ ه ع ح غ خ]",
+   "notes": ""
+  },
+  {
+   "id": 115,
+   "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ء أ ؤ ئ إ ه ع ح غ خ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "izhar-halqi-tanween.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ء أ ؤ ئ إ ه ع ح غ خ]",
+   "notes": ""
+  },
+  {
+   "id": 116,
+   "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ء أ ؤ ئ إ ه ع ح غ خ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "izhar-halqi-tanween.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ء أ ؤ ئ إ ه ع ح غ خ]",
+   "notes": ""
+  },
+  {
+   "id": 117,
+   "case": "نْ + [ ي ن م و]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-bi-ghunnah-noon.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ + [ ي ن م و]",
+   "notes": ""
+  },
+  {
+   "id": 118,
+   "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ي ن م و]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-bi-ghunnah-tanween.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ي ن م و]",
+   "notes": ""
+  },
+  {
+   "id": 119,
+   "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ي ن م و]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-bi-ghunnah-tanween.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ي ن م و]",
+   "notes": ""
+  },
+  {
+   "id": 120,
+   "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ي ن م و]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-bi-ghunnah-tanween.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ي ن م و]",
+   "notes": ""
+  },
+  {
+   "id": 121,
+   "case": "نْ + [ ل ر]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-bila-ghunnah-noon.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ + [ ل ر]",
+   "notes": ""
+  },
+  {
+   "id": 122,
+   "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ل ر]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-bila-ghunnah-tanween.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ل ر]",
+   "notes": ""
+  },
+  {
+   "id": 123,
+   "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ل ر]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-bila-ghunnah-tanween.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ل ر]",
+   "notes": ""
+  },
+  {
+   "id": 124,
+   "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ل ر]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-bila-ghunnah-tanween.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ل ر]",
+   "notes": ""
+  },
+  {
+   "id": 125,
+   "case": "نْ + [ ن ر م ل]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-kamil-noon.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ + [ ن ر م ل]",
+   "notes": ""
+  },
+  {
+   "id": 126,
+   "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ن ر م ل]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-kamil-tanween.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ن ر م ل]",
+   "notes": ""
+  },
+  {
+   "id": 127,
+   "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ن ر م ل]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-kamil-tanween.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ن ر م ل]",
+   "notes": ""
+  },
+  {
+   "id": 128,
+   "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ن ر م ل]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-kamil-tanween.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ن ر م ل]",
+   "notes": ""
+  },
+  {
+   "id": 129,
+   "case": "نْ + [ ي و ]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-naqis-noon.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ + [ ي و ]",
+   "notes": ""
+  },
+  {
+   "id": 130,
+   "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ي و]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-naqis-tanween.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ي و]",
+   "notes": ""
+  },
+  {
+   "id": 131,
+   "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ي و ]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-naqis-tanween.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ي و ]",
+   "notes": ""
+  },
+  {
+   "id": 132,
+   "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ي و]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "idgham-naqis-tanween.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ي و]",
+   "notes": ""
+  },
+  {
+   "id": 133,
+   "case": "نْ + ب",
+   "white_spaces_pattern": "\\s*",
+   "slug": "iqlab-noon.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ + ب",
+   "notes": ""
+  },
+  {
+   "id": 134,
+   "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + ب",
+   "white_spaces_pattern": "\\s*",
+   "slug": "iqlab-tanween.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + ب",
+   "notes": ""
+  },
+  {
+   "id": 135,
+   "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + ب",
+   "white_spaces_pattern": "\\s*",
+   "slug": "iqlab-tanween.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + ب",
+   "notes": ""
+  },
+  {
+   "id": 136,
+   "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + ب",
+   "white_spaces_pattern": "\\s*",
+   "slug": "iqlab-tanween.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + ب",
+   "notes": ""
+  },
+  {
+   "id": 137,
+   "case": "نْ + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-haqiqi-noon.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+   "notes": ""
+  },
+  {
+   "id": 138,
+   "case": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-haqiqi-tanween.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءً أً ؤً ئً بً تً ثً جً حً خً دً ذً رً زً سً شً صً ضً طً ظً عً غً فً قً كً لً مً نً هً وً يً ًا ةً ًى] + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+   "notes": ""
+  },
+  {
+   "id": 139,
+   "case": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-haqiqi-tanween.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٌ أٌ ؤٌ ئٌ بٌ تٌ ثٌ جٌ حٌ خٌ دٌ ذٌ رٌ زٌ سٌ شٌ صٌ ضٌ طٌ ظٌ عٌ غٌ فٌ قٌ كٌ لٌ مٌ نٌ هٌ وٌ يٌ ةٌ] + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+   "notes": ""
+  },
+  {
+   "id": 140,
+   "case": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-haqiqi-tanween.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ءٍ أٍ ؤٍ ئٍ بٍ تٍ ثٍ جٍ حٍ خٍ دٍ ذٍ رٍ زٍ سٍ شٍ صٍ ضٍ طٍ ظٍ عٍ غٍ فٍ قٍ كٍ لٍ مٍ نٍ هٍ وٍ يٍ ةٍ] + [ ص ذ ث ك ج ش ق س د ط ز ف ت ض ظ ]",
+   "notes": ""
+  },
+  {
+   "id": 141,
+   "case": "نْ + [ ي ن م و]",
+   "white_spaces_pattern": null,
+   "slug": "izhar-mutlaq.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "نْ + [ي ن م و]",
+   "notes": ""
+  },
+  {
+   "id": 142,
+   "case": "موضعان فقط:\n يس والقرءان الحكيم (سورة يس)\n ن والقلم وما يسطرون (سورة القلم)",
+   "white_spaces_pattern": "\\s+",
+   "slug": "izhar-mutlaq.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "موضعان فقط:\n يس والقرءان الحكيم (سورة يس)\n ن والقلم وما يسطرون (سورة القلم)",
+   "notes": ""
+  },
+  {
+   "id": 143,
+   "case": "مْ + م",
+   "white_spaces_pattern": "\\s*",
+   "slug": "idgham-shafawi-meem.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "مْ + م",
+   "notes": ""
+  },
+  {
+   "id": 144,
+   "case": "مْ + ب",
+   "white_spaces_pattern": "\\s*",
+   "slug": "ikhfa-shafawi-meem.1",
+   "dbUpdatedAt": "2026-02-24 18:35:14",
+   "revertedToSpreadsheet": false,
+   "start_from": "مْ + ب",
+   "notes": ""
+  },
+  {
+   "id": 145,
+   "case": "مْ + [ ء أ ؤ ئ إ ا ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل ن ه و ي]",
+   "white_spaces_pattern": "\\s*",
+   "slug": "izhar-shafawi-meem.1",
+   "dbUpdatedAt": "2026-02-24 18:35:14",
+   "revertedToSpreadsheet": false,
+   "start_from": "مْ + [ ء أ ؤ ئ إ ا ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل ن ه و ي]",
+   "notes": ""
+  },
+  {
+   "id": 146,
+   "case": "نّ",
+   "white_spaces_pattern": null,
+   "slug": "noon-mushaddadah.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "نّ",
+   "notes": ""
+  },
+  {
+   "id": 147,
+   "case": "مّ",
+   "white_spaces_pattern": null,
+   "slug": "meem-mushaddadah.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "مّ",
+   "notes": ""
+  },
+  {
+   "id": 148,
+   "case": "[بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ا ى الألف الخنجرية]",
+   "white_spaces_pattern": null,
+   "slug": "madd-tabee-kalimi.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ا ى الألف الخنجرية]",
+   "notes": ""
+  },
+  {
+   "id": 149,
+   "case": "[بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [وْ و]",
+   "white_spaces_pattern": null,
+   "slug": "madd-tabee-kalimi.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [وْ و]",
+   "notes": ""
+  },
+  {
+   "id": 150,
+   "case": "[ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ي يْ]",
+   "white_spaces_pattern": null,
+   "slug": "madd-tabee-kalimi.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ي يْ]",
+   "notes": ""
+  },
+  {
+   "id": 151,
+   "case": "[أَ ؤَ ئَ ءَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [و وْ]",
+   "white_spaces_pattern": null,
+   "slug": "leen-waw.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [و وْ]",
+   "notes": ""
+  },
+  {
+   "id": 152,
+   "case": "[أَ ؤَ ئَ ءَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ي يْ]",
+   "white_spaces_pattern": null,
+   "slug": "leen-yaa.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ي يْ]",
+   "notes": ""
+  },
+  {
+   "id": 153,
+   "case": "[ ًا ءً ]",
+   "white_spaces_pattern": null,
+   "slug": "madd-iwad.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ ًا ءً ]",
+   "notes": ""
+  },
+  {
+   "id": 154,
+   "case": "[ ه ] + [واو صغيرة]",
+   "white_spaces_pattern": null,
+   "slug": "madd-silah-sughra.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ ه ] + [واو صغيرة]",
+   "notes": ""
+  },
+  {
+   "id": 155,
+   "case": "[ ه ] + [ياء صغيرة]",
+   "white_spaces_pattern": null,
+   "slug": "madd-silah-sughra.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[ ه ] + [ياء صغيرة]",
+   "notes": ""
+  },
+  {
+   "id": 156,
+   "case": "لَّٰكِنَّا۠",
+   "white_spaces_pattern": null,
+   "slug": "seven-alefs.1",
+   "dbUpdatedAt": "2026-02-24 19:23:48",
+   "revertedToSpreadsheet": false,
+   "start_from": "لكنا",
+   "notes": ""
+  },
+  {
+   "id": 157,
+   "case": "قَوَارِيرَا۠",
+   "white_spaces_pattern": null,
+   "slug": "seven-alefs.2",
+   "dbUpdatedAt": "2026-02-24 19:22:45",
+   "revertedToSpreadsheet": false,
+   "start_from": "قواريرا",
+   "notes": ""
+  },
+  {
+   "id": 158,
+   "case": "ٱلظُّنُونَا۠",
+   "white_spaces_pattern": null,
+   "slug": "seven-alefs.3",
+   "dbUpdatedAt": "2026-02-24 19:23:48",
+   "revertedToSpreadsheet": false,
+   "start_from": "الظنونا",
+   "notes": ""
+  },
+  {
+   "id": 159,
+   "case": "ٱلرَّسُولَا۠",
+   "white_spaces_pattern": null,
+   "slug": "seven-alefs.4",
+   "dbUpdatedAt": "2026-02-24 19:23:48",
+   "revertedToSpreadsheet": false,
+   "start_from": "الرسولا",
+   "notes": ""
+  },
+  {
+   "id": 160,
+   "case": "ٱلسَّبِيلَا۠",
+   "white_spaces_pattern": null,
+   "slug": "seven-alefs.5",
+   "dbUpdatedAt": "2026-02-24 19:23:48",
+   "revertedToSpreadsheet": false,
+   "start_from": "السبيلا",
+   "notes": ""
+  },
+  {
+   "id": 161,
+   "case": "أَنَا۠",
+   "white_spaces_pattern": null,
+   "slug": "seven-alefs.6",
+   "dbUpdatedAt": "2026-02-24 19:23:02",
+   "revertedToSpreadsheet": false,
+   "start_from": "أنا + [ء أ ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي]",
+   "notes": ""
+  },
+  {
+   "id": 162,
+   "case": "سَلَاسِلَاْ",
+   "white_spaces_pattern": null,
+   "slug": "seven-alefs-khulf.1",
+   "dbUpdatedAt": "2026-02-24 19:26:02",
+   "revertedToSpreadsheet": false,
+   "start_from": "سلاسلا",
+   "notes": ""
+  },
+  {
+   "id": 163,
+   "case": "[أَ ؤَ ئَ ءَ] + [ا ى الألف الخنجرية]",
+   "white_spaces_pattern": null,
+   "slug": "madd-badal.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[أَ ؤَ ئَ ءَ] + [ا ى الألف الخنجرية]",
+   "notes": ""
+  },
+  {
+   "id": 164,
+   "case": "[أُ ؤُ ئُ ءُ] + [و وْ]",
+   "white_spaces_pattern": null,
+   "slug": "madd-badal.2",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[أُ ؤُ ئُ ءُ] + [و وْ]",
+   "notes": ""
+  },
+  {
+   "id": 165,
+   "case": "[أِ ؤِ ئِ ءِ] + [يْ ي]",
+   "white_spaces_pattern": null,
+   "slug": "madd-badal.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[أِ ؤِ ئِ ءِ] + [يْ ي]",
+   "notes": ""
+  },
+  {
+   "id": 166,
+   "case": "[أَ ؤَ ئَ ءَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+   "white_spaces_pattern": null,
+   "slug": "madd-muttasil.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[أَ ؤَ ئَ ءَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+   "notes": ""
+  },
+  {
+   "id": 167,
+   "case": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+   "white_spaces_pattern": null,
+   "slug": "madd-muttasil.2",
+   "dbUpdatedAt": "2026-08-18 11:48:40",
+   "revertedToSpreadsheet": true,
+   "start_from": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+   "notes": ""
+  },
+  {
+   "id": 168,
+   "case": "[أِ ؤِ ئِ ءِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+   "white_spaces_pattern": null,
+   "slug": "madd-muttasil.3",
+   "dbUpdatedAt": "2026-08-18 11:48:40",
+   "revertedToSpreadsheet": true,
+   "start_from": "[أِ ؤِ ئِ ءِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+   "notes": ""
+  },
+  {
+   "id": 169,
+   "case": "[أَ ؤَ ئَ ءَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "madd-munfasil.1",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[أَ ؤَ ئَ ءَ بَ تَ ثَ جَ حَ خَ دَ ذَ رَ زَ سَ شَ صَ ضَ طَ ظَ عَ غَ فَ قَ كَ لَ مَ نَ هَ وَ يَ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+   "notes": ""
+  },
+  {
+   "id": 170,
+   "case": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [ا ى ] + [أ ؤ ئ ء]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "madd-munfasil.2",
+   "dbUpdatedAt": "2026-08-18 11:48:40",
+   "revertedToSpreadsheet": true,
+   "start_from": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [و وْ ] + [أ ؤ ئ ء]",
+   "notes": ""
+  },
+  {
+   "id": 171,
+   "case": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [وا وْا] + [أ ؤ ئ ء]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "madd-munfasil.3",
+   "dbUpdatedAt": "2026-02-24 09:35:08",
+   "revertedToSpreadsheet": false,
+   "start_from": "[أُ ؤُ ئُ ءُ بُ تُ ثُ جُ حُ خُ دُ ذُ رُ زُ سُ شُ صُ ضُ طُ ظُ عُ غُ فُ قُ كُ لُ مُ نُ هُ وُ يُ ] + [وا وْا] + [أ ؤ ئ ء]",
+   "notes": ""
+  },
+  {
+   "id": 172,
+   "case": "[أِ ؤِ ئِ ءِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ا ى الألف الخنجرية] + [أ ؤ ئ ء]",
+   "white_spaces_pattern": "\\s+",
+   "slug": "madd-munfasil.4",
+   "dbUpdatedAt": "2026-08-18 11:48:40",
+   "revertedToSpreadsheet": true,
+   "start_from": "[أِ ؤِ ئِ ءِ بِ تِ ثِ جِ حِ خِ دِ ذِ رِ زِ سِ شِ صِ ضِ طِ ظِ عِ غِ فِ قِ كِ لِ مِ نِ هِ وِ يِ ] + [ي يْ] + [أ ؤ ئ ء]",
+   "notes": ""
+  }
+ ]
+}

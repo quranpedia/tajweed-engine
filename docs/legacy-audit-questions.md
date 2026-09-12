@@ -1,0 +1,153 @@
+# Three questions from the legacy differential
+
+Raised by re-running the original PHP engine against this one over all 6,236
+āyahs. The oracle and the command are in `conformance/legacy/` and
+`scripts/differential-legacy.mjs`, so none of this has to be taken on trust.
+
+Every claim below is marked **VERIFIED** (I ran it) or **ASSUMED** (I did not).
+There is no CI in this org — the Actions billing block means nothing here has
+been checked by anything but a local run.
+
+These belong next to the nine in `QUESTIONS-FOR-ABDULLAH.md`; the first is an
+extension of its §8 rather than a new question.
+
+---
+
+## A. The twelve unreviewed rules are not waiting to ship. They shipped on 18 August.
+
+**The question.** Is unreviewed-but-live acceptable while a reviewer is found, or
+should the twelve be pulled from production until someone qualified clears them?
+
+**Evidence.** VERIFIED from the production `tajweed_rules` table. A single write
+at **`2026-08-18 11:48:40`** created hukums 53–58 and rules 175–182 — the eight
+rules authored here — and in the same second updated `madd-muttasil.2`,
+`madd-muttasil.3`, `madd-munfasil.2` and `madd-munfasil.4`, the four madd
+corrections. A second write at `11:49:23` updated the three `tahhan.3` rules.
+
+```
+created_at = 2026-08-18 11:48:40   ids 175-182   (qalqalah x3, madd lazim x5)
+updated_at = 2026-08-18 11:48:40   ids 167, 168, 170, 172
+updated_at = 2026-08-18 11:49:23   ids 13, 16, 19
+```
+
+So every rule this corpus marks `needsReview: true` has been live on
+tajweed.quranpedia.net for about three weeks.
+
+**Why it matters.** `needsReview` is not functioning as a pre-release gate. It is
+a note attached to something readers are already being shown. The line in
+`packages/rules/README.md` — *"The rule still matches in the meantime"* — reads
+differently once "the meantime" is production. §8 of the other document measures
+their weight: 4,144 of 147,255 spans, 2.81%, with the three qalqalah rules
+carrying most of it.
+
+This does not make the rules wrong. The differential shows the four madd
+corrections fixing patterns that searched for the wrong madd letter, and the
+qalqalah and madd lāzim rules filling a gap the spreadsheet never covered — which
+is why every āyah of الحروف المقطعة used to come back with no ruling at all.
+
+**Recommendation.** None on the scholarship; I am not qualified to give one. Only
+this: the honest options are to accept it explicitly or to revert it, and leaving
+it undecided is the one option that gets worse with time.
+
+---
+
+## B. The spreadsheet says where a ruling starts, and neither engine ever read it
+
+**The question.** Is `بداية الحكم` (`start_from`) the authored answer to "how far
+does a highlight extend"? If it is, this engine's answer is something the port
+invented, and 6,260 published spans are wrong.
+
+**Evidence.** VERIFIED against the production table, which has the column
+populated for all 182 rules. 74 enabled rules have `start_from` different from
+`case`. 35 of those produce matches. **29 of those 35 would produce shorter spans
+than we publish today.**
+
+```
+$ php /tmp/startfrom.php          # measurement script, not committed
+rules with start_from != case (enabled): 74
+matches over those rules              : 21972
+matches that would SHRINK             : 6260 (28.5%)
+code points highlighted, full match   : 69746
+code points highlighted, start_from   : 60798  (12.8% less ink)
+```
+
+The 29 are one coherent family — every two-group إدغام/إظهار rule, where
+`start_from` holds only the **first** group:
+
+| Rule | `CASE` | `بداية الحكم` | Matches | Today | Would be |
+|---|---|---|---|---|---|
+| `mutamathilain-idgham-kamil.23` | `لْ + ل` | `لْ` | 2,672 | `لْل` | `لْ` |
+| `mutamathilain-izhar.29` | `مْ + و` | `مْ` | 1,089 | `مْ و` | `مْ` |
+| `mutamathilain-izhar.27` | `وْ + م` | `وْ` | 863 | `وْم` | `وْ` |
+| `mutamathilain-idgham-kamil.24` | `مْ + م` | `مْ` | 832 | `مْ م` | `مْ` |
+| `mutajanisain-ikhfa-shafawi.1` | `مْ + ب` | `مْ` | 496 | `مْ ب` | `مْ` |
+
+Read one way that is a real instruction: match on both groups, but colour only
+the sākin letter the ruling is *about*, not the letter that triggers it. Read
+another way it is editorial shorthand meaning "the rule starts here".
+
+**What decides it, and it cuts against adopting.** VERIFIED by reading the
+recovered engine: `start_from` appears **zero times** in
+`conformance/legacy/matcher.php`. `TajweedRulesImport` stores the column,
+`ImportAndStoreTajweedRules` writes it to the database, and neither
+`DetectTajweedPattern` nor `HighlightAyahs` ever reads it. The legacy application
+highlighted the whole match, exactly as we do.
+
+So adopting it would be **a change from legacy behaviour, not a restoration of
+it** — the opposite of every other entry in `docs/divergences.md`, where the port
+either matches the legacy engine or documents why it deliberately does not.
+
+**The other six are noise, and that is useful.** The rules where `start_from`
+differs but nothing shrinks — `madd-tabee-kalimi.3`, `leen-waw.1`, `leen-yaa.1`,
+`izhar-mutlaq.1` — differ only in whitespace or in whether the hamza-carrying
+forms are listed. That looks like an earlier draft of `CASE` left undeleted,
+which is a third possible reading of the whole column.
+
+**Recommendation.** The question is narrow and worth answering once: is
+`بداية الحكم` mechanical or editorial? If mechanical, it is its own PR against
+29 rules with before-and-after span counts, and it is a corpus decision rather
+than a porting one. If editorial, record that in `docs/case-notation.md` so
+nobody has to ask again. No code change until then — but note that this is the
+only open item that would change **published offsets** on rules nobody has
+flagged as wrong.
+
+---
+
+## C. Two rules were typed into the database and nobody wrote down why
+
+**The question.** Should `raa-either-permissible.3` and `.4` carry a
+`statusReason` saying they rest on nobody's signature, or does someone remember
+the reasoning?
+
+**Evidence.** VERIFIED from the production table. The 172 spreadsheet rows were
+imported in one transaction at `2026-02-24 09:35:07`–`09:35:08`. These two were
+created the next morning:
+
+```
+id 173  raa-either-permissible.3  created 2026-02-25 09:48:15  updated 09:48:58
+id 174  raa-either-permissible.4  created 2026-02-25 09:48:15  updated 09:48:15
+```
+
+Both on hukum 16, `.3` revised 43 seconds after it was written. At the same
+instant `raa-either-permissible.2` (id 41) was rewritten to `فِرْقٍ`. So this was
+one deliberate sitting of work on ر rulings the morning after the import — not
+stray rows and not an import artifact.
+
+What is **not** recoverable: who, and why. `tajweed_rules` has no author column
+and no note, and no migration or commit corresponds to the change. The
+spreadsheet was never updated, which is why they look like orphans from this
+side.
+
+**Recommendation.** Give both a `statusReason` recording exactly that — hand-added
+2026-02-25, one day after the authored import, no spreadsheet row, no recorded
+rationale. Deleting them would be wrong; they are deliberate. Leaving them
+unmarked is also wrong, because a reader has no way to tell them apart from rules
+that have an authored source. If you remember the reasoning, it belongs in that
+field instead.
+
+The same treatment is worth considering for the eight rules in "There are two
+legacy rule tables" in `docs/divergences.md` — `seven-alefs.1`–`.6`,
+`seven-alefs-khulf.1` and `raa-either-permissible.2` — hand-edited in the database
+in February 2026 and never written back to the workbook. Those at least have an
+obvious motive: the spreadsheet forms are unvocalised and could never have
+matched. But they have no more recorded authorship than these two do.

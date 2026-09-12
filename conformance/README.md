@@ -42,17 +42,37 @@ presentation decisions that are allowed to change.
 
 ## Where these digests came from
 
-This engine is a port. During the migration it was checked against the
+This engine is a port. At the migration snapshot it was checked against the
 implementation it replaced, over the whole mushaf, in two ways: normalised text
 compared character for character, and rule-to-ayah incidence compared set for
-set. Both agreed exactly, for every ayah and for all 164 comparable rules.
+set. Both agreed exactly, for every ayah and for every comparable rule.
 
-That comparison needed the original implementation to be present, and it no
-longer is. `frozen.json` is the same guarantee in a form that outlives it — and
-being digests rather than text, it can be committed.
+**That was the state at the snapshot, and it is no longer the state at HEAD.**
+Seven rules have deliberately moved since: three madd rules whose patterns
+searched for the wrong letter, and four that stopped mis-reading الحروف المقطعة.
+Each is recorded in [docs/divergences.md](../docs/divergences.md). A reader who
+quotes "agreed exactly" about today's engine is quoting the wrong sentence.
 
-Deliberate differences from the original are recorded in
-[docs/divergences.md](../docs/divergences.md).
+Seven, not fifteen, and which number you get depends on which legacy rule table
+you compare against — so say which. Eight further rules (`seven-alefs.1`–`.6`,
+`seven-alefs-khulf.1`, `raa-either-permissible.2`) differ from the authored
+spreadsheet but **match the legacy database exactly**: they were hand-edited
+there in February 2026 and the workbook was never updated. This corpus carries
+the database value, so those eight are inherited rather than authored here.
+`node scripts/differential-legacy.mjs` reports both numbers — 147/154 against
+`--rules deployed`, 139/154 against `--rules spreadsheet`.
+
+**Comparable is 154 rules, not 164.** 164 is the number of *enabled* rules
+(182 − 18 disabled), and it is the wrong denominator for a comparison against the
+PHP: 8 of those 164 were authored for this corpus and have no legacy counterpart,
+and 2 more (`raa-either-permissible.3` and `.4`) were hand-inserted into the
+legacy database with no spreadsheet row behind them. 182 − 18 − 8 − 2 = 154.
+
+That comparison needs the original implementation to be present. It is no longer
+part of the application it came from, but it is recoverable and it has been
+recovered: see [`legacy/`](./legacy/), which holds the matcher and a script that
+re-runs the whole differential. `frozen.json` remains the cheap guarantee — being
+digests rather than text, it can be committed and it runs in a second.
 
 ## Digests, not text
 

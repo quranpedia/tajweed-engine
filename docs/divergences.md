@@ -11,6 +11,102 @@ checked over the whole mushaf before being accepted.
 
 ---
 
+## There are two legacy rule tables, and they disagree
+
+Before reading anything below as a divergence, check which legacy rule table it
+was measured against. There are two and they are not the same.
+
+- **The authored spreadsheet**, `resources/tajweed_rules.xlsx` in qaws-net/tajweed.
+  What a rule was *meant* to say.
+- **The legacy database**, which is what the PHP engine actually *ran* with.
+
+They agree on 164 of 172 rules. On eight they do not, because those eight were
+hand-edited in the database and the workbook was never updated to match:
+
+| Rule | Spreadsheet | Database (and this corpus) | Edited |
+|---|---|---|---|
+| `seven-alefs.1` | `لكنا` | `لَّٰكِنَّا۠` | 2026-02-24 |
+| `seven-alefs.2` | `قواريرا` | `قَوَارِيرَا۠` | 2026-02-24 |
+| `seven-alefs.3` | `الظنونا` | `ٱلظُّنُونَا۠` | 2026-02-24 |
+| `seven-alefs.4` | `الرسولا` | `ٱلرَّسُولَا۠` | 2026-02-24 |
+| `seven-alefs.5` | `السبيلا` | `ٱلسَّبِيلَا۠` | 2026-02-24 |
+| `seven-alefs.6` | `أنا + [...]` | `أَنَا۠` | 2026-02-24 |
+| `seven-alefs-khulf.1` | `سلاسلا` | `سَلَاسِلَاْ` | 2026-02-24 |
+| `raa-either-permissible.2` | `[ــــِـــ] + [خْ صْ ...] + رْ` | `فِرْقٍ` | 2026-02-25 |
+
+**This corpus carries the database value for all eight.** They are *inherited*,
+not authored here — which matters, because measured against the spreadsheet they
+look like eight corrections this port invented, and measured against the database
+they are eight rules we transcribed faithfully. The second reading is the correct
+one. The spreadsheet's unvocalised forms could never have matched vocalised
+Uthmānī text at all; someone noticed that in February 2026 and fixed it in the
+only place the running application read from.
+
+VERIFIED: `node scripts/differential-legacy.mjs` reports **147 of 154** comparable
+rules in exact ayah-level agreement against `--rules deployed`, and 139 against
+`--rules spreadsheet`. The eight above are the entire difference between those two
+numbers. Quote the first when the question is whether the port is faithful.
+
+`raa-either-permissible.2` is worth one more line: `فِرْقٍ` is exactly the
+exception written in the spreadsheet's own notes column on a *different* row
+(`raa-tafkheem.5`: "باستثناء كلمة فرق - الشعراء 63"). The notation cannot subtract
+a case from a group, so whoever made that edit expressed the exception as its own
+rule instead. `raa-tafkheem.5` remains `disabled` for the reason its
+`statusReason` gives.
+
+---
+
+## The legacy engine reported rulings it then failed to highlight
+
+This is the largest behavioural difference between the two engines, and it is not
+a disagreement about tajweed. The legacy engine contradicted *itself*.
+
+It decided two different things in two different places. `CacheAyahRules` asked
+"does this rule match this ayah" by running the compiled pattern over the
+normalised text. `HighlightAyahs` then had to find that match again in the
+*original* text in order to know where to colour, and it did so by building a
+second, looser pattern from the matched fragment. That second pattern ends with a
+negative lookahead when the fragment's last character is a bare wāw or yāʾ —
+added to stop false madd highlights, and correct for madd. Applied to every rule,
+it also rejects matches that were never in doubt.
+
+VERIFIED on 10:107, rule `idgham-bi-ghunnah-noon.1` (`نْ + [ي ن م و]`), by running
+the recovered matcher (`conformance/legacy/`):
+
+```
+matches on NORMALIZED text        : 3  →  "نْ ي"  "نْ ي"  "نْ ي"
+re-find in ORIGINAL text          : 0 hits
+same, without the final wāw/yāʾ lookahead : 3 hits
+```
+
+So the legacy application **listed 10:107 under إدغام بغنة in the researcher, and
+then rendered the ayah with nothing highlighted**. Nothing errored. The rule was
+`stable`, the ayah was in the result set, and the colour simply never appeared.
+
+Affected rules: `idgham-bi-ghunnah-noon.1`, `idgham-naqis-noon.1`,
+`izhar-mutlaq.1`, `mutamathilain-izhar.29`, `izhar-shafawi-meem.1`, and
+`idgham-bi-ghunnah-tanween.1`–`.3` and `idgham-naqis-tanween.1`–`.3`.
+`madd-badal.1` fails the same way for a different reason: normalisation produces
+`أَا`, which cannot be found in text that reads `أٓ`.
+
+**This accounts for roughly 21,000 of the spans this engine produces that the
+legacy engine did not.** That bulk is the legacy engine's missing highlights
+being restored, not this engine over-matching — the two engines agree at ayah
+level on every one of those rules. Anyone comparing span counts between the two
+should read that number as a repair.
+
+It belongs to a class worth naming, because it is not rare: **a check or a
+feature that reports success while doing nothing.** The eight rules that matched
+nothing because normalisation had already removed the mark they look for, further
+down this page, are the same shape — compiled cleanly, ran, returned zero, and
+reported `stable`. The lesson both times is that "no error" and "no output" are
+indistinguishable unless something asserts the output is non-empty.
+`scripts/validate-rules.ts` now makes that assertion for the second case; the
+first is structural, and the port removed it by deriving extents from an offset
+map instead of searching twice.
+
+---
+
 ## Span extents come from an offset map, not from a second search
 
 **Legacy:** match against the normalised text, then build a second, looser
