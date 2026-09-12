@@ -58,17 +58,31 @@ difference in what the engine reads — so each is handled in
 writes every case twice, once in each encoding, and asserts the two normalise to
 the same string.
 
-**4 ayahs still differ, and they are not one kind of thing.** Three are the same
-printed mark drawn with a different code point — the same shape of difference as
-the tanween class above, a fifth normalisation class rather than a disagreement
-about the text. One is a genuine difference in the rasm. Nothing here decides
+**4 ayahs still differ, and they are not one kind of thing.** Two are the same
+ruling recorded with a different code point — the same shape of difference as
+the tanween class above, a further normalisation class rather than a
+disagreement about the text. Two are word division. One of those four is filed
+as unresolved rather than explained.
+
+This paragraph used to say three were mark encoding and one was "a genuine
+difference in the rasm". Both halves were wrong: 52:37 is not established as
+mark encoding, and word division is a question this repository has raised
+upstream, not a difference in the letters it has found. Nothing here decides
 any of them:
 
 | | |
 |---|---|
-| **11:41** | *mark encoding.* The imāla on the rāʾ of مَجۡرٜىٰهَا: U+065C here, U+06EA there. Both draw the same mark, and PR #2 now reads either. |
-| **27:20**, **36:22** | *rasm.* مَا لِيَ is two words in quran-text and one, مَالِيَ, here — the only genuine difference in the written text of the two editions. A rule can match across a word boundary or not, so this is not cosmetic. |
-| **52:37** | *mark encoding.* The ṣād/sīn variant on ٱلۡمُصَۣيۡطِرُونَ: U+06E3 below there, U+06DC above here. Note U+06DC is also what the normaliser reads as a saktah at a word end, so the two are not interchangeable in code. |
+| **11:41** | *mark encoding.* The imāla on the rāʾ: U+065C here, U+06EA there — **the same ruling, recorded with two different code points**. PR #2 now reads either. This file cannot say the printed glyphs are identical: U+06EA is an empty-centre low stop and U+065C a dot below, and neither this repository nor its tooling renders them. |
+| **27:20**, **36:22** | *word division.* مَا لِيَ is written as two words in quran-text and as one here. This is the only place the two editions disagree about anything but marks, and it is **a question, not a finding** — raised upstream at quran-text rather than decided here. It is not cosmetic: a rule can match across a word boundary or fail to. |
+| **52:37** | **unresolved.** U+06DC above the ṣād here, U+06E3 below it there. Filed for a while as mark encoding, and that was wrong: position is what carries meaning for the small sīn, and KFGQPC moved **only** 52:37 from above to below while leaving 2:245 and 7:69 alone. A re-encoding does not produce that asymmetry, so something else is going on and this file does not know what. Note also that U+06DC is what the normaliser reads as a saktah at a word end, so the two are not interchangeable in code. |
+
+**None of these four is a difference in the letters.** Strip every combining
+mark, annotation sign, tatweel and hamza mark, decompose every seat, and compare
+the bare skeletons across all 6,236 āyahs: the two editions differ in **2**
+places with spaces significant and in **0** ignoring spaces — and the two are
+27:20 and 36:22 above. Decomposing the seats is load-bearing in that
+measurement, not a detail: without it 35:43's آ counts as a different letter
+from ا plus its madd, and the answer comes back 3 and 1.
 
 ## What that costs, measured
 
