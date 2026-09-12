@@ -131,10 +131,12 @@ cannot tell an absent rule from an absent ruling.
   the real spans over al-Fātiḥah, rendered on the edition's own text. Hover a
   span and the corpus names the ruling in its own Arabic; a second view lists
   every rule that fires and how often; a third shows the offsets beside the
-  text, with nothing wrapped around the Qurʾān.
-- **[The playground](https://quran-ws.github.io/quran-tajweed/)** — pick a
-  rule, see what it actually matches. One self-contained HTML file, no build
-  step and no network calls, so it works offline and straight from disk.
+  text, with nothing wrapped around the Qurʾān. **The playground is the first
+  tab there** — pick a rule, see what it actually matches.
+- **`playground/index.html`** in this repository is that same page, and it is
+  the whole of it: one self-contained HTML file, no build step and no network
+  calls, so it works offline and opens straight from disk. Rebuild it with
+  `pnpm playground:build`.
 
 The colours in any such demo are a **presentation choice**, not data. The corpus
 assigns no colours, and the scholarly colour conventions of a printed tajwīd
