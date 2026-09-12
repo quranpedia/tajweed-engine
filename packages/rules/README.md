@@ -1,6 +1,6 @@
 # @tajweed/rules
 
-The tajweed rule corpus: **7 topics → 27 categories → 57 ahkam → 182 rules**, for the riwayah of **Hafs ʿan ʿĀsim**.
+The tajweed rule corpus: **8 topics → 30 categories → 62 ahkam → 186 rules**, for the riwayah of **Hafs ʿan ʿĀsim**.
 
 This package is data only. It has no dependencies and no code. The engine that
 runs it lives in [`@tajweed/core`](../core).
