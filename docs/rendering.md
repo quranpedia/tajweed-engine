@@ -48,7 +48,7 @@ broken out into its own element is bridged on both sides.
 ## Both are exported
 
 ```ts
-import { bridgeJoins, clusterEnd } from '@quran-ws/tajwid'
+import { bridgeJoins, clusterEnd } from '@quran.ws/tajwid'
 
 const start = clusterEnd(text, span.start)
 const end = clusterEnd(text, span.end)
@@ -61,7 +61,7 @@ const [before, coloured, after] = bridgeJoins([
 ])
 ```
 
-`toHtml` and `@quran-ws/tajwid-react` use both, so a consumer of either gets this
+`toHtml` and `@quran.ws/tajwid-react` use both, so a consumer of either gets this
 for free. They are exported because anyone writing their own renderer — an SVG
 overlay, a canvas, a native view — meets exactly the same two problems, and
 neither is discoverable from the symptom.

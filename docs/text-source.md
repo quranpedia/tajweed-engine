@@ -122,7 +122,7 @@ the corpus. This is the caveat [`editions.md`](editions.md) describes, in number
 
 ## The decision this repository has not made
 
-The published annotations in `@quran-ws/tajwid-annotations` are still measured against
+The published annotations in `@quran.ws/tajwid-annotations` are still measured against
 `editions/uthmani-hafs.json`. Moving them onto quran-text's Ḥafṣ would give every
 span a provenance that reaches a printed muṣḥaf — and would move every offset in
 the file, change `conformance/frozen.json`, and invalidate the generated files in

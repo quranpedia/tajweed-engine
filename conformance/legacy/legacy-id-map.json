@@ -1,5 +1,5 @@
 {
-  "note": "Migration provenance only. Not part of @quran-ws/tajwid-rules, and not a public contract. Maps each corpus slug to the integer it had in the database it came from.",
+  "note": "Migration provenance only. Not part of @quran.ws/tajwid-rules, and not a public contract. Maps each corpus slug to the integer it had in the database it came from.",
   "topics": {
     "tafkheem-tarqeeq": 1,
     "letter-relations": 2,

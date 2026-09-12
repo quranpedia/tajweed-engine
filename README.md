@@ -17,13 +17,13 @@ Use it for Tajweed colouring, explaining rules while reading, and building recit
 
 | | |
 |---|---|
-| **Package** | `@quran-ws/tajwid-annotations` · `0.1.0` |
+| **Package** | `@quran.ws/tajwid-annotations` · `0.1.0` |
 | **Rules** | 182 authored \u00b7 127 produce spans |
 | **Spans** | 147,255 precomputed |
 | **Licence** | CC BY 4.0 |
 
 ```sh
-npm install @quran-ws/tajwid-annotations @quran-ws/tajwid-rules @quran-ws/tajwid
+npm install @quran.ws/tajwid-annotations @quran.ws/tajwid-rules @quran.ws/tajwid
 ```
 
 ## Where the documentation is

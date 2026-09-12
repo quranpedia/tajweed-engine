@@ -98,7 +98,7 @@ Harmless in a long word; worth knowing about in a short one.
 ## What the notation cannot say
 
 18 rules are published but `disabled`, and each records which limitation blocks
-it. Run `npx @quran-ws/tajwid-cli gaps` for the current list.
+it. Run `npx @quran.ws/tajwid-cli gaps` for the current list.
 
 | Gap | What is missing |
 |---|---|
