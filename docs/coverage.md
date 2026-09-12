@@ -96,5 +96,10 @@ about the ayah.
 
 **Ayahs with no annotations are left out** of a generated annotation set, not
 stored as an empty list. That keeps "no rules matched" and "not computed"
-distinguishable. As of the current corpus, every ayah of the mushaf has at
-least one annotation, so in practice nothing is left out.
+distinguishable. **6,235 of the muṣḥaf's 6,236 ayahs carry at least one
+annotation; 20:1 طه carries none**, for the reason given above, and is therefore
+absent from the file rather than present with an empty list.
+
+A consumer that looks up an ayah and finds nothing should read that as "no rule
+in this corpus describes anything here", not as an error — and should not assume
+the key exists.

@@ -86,7 +86,7 @@ never returns a modified copy of your string — only positions into it.
 ## Run it at build time
 
 The Quran is a fixed text, so for production the expected setup is: annotate
-every ayah once and ship the positions, instead of compiling 174 patterns on
+every ayah once and ship the positions, instead of compiling every pattern on
 every request. Record which text edition you computed against — the same rule
 lands on different positions in different editions of the Uthmani script.
 
