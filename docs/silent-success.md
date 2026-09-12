@@ -146,6 +146,15 @@ It reports what is in the tree, not who put it there or whether they are done.
 measurement names the SHA it was taken at. Nothing in the code changed, because
 nothing in the code was wrong.
 
+**The same family, smaller:** the first `start_from` measurement in this audit
+ran from a script in `/tmp`, and `/tmp` was cleaned mid-session — the script was
+gone when the numbers needed re-deriving. A number cited from a location nobody
+owns has the same defect as a number measured from a tree nobody owns: it cannot
+be re-run, so it cannot be checked, so it is an assertion wearing the clothes of
+a measurement. That measurement is now
+[`conformance/legacy/start-from.php`](../conformance/legacy/start-from.php), run
+by `pnpm differential --start-from`, with its control output in the docstring.
+
 ---
 
 ## What generalises
@@ -163,8 +172,25 @@ database against the workbook, one agent's test run against another's. A
 measurement with nothing to disagree with is not evidence, however precise it
 looks.
 
-And the habit that would have caught three of the four earliest: when a number is
-suspiciously clean — 0 āyahs, 100% agreement, exactly the expected count — treat
-it as a question rather than a result. `tajweed_ayah_spans` holding exactly
-147,255 rows, our own published span count, is what revealed that the production
-database is downstream of this engine and cannot be used to check it.
+And one rule, which would have caught three of the four earliest:
+
+> **When a number is suspiciously clean — 0 āyahs, 100% agreement, exactly the
+> expected count — treat it as a question rather than a result.**
+
+`tajweed_ayah_spans` holding exactly 147,255 rows, our own published span count,
+is what revealed that the production database is downstream of this engine and
+cannot be used to check it. To anyone not already looking for it, that number
+reads as reassuring: the database agrees with us. It was not agreement. It was
+an echo.
+
+The same tell runs through the others. Eight rules returning exactly 0 āyahs. A
+rule set agreeing with its oracle on 100% of spans — which, in the first run of
+this audit, it did *not*, and the zero agreement was the honest signal that the
+offsets were in different units. Clean numbers are not evidence of correctness;
+they are evidence that one of two things happened, and only one of them is good.
+
+---
+
+*Written during the audit these came out of, and each is recorded because it was
+missed, not because it was foreseen. Three of the four were found by someone
+checking a number they had already reported.*

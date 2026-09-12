@@ -203,6 +203,36 @@ correctly.
 comparing each rule's Arabic description against the letters its pattern
 actually contains.
 
+### The workbook corroborates two of the four, in its own hand
+
+That sentence above — "come either from the row's own editorial `start_from`
+column" — was written from reading the rules, and nobody had checked it against
+the workbook. Checked now, it holds for two of the four, and the evidence is
+better than the claim was:
+
+| Rule | Workbook `CASE` | Workbook `بداية الحكم` | Our correction |
+|---|---|---|---|
+| `madd-munfasil.2` | `[ا ى]` | **`[و وْ]`** | `[و وْ]` ✅ |
+| `madd-munfasil.4` | `[ا ى الألف الخنجرية]` | **`[ي يْ]`** | `[ي يْ]` ✅ |
+| `madd-muttasil.2` | `[ا ى الألف الخنجرية]` | `[ا ى الألف الخنجرية]` | `[و وْ]` — no support |
+| `madd-muttasil.3` | `[ا ى الألف الخنجرية]` | `[ا ى الألف الخنجرية]` | `[يْ ي]` — no support |
+
+On the two منفصل rows **the author's own editorial column disagrees with the
+author's own pattern column, and the editorial column is the one this port
+independently arrived at.** That is corroboration from the authored source rather
+than from our reading of the rule's Arabic description — the strongest evidence
+available for a correction to a rule nobody can now ask about.
+
+It is also the more interesting result for being *partial*. On the two متصل rows
+the same wrong alef group sits in both columns, so the error was copied into the
+editorial column too. `start_from` is therefore **not** a general independent
+check on `case`; it happens to be right twice. Anyone tempted to use it as a
+cross-check on the rest of the corpus should read those two rows first.
+
+VERIFIED by comparing `conformance/legacy/rules-as-deployed.json` against
+`packages/rules/rules.json`. All four keep `needsReview: true`: corroboration
+from a spreadsheet is not scholarly review.
+
 ## Eight rules matched nothing because normalisation removed what they look for
 
 `OPTIONAL_MARKS` removes the marks that never appear in a CASE pattern — which

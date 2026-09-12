@@ -95,7 +95,8 @@ the ruling is about, not the letter that triggers it.** إدغام happens *to* 
 ### The 6 where it looks like an undeleted draft — and these decide it
 
 The rules where `start_from` differs but nothing shrinks are not a footnote. They
-show the column doing **four different jobs**, which is the real finding:
+are what shows the column doing **five different jobs**, which is the real
+finding — more than "29 rules would change" ever was:
 
 | Rule | Matches | What `start_from` actually is |
 |---|---|---|
@@ -106,21 +107,42 @@ show the column doing **four different jobs**, which is the real finding:
 | `madd-munfasil.4` | 3 | **more correct than `CASE`** — see below |
 | `seven-alefs-khulf.1` | 1 | `سلاسلا`, the stale pre-2026-02-24 form; `CASE` is `سَلَاسِلَاْ` |
 
-So in 29 rows it is an extent instruction, in 2 it is whitespace noise, in 2 it
-disagrees with `CASE` about which letters the rule covers, and in 2 it is simply
-older than `CASE`. **A column that is authoritative in 29 rows and vestigial in 6
-cannot be adopted wholesale**, and that is a finding rather than a caveat: it
-means the answer cannot be "yes, use the column", only "yes, use it for this
-family, having decided what the other six are".
+So: an extent instruction in 29 rows, whitespace noise in 2, a disagreement with
+`CASE` about which letters the rule covers in 2, stale in 1, and **more correct
+than `CASE` in 1**. **A column that is authoritative in 29 rows, vestigial in 4
+and better than the pattern column in 1 cannot be adopted by a single rule** —
+and that is the finding, not a caveat on it. The answer cannot be "yes, use the
+column". It can only be "use it for this family, having decided what each of the
+other six is."
 
-### One row that pays for the whole exercise
+### Two rows that pay for the whole exercise
 
 `madd-munfasil.4`'s own `start_from` reads `[ي يْ]` while its `CASE` reads
-`[ا ى الألف الخنجرية]`. That is exactly the correction this port made to that
-rule — and it means **the workbook's own editorial column disagreed with its
-pattern column, and the editorial column was right.** Independent corroboration
-from the authored source that the four madd corrections were not our invention.
-Same story for `madd-muttasil.2` and `.3`.
+`[ا ى الألف الخنجرية]`, and `madd-munfasil.2`'s reads `[و وْ]` against a `CASE`
+of `[ا ى]`. Both are exactly the corrections this port made to those rules.
+
+So on those two rows **the author's own editorial column disagrees with the
+author's own pattern column, and the editorial column is the one we
+independently arrived at** — corroboration from the authored source rather than
+from our reading of the rule's Arabic.
+
+**Two of the four, not four.** `madd-muttasil.2` and `.3` carry the same wrong
+alef group in *both* columns, so the error was copied into the editorial column
+as well. `start_from` is not a general independent check on `case`; it is right
+twice and wrong twice, and anyone tempted to use it to audit the rest of the
+corpus should read those two rows first.
+
+**This also kills the "undeleted draft" reading I gave these rows earlier, and
+the correction strengthens the case rather than weakening it.** A draft does not
+contain the right answer where the final version has the wrong one. On the two
+منفصل rows the column is not *older* than `CASE` — it is *better* than `CASE`.
+Which makes the four-jobs finding above sharper, not softer: the column is an
+extent instruction in 29 rows, noise in 2, a coverage disagreement in 2, stale in
+1, and **more authoritative than the pattern column in 2**. Five jobs, on the
+evidence, and that is the reason it cannot be adopted by a single rule.
+
+All four corrections keep `needsReview: true`. Corroboration from a spreadsheet
+is not scholarly review.
 
 ### What cuts against adopting it
 
