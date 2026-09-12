@@ -327,7 +327,7 @@ for (const row of cumulative) {
   console.log(`  ${String(row.reconciled).padStart(5)} once ${row.id} is allowed for — ${row.what}`)
 }
 console.log(
-  `  ${differing.length} left over — what the classes above do not account for.\n` +
+  `  RAW BYTE DIFFERENCES: ${differing.length} — what the classes above do not account for.\n` +
     '      This tool cannot say what these are. A residue is the part the\n' +
     '      declared classes failed to explain, so naming it needs a reader, not\n' +
     '      a measurement. Listed with the codepoints that differ, so the next\n' +
@@ -336,7 +336,22 @@ console.log(
 for (const reference of differing) {
   console.log(`      ${reference}  ${describeDifference(left.ayahs[reference]!, right.ayahs[reference]!)}`)
 }
-console.log(`\n  ${normalisedAlike.length} of ${shared.length} normalise to the identical string; ${normalisedApart.length} do not`)
+// Two different measurements, and they must never share the word "residue".
+//
+// RAW BYTE DIFFERENCES counts ayahs whose stored bytes differ after the declared
+// classes are allowed for. RESIDUE AFTER NORMALISATION counts ayahs that still
+// differ once the normaliser has run — which is the number that decides whether
+// a rule can match, and the smaller of the two.
+//
+// They have been 4 and 3, and 4 and 2, on the same tree on the same night. One
+// word for both is how "182 rules" and "164 rule ids" came to be quoted
+// interchangeably, and how a stale "57 ahkam" survived four branches. Naming
+// them apart costs one line here and stops the confusion at the source.
+console.log(
+  `\n  RESIDUE AFTER NORMALISATION: ${normalisedApart.length} — ` +
+    `${normalisedAlike.length} of ${shared.length} ayahs normalise to an identical string, ` +
+    `${normalisedApart.length} do not`,
+)
 console.log(`\n  spans: ${leftIncidence.spans} on ${left.id}, ${rightIncidence.spans} on ${right.id}`)
 console.log(`  ${report.rules.matchingDifferently.length} of ${rules.length} rules match a different number of ayahs`)
 for (const row of report.rules.matchingDifferently.slice(0, 20)) {

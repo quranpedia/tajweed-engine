@@ -89,7 +89,7 @@ $ pnpm edition:diff editions/uthmani-hafs.json editions/hafs-quran-text.json
   6236 ayahs compared
   2715 byte-identical as they stand
   6232 once tanween is allowed for — positional tanween against open tanween
-  4 left over — what the classes above do not account for:
+  RAW BYTE DIFFERENCES: 4 — what the classes above do not account for:
       11:41  U+06EA -> U+065C ; U+065E -> U+08F1 ; U+065E -> U+08F1
       27:20  — -> U+0020 (word separation only)
       36:22  — -> U+0020 (word separation only)
@@ -103,7 +103,15 @@ these two editions only the tanwīn class does any work — quran-text stopped
 applying NFC, so the other two reconcile nothing and are kept because they are
 real differences between Uthmani editions in general.
 
-The four left over are **not** differences in the letters, and the earlier
+**Two numbers, two names, and they are not interchangeable.** *Raw byte
+differences* counts āyahs whose stored bytes still differ once the declared
+classes are allowed for. *Residue after normalisation* counts āyahs that still
+differ after the normaliser runs — the number that decides whether a rule can
+match. They are not the same and neither bounds the other: on this branch they
+are 4 and 5, because normalisation can introduce a difference as well as remove
+one. Quote the name with the number.
+
+The four raw differences are **not** differences in the letters, and the earlier
 wording here said they were. Two are word separation, one is the same ruling
 written with two different code points, and one is unresolved. Strip every
 combining mark, annotation sign, tatweel and hamza mark and compare the bare
