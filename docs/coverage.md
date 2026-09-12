@@ -19,13 +19,21 @@ of mistake.
 | المشددتان | 2 | النون والميم المشددتان |
 | المد | 13 | طبيعي، عوض، صلة صغرى، لين، بدل، واجب متصل، جائز منفصل، **لازم** |
 | القلقلة | 3 | صغرى في وسط الكلمة، متطرفة على حرف ساكن في آخرها، وكبرى على رأس الآية |
+| أداءات خاصة عند حفص | 4 | الإمالة، التسهيل، والإشمام والاختلاس في تأمنا — ثلاثة مواضع بأعيانها |
 
-القلقلة and المد اللازم were written for this corpus; the source system did not
-have them. Before المد اللازم was added, the engine had nothing to say about
-الحروف المقطعة — the disjoined letters that open some surahs. Every rule in
-these two areas is flagged `needsReview` until
-a qualified reviewer signs it off, and each is tested against passages whose
-ruling is not in dispute — see `scripts/verify-rules.ts`.
+القلقلة، المد اللازم and أداءات خاصة were written for this corpus; the source
+system did not have them. Before المد اللازم was added, the engine had nothing to
+say about الحروف المقطعة — the disjoined letters that open some surahs. Every rule
+in these three areas is flagged `needsReview` until a qualified reviewer signs it
+off, and each is tested against passages whose ruling is not in dispute — see
+`scripts/verify-rules.ts`.
+
+The three أداءات خاصة are rulings of specific words at specific places rather than
+patterns: الإمالة in Hūd 41, التسهيل in Fuṣṣilat 44, and الإشمام in Yūsuf 11, which
+also carries a second accepted wajh, الاختلاس. Each is written as the word itself and
+matched against the text as printed, because the mushaf records all three with a mark
+of its own — U+06EA and U+06EC — that normalisation strips. An edition without those
+marks silently loses the rules; `pnpm edition:check` reports it.
 
 Two consequences of the same limit are worth knowing before you rely on the
 output:
@@ -34,6 +42,13 @@ output:
   real, but it falls on the last mīm of the spelled name *mīm*, and the spelled
   name is not in the text. Marking it would mean marking the written mīm, which
   is a different letter.
+
+يوسف ١١ carries two accepted wajh, الإشمام and الاختلاس, and the corpus states
+both. They are alternatives — a reciter performs one or the other — but nothing in
+the model says so, and both are emitted as spans over the identical range. A
+consumer that flattens to a single layer with `resolveOverlaps` therefore shows
+exactly one of them, chosen by rule id, which is not a judgement anyone made. Read
+`analyze` directly if you need to present the choice.
 
 One of them is deliberately less detailed than the classical books:
 
