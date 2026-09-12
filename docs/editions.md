@@ -61,6 +61,10 @@ uses U+0652 also works.
 **Positional tanween.** U+0657, U+065E and U+0656 instead of the standalone
 marks. Handled, and an edition without them is fine.
 
+**The marks that carry a ruling on their own.** U+06EA (الإمالة, one place) and
+U+06EC (التسهيل and الإشمام, two places). An edition that omits them drops three
+rules to zero matches without any other symptom, which is why the check counts them.
+
 **Ayah count.** 6,236 is the Hafs count. If your total is different, your
 edition uses a different counting system, and ayah references will not line up
 with the annotations at all.

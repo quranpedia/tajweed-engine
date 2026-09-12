@@ -13,10 +13,10 @@
  * اللازم الكلمي المخفف occurs in exactly two places in the Quran; a pattern that
  * finds three has found something that is not it.
  *
- * Requires editions/uthmani-hafs.json. Exits non-zero on any failure.
+ * Runs against every edition in editions/. Exits non-zero on any failure.
  */
 
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
@@ -26,9 +26,25 @@ import type { Edition } from '../packages/core/src/edition.js'
 import type { Corpus } from '../packages/core/src/types.js'
 
 const here = dirname(fileURLToPath(import.meta.url))
-const edition = JSON.parse(
-  readFileSync(join(here, '..', 'editions', 'uthmani-hafs.json'), 'utf8'),
-) as Edition
+/**
+ * Every edition in editions/, not one named path.
+ *
+ * A pinned fixture is only as portable as the text it is pinned against, and
+ * this script hard-coded editions/uthmani-hafs.json. Four rules written as raw
+ * byte literals passed it while matching NOTHING on the other edition this
+ * repository ships, because the other edition was never run. The gate that
+ * should have caught that was the gate that could not see it.
+ */
+const editionsDir = join(here, '..', 'editions')
+const editions = readdirSync(editionsDir)
+  .filter((name) => name.endsWith('.json'))
+  .sort()
+  .map((name) => ({ name, edition: JSON.parse(readFileSync(join(editionsDir, name), 'utf8')) as Edition }))
+
+if (editions.length === 0) {
+  console.error('No editions in editions/ — nothing to verify against.')
+  process.exit(1)
+}
 const typed = corpus as unknown as Corpus
 
 interface Expectation {
@@ -116,12 +132,45 @@ const EXPECTATIONS: readonly Expectation[] = [
     exactlyOccurrences: 0,
     why: 'ياء مدية يليها حرف مشدد — لا يقع في القرآن',
   },
+  {
+    rule: 'imalah-kubra.1',
+    matches: ['11:41'],
+    // مرساها carries the same رvowel-ألف shape and is NOT imāla for Ḥafṣ.
+    avoids: ['7:187', '79:42'],
+    exactlyOccurrences: 1,
+    why: 'الموضع الوحيد للإمالة الكبرى عند حفص — هود ٤١',
+  },
+  {
+    rule: 'tashil-hamza.1',
+    matches: ['41:44'],
+    // The same word with a fully realised hamza, and its plural.
+    avoids: ['16:103', '26:198'],
+    exactlyOccurrences: 1,
+    why: 'الموضع الوحيد للتسهيل عند حفص — فصلت ٤٤',
+  },
+  {
+    rule: 'ishmam-tamanna.1',
+    matches: ['12:11'],
+    // Same root, no idghaam and so no ishmām.
+    avoids: ['3:75'],
+    exactlyOccurrences: 1,
+    why: 'الموضع الوحيد للإشمام في الحركة عند حفص — يوسف ١١',
+  },
+  {
+    rule: 'ikhtilas-tamanna.1',
+    matches: ['12:11'],
+    avoids: ['3:75'],
+    exactlyOccurrences: 1,
+    why: 'الوجه الثاني في الموضع نفسه — يوسف ١١',
+  },
 ]
 
 let failures = 0
 
+let currentEdition = ''
+
 function fail(message: string): void {
-  console.error(`  ✗ ${message}`)
+  console.error(`  ✗ [${currentEdition}] ${message}`)
   failures += 1
 }
 
@@ -137,6 +186,10 @@ interface Observed {
   occurrences: number
   samples: string[]
 }
+
+for (const { name, edition } of editions) {
+console.log(`\n\u2500\u2500 ${name} \u2500\u2500`)
+currentEdition = name
 
 const observed = new Map<string, Observed>(
   EXPECTATIONS.map((expectation) => [expectation.rule, { ayahs: [], occurrences: 0, samples: [] }]),
@@ -198,10 +251,11 @@ for (const expectation of EXPECTATIONS) {
     )
   }
 }
+}
 
 console.log()
 if (failures > 0) {
   console.error(`${failures} check(s) failed`)
   process.exit(1)
 }
-console.log(`all ${EXPECTATIONS.length} pinned rules behave as expected`)
+console.log(`all ${EXPECTATIONS.length} pinned rules behave as expected on ${editions.length} edition(s)`)

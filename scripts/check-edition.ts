@@ -66,6 +66,8 @@ const EXPECTED: readonly Expectation[] = [
   { char: '\u{06DC}', name: 'small high seen', matters: 'marks a saktah, which blocks matching across it', reference: 20, optional: true },
   { char: '\u{06E5}', name: 'small waw', matters: 'مد الصلة', reference: 100, optional: true },
   { char: '\u{06E6}', name: 'small yeh', matters: 'مد الصلة', reference: 100, optional: true },
+  { char: '\u{06EA}', name: 'empty centre low stop', matters: 'الإمالة in Hūd 41', reference: 1, optional: true },
+  { char: '\u{06EC}', name: 'rounded high stop', matters: 'التسهيل in Fuṣṣilat 44, الإشمام in Yūsuf 11', reference: 2, optional: true },
 ]
 
 function count(haystack: string, needle: string): number {
