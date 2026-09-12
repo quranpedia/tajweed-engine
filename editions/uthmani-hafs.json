@@ -3,11 +3,15 @@
     "riwayah": "hafs-an-asim",
     "script": "uthmani",
     "source": {
-        "known": "Exported from the tajweed application at tajweed.quranpedia.net. That is where the file came from, not where the text came from, and the step before it was not recorded.",
-        "verified": false,
-        "not": "This is not the KFGQPC text the rest of the organisation uses. Against quran-ws/quran-text's Hafs, 345 of 6236 ayahs are byte-identical and 6232 are the same text differently encoded; see reports/hafs-quran-text-vs-uthmani-hafs.json.",
-        "why_it_matters": "Every offset in @tajweed/annotations is measured against this file. Until the line above is filled in, the annotations are traceable to a digest but not to a printed mushaf.",
-        "replacement": "editions/hafs-quran-text.json, which records the KFGQPC package and its SHA-256."
+        "package": "UthmanicHafs_v2-0.zip",
+        "member": "UthmanicHafs_v2-0 data/hafsData_v2-0.csv",
+        "column": "aya_text",
+        "release_year": 2022,
+        "sha256": "a7b0e5591945712ec5e4d6142938ae4d1e9b49bdc89dff06222789bfebdfd72c",
+        "confidence": "measured, not asserted: all 6236 ayahs are byte-identical to that column after three mechanical steps — strip the CSV quoting, strip the trailing ayah-number presentation glyph, and replace the 199 non-breaking spaces after the hizb sign with ordinary spaces. Nothing else differs anywhere.",
+        "how_to_reproduce": "Take aya_text from the CSV, apply those three steps, and compare. 6236 of 6236.",
+        "note": "This was open for a long time. The file said only 'legacy application export', the README said it was the text published at tajweed.quranpedia.net, and LICENSE asserted a KFGQPC derivation that nobody could check. The derivation is now checkable: it is the 2022 v2 release, not the 2026 v3.0 one that quran-ws/quran-text carries. That is why 35:43 is composed here and decomposed there, and why only 2715 of 6236 ayahs match quran-text byte for byte.",
+        "found_by": "quran-ws/quran-text, which noticed that 35:43 differs between the two releases and pointed at the v2 line as the likely origin."
     },
     "ayahs": {
         "1:1": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
