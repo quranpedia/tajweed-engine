@@ -49,6 +49,26 @@ Quranic annotation marks sit in the Basic Multilingual Plane, so for Quranic
 text the positions also work directly as JavaScript string indices —
 `sliceSpan` handles the general case anyway.
 
+## Cutting the text is where Arabic breaks
+
+Colouring a span means giving it its own element, and a browser shapes each
+element on its own — so the word comes apart at every change of colour, and a
+cut taken at the raw offset can land between a letter and the shadda written on
+it. The text is unaltered either way, nothing is raised, and it reads as a font
+problem. Two exports carry the fix:
+
+```ts
+import { bridgeJoins, clusterEnd } from '@quran-ws/tajwid'
+
+const end = clusterEnd(text, span.end)          // past the marks on that letter
+const chunks = bridgeJoins([before, span, after]) // joiners across each cut
+```
+
+`toHtml` and [`@quran-ws/tajwid-react`](../react) already use both. Write your
+own renderer — an SVG overlay, a canvas, a native view — and you need them:
+[docs/rendering.md](../../docs/rendering.md) says why, including why the joiner
+has to be conditional.
+
 ## Spans overlap, on purpose
 
 One letter can demonstrate more than one ruling, and `analyze` reports all of

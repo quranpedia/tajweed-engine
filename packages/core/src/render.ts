@@ -9,6 +9,7 @@
  */
 
 import { resolveOverlaps } from './engine.js'
+import { bridgeJoins, clusterEndIn } from './shaping.js'
 import { ALLOWED_MARKS, toCodePoints } from './unicode.js'
 import type { Corpus, Span } from './types.js'
 
@@ -54,7 +55,7 @@ export interface RenderOptions {
 /**
  * Wraps each span in a `<span>` carrying its colour and its ruling.
  *
- * Two things this does that a naive implementation does not:
+ * Four things this does that a naive implementation does not:
  *
  * Waqf and sajda marks inside a span are left uncoloured. They are instructions
  * to the reciter about where to stop, not part of the letter the rule concerns,
@@ -63,6 +64,14 @@ export interface RenderOptions {
  * The ruling is written into `aria-label` as well as `title`, so a screen reader
  * reaches it. Colour alone conveys nothing to a reader who cannot see it, which
  * for a tool meant to teach is a failure of the whole exercise.
+ *
+ * Every boundary is pushed past the marks of the letter it lands on, so a shadda
+ * or a harakah is never separated from the letter it is written on.
+ *
+ * Every boundary is then bridged with a zero-width joiner where the letters
+ * either side would have joined. A browser shapes each element on its own, so
+ * without that the word comes apart at each change of colour — the text
+ * unaltered, nothing raised, and the reader sent looking at their font.
  */
 export function toHtml(ayahText: string, spans: readonly Span[], corpus: Corpus, options: RenderOptions = {}): string {
   const { flatten = true, colors = TOPIC_COLORS, describe } = options
@@ -70,33 +79,63 @@ export function toHtml(ayahText: string, spans: readonly Span[], corpus: Corpus,
   const chars = toCodePoints(ayahText)
   const ordered = flatten ? resolveOverlaps(spans) : [...spans].sort((a, b) => a.start - b.start)
 
-  const out: string[] = []
+  // Each piece becomes its own element, so each piece is a cut the shaper has to
+  // be told about. They are collected before anything is written, because a
+  // joiner is decided by the letters on BOTH sides of its cut.
+  const pieces: { readonly text: string; readonly span?: Span }[] = []
   let cursor = 0
 
   for (const span of ordered) {
-    if (span.start < cursor) {
+    const start = clusterEndIn(chars, span.start)
+    const end = clusterEndIn(chars, span.end)
+    if (start < cursor) {
       continue
     }
-    out.push(escapeHtml(chars.slice(cursor, span.start).join('')))
+    if (start > cursor) {
+      pieces.push({ text: chars.slice(cursor, start).join('') })
+    }
 
-    const color = colors[span.topicId] ?? 'currentColor'
-    const description = escapeHtml(label(span))
-    const open = `<span class="tajweed" data-rule="${escapeHtml(span.ruleId)}" data-topic="${escapeHtml(
-      span.topicId,
-    )}" style="color:${color}" title="${description}" aria-label="${description}">`
+    // A waqf mark is broken out so it keeps the default colour.
+    let run = ''
+    for (const char of chars.slice(start, end)) {
+      if (!ALLOWED_MARKS.includes(char)) {
+        run += char
+        continue
+      }
+      if (run !== '') {
+        pieces.push({ text: run, span })
+        run = ''
+      }
+      pieces.push({ text: char })
+    }
+    if (run !== '') {
+      pieces.push({ text: run, span })
+    }
 
-    // Close and reopen around each waqf mark so it keeps the default colour.
-    const inner = chars
-      .slice(span.start, span.end)
-      .map((char) => (ALLOWED_MARKS.includes(char) ? `</span>${escapeHtml(char)}${open}` : escapeHtml(char)))
-      .join('')
-
-    out.push(`${open}${inner}</span>`)
-    cursor = span.end
+    cursor = end
   }
 
-  out.push(escapeHtml(chars.slice(cursor).join('')))
-  return out.join('')
+  if (cursor < chars.length) {
+    pieces.push({ text: chars.slice(cursor).join('') })
+  }
+
+  const bridged = bridgeJoins(pieces.map((piece) => piece.text))
+
+  return pieces
+    .map((piece, index) => {
+      const text = escapeHtml(bridged[index]!)
+      if (!piece.span) {
+        return text
+      }
+      const color = colors[piece.span.topicId] ?? 'currentColor'
+      const description = escapeHtml(label(piece.span))
+      return (
+        `<span class="tajweed" data-rule="${escapeHtml(piece.span.ruleId)}" data-topic="${escapeHtml(
+          piece.span.topicId,
+        )}" style="color:${color}" title="${description}" aria-label="${description}">` + `${text}</span>`
+      )
+    })
+    .join('')
 }
 
 const ANSI: Readonly<Record<string, string>> = {

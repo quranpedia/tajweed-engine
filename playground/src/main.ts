@@ -20,6 +20,8 @@ import surahNames from './surahs.json' with { type: 'json' }
 import {
   Tajweed,
   TOPIC_COLORS,
+  bridgeJoins,
+  clusterEnd,
   orderedReferences,
   resolveOverlaps,
   sliceSpan,
@@ -153,21 +155,44 @@ function render(): void {
   reference.textContent = label
   output.replaceChildren()
 
+  // Each coloured stretch is its own element, and a browser shapes each element
+  // on its own — so every boundary here is a cut the shaper has to be told
+  // about, and the pieces are worked out before any of them is drawn. See
+  // docs/rendering.md.
   const characters = Array.from(text)
+  const pieces: { text: string; span?: Span }[] = []
   let cursor = 0
 
   for (const span of shown) {
-    if (span.start < cursor) {
+    const start = clusterEnd(text, span.start)
+    const end = clusterEnd(text, span.end)
+    if (start < cursor) {
       continue
     }
-    if (span.start > cursor) {
-      output.append(characters.slice(cursor, span.start).join(''))
+    if (start > cursor) {
+      pieces.push({ text: characters.slice(cursor, start).join('') })
+    }
+    pieces.push({ text: characters.slice(start, end).join(''), span })
+    cursor = end
+  }
+
+  if (cursor < characters.length) {
+    pieces.push({ text: characters.slice(cursor).join('') })
+  }
+
+  const bridged = bridgeJoins(pieces.map((piece) => piece.text))
+
+  for (const [index, piece] of pieces.entries()) {
+    const span = piece.span
+    if (!span) {
+      output.append(bridged[index]!)
+      continue
     }
 
     const mark = document.createElement('span')
     mark.className = 'mark'
     mark.style.color = TOPIC_COLORS[span.topicId] ?? 'currentColor'
-    mark.textContent = characters.slice(span.start, span.end).join('')
+    mark.textContent = bridged[index]!
     mark.title = describe(span)
     mark.setAttribute('aria-label', describe(span))
     mark.tabIndex = 0
@@ -179,12 +204,6 @@ function render(): void {
       }
     })
     output.append(mark)
-
-    cursor = span.end
-  }
-
-  if (cursor < characters.length) {
-    output.append(characters.slice(cursor).join(''))
   }
 
   const ahkam = new Set(found.map((span) => span.hukumId))
@@ -279,10 +298,13 @@ function showDetails(span: Span, text: string): void {
   heading.textContent = hukum?.label.ar ?? span.hukumId
   heading.style.color = TOPIC_COLORS[span.topicId] ?? 'inherit'
 
+  // Shown on its own, away from the rest of the ayah, so the end is pushed past
+  // the marks of the letter it lands on — otherwise a shadda belonging to the
+  // last letter of the span is left behind and drawn on a dotted circle.
   const matched = document.createElement('p')
   matched.className = 'matched'
   matched.lang = 'ar'
-  matched.textContent = sliceSpan(text, span)
+  matched.textContent = sliceSpan(text, { start: span.start, end: clusterEnd(text, span.end) })
 
   const rows = document.createElement('dl')
   const add = (term: string, value: string, isArabic = false): void => {

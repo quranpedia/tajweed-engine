@@ -199,7 +199,24 @@ export function resolveOverlaps(spans: readonly Span[]): Span[] {
   return kept
 }
 
-/** Extracts the text a span covers, correctly for any code point. */
+/**
+ * Extracts the text a span covers, correctly for any code point.
+ *
+ * Exactly the span, and deliberately so: this is the data accessor, and what it
+ * returns has to agree with `start`, `end` and anything counted from them.
+ *
+ * That is not the same as what a renderer should cut. A span ends on the letter
+ * its ruling concerns, which may be written before the shadda or harakah it
+ * carries, so a slice taken for DISPLAY beside the rest of the ayah should push
+ * the end past those marks first:
+ *
+ * ```ts
+ * sliceSpan(text, { start: span.start, end: clusterEnd(text, span.end) })
+ * ```
+ *
+ * `clusterEnd` and `bridgeJoins` are the two halves of drawing a cut ayah; see
+ * docs/rendering.md.
+ */
 export function sliceSpan(ayahText: string, span: Pick<Span, 'start' | 'end'>): string {
   return toCodePoints(ayahText).slice(span.start, span.end).join('')
 }

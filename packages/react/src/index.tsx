@@ -13,8 +13,9 @@ import { useMemo, type CSSProperties, type ReactElement, type ReactNode } from '
 import {
   Tajweed,
   TOPIC_COLORS,
+  bridgeJoins,
+  clusterEnd,
   resolveOverlaps,
-  sliceSpan,
   type Corpus,
   type Span,
   type TajweedOptions,
@@ -52,6 +53,13 @@ export interface TajweedTextProps {
  * The text is emitted character for character; nothing is normalised, escaped
  * away or reordered. React escapes it on output, so the string that reaches the
  * DOM is the string that was passed in.
+ *
+ * Two things are added to the DRAWING and to nothing else. Each boundary is
+ * pushed past the marks of the letter it lands on, and each is bridged with a
+ * zero-width joiner where the letters either side would have joined — a browser
+ * shapes every element on its own, so without that the word comes apart at each
+ * change of colour. Neither reaches the offsets, and neither is part of the
+ * text: see `clusterEnd` and `bridgeJoins` in @quran-ws/tajwid.
  */
 export function TajweedText({
   text,
@@ -76,17 +84,17 @@ export function TajweedText({
 
   const describe = useMemo(() => describer(corpus), [corpus])
 
+  const pieces = useMemo(() => layout(text, resolved), [text, resolved])
+  const bridged = useMemo(() => bridgeJoins(pieces.map((piece) => piece.text)), [pieces])
+
   const children: ReactNode[] = []
-  const characters = Array.from(text)
-  let cursor = 0
 
-  for (const [index, span] of resolved.entries()) {
-    if (span.start < cursor) {
+  for (const [index, piece] of pieces.entries()) {
+    const drawn = bridged[index]!
+    const span = piece.span
+    if (!span) {
+      children.push(drawn)
       continue
-    }
-
-    if (span.start > cursor) {
-      children.push(characters.slice(cursor, span.start).join(''))
     }
 
     const label = describe(span)
@@ -117,15 +125,9 @@ export function TajweedText({
             : undefined
         }
       >
-        {renderInner(characters.slice(span.start, span.end))}
+        {piece.waqf ? <span style={{ color: 'initial' }}>{drawn}</span> : drawn}
       </span>,
     )
-
-    cursor = span.end
-  }
-
-  if (cursor < characters.length) {
-    children.push(characters.slice(cursor).join(''))
   }
 
   return (
@@ -135,37 +137,65 @@ export function TajweedText({
   )
 }
 
-/**
- * Waqf and sajda marks keep the surrounding text's colour.
- *
- * They tell the reciter where to pause; they are not part of the letter the
- * ruling concerns, and colouring them says otherwise.
- */
-function renderInner(characters: readonly string[]): ReactNode {
-  const parts: ReactNode[] = []
-  let run = ''
+interface Piece {
+  /** The text this element will contain, before any joiner is added. */
+  readonly text: string
+  /** The span it belongs to, or none for the text between spans. */
+  readonly span?: Span
+  /**
+   * A waqf or sajda mark, drawn in the surrounding text's colour. It tells the
+   * reciter where to pause; it is not part of the letter the ruling concerns,
+   * and colouring it says otherwise.
+   */
+  readonly waqf?: boolean
+}
 
-  for (const [index, character] of characters.entries()) {
-    if (!WAQF_MARKS.has(character)) {
-      run += character
+/**
+ * The ordered pieces the component will emit, one element each.
+ *
+ * They are worked out before anything is rendered, because a joiner is decided
+ * by the letters on BOTH sides of its cut — and because every boundary here is a
+ * cut, including the ones made around a waqf mark inside a span.
+ */
+function layout(text: string, spans: readonly Span[]): Piece[] {
+  const characters = Array.from(text)
+  const pieces: Piece[] = []
+  let cursor = 0
+
+  for (const span of spans) {
+    const start = clusterEnd(text, span.start)
+    const end = clusterEnd(text, span.end)
+    if (start < cursor) {
       continue
     }
-    if (run !== '') {
-      parts.push(run)
-      run = ''
+    if (start > cursor) {
+      pieces.push({ text: characters.slice(cursor, start).join('') })
     }
-    parts.push(
-      <span key={`waqf-${index}`} style={{ color: 'initial' }}>
-        {character}
-      </span>,
-    )
+
+    let run = ''
+    for (const character of characters.slice(start, end)) {
+      if (!WAQF_MARKS.has(character)) {
+        run += character
+        continue
+      }
+      if (run !== '') {
+        pieces.push({ text: run, span })
+        run = ''
+      }
+      pieces.push({ text: character, span, waqf: true })
+    }
+    if (run !== '') {
+      pieces.push({ text: run, span })
+    }
+
+    cursor = end
   }
 
-  if (run !== '') {
-    parts.push(run)
+  if (cursor < characters.length) {
+    pieces.push({ text: characters.slice(cursor).join('') })
   }
 
-  return parts
+  return pieces
 }
 
 function describer(corpus: Corpus): (span: Span) => string {
@@ -218,5 +248,5 @@ export function TajweedLegend({ corpus, topics, colors = TOPIC_COLORS, className
   )
 }
 
-export { TOPIC_COLORS } from '@quran-ws/tajwid'
+export { TOPIC_COLORS, bridgeJoins, clusterEnd } from '@quran-ws/tajwid'
 export type { Span, Corpus } from '@quran-ws/tajwid'

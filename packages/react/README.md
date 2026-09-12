@@ -25,6 +25,15 @@ passage needs.
 **The text is never altered.** Characters are emitted exactly as given, and
 React escapes them on output, so what reaches the DOM is what you passed in.
 
+**The word does not come apart where the colour changes.** A browser shapes
+each element on its own, so a coloured stretch is drawn without seeing its
+neighbours: `عَلَيۡهِمۡ` becomes `عَ` `لَيۡهِ` `مۡ`. Every cut is bridged with a
+zero-width joiner where the letters either side join, and pushed past the marks
+written on the letter it lands on. Both belong to the drawing: nothing reaches
+the offsets or the text. `clusterEnd` and `bridgeJoins` are exported from
+[`@quran-ws/tajwid`](../core) for anyone rendering this some other way — see
+[docs/rendering.md](../../docs/rendering.md).
+
 **Waqf marks keep the colour around them.** They tell the reciter where to
 pause; they are not part of the letter the ruling is about.
 
