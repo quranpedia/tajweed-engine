@@ -28,9 +28,12 @@ import {
   FATHATAN,
   HAMZA,
   HAMZA_ABOVE,
+  HAMZA_BELOW,
   KASRA,
   KASRATAN,
   LAM,
+  MADDAH_ABOVE,
+  ALEF_MADDA,
   OPEN_FATHATAN,
   OPEN_KASRATAN,
   QURANIC_SUKOON,
@@ -49,6 +52,7 @@ const MEEM = '\u{0645}'
 const NOON = '\u{0646}'
 const JEEM = '\u{062C}'
 const SEEN = '\u{0633}'
+const QAF = '\u{0642}'
 
 describe('tanween, drawn two ways', () => {
   it('reads the open tanween as the standalone tanween', () => {
@@ -161,6 +165,27 @@ describe('a seat carrying two vowels', () => {
     // The other 10,790 of them. The seat is not pronounced.
     const one = '\u{0626}' + KASRA
     expect(normalize(one).text).not.toContain(YEH)
+  })
+})
+
+describe('a hamza written below its letter', () => {
+  it('is a hamza, and the seat is not pronounced', () => {
+    // تِلۡقَآيِٕ. The yeh carries the hamza and nothing of its own, exactly as ئ
+    // does elsewhere; the hamza is written under the line because it takes a
+    // kasra. Stripped as decoration, the consonant went with it — and the seat
+    // left behind then collected an implied sukoon, so the word reached the
+    // matchers as a sakin yeh followed by a kasra, which no Arabic word is.
+    const result = normalize(QAF + FATHA + ALEF + MADDAH_ABOVE + YEH + HAMZA_BELOW + KASRA)
+
+    expect(result.text).toContain(HAMZA)
+    expect(result.text).not.toContain(YEH + SUKOON)
+  })
+
+  it('reads the same whichever side of the vowel the hamza is stored', () => {
+    const hamzaFirst = QAF + FATHA + ALEF + MADDAH_ABOVE + YEH + HAMZA_BELOW + KASRA
+    const vowelFirst = QAF + FATHA + ALEF_MADDA + YEH + KASRA + HAMZA_BELOW
+
+    expect(normalize(hamzaFirst).text).toBe(normalize(vowelFirst).text)
   })
 })
 

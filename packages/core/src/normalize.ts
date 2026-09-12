@@ -30,6 +30,7 @@ import {
   FATHATAN_VERTICAL,
   HAMZA,
   HAMZA_ABOVE,
+  HAMZA_BELOW,
   INVERTED_DAMMA,
   KASRA,
   KASRATAN,
@@ -134,6 +135,51 @@ const recoverBorneHamza: Pass = (input) => {
           out.emit(input[k]!, k)
         }
         i = j + 1
+        continue
+      }
+    }
+    out.emit(input[i]!, i)
+    i += 1
+  }
+  return out.build()
+}
+
+/**
+ * A hamza written below its letter is a hamza, and its seat is not pronounced.
+ *
+ * The muṣḥaf writes a hamza under the line when the hamza takes a kasra —
+ * تِلۡقَآيِٕ, ٱمۡرِيٕٖ, ٱللُّؤۡلُوِٕ — on a yāʾ or wāw that is a seat and nothing more,
+ * exactly as ئ and ؤ are elsewhere. Fourteen places in Ḥafṣ.
+ *
+ * Until now U+0655 was stripped with the decoration, which lost the consonant
+ * and left the seat behind. Worse, the seat then had no haraka of its own, so
+ * insertImpliedSukoon gave it one: تِلۡقَآيِٕ reached the matchers as a sakin yāʾ
+ * followed by a kasra, which is not a possible Arabic word, and any leen or madd
+ * rule reading that yāʾ was reading something that is not there.
+ *
+ * Runs before insertImpliedSukoon, which is what was inventing the sukoon.
+ */
+const seatHamzaBelow: Pass = (input) => {
+  const out = new MappedBuilder()
+  let i = 0
+  while (i < input.length) {
+    // The seat is whatever letter the hamza is written under; it is replaced by
+    // the hamza rather than kept, because it is not sounded.
+    if (input[i] === YEH || input[i] === WAW || input[i] === ALEF) {
+      // The editions disagree about where the hamza sits in the stack: one
+      // writes it straight after the seat and the other after the seat's
+      // vowel. Either way every mark in the cluster is the hamza's, because
+      // the seat has nothing of its own to carry.
+      let end = i + 1
+      while (end < input.length && isStackedMark(input[end]!) && input[end] !== HAMZA_BELOW) {
+        end += 1
+      }
+      if (input[end] === HAMZA_BELOW) {
+        out.emit(HAMZA, i)
+        for (let k = i + 1; k < end; k++) {
+          out.emit(input[k]!, k)
+        }
+        i = end + 1
         continue
       }
     }
@@ -648,6 +694,7 @@ const PASSES: readonly Pass[] = [
 
   recoverBorneHamza,
   splitSeatedHamza,
+  seatHamzaBelow,
   seatUnborneHamza,
   saktahToBreak,
   silenceOrthographicWaw,
