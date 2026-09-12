@@ -14,11 +14,20 @@
  */
 
 export interface Edition {
-  /** Stable identifier, e.g. `quranpedia-uthmani`. */
+  /** Stable identifier, e.g. `hafs-quran-text`. */
   readonly id: string
   readonly riwayah: string
   readonly script: string
-  readonly source?: string
+  /**
+   * Where this text came from.
+   *
+   * A sentence is accepted because some editions have nothing better, but a
+   * sentence is not provenance: "legacy application export" names no file, no
+   * release and no digest, and cannot be checked by anyone. Prefer the object
+   * form, which records the repository, what was read, and the digest of the
+   * package underneath it — see `scripts/import-quran-text.ts`.
+   */
+  readonly source?: string | Readonly<Record<string, unknown>>
   /** Ayah text keyed by `surah:ayah`. */
   readonly ayahs: Readonly<Record<string, string>>
 }

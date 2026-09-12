@@ -56,13 +56,16 @@ const EXPECTED: readonly Expectation[] = [
   { char: '\u{0671}', name: 'alef wasla', matters: 'kept distinct so madd rules do not fire on it', reference: 8000 },
   { char: '\u{0670}', name: 'superscript alef', matters: 'read as a madd alef', reference: 3000 },
   { char: '\u{0653}', name: 'maddah above', matters: 'identifies المد اللازم الحرفي; composes آ', reference: 5000 },
-  { char: '\u{0640}', name: 'tatweel', matters: 'carries a hamza that would otherwise be lost', reference: 500 },
-  { char: '\u{0654}', name: 'hamza above', matters: 'the hamza the tatweel carries', reference: 500 },
+  { char: '\u{0640}', name: 'tatweel', matters: 'bears a hamza in editions that write it that way', reference: 500, optional: true },
+  { char: '\u{0654}', name: 'hamza above', matters: 'a hamza written on its letter rather than seated', reference: 500, optional: true },
   { char: '\u{06E2}', name: 'small high meem', matters: 'iqlab, read as tanween', reference: 500 },
   { char: '\u{06ED}', name: 'small low meem', matters: 'iqlab after a kasra', reference: 100, optional: true },
-  { char: '\u{0657}', name: 'inverted damma', matters: 'a positional tanween', reference: 500, optional: true },
-  { char: '\u{065E}', name: 'fathatan vertical', matters: 'a positional tanween', reference: 100, optional: true },
-  { char: '\u{0656}', name: 'subscript alef', matters: 'a positional tanween', reference: 500, optional: true },
+  { char: '\u{0657}', name: 'inverted damma', matters: 'positional tanween; one of the two families', reference: 500, optional: true },
+  { char: '\u{065E}', name: 'fathatan vertical', matters: 'positional tanween; one of the two families', reference: 100, optional: true },
+  { char: '\u{0656}', name: 'subscript alef', matters: 'positional tanween; one of the two families', reference: 500, optional: true },
+  { char: '\u{08F0}', name: 'open fathatan', matters: 'open tanween; the other family, used by KFGQPC', reference: 0, optional: true },
+  { char: '\u{08F1}', name: 'open dammatan', matters: 'open tanween; the other family, used by KFGQPC', reference: 0, optional: true },
+  { char: '\u{08F2}', name: 'open kasratan', matters: 'open tanween; the other family, used by KFGQPC', reference: 0, optional: true },
   { char: '\u{06DC}', name: 'small high seen', matters: 'marks a saktah, which blocks matching across it', reference: 20, optional: true },
   { char: '\u{06E5}', name: 'small waw', matters: 'مد الصلة', reference: 100, optional: true },
   { char: '\u{06E6}', name: 'small yeh', matters: 'مد الصلة', reference: 100, optional: true },
@@ -132,11 +135,21 @@ if (existsSync(frozenPath)) {
     }
   }
 
+  // A rule that moves is worth a look. A rule that stops matching ENTIRELY is a
+  // different thing: it is what a stripped or unrecognised mark looks like from
+  // here, and it is the failure this whole check exists to catch. Removing the
+  // open tanween from a valid edition silences twenty-four rules at once, and
+  // this used to report that and exit 0.
+  const collapsed: Array<{ id: string; here: number; reference: number }> = []
   const drifted: Array<{ id: string; here: number; reference: number }> = []
   for (const rule of engine.rules) {
     const baseline = frozen.incidence[rule.id]?.ayahs ?? 0
     const actual = matched.get(rule.id) ?? 0
     if (baseline < 20) {
+      continue
+    }
+    if (actual === 0) {
+      collapsed.push({ id: rule.id, here: actual, reference: baseline })
       continue
     }
     const ratio = actual / baseline
@@ -146,10 +159,22 @@ if (existsSync(frozenPath)) {
   }
 
   console.log(`\nRules, against the reference edition:\n`)
-  console.log(`  ${engine.rules.length} rules run, ${drifted.length} matching a very different number of ayahs`)
+  console.log(
+    `  ${engine.rules.length} rules run, ${collapsed.length} matching nothing at all, ` +
+      `${drifted.length} matching a very different number of ayahs`,
+  )
 
-  for (const entry of drifted.slice(0, 20)) {
+  for (const entry of [...collapsed, ...drifted].slice(0, 20)) {
     console.log(`    ${entry.id.padEnd(34)} ${String(entry.here).padStart(5)} here vs ${entry.reference} in the reference`)
+  }
+
+  if (collapsed.length > 0) {
+    problems.push(
+      `${collapsed.length} rules match nothing at all here, against ${collapsed[0]!.reference} ` +
+        `and more in the reference — ${collapsed.slice(0, 4).map((c) => c.id).join(', ')}` +
+        `${collapsed.length > 4 ? ', …' : ''}. A rule that finds nothing is what an unreadable ` +
+        'mark looks like from here, and it reports no ruling where there is one.',
+    )
   }
 
   if (drifted.length > 0) {

@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quranpedia/tajweed-engine.git",
+    "url": "git+https://github.com/quran-ws/quran-tajweed.git",
     "directory": "packages/core"
   },
   "keywords": [
