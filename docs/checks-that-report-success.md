@@ -16,7 +16,7 @@ non-empty*. The two documents were written a year apart without reference to
 each other, which is its own evidence. Whether they should be one file is an
 editorial decision nobody has made.
 
-Thirteen instances follow. Each is recorded with what it would have cost,
+Fourteen instances follow. Each is recorded with what it would have cost,
 because the cost is the argument.
 
 The last five were found after the first eight were written down, by people who
@@ -107,10 +107,10 @@ byte-identical to the reference.
 *Cost if unfixed:* the answer to the question the whole upstream investigation
 was for, reported backwards.
 
-## The five found after this document was written
+## The six found after this document was written
 
 These were all found while fixing the eight above, by people holding this list
-in their heads. Four of them are mine.
+in their heads. Five of them are mine. The last is not like the others.
 
 **A check reported success from a command that never ran.** `annotate.ts` was
 invoked without its arguments, printed its usage banner, and exited. The next
@@ -246,6 +246,44 @@ something other than what ships.
 a specific tree. Quote the SHA with the number, and re-measure when the base
 moves rather than carrying the figure forward.
 
+### And one that is not like the others: a correct label everybody completed wrongly
+
+`edition:diff` reported two different measurements under one word, *residue*.
+One counts āyahs whose stored bytes still differ once the declared classes are
+allowed for. The other counts āyahs that still differ **after the normaliser has
+run** — the number that decides whether a rule can match.
+
+On one branch they are **4 and 5**. The residue is *larger* than the raw
+difference, and neither bounds the other, because normalisation can **introduce**
+a difference as well as remove one.
+
+Every other instance in this document is something that reported success while
+doing nothing. This one reported the truth. The label was not wrong, it was
+incomplete — and it survived because **every reader silently supplied the same
+missing half, and supplied it wrongly.** Everyone who saw the word *residue*
+completed it with *residue ≤ raw*, because the intuition that normalisation only
+ever reconciles is very strong.
+
+**The evidence for that is the person who wrote the tool.** I held the same wrong
+inequality while writing the code that disproves it, and only questioned it when
+the numbers came back 4 and 5 and I went looking for the bug I assumed I had
+introduced. The label read as sufficient to its own author.
+
+*Cost if unfixed:* the two numbers quoted interchangeably, exactly as `182
+rules` and `164 rule ids` were, and exactly as a stale `57 aḥkām` travelled
+across four branches. Each of those is the same mechanism: a description that a
+reader completes from expectation.
+
+*What it teaches, and it is the general case behind several entries above:*
+**reading is not checking.** A reader fills the gaps in a description from what
+they expect, and expectation is precisely what a description cannot correct. If
+two numbers can differ, they need two names — not a clearer sentence about one
+name, which is what the reader will complete wrongly again.
+
+*The fix belongs at the source.* The tool now prints `RAW BYTE DIFFERENCES` and
+`RESIDUE AFTER NORMALISATION`, so every copy downstream inherits the distinction
+instead of the ambiguity.
+
 ## What they have in common
 
 1. **Every one produced a passing result.** None errored, none warned, none was
@@ -275,6 +313,12 @@ moves rather than carrying the figure forward.
   derived — a README's prose — guard it with a test that reads it back and
   compares. Seven counts in this repository were stale; the one with a generator
   went stale too, because nothing re-ran it.
+- **If two numbers can differ, give them two names.** Not a clearer sentence
+  about one name — a reader completes a description from expectation, and
+  expectation is exactly what a description cannot correct. *Reading is not
+  checking.* The residue entry above survived review by its own author for
+  precisely this reason.
+
 - **Record a set, not a count.** "Seventeen āyahs differ" survives nothing. The
   seventeen references survive being copied, re-run, and argued with.
 - **Read your own output as though someone else wrote it.** Twice in one night a
