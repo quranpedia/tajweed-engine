@@ -51,28 +51,32 @@ it undecided is the one option that gets worse with time.
 
 ---
 
-## B. The spreadsheet says where a ruling starts, and neither engine ever read it
+## B. The workbook says where a ruling starts, and neither engine ever read it
 
-**The question.** Is `بداية الحكم` (`start_from`) the authored answer to "how far
-does a highlight extend"? If it is, this engine's answer is something the port
-invented, and 6,260 published spans are wrong.
+**The question.** Should a span cover the whole match, or only the letter the
+ruling is *about*? The workbook has a column that answers this — `بداية الحكم` /
+`start_from` — and **29 rules and 6,260 published spans turn on the answer.**
 
-**Evidence.** VERIFIED against the production table, which has the column
-populated for all 182 rules. 74 enabled rules have `start_from` different from
-`case`. 35 of those produce matches. **29 of those 35 would produce shorter spans
-than we publish today.**
+This is the only open item that would change **published offsets on rules nobody
+has flagged as wrong**.
+
+**Evidence.** VERIFIED — `pnpm differential --start-from`, which is committed and
+reproduces this in about a minute:
 
 ```
-$ php /tmp/startfrom.php          # measurement script, not committed
-rules with start_from != case (enabled): 74
-matches over those rules              : 21972
-matches that would SHRINK             : 6260 (28.5%)
-code points highlighted, full match   : 69746
-code points highlighted, start_from   : 60798  (12.8% less ink)
+rules with start_from != case (enabled) : 74
+rules of those producing any matches    : 35
+rules whose spans would SHRINK          : 29
+matches over those rules                : 21,972
+matches that would shrink               :  6,260  (28.5%)
+code points highlighted now             : 69,746
+code points highlighted via start_from  : 60,798  (12.8% less)
 ```
 
-The 29 are one coherent family — every two-group إدغام/إظهار rule, where
-`start_from` holds only the **first** group:
+### The 29 where the column reads as an instruction
+
+One coherent family — every two-group إدغام/إظهار rule, where `start_from` holds
+only the **first** group:
 
 | Rule | `CASE` | `بداية الحكم` | Matches | Today | Would be |
 |---|---|---|---|---|---|
@@ -81,35 +85,63 @@ The 29 are one coherent family — every two-group إدغام/إظهار rule, w
 | `mutamathilain-izhar.27` | `وْ + م` | `وْ` | 863 | `وْم` | `وْ` |
 | `mutamathilain-idgham-kamil.24` | `مْ + م` | `مْ` | 832 | `مْ م` | `مْ` |
 | `mutajanisain-ikhfa-shafawi.1` | `مْ + ب` | `مْ` | 496 | `مْ ب` | `مْ` |
+| `mutamathilain-idgham-kamil.25` | `نْ + ن` | `نْ` | 150 | `نْ ن` | `نْ` |
+| … 23 more, 45 matches down to 1 | | | | | |
 
-Read one way that is a real instruction: match on both groups, but colour only
-the sākin letter the ruling is *about*, not the letter that triggers it. Read
-another way it is editorial shorthand meaning "the rule starts here".
+Read as an instruction that is coherent and defensible: **colour the sākin letter
+the ruling is about, not the letter that triggers it.** إدغام happens *to* the
+لام in `لْل`; the second lām is the environment, not the event.
 
-**What decides it, and it cuts against adopting.** VERIFIED by reading the
-recovered engine: `start_from` appears **zero times** in
-`conformance/legacy/matcher.php`. `TajweedRulesImport` stores the column,
-`ImportAndStoreTajweedRules` writes it to the database, and neither
+### The 6 where it looks like an undeleted draft — and these decide it
+
+The rules where `start_from` differs but nothing shrinks are not a footnote. They
+show the column doing **four different jobs**, which is the real finding:
+
+| Rule | Matches | What `start_from` actually is |
+|---|---|---|
+| `madd-tabee-kalimi.3` | 9,668 | identical to `CASE` but for one space |
+| `izhar-mutlaq.1` | 125 | identical to `CASE` but for one space |
+| `leen-yaa.1` | 3,285 | a **smaller letter set** — `CASE` lists `أَ ؤَ ئَ ءَ`, this does not |
+| `leen-waw.1` | 2,630 | a **smaller letter set** — same four hamza forms missing |
+| `madd-munfasil.4` | 3 | **more correct than `CASE`** — see below |
+| `seven-alefs-khulf.1` | 1 | `سلاسلا`, the stale pre-2026-02-24 form; `CASE` is `سَلَاسِلَاْ` |
+
+So in 29 rows it is an extent instruction, in 2 it is whitespace noise, in 2 it
+disagrees with `CASE` about which letters the rule covers, and in 2 it is simply
+older than `CASE`. **A column that is authoritative in 29 rows and vestigial in 6
+cannot be adopted wholesale**, and that is a finding rather than a caveat: it
+means the answer cannot be "yes, use the column", only "yes, use it for this
+family, having decided what the other six are".
+
+### One row that pays for the whole exercise
+
+`madd-munfasil.4`'s own `start_from` reads `[ي يْ]` while its `CASE` reads
+`[ا ى الألف الخنجرية]`. That is exactly the correction this port made to that
+rule — and it means **the workbook's own editorial column disagreed with its
+pattern column, and the editorial column was right.** Independent corroboration
+from the authored source that the four madd corrections were not our invention.
+Same story for `madd-muttasil.2` and `.3`.
+
+### What cuts against adopting it
+
+VERIFIED by reading the recovered engine: `start_from` appears **zero times** in
+`conformance/legacy/matcher.php`. `TajweedRulesImport` stores the column and
+`ImportAndStoreTajweedRules` writes it to the database, but neither
 `DetectTajweedPattern` nor `HighlightAyahs` ever reads it. The legacy application
-highlighted the whole match, exactly as we do.
+highlighted the whole match, exactly as this engine does.
 
-So adopting it would be **a change from legacy behaviour, not a restoration of
-it** — the opposite of every other entry in `docs/divergences.md`, where the port
-either matches the legacy engine or documents why it deliberately does not.
+So adopting it is **a change from legacy behaviour, not a restoration of it** —
+the opposite direction to every other entry in `docs/divergences.md`, where the
+port either matches the legacy engine or documents why it deliberately does not.
+It is worth seeing stated that way before deciding.
 
-**The other six are noise, and that is useful.** The rules where `start_from`
-differs but nothing shrinks — `madd-tabee-kalimi.3`, `leen-waw.1`, `leen-yaa.1`,
-`izhar-mutlaq.1` — differ only in whitespace or in whether the hamza-carrying
-forms are listed. That looks like an earlier draft of `CASE` left undeleted,
-which is a third possible reading of the whole column.
-
-**Recommendation.** The question is narrow and worth answering once: is
-`بداية الحكم` mechanical or editorial? If mechanical, it is its own PR against
-29 rules with before-and-after span counts, and it is a corpus decision rather
-than a porting one. If editorial, record that in `docs/case-notation.md` so
-nobody has to ask again. No code change until then — but note that this is the
-only open item that would change **published offsets** on rules nobody has
-flagged as wrong.
+**Recommendation.** Answer one narrow question — is `بداية الحكم` an extent
+instruction or an editorial note? — and the 29 follow from it. If it is an
+instruction, that is its own PR against 29 rules with before-and-after span
+counts, and a corpus decision rather than a porting one. If it is editorial,
+record that in `docs/case-notation.md` so nobody has to ask again. Either way the
+six need a separate answer, and `madd-munfasil.4` suggests the column is worth
+keeping as evidence even if it is never executed.
 
 ---
 

@@ -97,39 +97,18 @@ should read that number as a repair.
 
 ### The class this belongs to
 
-It is not rare, and naming it is most of the defence. **Something can report
-success while doing nothing, and nothing in the output distinguishes that from
-success.** This repository has now hit it four times:
+This is one of four times this repository has been fooled the same way —
+**something reporting success while doing nothing, with no error and no way to
+tell the result from a real one.** The other three are the eight rules further
+down this page that matched nothing because normalisation had removed the mark
+they look for, the workbook two sections above that the application had stopped
+reading from, and a working tree two agents measured while each was editing it.
 
-1. **The legacy engine's second search**, above — matched, then rendered nothing.
-2. **Eight rules that matched nothing** because normalisation had already removed
-   the mark they look for, further down this page. Compiled cleanly, ran,
-   returned zero, reported `stable`. The only symptom was a colour that never
-   appeared.
-3. **The authored workbook, which the application stopped reading from.** Two
-   rule tables disagreed on eight rules for seven months and nothing anywhere
-   said so, because a spreadsheet cannot report that it has been overtaken. Every
-   number measured against it was correct and was answering a question nobody had
-   asked. See the previous section.
-4. **Measuring a working tree that someone else was editing.** During this audit
-   two agents each ran the suite against a checkout the other was mutating. Both
-   sets of numbers were internally consistent and both described a state nobody
-   owned. The tell was an assertion failing against *itself* —
-   `expected 79 to be greater than 79` — which is not what a stale baseline looks
-   like; a stale baseline moves a count.
-
-The first three share a mechanism: "no error" and "no output" are
-indistinguishable unless something asserts the output is non-empty.
-`scripts/validate-rules.ts` now makes that assertion for (2), and the port
-removed (1) structurally by deriving extents from an offset map instead of
-searching twice. (3) is why `--rules` exists and why both numbers are quoted
-together in `conformance/README.md`.
-
-The fourth is different and worth separating: nothing was silent and nothing was
-wrong. Two correct instruments measured a shared mutable thing with no owner. The
-rule that generalises is not "check `git status`" — it was checked. It is that
-**a measurement is only quotable if you can name who owns the state it was taken
-from.**
+All four are written up together, with what fixed each, in
+[docs/silent-success.md](./silent-success.md). The short version: "no error" and
+"no output" are indistinguishable unless something asserts the output is
+non-empty, and the port removed *this* instance structurally — deriving extents
+from an offset map means there is no second search to disagree with the first.
 
 ---
 

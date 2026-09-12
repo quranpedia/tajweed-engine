@@ -2,7 +2,7 @@
  * Re-runs the differential against the legacy PHP engine.
  *
  *   node scripts/differential-legacy.mjs [--rules spreadsheet|deployed]
- *                                       [--spans] [--no-trailing]
+ *                                       [--spans] [--no-trailing] [--start-from]
  *                                       [--edition <path>] [--annotations <path>]
  *
  * Run this when the text base moves — the quran-text migration is the next one —
@@ -111,6 +111,16 @@ const WITH_SPANS = argv.includes('--spans')
 
 const LEGACY_MAP = at('../conformance/legacy/legacy-id-map.json')
 const RUNNER = at('../conformance/legacy/run.php')
+const START_FROM = at('../conformance/legacy/start-from.php')
+
+// --start-from answers a different question from the rest of this script: not
+// "do we match what the legacy engine matched" but "should a span be as long as
+// the match". See conformance/legacy/start-from.php and
+// docs/legacy-audit-questions.md.
+if (argv.includes('--start-from')) {
+  execFileSync('php', ['-d', 'memory_limit=4G', START_FROM, EDITION], { stdio: ['ignore', 'inherit', 'inherit'] })
+  process.exit(0)
+}
 
 /** The 18 the legacy engine's global scope suppressed. Mirrored as "disabled". */
 const EXCLUDED = new Set([4, 5, 13, 16, 19, 20, 29, 30, 34, 35, 40, 42, 43, 73, 74, 75, 76, 142])
