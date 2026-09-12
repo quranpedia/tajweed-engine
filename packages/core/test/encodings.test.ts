@@ -23,11 +23,13 @@ import { describe, expect, it } from 'vitest'
 import { normalize } from '../src/normalize.js'
 import {
   ALEF,
+  ALEF_MAQSURA,
   DAMMA,
   FATHA,
   FATHATAN,
   HAMZA,
   HAMZA_ABOVE,
+  IMALA_DOT_BELOW,
   KASRA,
   KASRATAN,
   LAM,
@@ -45,6 +47,8 @@ import {
 } from '../src/unicode.js'
 
 const BA = '\u{0628}'
+const RA = '\u{0631}'
+const EMPTY_CENTRE_LOW_STOP = '\u{06EA}'
 const MEEM = '\u{0645}'
 const NOON = '\u{0646}'
 
@@ -117,5 +121,25 @@ describe('marks stacked in either order', () => {
     expect(normalize(LAM + SHADDA + DAMMA + WAW + NOON).text).toBe(
       normalize(LAM + DAMMA + SHADDA + WAW + NOON).text,
     )
+  })
+})
+
+describe('the imāla, drawn two ways', () => {
+  it('reads the dot below and the empty-centre low stop alike', () => {
+    // 11:41, مَجۡرٜىٰهَا — the one imāla in Ḥafṣ. `editions/uthmani-hafs.json`
+    // writes U+06EA under the rāʾ; the KFGQPC-derived
+    // `editions/hafs-quran-text.json` writes U+065C. Same ruling, same place,
+    // two code points.
+    const lowStop = RA + EMPTY_CENTRE_LOW_STOP + ALEF_MAQSURA + SUPERSCRIPT_ALEF
+    const dotBelow = RA + IMALA_DOT_BELOW + ALEF_MAQSURA + SUPERSCRIPT_ALEF
+
+    expect(normalize(dotBelow).text).toBe(normalize(lowStop).text)
+  })
+
+  it('does not leave the dot below in the normalised text', () => {
+    // An undeclared mark is not an error and not a ruling — it survives, and the
+    // letter before it reads as sakin to every rule that looks. That is what
+    // `pnpm edition:check` caught on hafs-quran-text, and #29 is the fix.
+    expect(normalize(RA + IMALA_DOT_BELOW + ALEF_MAQSURA).text).not.toContain(IMALA_DOT_BELOW)
   })
 })

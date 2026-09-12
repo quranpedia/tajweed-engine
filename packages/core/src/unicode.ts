@@ -57,6 +57,27 @@ export const SMALL_HIGH_SEEN = '\u{06DC}' // ۜ
  * qualified says otherwise, and if they do, this is the line to change.
  */
 export const SMALL_LOW_SEEN = '\u{06E3}' // ۣ
+
+/**
+ * The dot written BELOW the letter, U+065C — the imāla on the rāʾ of
+ * مَجۡرٜىٰهَا at 11:41, the one imāla in Ḥafṣ.
+ *
+ * The same ruling is written two ways: U+06EA in `editions/uthmani-hafs.json`,
+ * U+065C in the KFGQPC-derived `editions/hafs-quran-text.json`. Both are
+ * stripped, so the two editions normalise alike. That is a normalisation class
+ * rather than a ruling — imāla is an instruction about the quality of a vowel,
+ * no CASE pattern refers to it, and the offset map puts the mark back inside the
+ * reported span. Unlike SMALL_LOW_SEEN there is no asymmetry here to explain:
+ * both editions mark the same imāla in the same place and differ only in the
+ * code point.
+ *
+ * It is handled for the reason SMALL_LOW_SEEN is handled. Leaving it out leaves
+ * nothing open: an undeclared mark survives normalisation and wedges an implied
+ * sukoon onto the rāʾ, silently. See #29, which is also where both the file
+ * and the test that claimed this was already handled are corrected.
+ */
+export const IMALA_DOT_BELOW = '\u{065C}' // ٜ
+
 export const MADDAH_ABOVE = '\u{0653}' // ٓ
 export const HAMZA_ABOVE = '\u{0654}' // ٔ
 export const TATWEEL = '\u{0640}' // ـ
@@ -97,6 +118,7 @@ export const OPTIONAL_MARKS: readonly string[] = [
   '\u{06E8}', // ۨ small high noon
   RECTANGULAR_ZERO,
   '\u{06EA}', // ۪ empty centre low stop
+  IMALA_DOT_BELOW,
   '\u{06EC}', // ۬ rounded high stop with filled centre
   HAMZA_ABOVE,
   '\u{0655}', // ٕ hamza below
