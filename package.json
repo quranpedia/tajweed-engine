@@ -17,6 +17,7 @@
     "annotate": "tsx scripts/annotate.ts",
     "rules:verify": "tsx scripts/verify-rules.ts",
     "conformance:freeze": "tsx scripts/freeze-conformance.ts",
+    "differential": "node scripts/differential-legacy.mjs",
     "playground:build": "tsx scripts/build-playground.ts",
     "edition:check": "tsx scripts/check-edition.ts",
     "inspect": "tsx scripts/inspect.ts",
