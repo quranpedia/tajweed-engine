@@ -116,6 +116,31 @@ const EXPECTATIONS: readonly Expectation[] = [
     exactlyOccurrences: 0,
     why: 'ياء مدية يليها حرف مشدد — لا يقع في القرآن',
   },
+  {
+    rule: 'ishmam-damm.1',
+    matches: ['1:5', '2:32'],
+    // No ishmām of a kasra (1:1) or a fatha (1:2), and none on a ta marbuta
+    // (56:1), where the stop is on a sakin haa.
+    avoids: ['1:1', '1:2', '56:1'],
+    exactlyOccurrences: 310,
+    why: 'رأس آية بحرف مضموم — يجوز الوقف عليه بالإشمام',
+  },
+  {
+    rule: 'ishmam-damm.2',
+    matches: ['2:7', '2:20'],
+    // 2:36 is a kasratan and 69:12 a ta marbuta.
+    avoids: ['1:5', '2:36', '69:12'],
+    exactlyOccurrences: 579,
+    why: 'رأس آية منون بتنوين الضم — يجوز الوقف عليه بالإشمام بعد حذف التنوين',
+  },
+  {
+    rule: 'ishmam-haa-tafsil.1',
+    matches: ['74:55', '99:7'],
+    // Preceded by a sakin waw, and a kasra-bearing haa: no ishmām in either.
+    avoids: ['69:30', '82:19'],
+    exactlyOccurrences: 22,
+    why: 'هاء مضمومة في رأس الآية قبلها فتح أو ألف أو ساكن صحيح — يجوز الإشمام',
+  },
 ]
 
 let failures = 0
