@@ -1,0 +1,110 @@
+{
+  "corpusVersion": "0.4.2",
+  "note": "Two editions of one riwayah, and the distance between them. Regenerate with `pnpm edition:diff` and read the diff. A change in these numbers is a change in where every annotation lands.",
+  "editions": {
+    "reference": {
+      "id": "uthmani-hafs",
+      "path": "editions/uthmani-hafs.json",
+      "sha256": "b5d29736bb3ef49d9d331c4e60a59d83fe899b921e9e8dc35911bd4a18ce55f3",
+      "source": {
+        "known": "Exported from the tajweed application at tajweed.quranpedia.net. That is where the file came from, not where the text came from, and the step before it was not recorded.",
+        "verified": false,
+        "not": "This is not the KFGQPC text the rest of the organisation uses. Against quran-ws/quran-text's Hafs, 345 of 6236 ayahs are byte-identical and 6232 are the same text differently encoded; see reports/hafs-quran-text-vs-uthmani-hafs.json.",
+        "why_it_matters": "Every offset in @tajweed/annotations is measured against this file. Until the line above is filled in, the annotations are traceable to a digest but not to a printed mushaf.",
+        "replacement": "editions/hafs-quran-text.json, which records the KFGQPC package and its SHA-256."
+      }
+    },
+    "other": {
+      "id": "hafs-quran-text",
+      "path": "editions/hafs-quran-text.json",
+      "sha256": "9e8f389fd43a2b5d159d080c2153cc1b67373663a560bc4fc294267b852d4d88",
+      "source": {
+        "repository": "quran-ws/quran-text",
+        "read": "/Users/abdullah/Documents/Github/quran-text/data/mushaf/hafs.json",
+        "dataset": "2026-09-08",
+        "edition": "hafs",
+        "kfgqpc": {
+          "package": "UthmanicHafs-v-3.0.zip",
+          "member": "UthmanicHafs-v-3.0.docx",
+          "release_year": 2026,
+          "sha256": "cdec7341b7c684e7b8dd469c4b68988914d2784e924c7e6cbb9cb4b57c24f013"
+        }
+      }
+    }
+  },
+  "text": {
+    "ayahsCompared": 6236,
+    "onlyInReference": [],
+    "identical": 2715,
+    "reconciledBy": [
+      {
+        "id": "order",
+        "what": "the order of the marks stacked on one letter",
+        "reconciled": 2715
+      },
+      {
+        "id": "composition",
+        "what": "a precomposed letter (آ أ ؤ ئ) against a base letter plus a combining mark",
+        "reconciled": 2715
+      },
+      {
+        "id": "tanween",
+        "what": "positional tanween (U+0657 U+065E U+0656) against open tanween (U+08F0 U+08F1 U+08F2)",
+        "reconciled": 6232
+      }
+    ],
+    "differing": 4,
+    "differences": [
+      {
+        "reference": "11:41",
+        "at": 48,
+        "left": "U+064E U+0651 U+0647 U+0650 U+0020 U+0645 U+064E U+062C U+06E1 U+0631 U+06EA U+0649 U+0670 U+0647 U+064E U+0627 U+0020 U+0648 U+064E U+0645",
+        "right": "U+064E U+0651 U+0647 U+0650 U+0020 U+0645 U+064E U+062C U+06E1 U+0631 U+065C U+0649 U+0670 U+0647 U+064E U+0627 U+0020 U+0648 U+064E U+0645"
+      },
+      {
+        "reference": "27:20",
+        "at": 33,
+        "left": "U+064E U+0642 U+064E U+0627 U+0644 U+064E U+0020 U+0645 U+064E U+0627 U+0644 U+0650 U+064A U+064E U+0020 U+0644 U+064E U+0627 U+0653 U+0020",
+        "right": "U+064E U+0642 U+064E U+0627 U+0644 U+064E U+0020 U+0645 U+064E U+0627 U+0020 U+0644 U+0650 U+064A U+064E U+0020 U+0644 U+064E U+0627 U+0653"
+      },
+      {
+        "reference": "36:22",
+        "at": 5,
+        "left": "U+0648 U+064E U+0645 U+064E U+0627 U+0644 U+0650 U+064A U+064E U+0020 U+0644 U+064E U+0627 U+0653 U+0020",
+        "right": "U+0648 U+064E U+0645 U+064E U+0627 U+0020 U+0644 U+0650 U+064A U+064E U+0020 U+0644 U+064E U+0627 U+0653"
+      },
+      {
+        "reference": "52:37",
+        "at": 54,
+        "left": "U+0645 U+064F U+0020 U+0671 U+0644 U+06E1 U+0645 U+064F U+0635 U+064E U+06DC U+064A U+06E1 U+0637 U+0650 U+0631 U+064F U+0648 U+0646 U+064E",
+        "right": "U+0645 U+064F U+0020 U+0671 U+0644 U+06E1 U+0645 U+064F U+0635 U+064E U+06E3 U+064A U+06E1 U+0637 U+0650 U+0631 U+064F U+0648 U+0646 U+064E"
+      }
+    ]
+  },
+  "normalisation": {
+    "note": "Ayahs that reach the matchers as the same string. The four real textual differences are included in the remainder and cannot be normalised away.",
+    "alike": 6231,
+    "apart": [
+      "11:41",
+      "27:20",
+      "35:43",
+      "36:22",
+      "52:37"
+    ]
+  },
+  "rules": {
+    "compiled": 164,
+    "spans": {
+      "reference": 147255,
+      "other": 147257
+    },
+    "matchingDifferently": [
+      {
+        "id": "madd-muttasil.3",
+        "reference": 25,
+        "other": 26,
+        "delta": 1
+      }
+    ]
+  }
+}

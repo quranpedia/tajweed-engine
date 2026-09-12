@@ -17,11 +17,25 @@ const typed = corpus as unknown as Corpus
 const text = ayah(RICH_AYAH)
 
 describe('Tajweed', () => {
-  it('uses only stable rules by default', () => {
+  it('excludes disabled rules by default, and nothing else', () => {
+    // This test used to read "uses only stable rules by default" and assert that
+    // every included rule was `stable`. That was true by accident: `stable` and
+    // `disabled` were the only two values, so "not disabled" and "stable" named
+    // the same set. They no longer do.
+    //
+    // The engine's actual contract — engine.ts, the `status === 'disabled'`
+    // check — is *exclude disabled*, and `annotate.ts` builds the published
+    // annotations with this default engine. So it is this line that decides
+    // whether a disputed rule's spans ship, and they do.
+    //
+    // That is deliberate: a disputed rule is one whose RULING a reader has
+    // questioned, not one whose pattern is broken. Dropping its spans would be
+    // acting on the objection, which is a scholarly decision. Recording the
+    // objection is not.
     const engine = new Tajweed(typed)
-    const stable = typed.rules.filter((rule) => rule.status === 'stable')
-    expect(engine.rules).toHaveLength(stable.length)
-    expect(engine.rules.every((rule) => rule.status === 'stable')).toBe(true)
+    const enabled = typed.rules.filter((rule) => rule.status !== 'disabled')
+    expect(engine.rules).toHaveLength(enabled.length)
+    expect(engine.rules.some((rule) => rule.status === 'disputed')).toBe(true)
   })
 
   it('includes disabled rules only when asked', () => {

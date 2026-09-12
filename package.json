@@ -1,6 +1,6 @@
 {
-  "name": "tajweed-engine",
-  "license": "MIT",
+  "name": "quran-tajweed",
+  "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@9.15.0",
@@ -20,8 +20,10 @@
     "differential": "node scripts/differential-legacy.mjs",
     "playground:build": "tsx scripts/build-playground.ts",
     "edition:check": "tsx scripts/check-edition.ts",
+    "edition:diff": "tsx scripts/compare-editions.ts",
     "inspect": "tsx scripts/inspect.ts",
-    "make-edition": "tsx scripts/make-edition.ts"
+    "make-edition": "tsx scripts/make-edition.ts",
+    "import:quran-text": "tsx scripts/import-quran-text.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

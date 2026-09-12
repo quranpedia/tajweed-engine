@@ -20,7 +20,8 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve } from 'node:path'
 
 import corpus from '../packages/rules/rules.json' with { type: 'json' }
-import { ALLOWED_MARKS, OPTIONAL_MARKS } from '../packages/core/src/unicode.js'
+import { ALLOWED_MARKS } from '../packages/core/src/unicode.js'
+import { normalize } from '../packages/core/src/normalize.js'
 import { Tajweed } from '../packages/core/src/engine.js'
 import { editionDigest, orderedReferences, type Edition } from '../packages/core/src/edition.js'
 import type { Corpus } from '../packages/core/src/types.js'
@@ -57,17 +58,22 @@ const EXPECTED: readonly Expectation[] = [
   { char: '\u{0671}', name: 'alef wasla', matters: 'kept distinct so madd rules do not fire on it', reference: 8000 },
   { char: '\u{0670}', name: 'superscript alef', matters: 'read as a madd alef', reference: 3000 },
   { char: '\u{0653}', name: 'maddah above', matters: 'identifies المد اللازم الحرفي; composes آ', reference: 5000 },
-  { char: '\u{0640}', name: 'tatweel', matters: 'carries a hamza that would otherwise be lost', reference: 500 },
-  { char: '\u{0654}', name: 'hamza above', matters: 'the hamza the tatweel carries', reference: 500 },
+  { char: '\u{0640}', name: 'tatweel', matters: 'bears a hamza in editions that write it that way', reference: 500, optional: true },
+  { char: '\u{0654}', name: 'hamza above', matters: 'a hamza written on its letter rather than seated', reference: 500, optional: true },
   { char: '\u{06E2}', name: 'small high meem', matters: 'iqlab, read as tanween', reference: 500 },
   { char: '\u{06ED}', name: 'small low meem', matters: 'iqlab after a kasra', reference: 100, optional: true },
-  { char: '\u{0657}', name: 'inverted damma', matters: 'a positional tanween', reference: 500, optional: true },
-  { char: '\u{065E}', name: 'fathatan vertical', matters: 'a positional tanween', reference: 100, optional: true },
-  { char: '\u{0656}', name: 'subscript alef', matters: 'a positional tanween', reference: 500, optional: true },
+  { char: '\u{0657}', name: 'inverted damma', matters: 'positional tanween; one of the two families', reference: 500, optional: true },
+  { char: '\u{065E}', name: 'fathatan vertical', matters: 'positional tanween; one of the two families', reference: 100, optional: true },
+  { char: '\u{0656}', name: 'subscript alef', matters: 'positional tanween; one of the two families', reference: 500, optional: true },
+  { char: '\u{08F0}', name: 'open fathatan', matters: 'open tanween; the other family, used by KFGQPC', reference: 0, optional: true },
+  { char: '\u{08F1}', name: 'open dammatan', matters: 'open tanween; the other family, used by KFGQPC', reference: 0, optional: true },
+  { char: '\u{08F2}', name: 'open kasratan', matters: 'open tanween; the other family, used by KFGQPC', reference: 0, optional: true },
   { char: '\u{06DC}', name: 'small high seen', matters: 'marks a saktah, which blocks matching across it', reference: 20, optional: true },
   { char: '\u{06E5}', name: 'small waw', matters: 'مد الصلة', reference: 100, optional: true },
   { char: '\u{06E6}', name: 'small yeh', matters: 'مد الصلة', reference: 100, optional: true },
 ]
+
+const count2 = (haystack: string, needle: string): number => count(haystack, needle)
 
 function count(haystack: string, needle: string): number {
   return haystack.split(needle).length - 1
@@ -132,13 +138,47 @@ if (precomposed > 0) {
 //
 // They are listed, not counted, because a count tells a reader nothing they can
 // act on.
-const known = new Set<string>([
-  ...OPTIONAL_MARKS,
+//
+// WHAT COUNTS AS "KNOWN" IS DERIVED, NOT LISTED, AND THAT MATTERS.
+//
+// The first version of this gate asked whether a mark appeared in
+// OPTIONAL_MARKS, ALLOWED_MARKS or EXPECTED. That model was correct the hour it
+// was written and false a day later: PR #10 removed U+0655 from OPTIONAL_MARKS
+// because the hamza below stopped being decoration to strip and became a
+// consonant recovered by a dedicated pass. It is handled better than before,
+// and the gate began reporting it as unknown — failing both editions the
+// repository ships, on a mark that is fully consumed.
+//
+// A mark handled by a PASS is invisible to a model built on LISTS. So the
+// question asked here is the one that actually matters, and it is asked of the
+// pipeline rather than of a list: after normalisation, is this mark still in
+// the text?
+//
+//   - It does not survive  -> the pipeline has an opinion. Folded, stripped or
+//     consumed, by a list or by a pass, it does not reach a rule. Known.
+//   - It survives and is declared  -> deliberate. The vowels, shaddah, sukoon
+//     and superscript alef MUST survive, because the rules match on them, and
+//     ALLOWED_MARKS are the waqf signs passed through on purpose. Known.
+//   - It survives and is not declared -> nothing put it there and nothing will
+//     read it. It sits in the normalised text wedging an implied sukoon onto
+//     the letter before it, or stopping a rule matching across it. Unknown.
+//
+// U+06E3, the small low seen at 52:37, is the third case and is why this gate
+// exists. U+0655 is the first, and is why it is no longer written as a list.
+// This is `docs/checks-that-report-success.md` applied to a gate that document
+// produced: prefer deriving a number to writing one down.
+
+/** Marks that are SUPPOSED to survive normalisation, because rules read them. */
+const declaredToSurvive = new Set<string>([
   ...ALLOWED_MARKS,
   ...EXPECTED.map((expectation) => expectation.char),
   '\u{0651}', '\u{0652}', '\u{064B}', '\u{064C}', '\u{064D}',
   '\u{064E}', '\u{064F}', '\u{0650}', '\u{0670}', '\u{0653}',
 ])
+
+const normalisedText = references.map((reference) => normalize(edition.ayahs[reference]!).text).join('')
+const survives = (character: string) => normalisedText.includes(character)
+
 const unknown = new Map<string, number>()
 for (const character of allText) {
   const code = character.codePointAt(0)!
@@ -147,7 +187,7 @@ for (const character of allText) {
     code === 0x0670 ||
     (code >= 0x06d6 && code <= 0x06ed) ||
     (code >= 0x08f0 && code <= 0x08f2)
-  if (isMark && !known.has(character)) {
+  if (isMark && !declaredToSurvive.has(character) && survives(character)) {
     unknown.set(character, (unknown.get(character) ?? 0) + 1)
   }
 }
@@ -156,7 +196,9 @@ if (unknown.size > 0) {
   for (const [character, count] of [...unknown].sort((a, b) => b[1] - a[1])) {
     console.log(
       `  U+${character.codePointAt(0)!.toString(16).toUpperCase().padStart(4, '0')}` +
-        `  ${String(count).padStart(5)}  neither folded, stripped, nor allowed through`,
+        `  ${String(count).padStart(5)} in the edition,` +
+        ` ${String(count2(normalisedText, character)).padStart(5)} still there after normalisation` +
+        '  — nothing folds it, strips it or reads it',
     )
   }
   problems.push(
@@ -185,11 +227,21 @@ if (existsSync(frozenPath)) {
     }
   }
 
+  // A rule that moves is worth a look. A rule that stops matching ENTIRELY is a
+  // different thing: it is what a stripped or unrecognised mark looks like from
+  // here, and it is the failure this whole check exists to catch. Removing the
+  // open tanween from a valid edition silences twenty-four rules at once, and
+  // this used to report that and exit 0.
+  const collapsed: Array<{ id: string; here: number; reference: number }> = []
   const drifted: Array<{ id: string; here: number; reference: number }> = []
   for (const rule of engine.rules) {
     const baseline = frozen.incidence[rule.id]?.ayahs ?? 0
     const actual = matched.get(rule.id) ?? 0
     if (baseline < 20) {
+      continue
+    }
+    if (actual === 0) {
+      collapsed.push({ id: rule.id, here: actual, reference: baseline })
       continue
     }
     const ratio = actual / baseline
@@ -199,10 +251,22 @@ if (existsSync(frozenPath)) {
   }
 
   console.log(`\nRules, against the reference edition:\n`)
-  console.log(`  ${engine.rules.length} rules run, ${drifted.length} matching a very different number of ayahs`)
+  console.log(
+    `  ${engine.rules.length} rules run, ${collapsed.length} matching nothing at all, ` +
+      `${drifted.length} matching a very different number of ayahs`,
+  )
 
-  for (const entry of drifted.slice(0, 20)) {
+  for (const entry of [...collapsed, ...drifted].slice(0, 20)) {
     console.log(`    ${entry.id.padEnd(34)} ${String(entry.here).padStart(5)} here vs ${entry.reference} in the reference`)
+  }
+
+  if (collapsed.length > 0) {
+    problems.push(
+      `${collapsed.length} rules match nothing at all here, against ${collapsed[0]!.reference} ` +
+        `and more in the reference — ${collapsed.slice(0, 4).map((c) => c.id).join(', ')}` +
+        `${collapsed.length > 4 ? ', …' : ''}. A rule that finds nothing is what an unreadable ` +
+        'mark looks like from here, and it reports no ruling where there is one.',
+    )
   }
 
   if (drifted.length > 0) {
