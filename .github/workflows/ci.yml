@@ -66,6 +66,39 @@ jobs:
       - name: Build
         run: pnpm build
 
+      # This used to live in pages.yml, which rebuilt the playground on every
+      # push to main and published the result. The playground is now served from
+      # quran.ws, which copies the committed file rather than building it, so
+      # the committed file is what has to be right.
+      #
+      # Two things are checked, and they are different: that a rebuild from the
+      # current corpus reproduces the committed bytes, so the page cannot drift
+      # from the rules it claims to demonstrate; and that the page reaches for
+      # nothing external, so "works offline" stays true. A build that quietly
+      # inlined a font from a CDN would pass the first and fail the second.
+      - name: The committed playground matches a fresh build
+        run: |
+          before=$(shasum -a 256 playground/index.html | cut -d' ' -f1)
+          pnpm playground:build
+          after=$(shasum -a 256 playground/index.html | cut -d' ' -f1)
+          if [ "$before" != "$after" ]; then
+            echo "playground/index.html is stale — run: pnpm playground:build"
+            echo "  committed $before"
+            echo "  rebuilt   $after"
+            git --no-pager diff --stat playground/index.html
+            exit 1
+          fi
+          echo "reproduced, $before"
+
+      - name: The playground is self-contained
+        run: |
+          if grep -qE '(src|href)="https?://' playground/index.html; then
+            echo "The playground references something external:"
+            grep -nE '(src|href)="https?://' playground/index.html
+            exit 1
+          fi
+          echo "self-contained, $(du -h playground/index.html | cut -f1)"
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
