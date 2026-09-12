@@ -4,7 +4,7 @@
   "script": "uthmani",
   "source": {
     "repository": "quran-ws/quran-text",
-    "read": "/Users/abdullah/Documents/Github/quran-text/data/mushaf/hafs.json",
+    "read": "quran-ws/quran-text: data/mushaf/hafs.json",
     "dataset": "2026-09-08",
     "edition": "hafs",
     "kfgqpc": {
