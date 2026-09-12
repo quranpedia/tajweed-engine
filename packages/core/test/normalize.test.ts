@@ -28,6 +28,7 @@ import {
   HAMZA,
   HAMZA_ABOVE,
   IMALAH_MARK,
+  IMALAH_MARK_KFGQPC,
   KASRA,
   KASRATAN,
   LAM,
@@ -145,6 +146,15 @@ describe('normalize', () => {
       // the rulings of a sakin reh then apply to it.
       expect(normalized(REH + IMALAH_MARK)).toBe(REH)
       expect(normalized(REH)).toBe(REH + SUKOON)
+    })
+
+    it('reads either character an edition draws the imāla with', () => {
+      // Editions disagree: this corpus's first edition marks the reh of Hūd 41
+      // with U+06EA, the KFGQPC mushafs with U+065C. Each occurs exactly once
+      // in Hafs, in that one place, and neither has any other use — so both are
+      // read, and the rule is right on either edition without a later change.
+      expect(normalized(REH + IMALAH_MARK_KFGQPC)).toBe(REH)
+      expect(normalized(REH + IMALAH_MARK)).toBe(normalized(REH + IMALAH_MARK_KFGQPC))
     })
   })
 

@@ -30,7 +30,6 @@ import {
   FATHATAN_VERTICAL,
   HAMZA,
   HAMZA_ABOVE,
-  IMALAH_MARK,
   INVERTED_DAMMA,
   KASRA,
   KASRATAN,
@@ -52,6 +51,7 @@ import {
   YEH,
   ZWSP,
   isDiacritic,
+  isImalahMark,
   isVowelMark,
   toCodePoints,
 } from './unicode.js'
@@ -242,7 +242,7 @@ const insertImpliedSukoon: Pass = (input) => {
     // imāla mark reaches here, since the other two places write a haraka as
     // well, but both are handled: what makes this true is the mark, not the
     // place.
-    if (next === MADDAH_ABOVE || next === IMALAH_MARK || next === TASHIL_MARK) {
+    if (next === MADDAH_ABOVE || isImalahMark(next) || next === TASHIL_MARK) {
       continue
     }
 

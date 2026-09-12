@@ -51,7 +51,24 @@ export const RECTANGULAR_ZERO = '\u{06E0}' // ۠
  * the letter as bare — see insertImpliedSukoon.
  */
 export const IMALAH_MARK = '\u{06EA}' // ۪
+export const IMALAH_MARK_KFGQPC = '\u{065C}' // ٜ
 export const TASHIL_MARK = '\u{06EC}' // ۬
+
+/**
+ * Editions do not agree on which character draws the imāla, and each uses one or
+ * the other throughout. The edition this corpus was first written against marks
+ * the reh of Hūd 41 with U+06EA; the KFGQPC muṣḥafs — and so quran-ws/quran-text
+ * — use U+065C. Each occurs exactly once in Ḥafṣ, in that one place, and neither
+ * has any other use, so reading both is unambiguous: there is nothing else for
+ * either to match.
+ *
+ * Both are recognised rather than one folded onto the other, because this is
+ * consulted before the marks are stripped and there is no later pass to do the
+ * folding in.
+ */
+export function isImalahMark(char: string | undefined): boolean {
+  return char === IMALAH_MARK || char === IMALAH_MARK_KFGQPC
+}
 
 /**
  * Marks that appear in mushaf text but never in a CASE pattern. They are removed
@@ -72,6 +89,7 @@ export const OPTIONAL_MARKS: readonly string[] = [
   '\u{06E8}', // ۨ small high noon
   RECTANGULAR_ZERO,
   IMALAH_MARK,
+  IMALAH_MARK_KFGQPC,
   TASHIL_MARK,
   HAMZA_ABOVE,
   '\u{0655}', // ٕ hamza below
