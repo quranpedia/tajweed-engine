@@ -72,7 +72,7 @@ any of them:
 
 | | |
 |---|---|
-| **11:41** | *mark encoding.* The imāla on the rāʾ: U+065C here, U+06EA there — **the same ruling, recorded with two different code points**. PR #2 now reads either. This file cannot say the printed glyphs are identical: U+06EA is an empty-centre low stop and U+065C a dot below, and neither this repository nor its tooling renders them. |
+| **11:41** | *mark encoding.* The imāla on the rāʾ: U+065C here, U+06EA there — **the same ruling, recorded with two different code points**. Both are stripped as non-reading marks, so the two normalise alike — but only since #29. This file said “PR #2 now reads either” and that was false: U+06EA was in `OPTIONAL_MARKS` and U+065C appeared nowhere in the code at all, so `pnpm edition:check` failed on this ayah and `main` sat red. The claim survived because `packages/core/test/encodings.test.ts` writes every OTHER class twice and had no case for this one. This file cannot say the printed glyphs are identical: U+06EA is an empty-centre low stop and U+065C a dot below, and neither this repository nor its tooling renders them. |
 | **27:20**, **36:22** | *word division.* مَا لِيَ is written as two words in quran-text and as one here. This is the only place the two editions disagree about anything but marks, and it is **a question, not a finding** — raised upstream at quran-text rather than decided here. It is not cosmetic: a rule can match across a word boundary or fail to. |
 | **52:37** | **unresolved**, and the normaliser's treatment of it is **provisional**. U+06E3 is now stripped as a non-reading mark, exactly as its sibling U+06DC is stripped away from a word end. That is a statement about this pipeline — the engine does not read this mark — and **it does not answer the question below.** It was done because leaving the mark unhandled did not leave the question open either: it silently wedged an implied sukoon onto the ṣād and told nobody. If a qualified reviewer rules that the small sīn's position is readable, the change is one line — `SMALL_LOW_SEEN` in `packages/core/src/unicode.ts`. The question itself: U+06DC above the ṣād here, U+06E3 below it there. Filed for a while as mark encoding, and that was wrong: position is what carries meaning for the small sīn, and KFGQPC moved **only** 52:37 from above to below while leaving 2:245 and 7:69 alone. A re-encoding does not produce that asymmetry, so something else is going on and this file does not know what. Note also that U+06DC is what the normaliser reads as a saktah at a word end, so the two are not interchangeable in code. |
 
@@ -86,7 +86,7 @@ from ا plus its madd, and the answer comes back 3 and 1.
 
 ## What that costs, measured
 
-With the one class handled, **6,231** of 6,236 ayahs normalise to a
+With the one class handled, **6,233** of 6,236 ayahs normalise to a
 byte-identical string, and the engine finds **147,257** spans on quran-text's
 Ḥafṣ against **147,255** on this edition — two apart, with **1** of 164 rules
 moving.
@@ -101,7 +101,7 @@ mark is not an error, it is a ruling that quietly stops being reported.
 
 ## What is still open
 
-**5 ayahs do not normalise alike**: the 4 above, and **35:43**.
+**3 ayahs do not normalise alike**: **27:20** and **36:22** above, and **35:43**. 11:41 and 52:37 are in the table above but no longer here — their marks are now stripped rather than left to survive, which settles what the engine reads without settling 52:37's open question.
 
 35:43 is the only unborne hamza left in the muṣḥaf. quran-text writes
 ٱلسَّيِّئُ as yāʾ + U+0654 + ḍammah where this edition writes the precomposed ئ,

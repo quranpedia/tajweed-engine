@@ -83,13 +83,11 @@
   },
   "normalisation": {
     "note": "Ayahs that reach the matchers as the same string. The four real textual differences are included in the remainder and cannot be normalised away.",
-    "alike": 6231,
+    "alike": 6233,
     "apart": [
-      "11:41",
       "27:20",
       "35:43",
-      "36:22",
-      "52:37"
+      "36:22"
     ]
   },
   "rules": {
