@@ -18,12 +18,15 @@ Use it for Tajweed colouring, explaining rules while reading, and building recit
 | | |
 |---|---|
 | **Package** | `@quran.ws/tajwid-annotations` · `0.1.0` |
-| **Rules** | 182 authored \u00b7 127 produce spans |
+| **Rules** | 182 authored · 127 produce spans |
 | **Spans** | 147,255 precomputed |
 | **Licence** | CC BY 4.0 |
 
 ```sh
-npm install @quran.ws/tajwid-annotations @quran.ws/tajwid-rules @quran.ws/tajwid
+# Not published yet: every package name in this repository 404s on the npm
+# registry today, and `tajweed` 404s on PyPI. Publication is intended.
+# Until then, take the data from a release — the assets are the whole dataset:
+gh release download v0.4.3 -R quran-ws/quran-tajweed
 ```
 
 ## Where the documentation is
