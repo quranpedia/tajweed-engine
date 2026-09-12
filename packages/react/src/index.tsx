@@ -37,7 +37,7 @@ export interface TajweedTextProps {
   readonly spans?: readonly Span[]
   /** Passed to the engine when `spans` is omitted. */
   readonly options?: TajweedOptions
-  /** Colour per topic id. Defaults to the six-colour palette in @quran-ws/tajwid. */
+  /** Colour per topic id. Defaults to the topic palette in @quran-ws/tajwid. */
   readonly colors?: Readonly<Record<string, string>>
   /** Show all overlapping rulings rather than the topmost. Off by default. */
   readonly overlapping?: boolean
