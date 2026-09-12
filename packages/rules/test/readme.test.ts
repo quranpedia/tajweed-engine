@@ -90,3 +90,35 @@ describe('the claims docs/coverage.md makes about what is annotated', () => {
     }
   })
 })
+
+describe('the root README does not tell a reader to install something that does not exist', () => {
+  // The README once carried a heading — "There is no install line, because none
+  // of the packages are published" — and the slim-down to a card removed it and
+  // put `npm install @quran-ws/tajwid-annotations …` in its place. Every one of
+  // those names 404s. The first thing anyone copied out of this repository
+  // failed, and nothing here could notice, because the fact that makes it false
+  // lives on a registry rather than in the tree.
+  //
+  // So this asserts the conservative half, which is checkable offline: while
+  // nothing is published, the README must not show an install command. Delete
+  // this block on the day the packages are published — that is the whole
+  // maintenance burden, and it is smaller than the one it replaces.
+  const readme = readFileSync(join(root, 'README.md'), 'utf8')
+
+  it('shows no npm or pip install command while the packages are unpublished', () => {
+    const install =
+      /^[^\n]*\b(?:(?:npm|pnpm|yarn) (?:install|add)|pip install)\s+(?![./])\S.*$/m.exec(readme)
+    expect(
+      install?.[0].trim(),
+      install
+        ? `README.md shows "${install[0].trim()}". Nothing in this repository is published — check the registry before restoring an install line, and delete this test when it is.`
+        : undefined,
+    ).toBeUndefined()
+  })
+
+  it('says instead where the data can actually be got', () => {
+    // Not just the absence of a wrong instruction: the presence of a right one.
+    expect(readme).toMatch(/not published yet/i)
+    expect(readme).toContain('gh release download')
+  })
+})
