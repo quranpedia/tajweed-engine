@@ -56,6 +56,22 @@ const pinned = new Set(pinnedRules)
  *
  * Raising it is expected and requires this line to move with it. LOWERING it is
  * the case this exists for: it is what deleting a fixture looks like.
+ *
+ * THIS TEST IS SUPPOSED TO FAIL ON ANY BRANCH THAT ADDS A FIXTURE, AND THE FIX
+ * IS TO EDIT THIS NUMBER.
+ *
+ * Merging the ten open branches takes it from 8 to 23, and the test fails until
+ * a person writes 23 here. That is not friction to be engineered away — it is
+ * the entire mechanism. The failure is a human being asked to say, out loud and
+ * in a diff, how many fixtures the corpus is now meant to have.
+ *
+ * So do NOT "fix" this by deriving the number from the source file it is
+ * checking. A pin that computes itself from the thing it guards always agrees
+ * with it, passes forever, and reports success while watching nothing — which
+ * is the exact failure documented in docs/checks-that-report-success.md, and
+ * the failure that let a fixture be deleted from verify-rules.ts under a green
+ * check in the first place. Deriving it would rebuild the defect inside its own
+ * fix.
  */
 const EXPECTED_FIXTURE_COUNT = 8
 
