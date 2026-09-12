@@ -132,9 +132,35 @@ separate green results, none of which was the green of the thing being claimed.
 *The fix is not care.* It is to confirm the run executed before reading its
 result — check that the output looks like output, capture the status into a
 variable before anything else can touch it, and treat a gate that printed
-nothing as a gate that did not run. Two of the four were caught only because a
-gate printed *"This edition is not one the engine can read"* immediately above
-an `EXIT=0` that had been printed by hand.
+nothing as a gate that did not run.
+
+*How the third one was actually caught, because it is the transferable part.*
+Not by re-running anything and not by suspecting the shell. The gate printed
+**"This edition is not one the engine can read as it stands"** directly above an
+`EXIT=0` that had been printed by hand on the next line. **Two halves of one
+piece of output contradicted each other.** No external source was consulted, no
+check was repeated — the report disagreed with itself, in the same paragraph,
+and that was enough. Read your own output as though someone else wrote it.
+
+**A fact asserted about the world because it was very likely true — and it
+was.** A report stated "PR #22" before the pull request had been opened. It was
+then opened, and GitHub assigned it 22.
+
+This belongs here rather than in a list of near-misses, and the luck is what
+makes it worse. A wrong prediction is caught by the first person who follows the
+link. A *correct* one teaches everybody, the author included, that the number
+can be stated in advance — so the next time it is off by one it will read
+exactly as authoritative as this one did.
+
+It is a purer instance than the three above: those were "the command ran and I
+read the wrong output". This one had no command at all. It is the same shape as
+a release body asserting a licence nobody checked, a version string that read
+reassuringly and was false, and a count relayed from a report without being
+derived — **a statement that was never checked because checking it felt
+unnecessary.**
+
+*The rule is narrow and usable:* an identifier that a system assigns is not
+knowable before the system assigns it. Open it, then quote it.
 
 **A verification run in the wrong tree produced the expected output for the
 opposite reason.** To prove that a fix to the unknown-marks gate removed a false
