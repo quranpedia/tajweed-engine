@@ -32,12 +32,12 @@ interface Frozen {
   incidence: Record<string, { ayahs: number; occurrences: number; digest: string }>
 }
 
+// A missing edition used to skip this entire suite, so `pnpm test` went green
+// having verified nothing at all. Renaming one file was enough to do it, and the
+// migration off this edition will move it for real — so absence is a failure
+// now, and moving the edition means updating this path deliberately.
 const available = existsSync(editionPath)
-const describeIfAvailable = available ? describe : describe.skip
-
-if (!available) {
-  console.warn(`frozen conformance: ${editionPath} not found — skipping.`)
-}
+const describeIfAvailable = describe
 
 const frozen = JSON.parse(readFileSync(frozenPath, 'utf8')) as Frozen
 const edition: Edition = available
@@ -104,16 +104,37 @@ describeIfAvailable('frozen conformance', () => {
         continue
       }
       const actualDigest = await digest((matched.get(rule.id) ?? []).join(','))
-      if (actualDigest !== expected.digest) {
+      const actualOccurrences = occurrences.get(rule.id) ?? 0
+      // The digest is over the LIST of ayahs, so a rule that fires a different
+      // number of times inside the same ayahs leaves it unchanged. That is not
+      // hypothetical: recovering the hamza written below the line moved
+      // mutamathilain-izhar.1 by -1 and .2 by -7 with byte-identical digests,
+      // and this suite reported nothing. The count is frozen too; compare it.
+      if (actualDigest !== expected.digest || actualOccurrences !== expected.occurrences) {
         problems.push(
           `${rule.id}: matched ${(matched.get(rule.id) ?? []).length} ayahs / ` +
-            `${occurrences.get(rule.id) ?? 0} occurrences, frozen at ` +
+            `${actualOccurrences} occurrences, frozen at ` +
             `${expected.ayahs} / ${expected.occurrences}`,
         )
       }
     }
 
     expect(problems.length, problems.slice(0, 30).join('\n')).toBe(0)
+  })
+
+  it('was frozen against the corpus that is here now', () => {
+    // frozen.json declares the corpus version it was generated from, and nothing
+    // compared it to anything — which is how main came to ship a file labelled
+    // 0.4.1 against a corpus at 0.4.2 for two releases. The digests happened to
+    // be current; the label was not, and no test could tell.
+    expect(frozen.corpusVersion).toBe(typed.version)
+  })
+
+  it('was frozen against the edition that is here now', () => {
+    // Same failure, one step along: a frozen set describes one exact text, and
+    // the digest of that text is recorded. If the edition moves underneath it,
+    // every normalisation digest below is measuring something else.
+    expect(frozen.edition.ayahCount).toBe(orderedReferences(edition).length)
   })
 
   it('covers every rule in the corpus', () => {
