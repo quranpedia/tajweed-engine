@@ -20,7 +20,8 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve } from 'node:path'
 
 import corpus from '../packages/rules/rules.json' with { type: 'json' }
-import { ALLOWED_MARKS, OPTIONAL_MARKS } from '../packages/core/src/unicode.js'
+import { ALLOWED_MARKS } from '../packages/core/src/unicode.js'
+import { normalize } from '../packages/core/src/normalize.js'
 import { Tajweed } from '../packages/core/src/engine.js'
 import { editionDigest, orderedReferences, type Edition } from '../packages/core/src/edition.js'
 import type { Corpus } from '../packages/core/src/types.js'
@@ -71,6 +72,8 @@ const EXPECTED: readonly Expectation[] = [
   { char: '\u{06E5}', name: 'small waw', matters: 'مد الصلة', reference: 100, optional: true },
   { char: '\u{06E6}', name: 'small yeh', matters: 'مد الصلة', reference: 100, optional: true },
 ]
+
+const count2 = (haystack: string, needle: string): number => count(haystack, needle)
 
 function count(haystack: string, needle: string): number {
   return haystack.split(needle).length - 1
@@ -135,13 +138,47 @@ if (precomposed > 0) {
 //
 // They are listed, not counted, because a count tells a reader nothing they can
 // act on.
-const known = new Set<string>([
-  ...OPTIONAL_MARKS,
+//
+// WHAT COUNTS AS "KNOWN" IS DERIVED, NOT LISTED, AND THAT MATTERS.
+//
+// The first version of this gate asked whether a mark appeared in
+// OPTIONAL_MARKS, ALLOWED_MARKS or EXPECTED. That model was correct the hour it
+// was written and false a day later: PR #10 removed U+0655 from OPTIONAL_MARKS
+// because the hamza below stopped being decoration to strip and became a
+// consonant recovered by a dedicated pass. It is handled better than before,
+// and the gate began reporting it as unknown — failing both editions the
+// repository ships, on a mark that is fully consumed.
+//
+// A mark handled by a PASS is invisible to a model built on LISTS. So the
+// question asked here is the one that actually matters, and it is asked of the
+// pipeline rather than of a list: after normalisation, is this mark still in
+// the text?
+//
+//   - It does not survive  -> the pipeline has an opinion. Folded, stripped or
+//     consumed, by a list or by a pass, it does not reach a rule. Known.
+//   - It survives and is declared  -> deliberate. The vowels, shaddah, sukoon
+//     and superscript alef MUST survive, because the rules match on them, and
+//     ALLOWED_MARKS are the waqf signs passed through on purpose. Known.
+//   - It survives and is not declared -> nothing put it there and nothing will
+//     read it. It sits in the normalised text wedging an implied sukoon onto
+//     the letter before it, or stopping a rule matching across it. Unknown.
+//
+// U+06E3, the small low seen at 52:37, is the third case and is why this gate
+// exists. U+0655 is the first, and is why it is no longer written as a list.
+// This is `docs/checks-that-report-success.md` applied to a gate that document
+// produced: prefer deriving a number to writing one down.
+
+/** Marks that are SUPPOSED to survive normalisation, because rules read them. */
+const declaredToSurvive = new Set<string>([
   ...ALLOWED_MARKS,
   ...EXPECTED.map((expectation) => expectation.char),
   '\u{0651}', '\u{0652}', '\u{064B}', '\u{064C}', '\u{064D}',
   '\u{064E}', '\u{064F}', '\u{0650}', '\u{0670}', '\u{0653}',
 ])
+
+const normalisedText = references.map((reference) => normalize(edition.ayahs[reference]!).text).join('')
+const survives = (character: string) => normalisedText.includes(character)
+
 const unknown = new Map<string, number>()
 for (const character of allText) {
   const code = character.codePointAt(0)!
@@ -150,7 +187,7 @@ for (const character of allText) {
     code === 0x0670 ||
     (code >= 0x06d6 && code <= 0x06ed) ||
     (code >= 0x08f0 && code <= 0x08f2)
-  if (isMark && !known.has(character)) {
+  if (isMark && !declaredToSurvive.has(character) && survives(character)) {
     unknown.set(character, (unknown.get(character) ?? 0) + 1)
   }
 }
@@ -159,7 +196,9 @@ if (unknown.size > 0) {
   for (const [character, count] of [...unknown].sort((a, b) => b[1] - a[1])) {
     console.log(
       `  U+${character.codePointAt(0)!.toString(16).toUpperCase().padStart(4, '0')}` +
-        `  ${String(count).padStart(5)}  neither folded, stripped, nor allowed through`,
+        `  ${String(count).padStart(5)} in the edition,` +
+        ` ${String(count2(normalisedText, character)).padStart(5)} still there after normalisation` +
+        '  — nothing folds it, strips it or reads it',
     )
   }
   problems.push(
