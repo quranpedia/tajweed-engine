@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join, resolve } from 'node:path'
 
 import corpus from '../packages/rules/rules.json' with { type: 'json' }
+import { ALLOWED_MARKS, OPTIONAL_MARKS } from '../packages/core/src/unicode.js'
 import { Tajweed } from '../packages/core/src/engine.js'
 import { editionDigest, orderedReferences, type Edition } from '../packages/core/src/edition.js'
 import type { Corpus } from '../packages/core/src/types.js'
@@ -117,6 +118,58 @@ if (precomposed > 0) {
   )
 }
 
+// Marks the edition contains that this engine has no opinion about.
+//
+// EXPECTED above enumerates the marks the normaliser depends on and reports the
+// ones it does NOT find. It never reports the reverse: a mark that is present in
+// the text and that nothing in the pipeline recognises. Such a mark is neither
+// folded, nor stripped as decoration, nor allowed through as a waqf sign — it
+// simply sits in the normalised text, where it can wedge an implied sukoon onto
+// the letter before it or stop a rule matching across it.
+//
+// U+06E3, the small low seen at 52:37, is exactly that: it is in neither
+// OPTIONAL_MARKS nor ALLOWED_MARKS, and the check reported "No problems found".
+//
+// They are listed, not counted, because a count tells a reader nothing they can
+// act on.
+const known = new Set<string>([
+  ...OPTIONAL_MARKS,
+  ...ALLOWED_MARKS,
+  ...EXPECTED.map((expectation) => expectation.char),
+  '\u{0651}', '\u{0652}', '\u{064B}', '\u{064C}', '\u{064D}',
+  '\u{064E}', '\u{064F}', '\u{0650}', '\u{0670}', '\u{0653}',
+])
+const unknown = new Map<string, number>()
+for (const character of allText) {
+  const code = character.codePointAt(0)!
+  const isMark =
+    (code >= 0x064b && code <= 0x065f) ||
+    code === 0x0670 ||
+    (code >= 0x06d6 && code <= 0x06ed) ||
+    (code >= 0x08f0 && code <= 0x08f2)
+  if (isMark && !known.has(character)) {
+    unknown.set(character, (unknown.get(character) ?? 0) + 1)
+  }
+}
+if (unknown.size > 0) {
+  console.log('\nMarks this engine has no opinion about:\n')
+  for (const [character, count] of [...unknown].sort((a, b) => b[1] - a[1])) {
+    console.log(
+      `  U+${character.codePointAt(0)!.toString(16).toUpperCase().padStart(4, '0')}` +
+        `  ${String(count).padStart(5)}  neither folded, stripped, nor allowed through`,
+    )
+  }
+  problems.push(
+    `${unknown.size} mark(s) present in this edition are unknown to the normaliser: ` +
+      [...unknown.keys()]
+        .map((c) => `U+${c.codePointAt(0)!.toString(16).toUpperCase().padStart(4, '0')}`)
+        .join(', ') +
+      '. An unrecognised mark is not dropped and not read — it stays in the ' +
+      'normalised text, where it can give the letter before it an implied sukoon ' +
+      'or stop a rule matching across it.',
+  )
+}
+
 const frozenPath = join(here, '..', 'conformance', 'frozen.json')
 if (existsSync(frozenPath)) {
   const frozen = JSON.parse(readFileSync(frozenPath, 'utf8')) as {
@@ -159,7 +212,16 @@ if (existsSync(frozenPath)) {
     )
   }
 } else {
-  warnings.push('No conformance/frozen.json, so rule counts were not compared.')
+  // The rule comparison is the substance of this check, not an extra. Without a
+  // reference set the script can report that the characters are present and
+  // still miss twenty-four rules matching nothing — which is the failure it
+  // exists for. It is a problem, never a warning: this is pointed at arbitrary
+  // editions, and the base-text migration is exactly when frozen.json is in flux.
+  problems.push(
+    'No conformance/frozen.json, so no rule was compared against anything. ' +
+      'That is the substance of this check; without it the result means only ' +
+      'that the characters are present.',
+  )
 }
 
 console.log()
