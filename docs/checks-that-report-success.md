@@ -8,6 +8,14 @@ This is worse than having no check. No check is a known gap. A check that cannot
 fire is a gap that someone has already decided is covered, and the green tick is
 the evidence they will cite.
 
+**See also [`silent-success.md`](silent-success.md)**, which names the same
+class from four earlier instances — a regex, a rule corpus, a spreadsheet and a
+git checkout — and states the instinct it corrects: *"no error" and "no
+output" are indistinguishable unless something asserts the output is
+non-empty*. The two documents were written a year apart without reference to
+each other, which is its own evidence. Whether they should be one file is an
+editorial decision nobody has made.
+
 Thirteen instances follow. Each is recorded with what it would have cost,
 because the cost is the argument.
 
