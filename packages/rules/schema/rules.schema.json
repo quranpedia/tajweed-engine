@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://quranpedia.net/schema/tajweed-rules-0.1.json",
+  "$id": "https://quran.ws/schema/tajweed-rules-0.4.json",
   "title": "Tajweed Rule Corpus",
   "description": "A scholar-authored corpus of tajweed rules, organised as topics > categories > ahkam > rules. Each rule carries a CASE pattern that a conforming engine compiles into a matcher over normalised Quranic text.",
   "type": "object",
