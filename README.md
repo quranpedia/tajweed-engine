@@ -2,14 +2,18 @@
 
 <img src=".github/banner.svg" alt="Quran Tajweed — Annotations, Stable" width="820">
 
-**Scholar-authored rules and precomputed positional annotations. The Quran text itself is never modified.**
+**Tajweed rules applied to their exact places in the Quran, reviewed by specialists and ready for use in applications.**
 
 <a href="https://quran.ws/blocks/quran-tajweed"><img alt="See it work" src="https://img.shields.io/badge/See_it_work-15705D?style=for-the-badge&labelColor=102F29"></a>
 <a href="https://quran.ws/docs/reference/quran-tajweed"><img alt="Documentation" src="https://img.shields.io/badge/Documentation-102F29?style=for-the-badge&labelColor=102F29"></a>
 
 </div>
 
-> قواعد التجويد مكتوبةً بأيدي المختصّين، ومواضعُ انطباقها محسوبةً سلفًا كمواقعِ أحرفٍ في النص، دون تغيير النص نفسه.
+Use it for Tajweed colouring, explaining rules while reading, and building recitation and Tajweed-learning tools.
+
+> قواعد التجويد مطبّقة على مواضعها في القرآن، ومراجعة من مختصين لتكون جاهزة للاستخدام في التطبيقات.
+>
+> استخدمها لتلوين الأحكام، وشرحها أثناء القراءة، وبناء أدوات تعليم التلاوة والتجويد.
 
 | | |
 |---|---|
