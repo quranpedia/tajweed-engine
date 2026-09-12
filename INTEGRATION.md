@@ -1,5 +1,27 @@
 # `integration/the-set` — what this branch is, and what to check hardest
 
+## If you are picking this up cold, these two will bite you
+
+**1. You must set `EXPECTED_FIXTURE_COUNT = 23` when this merges.**
+`conformance/fixtures.test.ts` pins the number of fixtures in
+`scripts/verify-rules.ts`. `main` has 8; this set has 23. **The test fails until
+a human writes 23 in that file, and that failure is the mechanism, not a bug.**
+It exists because deleting a fixture previously changed a number in prose and
+failed nothing. Do not "fix" it by deriving the count from the file it guards —
+a pin that computes itself from the thing it watches always agrees with it and
+watches nothing.
+
+**2. `pnpm edition:diff` in this tree prints a sentence that is wrong.** It says
+`4 left over, and those are real differences in the text`. **Not one of those
+four is a difference in the letters:** 27:20 and 36:22 are word separation,
+11:41 is the same ruling recorded with two different code points, and 52:37 is
+unresolved. The corrected tool is on #7, which is held, so this tree cannot
+carry the fix. **Do not quote that output.** Strip every mark and decompose every
+seat and the two editions differ in 2 places with spaces significant and **0**
+ignoring spaces.
+
+---
+
 This branch is an **instrument, not a delivery**. It exists so that the thing
 that would ship can be measured, rather than ten branches that each pass alone.
 Nothing here is proposed for `main`.
