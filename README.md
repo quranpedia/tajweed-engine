@@ -20,7 +20,7 @@ Use it for Tajweed colouring, explaining rules while reading, and building recit
 | **Package** | `@quran.ws/tajwid-annotations` · `0.1.0` |
 | **Rules** | 182 authored · 127 produce spans |
 | **Spans** | 147,255 precomputed |
-| **Licence** | CC BY 4.0 |
+| **Licence** | CC BY 4.0 (the corpus, annotations and editions) · MIT (the engine and tools) |
 
 ```sh
 # Not published yet: every package name in this repository 404s on the npm
