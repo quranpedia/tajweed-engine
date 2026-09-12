@@ -110,14 +110,19 @@ function commandRules(options: Options): void {
   }
 
   for (const rule of matching) {
-    const mark = rule.status === 'disabled' ? '✗' : rule.needsReview ? '?' : ' '
+    // A dispute outranks the review flag: `?` means nobody has checked, `!` means
+    // somebody checked and disagreed. Both rules carry needsReview too, so without
+    // this they would render as merely unreviewed.
+    const mark =
+      rule.status === 'disabled' ? '✗' : rule.status === 'disputed' ? '!' : rule.needsReview ? '?' : ' '
     console.log(`${mark} ${rule.id.padEnd(34)} ${rule.label.ar}`)
   }
 
   const disabled = matching.filter((rule) => rule.status === 'disabled').length
+  const disputed = matching.filter((rule) => rule.status === 'disputed').length
   const review = matching.filter((rule) => rule.needsReview).length
   console.log(
-    `\n${matching.length} rules  (✗ ${disabled} disabled, ? ${review} awaiting review)  ` +
+    `\n${matching.length} rules  (✗ ${disabled} disabled, ! ${disputed} disputed, ? ${review} awaiting review)  ` +
       `riwayah ${typed.riwayah}`,
   )
 }
@@ -151,6 +156,17 @@ function commandExplain(options: Options): void {
     console.log('  matches   the text as written, not the normalised form')
   }
   console.log(`  status    ${rule.status}${rule.needsReview ? ' (awaiting reviewer sign-off)' : ''}`)
+  if (rule.disputed) {
+    // Printed in full, not summarised. Someone reading `tajweed show <id>` to
+    // decide whether to trust a span needs the objection itself, not a flag
+    // telling them one exists somewhere.
+    console.log(`\n  DISPUTED — raised by ${rule.disputed.raised_by}`)
+    console.log(`  bears on: ${rule.disputed.occurrences.join(', ')}`)
+    console.log(`\n  ${rule.disputed.finding}`)
+    if (rule.disputed.resolved_by) {
+      console.log(`\n  resolved by ${rule.disputed.resolved_by}`)
+    }
+  }
   if (rule.gap) {
     console.log(`  gap       ${rule.gap}`)
   }
