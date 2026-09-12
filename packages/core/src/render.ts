@@ -15,7 +15,8 @@ import type { Corpus, Span } from './types.js'
 /**
  * Colours keyed by TOPIC, of which there are seven.
  *
- * The corpus has 57 ahkam, and the application this came from gave each its own
+ * The corpus has more ahkam than a reader can hold apart by colour, and the
+ * application this came from gave each its own
  * colour. Fifty-seven colours are not fifty-seven distinctions — past roughly a
  * dozen, a reader stops decoding the colour and starts ignoring it, and the
  * palette necessarily contains pairs no one can separate, least of all on a

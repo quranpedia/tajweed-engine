@@ -1,7 +1,7 @@
 /**
  * Precomputed annotations.
  *
- * The Quran is a fixed corpus, so running 174 compiled patterns over an ayah on
+ * The Quran is a fixed corpus, so running the compiled patterns over an ayah on
  * every request computes the same answer every time. The engine is better used
  * once, at build time, with the offsets shipped as data.
  *
