@@ -140,6 +140,11 @@ export function isStackedMark(char: string | undefined): boolean {
   )
 }
 
+/** Tanween, in the standalone forms everything has been folded onto by this point. */
+export function isTanween(char: string | undefined): boolean {
+  return char === FATHATAN || char === DAMMATAN || char === KASRATAN
+}
+
 /** Vowel marks only — excludes shadda and sukoon. U+064B..U+0650. */
 export function isVowelMark(char: string | undefined): boolean {
   if (char === undefined) {

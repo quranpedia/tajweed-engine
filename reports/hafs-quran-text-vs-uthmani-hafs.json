@@ -89,32 +89,24 @@
   },
   "normalisation": {
     "note": "Ayahs that reach the matchers as the same string. The four real textual differences are included in the remainder and cannot be normalised away.",
-    "alike": 6219,
+    "alike": 6227,
     "apart": [
       "2:245",
-      "4:92",
-      "7:161",
-      "9:57",
       "11:41",
-      "12:31",
       "25:49",
       "27:20",
       "36:22",
       "46:33",
-      "52:19",
       "52:21",
       "52:37",
-      "69:24",
-      "71:25",
-      "75:40",
-      "77:43"
+      "75:40"
     ]
   },
   "rules": {
     "compiled": 164,
     "spans": {
       "reference": 147261,
-      "other": 147243
+      "other": 147255
     },
     "matchingDifferently": [
       {
@@ -124,40 +116,10 @@
         "delta": -1
       },
       {
-        "id": "ikhfa-ghunnah-tarqeeq.2",
-        "reference": 470,
-        "other": 469,
-        "delta": -1
-      },
-      {
-        "id": "idgham-naqis-tanween.1",
-        "reference": 655,
-        "other": 654,
-        "delta": -1
-      },
-      {
-        "id": "iqlab-tanween.1",
-        "reference": 80,
-        "other": 77,
-        "delta": -3
-      },
-      {
         "id": "iqlab-tanween.3",
         "reference": 82,
         "other": 81,
         "delta": -1
-      },
-      {
-        "id": "ikhfa-haqiqi-tanween.1",
-        "reference": 563,
-        "other": 562,
-        "delta": -1
-      },
-      {
-        "id": "madd-iwad.1",
-        "reference": 1961,
-        "other": 1958,
-        "delta": -3
       },
       {
         "id": "seven-alefs.1",
@@ -182,18 +144,6 @@
         "reference": 1,
         "other": 0,
         "delta": -1
-      },
-      {
-        "id": "madd-badal.1",
-        "reference": 1334,
-        "other": 1337,
-        "delta": 3
-      },
-      {
-        "id": "madd-muttasil.3",
-        "reference": 25,
-        "other": 23,
-        "delta": -2
       },
       {
         "id": "madd-lazim-kalimi-mukhaffaf.1",
