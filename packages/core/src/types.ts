@@ -24,7 +24,7 @@ export interface Hukum {
   readonly school?: { readonly id: string; readonly scholar: string }
 }
 
-export type RuleStatus = 'stable' | 'disabled'
+export type RuleStatus = 'stable' | 'disputed' | 'disabled'
 
 export interface Rule {
   readonly id: string
@@ -37,6 +37,26 @@ export interface Rule {
   readonly gap?: string
   readonly statusReason?: string
   readonly needsReview?: boolean
+  /**
+   * A qualified reader has questioned this RULING, and it is unresolved.
+   *
+   * Distinct from `needsReview`, which means nobody has looked yet. This means
+   * somebody looked and disagreed. It is recorded on the rule so the objection
+   * travels with the thing it is about instead of living in a review thread,
+   * and `validate-rules.ts` refuses to let a rule carry an open one while
+   * claiming `status: "stable"`.
+   *
+   * Carrying this does NOT remove the rule's spans: the engine excludes
+   * `disabled` and nothing else. Whether a questioned ruling should still be
+   * published is a scholarly decision, not a schema one.
+   */
+  readonly disputed?: {
+    readonly finding: string
+    readonly raised_by: string
+    /** Every place it fires, by reference. A list, never a count. */
+    readonly occurrences: readonly string[]
+    readonly resolved_by?: string
+  }
   readonly corrections?: ReadonlyArray<{ field: string; was: string; reason: string }>
   readonly label: Label
   readonly notes?: Label

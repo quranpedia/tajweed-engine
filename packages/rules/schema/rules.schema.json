@@ -4,10 +4,19 @@
   "title": "Tajweed Rule Corpus",
   "description": "A scholar-authored corpus of tajweed rules, organised as topics > categories > ahkam > rules. Each rule carries a CASE pattern that a conforming engine compiles into a matcher over normalised Quranic text.",
   "type": "object",
-  "required": ["version", "riwayah", "topics", "categories", "hukums", "rules"],
+  "required": [
+    "version",
+    "riwayah",
+    "topics",
+    "categories",
+    "hukums",
+    "rules"
+  ],
   "additionalProperties": false,
   "properties": {
-    "$schema": { "type": "string" },
+    "$schema": {
+      "type": "string"
+    },
     "version": {
       "type": "string",
       "pattern": "^\\d+\\.\\d+\\.\\d+$",
@@ -22,25 +31,38 @@
       "type": "object",
       "additionalProperties": true,
       "properties": {
-        "source": { "type": "string" },
-        "url": { "type": "string", "format": "uri" }
+        "source": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
       }
     },
     "topics": {
       "type": "array",
-      "items": { "$ref": "#/$defs/topic" }
+      "items": {
+        "$ref": "#/$defs/topic"
+      }
     },
     "categories": {
       "type": "array",
-      "items": { "$ref": "#/$defs/category" }
+      "items": {
+        "$ref": "#/$defs/category"
+      }
     },
     "hukums": {
       "type": "array",
-      "items": { "$ref": "#/$defs/hukum" }
+      "items": {
+        "$ref": "#/$defs/hukum"
+      }
     },
     "rules": {
       "type": "array",
-      "items": { "$ref": "#/$defs/rule" }
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
     }
   },
   "$defs": {
@@ -51,29 +73,53 @@
     "label": {
       "type": "object",
       "description": "Human-readable text, keyed by BCP-47 language tag. Arabic is authoritative; other languages are translations of it.",
-      "required": ["ar"],
-      "additionalProperties": { "type": "string" },
+      "required": [
+        "ar"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      },
       "properties": {
-        "ar": { "type": "string", "minLength": 1 }
+        "ar": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     },
     "topic": {
       "type": "object",
-      "required": ["id", "label"],
+      "required": [
+        "id",
+        "label"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/$defs/slug" },
-        "label": { "$ref": "#/$defs/label" }
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        }
       }
     },
     "category": {
       "type": "object",
-      "required": ["id", "topic", "label"],
+      "required": [
+        "id",
+        "topic",
+        "label"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/$defs/slug" },
-        "topic": { "$ref": "#/$defs/slug" },
-        "label": { "$ref": "#/$defs/label" },
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "topic": {
+          "$ref": "#/$defs/slug"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
         "empty": {
           "type": "boolean",
           "description": "This category carries no ahkam. Kept so the hierarchy round-trips; consumers should hide it."
@@ -82,27 +128,51 @@
     },
     "hukum": {
       "type": "object",
-      "required": ["id", "category", "label"],
+      "required": [
+        "id",
+        "category",
+        "label"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/$defs/slug" },
-        "category": { "$ref": "#/$defs/slug" },
-        "label": { "$ref": "#/$defs/label" },
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "category": {
+          "$ref": "#/$defs/slug"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
         "school": {
           "type": "object",
           "description": "Where ahkam differ between scholars, each position is modelled as its own hukum rather than one being silently preferred. Consumers that want a single answer must choose a school; consumers teaching tajweed may want to show both.",
-          "required": ["id", "scholar"],
+          "required": [
+            "id",
+            "scholar"
+          ],
           "additionalProperties": false,
           "properties": {
-            "id": { "$ref": "#/$defs/slug" },
-            "scholar": { "type": "string" }
+            "id": {
+              "$ref": "#/$defs/slug"
+            },
+            "scholar": {
+              "type": "string"
+            }
           }
         }
       }
     },
     "rule": {
       "type": "object",
-      "required": ["id", "hukum", "case", "scope", "status", "label"],
+      "required": [
+        "id",
+        "hukum",
+        "case",
+        "scope",
+        "status",
+        "label"
+      ],
       "additionalProperties": false,
       "properties": {
         "id": {
@@ -110,25 +180,38 @@
           "pattern": "^[a-z0-9]+(-[a-z0-9]+)*\\.\\d+$",
           "description": "Stable public identifier, `<hukum-slug>.<n>`."
         },
-        "hukum": { "$ref": "#/$defs/slug" },
+        "hukum": {
+          "$ref": "#/$defs/slug"
+        },
         "case": {
           "type": "string",
           "minLength": 1,
           "description": "The CASE pattern: a compact Arabic notation a non-programmer can author. Space-separated alternatives inside [ ], groups joined by +, `ــ` as a wildcard, and the literal names الألف الخنجرية / واو صغيرة / ياء صغيرة for marks that are hard to type. Compiled to a regular expression by the engine — see packages/core."
         },
         "scope": {
-          "enum": ["within-word", "across-words", "either"],
+          "enum": [
+            "within-word",
+            "across-words",
+            "either"
+          ],
           "description": "Whether the groups of a multi-group CASE may span a word boundary. This also determines what may appear between groups, so there is no separate whitespace field: within-word permits no space at all, across-words requires one, either permits one.",
           "$comment": "within-word => no whitespace; across-words => \\s+; either => \\s*"
         },
         "matchAgainst": {
-          "enum": ["normalized", "original"],
+          "enum": [
+            "normalized",
+            "original"
+          ],
           "default": "normalized",
           "description": "Which text the pattern is written against. Almost every rule matches the normalised form. A rule declares `original` when it concerns a mark that normalisation removes as decoration — the maddah that identifies المد اللازم الحرفي sits over a consonant only in the disjoined letters, and is stripped before an ordinary rule could see it."
         },
         "status": {
-          "enum": ["stable", "disabled"],
-          "description": "`disabled` rules are published but must not be matched by default. They are kept visible rather than deleted so the gap is auditable."
+          "enum": [
+            "stable",
+            "disputed",
+            "disabled"
+          ],
+          "description": "How settled the rule is. Three values, and the difference between the last two is what happens to the spans.\n  stable   — published as correct.\n  disputed — the pattern works and the spans are still published, but a qualified reader has questioned the RULING and it is unresolved. Requires `disputed`. This exists because the alternatives both lie: `stable` says the question was settled, and `disabled` requires a `gap`, every value of which describes a limitation of the CASE notation — which a questioned ruling is not.\n  disabled — not compiled into the default engine, so its spans do not ship. Requires `gap`.\nNote that the engine excludes `disabled` and nothing else, so moving a rule to `disputed` removes no annotation from any consumer. Removing the spans of a questioned rule is a decision about the Qur'an and is not made by changing a status."
         },
         "gap": {
           "enum": [
@@ -142,7 +225,9 @@
           ],
           "description": "For disabled rules: which limitation of the CASE notation prevents this rule from being expressed. Together these form the backlog for the next version of the notation."
         },
-        "statusReason": { "type": "string" },
+        "statusReason": {
+          "type": "string"
+        },
         "needsReview": {
           "type": "boolean",
           "description": "This rule was altered during migration, or is otherwise awaiting sign-off from a qualified reviewer. It still matches; the flag exists so the change is not invisible."
@@ -152,20 +237,68 @@
           "description": "Changes made to this rule relative to the source it was migrated from, with the evidence for each.",
           "items": {
             "type": "object",
-            "required": ["field", "was", "reason"],
+            "required": [
+              "field",
+              "was",
+              "reason"
+            ],
             "additionalProperties": false,
             "properties": {
-              "field": { "enum": ["case"] },
-              "was": { "type": "string" },
-              "reason": { "type": "string", "minLength": 1 }
+              "field": {
+                "enum": [
+                  "case"
+                ]
+              },
+              "was": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
             }
           }
         },
-        "label": { "$ref": "#/$defs/label" },
-        "notes": { "$ref": "#/$defs/label" },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "notes": {
+          "$ref": "#/$defs/label"
+        },
         "startFrom": {
           "type": "string",
           "description": "Editorial annotation, NOT a pattern — do not compile it. Depending on the rule it marks where a highlight should visually begin (typically the first group of `case`), or gives the plain undiacritised spelling of the target word."
+        },
+        "disputed": {
+          "type": "object",
+          "description": "A qualified reader has questioned this ruling, and it has not been resolved. Recorded on the rule so the question travels with the thing it is about, rather than living in a review thread. A rule carrying this MUST NOT be `status: \"stable\"` — see scripts/validate-rules.ts. Note that `gap` cannot express this: every value there is a limitation of the CASE notation, and a disputed ruling is not a notation problem.",
+          "additionalProperties": false,
+          "required": [
+            "finding",
+            "raised_by",
+            "occurrences"
+          ],
+          "properties": {
+            "finding": {
+              "type": "string",
+              "description": "What is questioned and why, in enough detail to act on without the original thread."
+            },
+            "raised_by": {
+              "type": "string",
+              "description": "Who raised it, and whether they cited a source or reasoned from the standard treatment."
+            },
+            "occurrences": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The places the dispute bears on, by ayah reference — not necessarily everywhere the rule fires. A list, never a count, so it survives being copied and re-run."
+            },
+            "resolved_by": {
+              "type": "string",
+              "description": "Left absent until a qualified reviewer has ruled."
+            }
+          }
         }
       }
     }
