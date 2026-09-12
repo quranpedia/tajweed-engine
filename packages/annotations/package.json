@@ -1,7 +1,7 @@
 {
   "name": "@tajweed/annotations",
   "version": "0.1.0",
-  "description": "Precomputed tajweed annotations for the whole mushaf: 147,255 spans as code-point offsets, pinned to the digest of the text edition they were computed against.",
+  "description": "Precomputed tajweed annotations for the whole mushaf: spans as code-point offsets, pinned to the digest of the text edition they were computed against.",
   "license": "CC-BY-4.0",
   "type": "module",
   "main": "./uthmani-hafs.json",

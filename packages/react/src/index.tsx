@@ -190,8 +190,8 @@ export interface TajweedLegendProps {
 /**
  * A legend of what the colours mean.
  *
- * Worth rendering rather than skipping: the corpus covers six topics and is
- * silent outside them, and an unlabelled wash of colour implies a completeness
+ * Worth rendering rather than skipping: the corpus covers a fixed set of topics
+ * and is silent outside them, and an unlabelled wash of colour implies a completeness
  * the data does not have. See docs/coverage.md.
  */
 export function TajweedLegend({ corpus, topics, colors = TOPIC_COLORS, className }: TajweedLegendProps): ReactElement {
