@@ -137,3 +137,22 @@ span a provenance that reaches a printed muṣḥaf — and would move every off
 the file, change `conformance/frozen.json`, and invalidate the generated files in
 every open rule pull request. It is a decision about ordering, not about
 engineering, and it is not taken here.
+
+---
+
+## A note for issue #5, not an argument for anything here
+
+This corpus is Ḥafṣ only. `scripts/annotate.ts` refuses any other riwayah by
+design, and everything above is measured on Ḥafṣ.
+
+One fact is worth leaving for whoever takes up
+[#5](https://github.com/quran-ws/quran-tajweed/issues/5), support for other
+riwayat. The KFGQPC releases differ in how consistently they compose a seated
+hamza. In Ḥafṣ, ئ is written as يـ + U+0654 **once in 909** — 35:43, which is why
+this repository composes before analysing. In the other published editions the
+same inconsistency runs from once to twenty-two times each.
+
+So the composition step is load-bearing rather than cosmetic the moment this
+corpus is pointed at a second riwayah, and it would be worth re-measuring rather
+than assuming it carries over. That is all: a fact recorded where it will be
+found, not a reason for anything being done today.
