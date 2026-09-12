@@ -114,6 +114,47 @@ for (const rule of corpus.rules) {
     problems.push(`rule ${rule.id} is single-group but is scoped ${rule.scope}`)
   }
 
+  // The bracket structure of a CASE, checked before anything reads it.
+  //
+  // compile.ts strips brackets indiscriminately — `stripBrackets` does
+  // `replaceAll('[', '').replaceAll(']', '')` — so a malformed pattern does not
+  // fail to parse. It quietly degrades into a literal: `[ر[زس]]` becomes the
+  // three-letter sequence رزس, which occurs nowhere, and the rule compiles,
+  // validates, matches nothing, and then freezes at the digest of an empty list
+  // where the conformance test asserts "still nothing" forever.
+  //
+  // That is a rule that is wrong and looks correct from every angle we have, and
+  // it is the most likely way the eight rules PR #6 found had rotted. A class
+  // cannot contain a class, and brackets must balance.
+  if (rule.gap !== 'not-a-pattern') {
+    let depth = 0
+    let malformed: string | undefined
+    for (const character of rule.case) {
+      if (character === '[') {
+        depth += 1
+        if (depth > 1) {
+          malformed = 'a letter class cannot contain another letter class'
+          break
+        }
+      } else if (character === ']') {
+        depth -= 1
+        if (depth < 0) {
+          malformed = 'a ] closes a class that was never opened'
+          break
+        }
+      }
+    }
+    if (malformed === undefined && depth !== 0) {
+      malformed = 'a [ is never closed'
+    }
+    if (malformed !== undefined) {
+      problems.push(
+        `rule ${rule.id} has a malformed case — ${malformed}. Brackets are stripped rather ` +
+          'than parsed, so this would compile into a literal and match nothing.',
+      )
+    }
+  }
+
   if (rule.corrections && !rule.needsReview) {
     problems.push(`rule ${rule.id} carries corrections but is not flagged needsReview`)
   }
